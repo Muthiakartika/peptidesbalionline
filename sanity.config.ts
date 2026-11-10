@@ -20,7 +20,11 @@ export default defineConfig({
   name: "default",
   // Named after the project (not the "Atlas Longevity" brand) so it is easy to tell apart from
   // other Atlas projects in the Sanity dashboard and workspace switcher.
-  title: "Peptides Bali Online",
+  // Every dataset other than the live "production" one gets its name in capitals after the title
+  // (e.g. "Peptides Bali Online · STAGING"), so a staging Studio is never mistaken for the live one.
+  title: dataset === "production" ? "Peptides Bali Online" : `Peptides Bali Online · ${dataset.toUpperCase()}`,
+  // Shown under the title in the workspace menu (click the title, top-left).
+  subtitle: `Dataset: ${dataset}`,
   icon: StudioIcon,
   basePath: "/studio",
   projectId: projectId || "not-configured",
