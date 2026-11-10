@@ -1,0 +1,222 @@
+/*
+ * "Quick view" popup of the product cards (src/components/product/QuickView.tsx).
+ * The live site shows it with Magnific Popup and Woodmart's quick-view styles; same class names and
+ * values here (the theme's lib-magnific-popup, woo-opt-quick-view and form defaults). Sizes that the
+ * site's theme settings change are the measured ones (popup 920px wide, 12px corners).
+ */
+
+/* ── Magnific Popup: dark background and the scrollable layer that centres the box ── */
+.mfp-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 1102;
+  overflow: hidden;
+  background-color: rgb(0 0 0 / 0.7);
+  opacity: 0;
+  transition: all 0.45s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.mfp-bg.mfp-ready { opacity: 1; }
+.mfp-bg.mfp-removing { opacity: 0; }
+.mfp-wrap {
+  --wd-popup-mt: 50px;
+  --wd-popup-mr: 15px;
+  --wd-popup-mb: 50px;
+  --wd-popup-ml: 15px;
+  --wd-popup-max-height: calc(100dvh - var(--wd-popup-mt) - var(--wd-popup-mb));
+  position: fixed;
+  inset: 0;
+  z-index: 1103;
+  overflow: hidden;
+  outline: none !important;
+  backface-visibility: hidden;
+}
+.mfp-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: var(--wd-popup-mt) var(--wd-popup-mr) var(--wd-popup-mb) var(--wd-popup-ml);
+}
+.mfp-content { position: relative; z-index: 1105; width: 100%; max-height: 100%; max-width: var(--wd-popup-width, 800px); }
+.wd-popup-quick-view-wrap { --wd-popup-width: 920px; }
+
+/* Slides in from the left, out to the right (theme "default" popup animation). */
+.wd-popup-wrap {
+  opacity: 0;
+  transform: translateX(-100px);
+  transition: transform 0.45s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.25s ease;
+}
+.wd-popup-wrap.wd-in { opacity: 1; transform: none; }
+.wd-popup-wrap.wd-out { opacity: 0; transform: translateX(100px); }
+
+.wd-popup {
+  position: relative;
+  max-height: var(--wd-popup-max-height) !important;
+  padding: var(--wd-popup-padding, 30px);
+  border-radius: 12px;
+  background-color: #ffffff;
+}
+.wd-scroll-content { overflow: hidden; overflow-y: auto; max-height: var(--wd-scroll-h, 50vh); -webkit-overflow-scrolling: touch; }
+.wd-scroll ::-webkit-scrollbar { width: 5px; }
+.wd-scroll ::-webkit-scrollbar-track { background-color: rgb(0 0 0 / 0.05); }
+.wd-scroll ::-webkit-scrollbar-thumb { background-color: rgb(0 0 0 / 0.12); }
+
+/* The × above the top right corner */
+.wd-popup-close { position: absolute; top: -50px; inset-inline-end: -15px; z-index: 100; }
+.wd-popup-close > button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #ffffff;
+  font-size: 0;
+  line-height: 0;
+  cursor: pointer;
+}
+.wd-popup-close > button:hover { color: #bbbbbb; }
+.wd-popup-close > button::before { content: "\f112"; font-family: var(--font-icons); font-size: 20px; transition: opacity 0.15s ease; }
+.wd-popup-close > button span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+/* ── Inside: pictures | summary ── */
+.popup-quick-view:has(.quick-view-horizontal) { scrollbar-width: none; }
+.popup-quick-view:has(.quick-view-horizontal)::-webkit-scrollbar { display: none; }
+.quick-view-horizontal .product-image-summary { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px; min-height: 450px; }
+/* One cell each (the product page puts them on a 12-column grid instead). */
+.quick-view-horizontal .product-image-summary > :is(.product-images, .summary) { grid-column: auto; }
+.popup-quick-view .woocommerce-product-gallery { width: auto; min-width: 100%; }
+.popup-quick-view .woocommerce-product-gallery .woocommerce-product-gallery__image { margin: 0; }
+/* The carousel clips the "View details" bar while it waits below the picture. */
+.popup-quick-view .woocommerce-product-gallery .wd-carousel { position: relative; }
+
+/* "View details": slides up over the picture while the pointer is on it. */
+.popup-quick-view .view-details-btn {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 5px 20px;
+  background-color: #b8952a;
+  color: #333333;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-transform: uppercase;
+  transform: translateY(100%);
+  transition: all 0.25s ease;
+}
+.popup-quick-view .woocommerce-product-gallery:hover .view-details-btn { transform: none; }
+
+/* Summary: its own scroll area, faded out at the bottom (desktop and tablets). */
+@media (min-width: 769px) {
+  .quick-view-horizontal .entry-summary {
+    position: relative;
+    margin-inline-end: calc(var(--wd-popup-padding, 30px) / -1);
+    margin-top: calc(var(--wd-popup-padding, 30px) / -1);
+    mask-image: linear-gradient(to top, transparent 5px, #000000 40px);
+  }
+  .quick-view-horizontal .summary-inner {
+    position: absolute;
+    inset: 0;
+    max-height: 100%;
+    padding-block: var(--wd-popup-padding, 30px) 25px;
+    padding-inline-end: var(--wd-popup-padding, 30px);
+  }
+}
+.product-quick-view .wd-set-mb > *,
+.product-quick-view .summary form.cart { margin-bottom: 15px; }
+.product-quick-view .reset-last-child > :last-child { margin-bottom: 0; }
+.product-quick-view .product_title { color: #333333; font-size: 26px; font-weight: 500; line-height: 1.2; }
+.product-quick-view .product_title a { color: inherit; text-decoration: none; }
+.product-quick-view .summary-inner > .price { color: #b8952a; font-size: 155%; line-height: 1.2; }
+.product-quick-view .summary-inner > .price .price { font-size: inherit; }
+/* The owner's USD price (snippet 09, site-wide on the live site). */
+.product-quick-view .atlas-usd-price {
+  display: inline-block;
+  margin-left: 6px;
+  color: #aaa3a5;
+  font-size: 0.62em;
+  font-weight: 400;
+  line-height: 1;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+/* The option form with the theme's default look (the owner's styles are for product pages). */
+.product-quick-view table.variations { width: 100%; }
+.product-quick-view table.variations label { color: #333333; }
+.product-quick-view .woocommerce-variation-add-to-cart { display: flex; flex-wrap: wrap; gap: 10px; }
+.product-quick-view table.variations td:not(.with-swatches) select {
+  width: 100%;
+  max-width: 260px;
+  height: 42px;
+  padding: 0 30px 0 15px;
+  border: 2px solid rgb(0 0 0 / 0.1);
+  border-radius: 35px;
+  background-color: transparent;
+  color: #767676;
+  font-size: 14px;
+}
+.product-quick-view div.quantity { --wd-form-height: 42px; display: inline-flex; vertical-align: top; white-space: nowrap; }
+.product-quick-view div.quantity :is(input[type="number"], input[type="button"]) {
+  display: inline-block;
+  height: 42px;
+  border: 2px solid rgb(0 0 0 / 0.1);
+  background: transparent;
+  color: inherit;
+  box-shadow: none;
+}
+.product-quick-view div.quantity input[type="number"] { width: 30px; padding: 0; border-inline: none; border-radius: 0; text-align: center; }
+.product-quick-view div.quantity input[type="button"] { min-width: 25px; padding: 0 5px; }
+.product-quick-view div.quantity input[type="button"]:hover { border-color: #b8952a; background-color: #b8952a; color: #ffffff; }
+.product-quick-view div.quantity .minus { border-start-start-radius: 35px; border-end-start-radius: 35px; }
+.product-quick-view div.quantity .plus { border-start-end-radius: 35px; border-end-end-radius: 35px; }
+.product-quick-view .single_add_to_cart_button {
+  flex: 0 0 auto;
+  min-height: 42px;
+  padding: 5px 20px;
+  border-radius: 35px;
+  background-color: #b8952a;
+  color: #333333;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* SKU and categories */
+.product-quick-view .product_meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  padding-top: 20px;
+  border-top: 1px solid rgb(0 0 0 / 0.105);
+}
+.product-quick-view .product_meta > span { flex: 1 1 100%; }
+.product-quick-view .product_meta .meta-label { color: #333333; font-weight: 600; }
+.product-quick-view .product_meta .meta-sep { display: inline-block; margin: 0 2px; }
+.product-quick-view .product_meta a { color: inherit; text-decoration: none; }
+
+@media (min-width: 1025px) {
+  .popup-quick-view .product_title { font-size: 26px; }
+}
+@media (max-width: 1024px) {
+  .popup-quick-view { --wd-popup-padding: 20px; }
+  .popup-quick-view .wd-scroll-content { max-height: unset; }
+  .quick-view-horizontal .product-image-summary { gap: 20px; }
+  .product-quick-view .summary-inner > .price { margin-bottom: 15px; font-size: 130%; }
+}
+@media (max-width: 768.98px) {
+  .popup-quick-view { --wd-popup-padding: 15px; }
+  .quick-view-horizontal .product-image-summary { grid-template-columns: minmax(0, 1fr); }
+}

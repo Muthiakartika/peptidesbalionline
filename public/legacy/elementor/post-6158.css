@@ -1,0 +1,311 @@
+.elementor-6158 .elementor-element.elementor-element-acf9054{--display:flex;}/* Start custom CSS for shortcode, class: .elementor-element-9e725dc *//* =====================================================
+   ATLAS LONGEVITY – ICEGRAM SUBSCRIBE FORM
+   Page: /subscribe/
+===================================================== */
+
+/* Form container */
+body .ig_es_form_wrapper,
+body .es_subscription_form {
+    width: 100%;
+    max-width: 620px;
+    margin: 30px auto;
+    padding: 38px;
+    position: relative;
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.035),
+            rgba(255, 255, 255, 0)
+        ),
+        #071922;
+
+    border: 1px solid rgba(201, 164, 92, 0.5);
+    border-radius: 18px;
+
+    box-shadow:
+        0 20px 55px rgba(0, 0, 0, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* Gold decorative line */
+body .ig_es_form_wrapper::before,
+body .es_subscription_form::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 12%;
+    width: 76%;
+    height: 3px;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        #b68a3c,
+        #e7c978,
+        #b68a3c,
+        transparent
+    );
+}
+
+/* Heading inside form */
+body .ig_es_form_wrapper h1,
+body .ig_es_form_wrapper h2,
+body .ig_es_form_wrapper h3,
+body .ig_es_form_wrapper h4,
+body .es_subscription_form h1,
+body .es_subscription_form h2,
+body .es_subscription_form h3,
+body .es_subscription_form h4 {
+    margin: 0 0 10px;
+    color: #e5c576 !important;
+    font-size: 28px;
+    line-height: 1.25;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* Paragraph and description */
+body .ig_es_form_wrapper p,
+body .es_subscription_form p {
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.65;
+}
+
+/* Labels */
+body .ig_es_form_wrapper label,
+body .es_subscription_form label {
+    display: block;
+    margin: 0 0 7px;
+
+    color: #d6b35f !important;
+    font-size: 13px;
+    line-height: 1.4;
+    font-weight: 600;
+}
+
+/* Each input wrapper */
+body .ig_es_form_wrapper .es-field-wrap,
+body .es_subscription_form .es-field-wrap {
+    margin-bottom: 15px !important;
+}
+
+/* Text, email and name inputs */
+body .ig_es_form_wrapper input[type="text"],
+body .ig_es_form_wrapper input[type="email"],
+body .ig_es_form_wrapper input[type="tel"],
+body .es_subscription_form input[type="text"],
+body .es_subscription_form input[type="email"],
+body .es_subscription_form input[type="tel"] {
+    display: block;
+    width: 100% !important;
+    height: 52px;
+    margin: 0 !important;
+    padding: 0 17px !important;
+
+    color: #000 !important;
+    font-size: 15px;
+
+    background: rgba(255, 255, 255, 0.055) !important;
+    border: 1px solid rgba(214, 179, 95, 0.65) !important;
+    border-radius: 9px !important;
+    box-shadow: none !important;
+
+    transition:
+        border-color 0.25s ease,
+        background-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+/* Placeholder */
+body .ig_es_form_wrapper input::placeholder,
+body .es_subscription_form input::placeholder {
+    color: #000 !important;
+    opacity: 1;
+}
+
+/* Input focus */
+body .ig_es_form_wrapper input[type="text"]:focus,
+body .ig_es_form_wrapper input[type="email"]:focus,
+body .ig_es_form_wrapper input[type="tel"]:focus,
+body .es_subscription_form input[type="text"]:focus,
+body .es_subscription_form input[type="email"]:focus,
+body .es_subscription_form input[type="tel"]:focus {
+    outline: none !important;
+
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-color: #d6b35f !important;
+
+    box-shadow:
+        0 0 0 3px rgba(214, 179, 95, 0.13) !important;
+}
+
+/* Chrome autofill */
+body .ig_es_form_wrapper input:-webkit-autofill,
+body .ig_es_form_wrapper input:-webkit-autofill:hover,
+body .ig_es_form_wrapper input:-webkit-autofill:focus,
+body .es_subscription_form input:-webkit-autofill,
+body .es_subscription_form input:-webkit-autofill:hover,
+body .es_subscription_form input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #ffffff !important;
+
+    -webkit-box-shadow:
+        0 0 0 1000px #10242d inset !important;
+
+    box-shadow:
+        0 0 0 1000px #10242d inset !important;
+
+    border: 1px solid rgba(214, 179, 95, 0.65) !important;
+
+    transition:
+        background-color 9999s ease-in-out 0s;
+}
+
+/* Subscribe button */
+body .ig_es_form_wrapper input[type="submit"],
+body .ig_es_form_wrapper button[type="submit"],
+body .es_subscription_form input[type="submit"],
+body .es_subscription_form button[type="submit"],
+body .es_subscription_form_submit {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+
+    width: 100% !important;
+    min-height: 52px;
+    margin: 8px 0 0 !important;
+    padding: 13px 25px !important;
+
+    color: #071922 !important;
+    font-size: 14px !important;
+    line-height: 1.2;
+    font-weight: 700 !important;
+    letter-spacing: 0.5px;
+    text-align: center;
+    text-transform: uppercase;
+
+    background: linear-gradient(
+        135deg,
+        #a97b2f 0%,
+        #e4c370 45%,
+        #b78735 100%
+    ) !important;
+
+    border: 1px solid #e4c370 !important;
+    border-radius: 9px !important;
+
+    box-shadow:
+        0 8px 25px rgba(183, 135, 53, 0.2) !important;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        filter 0.25s ease;
+}
+
+/* Button hover */
+body .ig_es_form_wrapper input[type="submit"]:hover,
+body .ig_es_form_wrapper button[type="submit"]:hover,
+body .es_subscription_form input[type="submit"]:hover,
+body .es_subscription_form button[type="submit"]:hover,
+body .es_subscription_form_submit:hover {
+    color: #071922 !important;
+    filter: brightness(1.08);
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 28px rgba(183, 135, 53, 0.3) !important;
+}
+
+/* Checkbox layout */
+body .ig_es_form_wrapper input[type="checkbox"],
+body .es_subscription_form input[type="checkbox"] {
+    width: 16px !important;
+    height: 16px;
+    margin: 1px 7px 0 0 !important;
+    accent-color: #c69b4c;
+}
+
+/* Privacy and consent text */
+body .ig_es_form_wrapper .es-field-wrap label:has(input[type="checkbox"]),
+body .es_subscription_form .es-field-wrap label:has(input[type="checkbox"]) {
+    display: flex;
+    align-items: flex-start;
+
+    color: rgba(255, 255, 255, 0.65) !important;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+/* Links */
+body .ig_es_form_wrapper a,
+body .es_subscription_form a {
+    color: #e5c576 !important;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+/* Success message */
+body .es_subscription_message.success,
+body .ig_es_form_wrapper .success {
+    margin-top: 15px !important;
+    padding: 12px 15px !important;
+
+    color: #000 !important;
+    background: rgba(33, 140, 84, 0.18) !important;
+    border: 1px solid rgba(73, 190, 123, 0.45) !important;
+    border-radius: 8px;
+}
+
+/* Error message */
+body .es_subscription_message.error,
+body .ig_es_form_wrapper .error {
+    margin-top: 15px !important;
+    padding: 12px 15px !important;
+
+    color: #000 !important;
+    background: rgba(180, 40, 40, 0.17) !important;
+    border: 1px solid rgba(220, 80, 80, 0.45) !important;
+    border-radius: 8px;
+}
+
+/* Loading state */
+body .es_subscription_form_submit.es_submit_button.loading,
+body .es_subscription_form input[type="submit"]:disabled {
+    opacity: 0.65;
+    cursor: wait;
+    transform: none;
+}
+
+/* Mobile */
+@media only screen and (max-width: 767px) {
+
+    body .ig_es_form_wrapper,
+    body .es_subscription_form {
+        margin: 20px auto;
+        padding: 27px 20px;
+        border-radius: 14px;
+    }
+
+    body .ig_es_form_wrapper h1,
+    body .ig_es_form_wrapper h2,
+    body .ig_es_form_wrapper h3,
+    body .es_subscription_form h1,
+    body .es_subscription_form h2,
+    body .es_subscription_form h3 {
+        font-size: 23px;
+    }
+
+    body .ig_es_form_wrapper input[type="text"],
+    body .ig_es_form_wrapper input[type="email"],
+    body .ig_es_form_wrapper input[type="tel"],
+    body .es_subscription_form input[type="text"],
+    body .es_subscription_form input[type="email"],
+    body .es_subscription_form input[type="tel"] {
+        height: 50px;
+        font-size: 16px;
+    }
+}/* End custom CSS */

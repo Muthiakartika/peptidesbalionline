@@ -1,0 +1,101 @@
+[
+  {
+    "id": 77,
+    "count": 1,
+    "description": "",
+    "link": "https://peptidesbali.online/category/anti-ageing-longevity/",
+    "name": "Anti-Ageing &amp; Longevity",
+    "slug": "anti-ageing-longevity",
+    "parent": 0
+  },
+  {
+    "id": 86,
+    "count": 2,
+    "description": "",
+    "link": "https://peptidesbali.online/category/bali-wellness-guides/",
+    "name": "Bali Wellness Guides",
+    "slug": "bali-wellness-guides",
+    "parent": 0
+  },
+  {
+    "id": 82,
+    "count": 1,
+    "description": "",
+    "link": "https://peptidesbali.online/category/hormones-healthy-ageing/",
+    "name": "Hormones &amp; Healthy Ageing",
+    "slug": "hormones-healthy-ageing",
+    "parent": 0
+  },
+  {
+    "id": 83,
+    "count": 1,
+    "description": "",
+    "link": "https://peptidesbali.online/category/mens-health/",
+    "name": "Men's Health",
+    "slug": "mens-health",
+    "parent": 0
+  },
+  {
+    "id": 85,
+    "count": 0,
+    "description": "",
+    "link": "https://peptidesbali.online/category/nutrition-lifestyle/",
+    "name": "Nutrition &amp; Lifestyle",
+    "slug": "nutrition-lifestyle",
+    "parent": 0
+  },
+  {
+    "id": 78,
+    "count": 2,
+    "description": "",
+    "link": "https://peptidesbali.online/category/peptide-therapy/",
+    "name": "Peptide Therapy",
+    "slug": "peptide-therapy",
+    "parent": 0
+  },
+  {
+    "id": 80,
+    "count": 3,
+    "description": "",
+    "link": "https://peptidesbali.online/category/recovery-performance/",
+    "name": "Recovery &amp; Performance",
+    "slug": "recovery-performance",
+    "parent": 0
+  },
+  {
+    "id": 1,
+    "count": 41,
+    "description": "",
+    "link": "https://peptidesbali.online/category/uncategorized/",
+    "name": "Uncategorized",
+    "slug": "uncategorized",
+    "parent": 0
+  },
+  {
+    "id": 79,
+    "count": 4,
+    "description": "",
+    "link": "https://peptidesbali.online/category/weight-management/",
+    "name": "Weight Management",
+    "slug": "weight-management",
+    "parent": 0
+  },
+  {
+    "id": 81,
+    "count": 0,
+    "description": "",
+    "link": "https://peptidesbali.online/category/wellness-preventative-health/",
+    "name": "Wellness &amp; Preventative Health",
+    "slug": "wellness-preventative-health",
+    "parent": 0
+  },
+  {
+    "id": 84,
+    "count": 0,
+    "description": "",
+    "link": "https://peptidesbali.online/category/womens-health/",
+    "name": "Women's Health",
+    "slug": "womens-health",
+    "parent": 0
+  }
+]

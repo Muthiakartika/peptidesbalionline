@@ -1,0 +1,265 @@
+/*
+ * The WooCommerce pages (Phase 3h): the checkout steps in the title band, the empty cart, the
+ * login / registration page, the lost-password form and WooCommerce's messages. These are the
+ * Woodmart theme's rules (woo-mod-checkout-steps, woo-page-empty-page, woo-page-login-register(-predefined),
+ * woo-mod-login-form, woo-page-lost-password, woocommerce-base and the notices in base.css),
+ * written for this project with the live values (open question Q-34). Inside the page they are
+ * written as ":where(.woo-page) <the theme's selector>", so they weigh as much as on the live site.
+ * The page frame, buttons and form fields: src/styles/elementor-page.css; the title band:
+ * src/styles/blog.css. Imported by src/components/woocommerce/WooPage.tsx.
+ */
+
+/* The theme settings' button and message colours (xts-theme_settings_default-….css). */
+.woo-page,
+.wd-checkout-steps {
+  --wd-primary-color: rgb(184, 149, 42);
+  --btn-accented-brd-radius: 35px;
+  --btn-accented-color: #333;
+  --btn-accented-color-hover: #333;
+  --btn-accented-bgcolor: rgb(184, 149, 42);
+  --btn-accented-bgcolor-hover: rgb(184, 149, 42);
+  --btn-accented-box-shadow: none;
+  --btn-accented-box-shadow-hover: none;
+  --btn-default-brd-radius: 35px;
+  --btn-default-color: #333;
+  --btn-default-color-hover: #333;
+  --btn-default-bgcolor: rgb(184, 149, 42);
+  --btn-default-bgcolor-hover: rgb(184, 149, 42);
+  --btn-default-box-shadow: none;
+  --btn-default-box-shadow-hover: none;
+  --notices-success-bg: #459647;
+  --notices-success-color: #fff;
+  --notices-warning-bg: #e0b252;
+  --notices-warning-color: #fff;
+}
+
+/* ── The checkout steps in the title band: "Shopping cart > Checkout > Order complete" ── */
+.wd-checkout-steps {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: var(--wd-align);
+  gap: 10px 15px;
+  margin: 0;
+  padding: 0;
+  color: var(--wd-title-color);
+  font-family: var(--font-body);
+  font-size: 22px;
+  font-weight: 600;
+  text-transform: uppercase;
+  list-style: none;
+}
+.wd-checkout-steps li { display: flex; align-items: center; gap: 15px; margin: 0; }
+.wd-checkout-steps a { color: inherit; text-decoration: none; transition: all 0.25s ease; }
+@media (min-width: 769px) {
+  .wd-checkout-steps li > :is(a, span) { opacity: 0.7; }
+  .wd-checkout-steps li a:hover { opacity: 1; }
+  .wd-checkout-steps li:not(:last-child)::after { content: "\f120"; font-family: var(--font-icons); font-size: 85%; font-weight: 400; opacity: 0.7; }
+  .wd-checkout-steps .step-active > :is(a, span) { opacity: 1; text-decoration: underline 2px solid var(--wd-primary-color); text-underline-offset: 6px; }
+}
+@media (max-width: 768.98px) {
+  .wd-checkout-steps .step-inactive { display: none; }
+}
+
+/* ── WooCommerce's messages (base theme): green for success, amber for errors and information,
+ * with the theme's icon on the left ── */
+:where(.woo-page) .woocommerce-notices-wrapper:empty { display: none; }
+:where(.woo-page) :is(.woocommerce-error, .woocommerce-message, .woocommerce-info) {
+  --wd-link-decor: underline;
+  --wd-link-decor-hover: underline;
+  --wd-link-color: currentColor;
+  --wd-link-color-hover: color-mix(in srgb, currentColor 80%, transparent);
+  position: relative;
+  margin-bottom: 20px;
+  padding-block: 18px;
+  padding-inline: 65px 30px !important;
+  border: none;
+  border-radius: var(--wd-brd-radius);
+  outline: none !important;
+  text-align: start;
+}
+:where(.woo-page) :is(.woocommerce-error, .woocommerce-message, .woocommerce-info)::before {
+  position: absolute;
+  top: calc(50% - 9px);
+  left: 24px;
+  font-family: var(--font-icons);
+  font-size: 18px;
+  line-height: 18px;
+}
+:where(.woo-page) :is(.woocommerce-error, .woocommerce-message, .woocommerce-info) p:last-child { margin-bottom: 0; }
+/* A button inside a message is drawn as an underlined text link (base.css). */
+:where(.woo-page) :is(.woocommerce-error, .woocommerce-message, .woocommerce-info) :is(.button, .wc-backward) {
+  text-decoration: none;
+  --btn-color: currentColor;
+  --btn-color-hover: currentColor;
+  --btn-bgcolor: transparent;
+  --btn-bgcolor-hover: transparent;
+  --btn-brd-width: 2px;
+  --btn-box-shadow-hover: none;
+  --btn-height: none;
+  --btn-padding: 0;
+  --btn-brd-color: color-mix(in srgb, currentColor 50%, transparent);
+  border-top: 0;
+  border-inline: 0;
+  margin-inline: 4px;
+}
+:where(.woo-page) .woocommerce-message { background-color: var(--notices-success-bg); color: var(--notices-success-color); }
+:where(.woo-page) .woocommerce-message::before { content: "\f107"; }
+:where(.woo-page) :is(.woocommerce-error, .woocommerce-info) { background-color: var(--notices-warning-bg); color: var(--notices-warning-color); }
+:where(.woo-page) :is(.woocommerce-error, .woocommerce-info)::before { content: "\f100"; }
+:where(.woo-page) ul:is(.woocommerce-error, .woocommerce-message, .woocommerce-info) {
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  list-style: none;
+}
+
+/* ── The empty cart: a big faded cart icon, the title, the text, "Return to shop" ── */
+:where(.woo-page) .wd-empty-page {
+  position: relative;
+  margin-top: 5vw;
+  margin-bottom: 15px;
+  color: var(--wd-title-color);
+  font-family: var(--font-body);
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+}
+:where(.woo-page) .wd-empty-page::before { display: block; margin-bottom: 20px; color: rgb(0 0 0 / 0.07); font-size: 3.8em; font-weight: 400; line-height: 1; }
+:where(.woo-page) .cart-empty::before { content: "\f147"; font-family: var(--font-icons); }
+:where(.woo-page) .wd-empty-page-text { max-width: 535px; margin-inline: auto; margin-bottom: 0; font-size: 110%; text-align: center; }
+:where(.woo-page) .wd-empty-page-text + .return-to-shop { margin-top: 25px; margin-bottom: 5vw; }
+:where(.woo-page) .wd-empty-page-text + .return-to-shop .button { min-height: 48px; padding: 5px 28px; font-size: 14px; }
+:where(.woo-page) .return-to-shop { text-align: center; }
+/* The theme's "accented" button (also the login, register and reset buttons below). */
+:where(.woo-page) :is(.return-to-shop, .register, .woocommerce-form-login, .lost_reset_password) .button {
+  border-radius: var(--btn-accented-brd-radius);
+  background-color: var(--btn-accented-bgcolor);
+  box-shadow: var(--btn-accented-box-shadow);
+  color: var(--btn-accented-color);
+  font-family: inherit;
+  font-style: unset;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+:where(.woo-page) :is(.return-to-shop, .register, .woocommerce-form-login, .lost_reset_password) .button:hover {
+  background-color: var(--btn-accented-bgcolor-hover);
+  box-shadow: var(--btn-accented-box-shadow-hover);
+  color: var(--btn-accented-color-hover);
+}
+:where(.woo-page) :is(.register, .woocommerce-form-login, .lost_reset_password) .button { width: 100%; }
+@media (max-width: 1024px) {
+  :where(.woo-page) .wd-empty-page { font-size: 42px; }
+}
+@media (max-width: 768.98px) {
+  :where(.woo-page) .wd-empty-page { font-size: 32px; }
+  :where(.woo-page) .wd-empty-page-text { font-size: 100%; }
+}
+@media (max-width: 576px) {
+  :where(.woo-page) .wd-empty-page { font-size: 28px; }
+}
+
+/* ── /my-account/: login | "Or" · Register · text · button; the button swaps the login form for the
+ * registration form (AccountLogin.tsx adds "active-register") ── */
+:where(.woo-page) .wd-registration-page { max-width: 1000px; margin-inline: auto; }
+:where(.woo-page) #customer_login { --wd-col-lg: 2; --wd-col-sm: 1; --wd-gap-lg: 80px; --wd-gap-md: 40px; --wd-gap-sm: 30px; }
+:where(.woo-page) .col-register-text { text-align: center; }
+:where(.woo-page) .wd-switch-to-register {
+  border-radius: var(--btn-default-brd-radius);
+  background-color: var(--btn-default-bgcolor);
+  box-shadow: var(--btn-default-box-shadow);
+  color: var(--btn-default-color);
+  font-family: inherit;
+  font-style: unset;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+:where(.woo-page) .wd-switch-to-register:hover { background-color: var(--btn-default-bgcolor-hover); box-shadow: var(--btn-default-box-shadow-hover); color: var(--btn-default-color-hover); }
+:where(.woo-page) :is(.registration-info, .login-info) { margin-bottom: 20px; }
+:where(.woo-page) .wd-register-tabs :is(.col-register, .col-login) { animation: woo-fade-in 0.7s ease; }
+:where(.woo-page) .wd-register-tabs .col-register { display: none; }
+:where(.woo-page) .active-register .col-register { display: block; }
+:where(.woo-page) .active-register .col-login { display: none; }
+@media (min-width: 769px) {
+  :where(.woo-page) #customer_login > div:not(:first-child):last-child { border-inline-start: 1px solid var(--brdcolor-gray-300); }
+  :where(.woo-page) .col-register-text .wd-login-divider { display: none; }
+}
+@keyframes woo-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+:where(.woo-page) .register > :last-child { margin-bottom: 0; }
+
+/* The login form (woo-mod-login-form): "Lost your password?" on the right, "Remember me" on the left. */
+:where(.woo-page) .woocommerce-form-login > :last-child { margin-bottom: 0; }
+:where(.woo-page) .woocommerce-form-login:not(.hidden-form) { display: block !important; }
+:where(.woo-page) .login-form-footer {
+  --wd-link-color: var(--wd-primary-color);
+  --wd-link-color-hover: var(--wd-primary-color);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+:where(.woo-page) .login-form-footer .lost_password { order: 2; text-decoration: none; }
+:where(.woo-page) .login-form-footer .lost_password:hover { opacity: 0.7; }
+:where(.woo-page) .login-form-footer .woocommerce-form-login__rememberme { order: 1; margin-bottom: 0; }
+/* The theme's ".title" (it looks like a heading), here on the "Or" between the columns. */
+:where(.woo-page) .title { display: block; margin-bottom: 20px; color: var(--wd-title-color); font-family: var(--font-body); font-weight: 600; line-height: 1.4; }
+:where(.woo-page) .wd-login-divider { display: flex; align-items: center; text-transform: uppercase; }
+:where(.woo-page) .wd-login-divider span { margin-inline: 20px; }
+:where(.woo-page) .wd-login-divider::before,
+:where(.woo-page) .wd-login-divider::after { content: ""; flex: 1 0 0; border-bottom: 1px solid var(--brdcolor-gray-300); }
+
+/* The password field's eye button (WooCommerce's script adds it; PasswordInput.tsx). */
+:where(.woo-page) .password-input { position: relative; display: block; }
+:where(.woo-page) .password-input input { padding-inline-end: var(--wd-form-height) !important; }
+:where(.woo-page) .show-password-input {
+  position: absolute;
+  top: 0;
+  inset-inline-end: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--wd-form-height);
+  height: var(--wd-form-height);
+  min-height: unset !important;
+  padding: 0 !important;
+  border: none !important;
+  background: none !important;
+  box-shadow: none !important;
+  color: #666;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+:where(.woo-page) .show-password-input:hover { color: #a5a5a5; }
+:where(.woo-page) .show-password-input::before { content: "\f11a"; font-family: var(--font-icons); }
+:where(.woo-page) .show-password-input.display-password::before { content: "\f11b"; }
+
+/* Text for screen readers only ("Required"): the theme also shrinks it to nothing; WordPress's block
+ * styles clip it (the rest comes from Elementor's and AffiliateWP's CSS, as live). */
+:where(.woo-page) [class*="screen-reader"] { position: absolute !important; clip: rect(1px, 1px, 1px, 1px); transform: scale(0); }
+:where(.woo-page) .screen-reader-text { clip-path: inset(50%); }
+
+/* ── /checkout/order-received/: the green dashed "Thank you" box (woo-thank-you-page-predefined) ── */
+.wd-builder-off:where(.woo-page) .woocommerce-order > :not(:last-child) { margin-bottom: 30px; }
+.wd-builder-off:where(.woo-page) .woocommerce-order:not(.wd-with-extra-content) { max-width: 800px; margin: 0 auto; }
+.wd-builder-off:where(.woo-page) :is(.woocommerce-thankyou-order-received, .woocommerce-thankyou-order-failed) {
+  width: 100%;
+  padding: 3%;
+  border: 2px dashed #7a9c59;
+  border-radius: var(--wd-brd-radius);
+  color: #7a9c59;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: center;
+}
+.wd-builder-off:where(.woo-page) .woocommerce-thankyou-order-failed { border-color: #fbbc34; color: #fbbc34; }
+
+/* ── /my-account/lost-password/ ── */
+:where(.woo-page) .lost_reset_password .form-row { width: 100%; }
+.wd-builder-off:where(.woo-page) .lost_reset_password { max-width: 470px; margin-inline: auto; }
+:where(.woo-page) .clear { clear: both; width: 100%; }

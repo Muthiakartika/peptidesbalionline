@@ -1,0 +1,387 @@
+/*
+ * Product page: the theme (Woodmart/WooCommerce) rules the owner's CSS sits on top of.
+ * The owner's own rules are in product-owner.css (copied verbatim, loaded after this file).
+ * Values measured on https://peptidesbali.online/product/bpc-157/ and 5 other products at
+ * 1440, 1280, 768 and 390 px (docs/audit/visual-reference/measurements/, 4 Nov 2026).
+ */
+
+/* ───────────────────────── Frame ───────────────────────── */
+.single-product { padding-block: 40px; }
+.single-product .container { max-width: 1222px; margin-inline: auto; padding-inline: 15px; }
+.single-product-page > .container:first-child { margin-bottom: 40px; }
+
+.product-image-summary-inner {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 30px;
+}
+.product-images { grid-column: span 4; min-width: 0; }
+.summary.entry-summary { grid-column: span 8; min-width: 0; }
+
+/* ───────────────────────── Gallery ───────────────────────── */
+.woocommerce-product-gallery { display: flex; flex-direction: column; gap: 10px; }
+.wd-gallery-images,
+.wd-gallery-thumb { position: relative; max-width: 100%; }
+.wd-gallery-images .wd-carousel-inner { position: relative; }
+.woocommerce-product-gallery .wd-carousel { margin: 0; overflow: hidden; }
+.woocommerce-product-gallery .wd-carousel-wrap { display: flex; height: 100%; box-sizing: content-box; transition: transform 0.3s ease; }
+/* height: 100% (as in the theme's carousel) keeps each slide as tall as its own picture: a tall
+   thumbnail does not stretch the square ones next to it. */
+.woocommerce-product-gallery .wd-carousel-item { position: relative; flex: 0 0 100%; max-width: 100%; height: 100%; }
+.woocommerce-product-gallery__image { position: relative; overflow: hidden; border-radius: 12px; }
+.woocommerce-product-gallery__image a { display: block; color: #333333; cursor: pointer; }
+.woocommerce-product-gallery__image img { display: inline; max-width: 100%; height: auto; border-radius: 12px; }
+.wd-zoom-area { position: absolute; inset: 0; overflow: hidden; border-radius: 12px; }
+.wd-zoom-area .zoomImg { position: absolute; max-width: none; max-height: none; border: none; background-color: #ffffff; pointer-events: none; }
+
+/* Gallery arrows (the theme's carousel arrows, "separate" position, "hover 1" style): on desktop
+   they slide in from the sides while the pointer is over the gallery; on tablets and phones they
+   are always there, smaller. The first arrow is dimmed on the first picture. */
+/* Greys are the theme's own (#333 / #767676 / #a5a5a5 / #242424), written out: Tailwind has its own
+   --color-gray-* variables with other values. */
+.woocommerce-product-gallery .wd-btn-arrow { padding: 0; border: 0; background: none; transition: all 0.25s ease; }
+.woocommerce-product-gallery .wd-arrow-inner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--wd-arrow-size, 50px);
+  height: var(--wd-arrow-size, 50px);
+  color: var(--wd-arrow-color, #333333);
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.woocommerce-product-gallery .wd-arrow-inner::after { font-family: var(--font-icons); font-size: var(--wd-arrow-icon-size, 24px); }
+.woocommerce-product-gallery .wd-arrow-inner:hover { color: var(--wd-arrow-color-hover, #767676); }
+.woocommerce-product-gallery .wd-disabled .wd-arrow-inner { color: var(--wd-arrow-color-dis, #a5a5a5); cursor: unset; }
+.woocommerce-product-gallery .wd-prev .wd-arrow-inner::after { content: "\f114"; }
+.woocommerce-product-gallery .wd-next .wd-arrow-inner::after { content: "\f113"; }
+.woocommerce-product-gallery .wd-nav-arrows.wd-pos-sep { --wd-arrow-offset-h: calc(var(--wd-arrow-size, 50px) / -1); }
+.woocommerce-product-gallery .wd-nav-arrows.wd-pos-sep .wd-btn-arrow { position: absolute; top: calc(50% - var(--wd-arrow-size, 50px) / 2); z-index: 250; }
+.woocommerce-product-gallery .wd-nav-arrows.wd-pos-sep .wd-prev { inset-inline-end: calc(100% + var(--wd-arrow-offset-h, 0px)); }
+.woocommerce-product-gallery .wd-nav-arrows.wd-pos-sep .wd-next { inset-inline-start: calc(100% + var(--wd-arrow-offset-h, 0px)); }
+/* Arrows of a carousel whose items all fit (the theme's "lock"). */
+.woocommerce-product-gallery .wd-btn-arrow.wd-lock { opacity: 0 !important; pointer-events: none !important; }
+@media (min-width: 1025px) {
+  .woocommerce-product-gallery .wd-nav-arrows[class*="wd-hover"].wd-pos-sep .wd-btn-arrow { opacity: 0; pointer-events: none; }
+  .woocommerce-product-gallery .wd-nav-arrows.wd-hover-1.wd-pos-sep .wd-prev { transform: translateX(-30px); }
+  .woocommerce-product-gallery .wd-nav-arrows.wd-hover-1.wd-pos-sep .wd-next { transform: translateX(30px); }
+  .woocommerce-product-gallery .wd-carousel-container:hover .wd-nav-arrows[class*="wd-hover"].wd-pos-sep .wd-btn-arrow { opacity: 1; transform: translateY(0); pointer-events: unset; }
+}
+@media (max-width: 1024px) {
+  .woocommerce-product-gallery .wd-nav-arrows { --wd-arrow-icon-size: 16px; --wd-arrow-size: 40px; }
+}
+
+.product-additional-galleries { position: absolute; bottom: 15px; left: 15px; z-index: 2; display: flex; flex-direction: column; gap: 10px; }
+.wd-gallery-btn > a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50.4px;
+  height: 50.4px;
+  overflow: hidden;
+  border-radius: 36px;
+  background-color: #ffffff;
+  box-shadow: 0 0 5px rgb(0 0 0 / 0.08);
+  color: #666666;
+}
+.wd-gallery-btn > a::before { content: "\f127"; font-family: var(--font-icons); font-size: 18px; line-height: 1; }
+.wd-gallery-btn > a span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+.wd-gallery-thumb .wd-carousel { overflow: clip; }
+.wd-gallery-thumb .wd-carousel-wrap { gap: 0; }
+.wd-gallery-thumb .wd-carousel { margin-inline: -5px; }
+.wd-gallery-thumb .wd-carousel-item { flex: 0 0 25%; max-width: 25%; padding-inline: 5px; cursor: pointer; transition: opacity 0.3s; }
+/* The live theme dims the CURRENT thumbnail (measured: active 0.5, others 1). */
+.wd-gallery-thumb .wd-carousel-item.wd-thumb-active { opacity: 0.5; }
+.wd-gallery-thumb img { display: block; width: 100%; height: auto; border-radius: 12px; }
+
+/* Full-screen pictures ("Click to enlarge"): src/styles/photoswipe.css */
+
+/* ───────────────────────── Summary ───────────────────────── */
+.summary.entry-summary { text-align: left; }
+/* Woodmart: summary blocks are 20px apart unless a more specific rule says otherwise. */
+.wd-set-mb > * { margin-bottom: 20px; }
+.reset-last-child > :last-child { margin-bottom: 0; }
+.single-breadcrumbs-wrapper { display: flex; gap: 20px; margin-bottom: 20px; }
+.single-product .wd-breadcrumbs { display: flex; flex: 1 1 auto; flex-wrap: wrap; align-items: center; }
+.single-product .wd-breadcrumbs a { transition: color 0.25s; }
+.single-product .wd-breadcrumbs .wd-delimiter { margin-inline: 8px; }
+.single-product .wd-breadcrumbs .wd-delimiter::after { content: "/"; }
+.single-product .wd-breadcrumbs .wd-last { color: var(--color-title); font-weight: 600; }
+
+.product_title { font-family: var(--font-body); }
+.summary p.price .woocommerce-Price-amount { color: var(--color-gold); }
+/* A sale: the struck-through regular price in the theme's grey (Woodmart woocommerce-base.min.css
+ * `del .amount { color: var(--color-gray-300) #bbb; font-weight: 400 }`); the owner's snippet sizes the <del>. */
+.summary p.price del .woocommerce-Price-amount,
+.woocommerce-variation-price del .woocommerce-Price-amount { color: #bbb; font-weight: 400; }
+.woocommerce-variation-price ins { padding: 0; background-color: transparent; text-decoration: none; opacity: 1; }
+/* Woodmart "hide larger price": only the cheapest price of a range is shown (not the sale price <ins>). */
+.summary p.price > [aria-hidden="true"]:not(:first-child):not(ins),
+.summary p.price > .woocommerce-Price-amount ~ .woocommerce-Price-amount { display: none; }
+.atlas-usd-price { display: inline-block; line-height: 1; vertical-align: middle; }
+.screen-reader-text { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.woocommerce-product-details__short-description p { margin-bottom: 20px; }
+.woocommerce-product-details__short-description > :last-child { margin-bottom: 0; }
+
+/* Cream note under the description (Sleeks plugin; measured). Product pages only: in the quick-view
+   popup on shop pages the live note is plain text. */
+.single-product .sleeks-included-supplies {
+  margin: 10px 0 14px;
+  padding: 9px 12px;
+  border-left: 3px solid #b98a31;
+  border-radius: 5px;
+  background-color: #fff9eb;
+  color: #5f5b54;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+/* ───────────────────────── Add to cart form ───────────────────────── */
+.summary form.cart { display: flex; flex-wrap: wrap; align-items: center; margin-bottom: 20px; }
+.summary form.cart:not(.variations_form) { gap: 10px; }
+/* Woodmart's variation form (woo-mod-variation-form + its single-product part), same selectors.
+   The form carries the theme's option classes from the live page:
+     wd-reset-side-lg  "Clear" next to the options on desktop;
+     wd-reset-bottom-md "Clear" under the options on tablets/phones (the table then gets 40px
+                        under it while an option is picked: .variation-swatch-selected);
+     wd-label-top-md   the label above the options on tablets/phones. */
+form.variations_form { --wd-var-table-mb: 20px; gap: 0; }
+form.variations_form p.stock { margin-bottom: 0; }
+table.variations { position: relative; margin-bottom: var(--wd-var-table-mb); line-height: 21px; transition: margin-bottom 0.3s ease; }
+table.variations .cell { padding: 0 0 20px; border: none; text-align: var(--text-align, start); vertical-align: middle; }
+table.variations tr:last-child .cell { padding-bottom: 0; }
+table.variations .label { padding-right: 20px; color: inherit; font-family: inherit; font-weight: inherit; font-style: inherit; }
+table.variations .label > * { display: inline-block; vertical-align: middle; line-height: var(--wd-text-line-height, 1.6); }
+table.variations label { margin-bottom: 0; font-weight: 600; white-space: nowrap; }
+table.variations label::after { content: ":"; margin-left: 2px; }
+table.variations .value { width: 100%; }
+table.variations select { max-width: 260px; }
+.summary .variations select { display: none; }
+.summary .variations td:not(.with-swatches) select {
+  display: inline-block;
+  appearance: none;
+  background: #ffffff url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNSIgaGVpZ2h0PSIyNSIgZmlsbD0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2U9IiNiYmIiPjxwYXRoIGQ9Ik02IDlsNiA2IDYtNiIvPjwvc3ZnPg==") no-repeat right 10px top 50% / auto 18px;
+  cursor: pointer;
+}
+/* Option pills (Woodmart swatches, "text style 1", same selectors). The theme's min size wins over
+   the owner's 72 × 38 minimum (measured 71.4 × 34 px), and the picked pill gets a dark line under
+   it (also on hover, with a mouse). */
+[class*="wd-swatches"] { --wd-swatch-size: 25px; --wd-swatch-text-size: 16px; --wd-swatch-h-sp: 15px; --wd-swatch-v-sp: 10px; }
+.wd-swatches-product {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: var(--text-align, flex-start);
+  gap: var(--wd-swatch-v-sp) var(--wd-swatch-h-sp);
+  vertical-align: middle;
+}
+.wd-swatch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #242424;
+  font-size: var(--wd-swatch-size);
+  font-weight: 600;
+  line-height: 1;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.wd-swatch.wd-text { width: auto; height: auto; min-width: 1em; min-height: 1em; }
+.wd-swatch.wd-text .wd-swatch-text { font-size: var(--wd-swatch-text-size); line-height: 1; }
+[class*="wd-swatches"].wd-text-style-1 .wd-swatch.wd-text { min-width: max(var(--wd-swatch-text-min-width, 25px), var(--wd-swatch-text-size)); min-height: 20px; }
+[class*="wd-swatches"].wd-text-style-1 .wd-swatch.wd-text .wd-swatch-text { padding: 0; }
+[class*="wd-swatches"].wd-text-style-1 .wd-swatch.wd-text::after {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  inset-inline-start: 0;
+  width: 100%;
+  border-bottom: 2px solid #242424;
+  opacity: 0;
+  transition: inherit;
+  pointer-events: none;
+}
+[class*="wd-swatches"].wd-text-style-1 .wd-swatch.wd-text.wd-active::after { opacity: 1; }
+@media (hover: hover) {
+  [class*="wd-swatches"].wd-text-style-1 .wd-swatch.wd-text:hover:not(.wd-disabled)::after { opacity: 1; }
+}
+/* The picked value after the label ("MG: 5 MG"): the theme's script adds it on screens up to 768px. */
+table.variations .label span { margin-left: 5px; }
+table.variations .label span:empty { display: none; }
+@media (min-width: 769px) {
+  table.variations .label .wd-attr-selected { display: none; }
+}
+.wd-reset-var { --wd-reset-btn-space: 10px; display: inline-block; vertical-align: middle; }
+.reset_variations {
+  display: inline-flex !important;
+  align-items: center;
+  color: #767676;
+  font-size: 12px;
+  line-height: 1.4;
+  text-decoration: none !important;
+  vertical-align: middle;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+.reset_variations::before { content: "\f112"; margin-right: 3px; font-family: var(--font-icons); font-size: 12px; }
+.reset_variations:hover { color: #242424; }
+.variation-swatch-selected .reset_variations { opacity: 1 !important; visibility: visible !important; }
+.woocommerce-variation { animation: wd-fadeInBottomShort 0.3s ease; }
+.woocommerce-variation > div { margin-bottom: 20px; }
+.woocommerce-variation > div:empty { display: none; }
+.woocommerce-variation-price,
+.woocommerce-variation-availability { display: inline-block; vertical-align: middle; }
+.woocommerce-variation-price .price { font-size: 110%; }
+.woocommerce-variation-price:not(:empty) + .woocommerce-variation-availability { margin-left: 15px; }
+/* Stock message (Woodmart "bordered" style; same selectors and values as the theme). */
+p.stock { font-weight: 600; line-height: 1.2; }
+p.stock.out-of-stock { color: #b50808; }
+p.stock.wd-style-bordered span { display: inline-block; padding: 8px 12px; border: 1px solid #85b951; border-radius: calc(var(--wd-brd-radius, 0.001px) / 1.5); color: #333333; }
+p.stock.wd-style-bordered span::before { content: ""; display: inline-block; width: 8px; height: 8px; margin-inline-end: 8px; border-radius: 50%; background-color: #85b951; vertical-align: baseline; }
+p.stock.wd-style-bordered.out-of-stock span { border-color: #e22d2d; }
+p.stock.wd-style-bordered.out-of-stock span::before { background-color: #e22d2d; }
+.wd-price-outside .woocommerce-variation-price { display: none; }
+.wd-price-outside .woocommerce-variation .woocommerce-variation-availability { margin-left: 0; }
+@keyframes wd-fadeInBottomShort {
+  from { transform: translate3d(0, 20px, 0); }
+  to { transform: none; }
+}
+@media (min-width: 1025px) {
+  .wd-reset-side-lg .wd-reset-var { width: 0; }
+  .wd-reset-side-lg .reset_variations { margin-left: 10px; }
+}
+@media (max-width: 1024px) {
+  .wd-reset-bottom-md .wd-reset-var { position: absolute; inset-inline: 0; top: calc(100% + var(--wd-reset-btn-space)); }
+  .wd-reset-bottom-md.variation-swatch-selected { --wd-var-table-mb: 40px; }
+  .wd-label-top-md table.variations .cell { display: block; }
+  .wd-label-top-md table.variations .label { margin-bottom: 5px; padding-bottom: 0; padding-right: 0; }
+}
+.summary .single_variation_wrap { width: 100%; }
+.summary .quantity input[type="button"] { cursor: pointer; font-weight: 600; text-transform: uppercase; }
+.summary .quantity input.qty { appearance: textfield; text-align: center; }
+.summary .quantity input.qty::-webkit-outer-spin-button,
+.summary .quantity input.qty::-webkit-inner-spin-button { appearance: none; margin: 0; }
+.single_add_to_cart_button { display: inline-flex; align-items: center; justify-content: center; text-transform: uppercase; cursor: pointer; }
+/* Before every option is picked the button looks the same (live: full colour, pointer cursor); a
+   click shows WooCommerce's alert instead. */
+
+/* ───────────────────────── Tabs ───────────────────────── */
+.product-tabs-wrapper { margin-bottom: 40px; padding-block: 40px; border-block: 1px solid rgb(0 0 0 / 0.106); }
+.wd-nav-tabs-wrapper { margin: -41px 0 30px; text-align: center; }
+.single-product .woocommerce-tabs .tabs li a { text-transform: uppercase; }
+.single-product .woocommerce-tabs .tabs .nav-link-text { padding-block: 1px; line-height: 1.2; }
+.woocommerce-tabs .wd-accordion-title { display: none; }
+.woocommerce-tabs .woocommerce-Tabs-panel { display: none; }
+.woocommerce-tabs .woocommerce-Tabs-panel.wd-active { display: block; }
+
+/* ───────────────────────── Related products ───────────────────────── */
+.related-and-upsells .related-products { position: relative; }
+.related-products .slider-title { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; color: var(--color-title); font-size: 22px; font-weight: 600; line-height: 1.4; }
+.related-products .wd-carousel-inner { position: relative; }
+.related-products .wd-carousel { margin: -15px -10px; padding-block: 15px; overflow: clip; touch-action: pan-y; }
+.related-products .wd-carousel-wrap { display: flex; align-items: stretch; transition: transform 0.3s ease; }
+.related-products .wd-carousel-item { flex: 0 0 25%; max-width: 25%; padding-inline: 10px; }
+.related-products .wd-carousel-item > .product-card { height: 100%; }
+/* On the live site the <body> of a product page has the class "single-product", so the owner's
+   product-page form styles (snippet 04) also reach the option forms inside these cards (measured:
+   46px dropdown, 12px between rows, 8px above and below). Same result for our card markup. */
+.single-product .related-products .quick-shop__table { border-collapse: separate; border-spacing: 0 8px; }
+.single-product .related-products .quick-shop__table tr { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
+.single-product .related-products .quick-shop__table tr:last-child { margin-bottom: 0; }
+.single-product .related-products .quick-shop__value { display: flex; flex: 1; flex-wrap: wrap; align-items: center; gap: 9px; min-width: 0; padding: 0; }
+.single-product .related-products .quick-shop__select {
+  width: 100%;
+  min-height: 46px;
+  padding: 0 18px;
+  border: 1px solid #dedede;
+  border-radius: 30px;
+  background-color: #ffffff;
+  color: #555555;
+  font-size: 13px;
+}
+.related-products .wd-btn-arrow {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 250;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  margin-block: auto;
+  color: #a5a5a5;
+  font-size: 24px;
+  opacity: 0;
+  transition: all 0.25s;
+}
+.related-products .wd-btn-arrow .wd-arrow-inner::after { font-family: var(--font-icons); line-height: 1; }
+.related-products .wd-prev { left: -50px; transform: translateX(-30px); }
+.related-products .wd-prev .wd-arrow-inner::after { content: "\f114"; }
+.related-products .wd-next { right: -50px; transform: translateX(30px); }
+.related-products .wd-next .wd-arrow-inner::after { content: "\f113"; }
+.related-products:hover .wd-btn-arrow:not(:disabled) { opacity: 1; transform: none; }
+.related-products .wd-btn-arrow:disabled { pointer-events: none; }
+.wd-nav-pagin-wrap { display: flex; justify-content: center; min-height: 10px; margin-top: 20px; font-size: 0; line-height: 0; }
+.wd-nav-pagin { display: flex; gap: 10px; }
+.wd-nav-pagin li span { display: inline-flex; width: 10px; height: 10px; border: 2px solid #333333; border-radius: 10px; cursor: pointer; transition: all 0.25s; }
+.wd-nav-pagin li.wd-active span { background-color: #333333; }
+
+/* "Sticky product" (desktop only): the gallery stays in view while the longer summary scrolls,
+   until the bottom of its column. The theme's script sets it as an inline style (position: sticky;
+   top: 150px, measured on the live page), which beats the owner's "position: relative"; the extra
+   .single-product here does the same. */
+@media (min-width: 1025px) {
+  .single-product .product-sticky-on .woocommerce-product-gallery { position: sticky; top: 150px; }
+}
+
+/* ───────────────────────── Tablet (≤ 1024px) ───────────────────────── */
+@media (max-width: 1024px) {
+  .product-images,
+  .summary.entry-summary { grid-column: span 6; }
+  .related-products .wd-carousel-item { flex-basis: 33.3333%; max-width: 33.3333%; }
+  .related-products .wd-btn-arrow { width: 40px; height: 40px; color: #333333; font-size: 16px; opacity: 1; transform: none; }
+  .related-products .wd-prev { left: -28px; }
+  .related-products .wd-next { right: -28px; }
+  .wd-hide-md-sm { display: none; }
+}
+@media (max-width: 768.98px) {
+  .product-image-summary-inner { gap: 20px; }
+  .product-images,
+  .summary.entry-summary { grid-column: span 12; }
+  .related-products .wd-carousel { margin-inline: -5px; }
+  .related-products .wd-carousel-item { flex-basis: 50%; max-width: 50%; padding-inline: 5px; }
+  .wd-gallery-thumb .wd-carousel-item { flex-basis: 33.3333%; max-width: 33.3333%; }
+}
+
+/* ───────────────────────── Tablets and phones (≤ 1024px): tabs become an accordion ───────────────────────── */
+@media (max-width: 1024px) {
+  .single-product { padding-block: 20px; }
+  .single-product-page > .container:first-child { margin-bottom: 25px; }
+  /* The current product is left out of the breadcrumb trail on small screens. */
+  .single-product .wd-breadcrumbs .wd-last,
+  .single-product .wd-breadcrumbs .wd-delimiter:has(+ .wd-last) { display: none; }
+  .wd-gallery-btn > a { width: 44.8px; height: 44.8px; border-radius: 32px; }
+  .wd-gallery-btn > a::before { font-size: 16px; }
+  .summary-inner { margin-bottom: -20px; }
+  .product-tabs-wrapper { margin-bottom: 25px; padding-block: 25px; border-block: none; }
+  .wd-nav-tabs-wrapper { display: none; }
+  .woocommerce-tabs { display: flex; flex-direction: column; gap: 0.001px; }
+  .woocommerce-tabs > .wd-accordion-item { border-bottom: 1px solid rgb(0 0 0 / 0.106); }
+  .woocommerce-tabs > .wd-nav-tabs-wrapper + .wd-accordion-item { border-top: 2px solid rgb(0 0 0 / 0.106); }
+  .woocommerce-tabs .wd-accordion-title { display: flex; align-items: center; gap: 12px; padding-block: 20px; cursor: pointer; user-select: none; transition: all 0.25s ease; }
+  .woocommerce-tabs .wd-accordion-title:is(.wd-active, :hover) > .wd-accordion-title-text { color: var(--color-gold); }
+  .woocommerce-tabs .wd-accordion-title .wd-accordion-opener::before { content: "\f129"; font-family: var(--font-icons); }
+  .woocommerce-tabs .wd-accordion-title.wd-active .wd-accordion-opener { transform: rotate(180deg); }
+}
+
+@media (max-width: 767px) {
+  .single-product .sleeks-included-supplies { margin: 9px 0 12px; padding: 8px 10px; font-size: 10px; line-height: 1.45; }
+}

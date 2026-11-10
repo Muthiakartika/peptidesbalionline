@@ -1,0 +1,1172 @@
+/*
+ * The site owner's own CSS for the product page, copied WORD FOR WORD from the live site's
+ * "WPCode" snippets (03 to 08, 4 Nov 2026; 09, the USD prices, is in usd-prices-owner.css). The product page uses the same class names as the
+ * live WooCommerce page (.single-product, .summary, .variations_form…) so these rules apply
+ * unchanged. Do not edit them here to fix a layout problem: the theme rules they sit on top of
+ * are in src/styles/product.css.
+ */
+
+/* Single Product — Gallery, Summary & Details
+   Atlas Longevity | Snippet: 03-single-product-page-layout
+   Standalone CSS. No <style> tags. Desktop and responsive styles included.
+*/
+
+.single-product div.product {
+    gap: 35px;
+}
+
+.single-product .woocommerce-product-gallery {
+    position: relative;
+    overflow: hidden;
+    padding: 26px;
+    background: linear-gradient( 180deg, #ffffff 0%, #fcfaf5 100% );
+    border: 1px solid #ead9aa;
+    border-radius: 24px;
+    box-shadow: 0 18px 45px rgba(41, 31, 9, 0.07);
+}
+
+.single-product .woocommerce-product-gallery__image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 520px;
+    background: radial-gradient( circle at center, rgba(216, 183, 106, 0.08), transparent 55% );
+}
+
+.single-product .woocommerce-product-gallery__image img {
+    max-height: 500px;
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.35s ease;
+}
+
+.single-product .woocommerce-product-gallery__image:hover img {
+    transform: scale(1.02);
+}
+
+.single-product .woocommerce-product-gallery__trigger {
+    width: 46px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 20px;
+    left: 20px;
+    top: auto;
+    color: #16323c;
+    background: #ffffff;
+    border: 1px solid #eadbb5;
+    border-radius: 50%;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+}
+
+.single-product .summary.entry-summary {
+    position: relative;
+    padding: 34px 42px;
+    background: #ffffff;
+    border: 1px solid #eee3c8;
+    border-radius: 24px;
+    box-shadow: 0 18px 50px rgba(35, 26, 8, 0.06);
+}
+
+.single-product .summary.entry-summary::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 40px;
+    width: 80px;
+    height: 3px;
+    background: linear-gradient( 90deg, #b88931, #e5c76f );
+    border-radius: 0 0 4px 4px;
+}
+
+.single-product .woocommerce-breadcrumb {
+    margin-bottom: 26px;
+    color: #9d958a;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.single-product .woocommerce-breadcrumb a {
+    color: #9d958a;
+}
+
+.single-product .woocommerce-breadcrumb a:hover {
+    color: #b4882d;
+}
+
+.single-product .product_title {
+    margin: 0 0 15px;
+    color: #132f3a;
+    font-size: 42px;
+    line-height: 1.15;
+    font-weight: 600;
+    letter-spacing: -0.7px;
+}
+
+.single-product .summary .price {
+    margin: 0 0 26px;
+    color: #b98b24;
+    font-size: 29px;
+    line-height: 1.2;
+    font-weight: 600;
+}
+
+.single-product .summary .price ins {
+    color: #b98b24;
+    text-decoration: none;
+}
+
+.single-product .summary .price del {
+    margin-left: 8px;
+    color: #aaa39a;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.single-product .woocommerce-product-details__short-description {
+    margin-bottom: 26px;
+    max-width: 760px;
+    color: #6e7071;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+.single-product .product_meta {
+    margin-top: 30px;
+    padding-top: 22px;
+    border-top: 1px solid #eee8dc;
+    color: #8f8b84;
+    font-size: 12px;
+}
+
+.single-product .product_meta a {
+    color: #a67c27;
+}
+
+@media only screen and (max-width: 767px) {
+    .single-product .woocommerce-product-gallery {
+        padding: 18px;
+        border-radius: 18px;
+    }
+
+    .single-product .woocommerce-product-gallery__image {
+        min-height: 360px;
+    }
+
+    .single-product .woocommerce-product-gallery__image img {
+        max-height: 340px;
+    }
+
+    .single-product .summary.entry-summary {
+        margin-top: 18px;
+        padding: 24px 20px;
+        border-radius: 18px;
+    }
+
+    .single-product .summary.entry-summary::before {
+        left: 20px;
+    }
+
+    .single-product .product_title {
+        font-size: 30px;
+    }
+
+    .single-product .summary .price {
+        font-size: 24px;
+    }
+
+    .single-product .woocommerce-product-details__short-description {
+        font-size: 14px;
+    }
+}
+
+/* Single Product — Variations, Swatches & Add to Cart
+   Atlas Longevity | Snippet: 04-single-product-variations-and-cart
+   Standalone CSS. No <style> tags. Desktop and responsive styles included.
+*/
+
+.single-product .variations_form .variations {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 12px;
+}
+
+.single-product .variations_form .variations tr {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 12px;
+}
+
+.single-product .variations_form .variations th.label {
+    flex: 0 0 95px;
+    width: 95px;
+    padding: 0;
+    text-align: left;
+}
+
+.single-product .variations_form .variations th.label label {
+    margin: 0;
+    color: #303030;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.single-product .variations_form .variations td.value {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 9px;
+    flex: 1;
+    min-width: 0;
+    padding: 0;
+}
+
+.single-product .variations_form .variations select {
+    width: 100%;
+    min-height: 46px;
+    padding: 0 18px;
+    border: 1px solid #dedede;
+    border-radius: 30px;
+    background-color: #fff;
+    color: #555;
+    font-size: 13px;
+}
+
+.single-product .variations_form .wd-swatches {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin: 0;
+}
+
+.single-product .variations_form .wd-swatch {
+    margin: 0 !important;
+    min-height: 42px;
+    padding: 9px 17px;
+    border: 1px solid #e3d6bc;
+    border-radius: 12px;
+    background: #fff;
+    transition: all 0.2s ease;
+}
+
+.single-product .variations_form .wd-swatch.wd-active {
+    border-color: #b98a31;
+    background: #fff9eb;
+    box-shadow: inset 0 -2px 0 #b98a31;
+}
+
+.single-product .variations_form .reset_variations {
+    display: inline-flex !important;
+    align-items: center;
+    margin: 0 0 0 6px !important;
+    padding: 0;
+    color: #b98a31;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+@media (max-width: 767px) {
+    .single-product .variations_form .variations tr {
+        gap: 10px;
+    }
+
+    .single-product .variations_form .variations th.label {
+        flex: 0 0 75px;
+        width: 75px;
+    }
+
+    .single-product .variations_form .variations th.label label {
+        font-size: 11px;
+    }
+
+    .single-product .variations_form .wd-swatch {
+        min-height: 38px;
+        padding: 8px 13px;
+    }
+
+    .single-product .variations_form .variations td.value {
+        gap: 7px;
+    }
+}
+
+.single-product .variations_form .variations {
+    margin-bottom: 5px !important;
+}
+
+.single-product .variations_form .variations tr:last-child {
+    margin-bottom: 0 !important;
+}
+
+.single-product .variations_form .single_variation_wrap {
+    margin-top: 0 !important;
+}
+
+.single-product .variations_form .woocommerce-variation {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.single-product .variations_form .woocommerce-variation-price {
+    margin: 8px 0 12px !important;
+    padding: 0 !important;
+}
+
+.single-product .variations_form .woocommerce-variation-price .price {
+    margin: 0 !important;
+}
+
+.single-product form.variations_form {
+    margin-top: 6px;
+}
+
+.single-product table.variations {
+    width: 100%;
+    margin-bottom: 18px;
+    border: 0;
+}
+
+.single-product table.variations tr {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.single-product table.variations th.label {
+    width: auto;
+    padding: 0;
+    color: #887653;
+    font-size: 11px;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+}
+
+.single-product table.variations td.value {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.single-product .wd-swatches-product {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.single-product .wd-swatches-product .wd-swatch {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 72px;
+    min-height: 38px;
+    padding: 8px 15px;
+    color: #19343e;
+    font-size: 12px;
+    line-height: 1;
+    font-weight: 600;
+    background: #ffffff;
+    border: 1px solid #ddd4be;
+    border-radius: 999px;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.single-product .wd-swatches-product .wd-swatch:hover {
+    color: #876316;
+    background: #fffaf0;
+    border-color: #caa344;
+}
+
+.single-product .wd-swatches-product .wd-swatch.wd-active,
+.single-product .wd-swatches-product .wd-swatch.active,
+.single-product .wd-swatches-product .wd-swatch.selected {
+    color: #76530d;
+    background: #fff7e3;
+    border-color: #c99d3c;
+    box-shadow: inset 0 0 0 1px #c99d3c;
+}
+
+.single-product .reset_variations {
+    margin-left: 6px;
+    color: #b18936;
+    font-size: 11px;
+}
+
+.single-product .single_variation_wrap {
+    margin-top: 12px;
+}
+
+.single-product .woocommerce-variation-add-to-cart {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.single-product .summary.entry-summary form.cart .quantity {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    height: 52px;
+    background: #ffffff;
+    border: 1px solid #ded7ca;
+    border-radius: 999px;
+}
+
+.single-product .summary.entry-summary form.cart .quantity .minus,
+.single-product .summary.entry-summary form.cart .quantity .plus {
+    width: 42px;
+    height: 50px;
+    color: #17323d;
+    background: transparent;
+    border: 0;
+    font-size: 17px;
+}
+
+.single-product .summary.entry-summary form.cart .quantity input.qty {
+    width: 42px;
+    height: 50px;
+    padding: 0;
+    color: #17323d;
+    font-size: 14px;
+    font-weight: 600;
+    background: transparent;
+    border: 0;
+}
+
+.single-product .single_add_to_cart_button {
+    min-height: 52px;
+    padding: 13px 30px;
+    color: #102d37;
+    font-size: 13px;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    background: linear-gradient( 135deg, #b98a31 0%, #e6c76c 50%, #bd9036 100% );
+    border: 1px solid #d5b45d;
+    border-radius: 999px;
+    box-shadow: 0 8px 22px rgba(181, 132, 41, 0.18);
+    transition: transform 0.25s ease, filter 0.25s ease, box-shadow 0.25s ease;
+}
+
+.single-product .single_add_to_cart_button:hover {
+    color: #102d37;
+    filter: brightness(1.05);
+    transform: translateY(-1px);
+    box-shadow: 0 12px 28px rgba(181, 132, 41, 0.25);
+}
+
+@media only screen and (max-width: 767px) {
+    /* Reset desktop table/flex layout */
+    .single-product .variations_form table.variations {
+        display: block !important;
+        width: 100% !important;
+        margin: 0 0 12px !important;
+        padding: 0 !important;
+        border: 0 !important;
+        border-spacing: 0 !important;
+    }
+
+    .single-product .variations_form table.variations tbody {
+        display: block !important;
+        width: 100% !important;
+    }
+
+    /* Each variation becomes a compact block */
+    .single-product .variations_form table.variations tr {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        justify-content: flex-start !important;
+        gap: 8px !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: 0 !important;
+        margin: 0 0 16px !important;
+        padding: 0 !important;
+    }
+
+    /* Labels above their controls */
+    .single-product .variations_form table.variations th.label {
+        display: block !important;
+        flex: none !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        text-align: left !important;
+    }
+
+    .single-product .variations_form table.variations th.label label {
+        display: inline !important;
+        margin: 0 !important;
+        color: #263238;
+        font-size: 12px !important;
+        font-weight: 600;
+        letter-spacing: 0.4px;
+        text-transform: uppercase;
+    }
+
+    /* Values directly beneath labels */
+    .single-product .variations_form table.variations td.value {
+        display: flex !important;
+        flex: none !important;
+        flex-wrap: wrap !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        gap: 8px !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* Pen type dropdown */
+    .single-product .variations_form table.variations select {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-height: 46px !important;
+        margin: 0 !important;
+        border: 1px solid #dedede;
+        border-radius: 28px;
+        background-color: #fff;
+        font-size: 13px;
+    }
+
+    /* WoodMart swatches */
+    .single-product .variations_form .wd-swatches {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        gap: 8px !important;
+        width: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .single-product .variations_form .wd-swatch {
+        min-height: 38px !important;
+        margin: 0 !important;
+        padding: 8px 13px !important;
+        font-size: 12px !important;
+        border-radius: 20px;
+    }
+
+    /* Clear link: prevent price overlap */
+    .single-product .variations_form .reset_variations {
+        position: static !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        width: auto !important;
+        height: auto !important;
+        margin: 0 0 0 5px !important;
+        padding: 0 !important;
+        transform: none !important;
+        float: none !important;
+        color: #b98a31;
+        font-size: 11px !important;
+        line-height: 1.5 !important;
+    }
+
+    /* Remove space before price */
+    .single-product .variations_form .single_variation_wrap {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .single-product .variations_form .woocommerce-variation {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .single-product .variations_form .woocommerce-variation-price {
+        margin: 8px 0 14px !important;
+        padding: 0 !important;
+    }
+
+    /* Keep variation price clear of other elements */
+    .single-product .variations_form .woocommerce-variation-price .price {
+        display: flex;
+        align-items: baseline;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 0 !important;
+        line-height: 1.3;
+    }
+
+    /* Add to cart controls */
+    .single-product .variations_form .woocommerce-variation-add-to-cart {
+        margin-top: 10px !important;
+    }
+
+    .single-product .woocommerce-variation-add-to-cart {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .single-product .summary.entry-summary form.cart .quantity {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .single-product .single_add_to_cart_button {
+        width: 100%;
+    }
+}
+/* ==========================================
+   MOBILE – CLEAR VARIATIONS LINK FIX
+   ATLAS LONGEVITY
+========================================== */
+
+@media only screen and (max-width: 767px) {
+
+    /* Keep variation options neatly aligned */
+    .single-product .variations_form table.variations td.value {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        gap: 8px !important;
+        padding-bottom: 8px !important;
+    }
+
+    /* Clear link on its own line */
+    .single-product .variations_form .reset_variations {
+        position: static !important;
+        display: block !important;
+
+        flex: 0 0 100% !important;
+        align-self: flex-start !important;
+
+        width: fit-content !important;
+        height: auto !important;
+
+        margin: 4px 0 0 !important;
+        padding: 0 !important;
+
+        float: none !important;
+        clear: both !important;
+        transform: none !important;
+
+        color: #b98a31 !important;
+        font-size: 12px !important;
+        font-weight: 500 !important;
+        line-height: 1.5 !important;
+
+        text-align: left !important;
+        text-decoration: none !important;
+    }
+
+    .single-product .variations_form .reset_variations:hover {
+        color: #17333d !important;
+    }
+
+    /* Space between variation options and price/cart */
+    .single-product .variations_form .single_variation_wrap {
+        margin-top: 12px !important;
+    }
+}
+
+/* Single Product — Description Tab Navigation
+   Atlas Longevity | Snippet: 05-single-product-description-tabs
+   Standalone CSS. No <style> tags. Desktop and responsive styles included.
+*/
+
+.single-product .woocommerce-tabs {
+    max-width: 1220px;
+    margin: 60px auto 0;
+    padding: 0 24px;
+}
+
+.single-product .woocommerce-tabs .tabs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 0 0 42px;
+    padding: 8px;
+    background: #fbfaf7;
+    border: 1px solid #eadfbe;
+    border-radius: 16px;
+    box-shadow: 0 8px 28px rgba(45, 34, 12, 0.05);
+}
+
+.single-product .woocommerce-tabs .tabs li {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    border: 0;
+}
+
+.single-product .woocommerce-tabs .tabs li a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 10px 18px;
+    color: #6f6b64;
+    font-size: 13px;
+    line-height: 1;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.single-product .woocommerce-tabs .tabs li a:hover {
+    color: #8d681b;
+    background: #fffdf8;
+    border-color: #e5d6ad;
+}
+
+.single-product .woocommerce-tabs .tabs li.active a {
+    color: #18343e;
+    background: linear-gradient( 135deg, #f7e9b9, #d9b658 );
+    border-color: #d0aa46;
+    box-shadow: 0 5px 15px rgba(176, 132, 35, 0.12);
+}
+
+.single-product .woocommerce-tabs .tabs::before,
+.single-product .woocommerce-tabs .tabs::after,
+.single-product .woocommerce-tabs .tabs li::before,
+.single-product .woocommerce-tabs .tabs li::after,
+.single-product .woocommerce-tabs .tabs li a::before,
+.single-product .woocommerce-tabs .tabs li a::after,
+.single-product .woocommerce-tabs .nav-link-text::before,
+.single-product .woocommerce-tabs .nav-link-text::after,
+.single-product .woocommerce-tabs .wd-nav-tabs-wrapper::before,
+.single-product .woocommerce-tabs .wd-nav-tabs-wrapper::after,
+.single-product .woocommerce-tabs .wd-nav-wrapper::before,
+.single-product .woocommerce-tabs .wd-nav-wrapper::after {
+    display: none !important;
+    content: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+.single-product .woocommerce-Tabs-panel {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+}
+
+@media only screen and (max-width: 767px) {
+    .single-product .woocommerce-tabs {
+        margin-top: 35px;
+        padding: 0 14px;
+    }
+
+    .single-product .woocommerce-tabs .tabs {
+        justify-content: flex-start;
+        gap: 6px;
+        margin-bottom: 28px;
+        padding: 6px;
+        border-radius: 12px;
+    }
+
+    .single-product .woocommerce-tabs .tabs li {
+        flex: 1 1 calc(50% - 6px);
+    }
+
+    .single-product .woocommerce-tabs .tabs li a {
+        width: 100%;
+        min-height: 40px;
+        padding: 8px 10px;
+        font-size: 11px;
+        text-align: center;
+    }
+}
+
+.single-product .woocommerce-tabs .wd-nav[class*="wd-style-underline"] .nav-link-text::after,
+.single-product .woocommerce-tabs .wd-nav[class*="wd-style-underline"] .nav-link-text::before,
+.single-product .woocommerce-tabs .tabs .nav-link-text::after,
+.single-product .woocommerce-tabs .tabs .nav-link-text::before {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    background: transparent !important;
+    content: none !important;
+}
+
+/* Product Description — Expandable Accordions
+   Atlas Longevity | Snippet: 06-product-description-accordions
+   Standalone CSS. No <style> tags. Desktop and responsive styles included.
+*/
+
+.atlas-product-accordion {
+    border-bottom: 1px solid #d7d7d7;
+    background: #f2f2f2;
+    margin: 0;
+}
+
+.atlas-product-accordion:first-of-type {
+    border-top: 1px solid #d7d7d7;
+}
+
+.atlas-product-accordion summary {
+    position: relative;
+    padding: 18px 50px 18px 42px;
+    cursor: pointer;
+    list-style: none;
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.4;
+    color: #111;
+    transition: background 0.25s ease;
+}
+
+.atlas-product-accordion summary::-webkit-details-marker {
+    display: none;
+}
+
+.atlas-product-accordion summary::before {
+    content: "+";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 1;
+    color: #222;
+}
+
+.atlas-product-accordion[open] summary::before {
+    content: "−";
+}
+
+.atlas-product-accordion summary:hover {
+    background: #e9e9e9;
+}
+
+.atlas-accordion-content {
+    padding: 5px 22px 22px 42px;
+    background: #fff;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #444;
+}
+
+.atlas-accordion-content p {
+    margin: 0 0 12px;
+}
+
+.atlas-accordion-content p:last-child {
+    margin-bottom: 0;
+}
+
+.atlas-accordion-content ul {
+    margin: 8px 0 0 18px;
+    padding: 0;
+}
+
+.atlas-accordion-content li {
+    margin-bottom: 7px;
+}
+
+@media (max-width: 767px) {
+    .atlas-product-accordion summary {
+        padding: 16px 42px 16px 38px;
+        font-size: 16px;
+    }
+
+    .atlas-product-accordion summary::before {
+        left: 12px;
+        font-size: 24px;
+    }
+
+    .atlas-accordion-content {
+        padding: 5px 18px 18px 38px;
+        font-size: 14px;
+    }
+}
+
+/* Product Bundles — Bundle and Save Cards
+   Atlas Longevity | Snippet: 07-product-bundles
+   Standalone CSS. No <style> tags. Desktop and responsive styles included.
+*/
+
+.atlas-bundle-wrap {
+    width: 100%;
+    margin: 22px 0 20px;
+}
+
+.atlas-bundle-heading {
+    position: relative;
+    margin-bottom: 15px;
+    color: #17323d;
+    font-size: 12px;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-align: center;
+}
+
+.atlas-bundle-heading::after {
+    content: "";
+    display: block;
+    width: 45px;
+    height: 2px;
+    margin: 8px auto 0;
+    background: linear-gradient( 90deg, #b98a31, #e5ca74 );
+    border-radius: 5px;
+}
+
+.atlas-bundle-options {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.atlas-bundle-option {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 142px;
+    margin: 0;
+    padding: 18px 10px 14px;
+    color: #17323d;
+    background: #ffffff;
+    border: 1px solid #e1d9c6;
+    border-radius: 14px;
+    box-shadow: none;
+    cursor: pointer;
+    text-align: center;
+    transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.atlas-bundle-option:hover {
+    color: #17323d;
+    border-color: #c9a143;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(93, 66, 12, 0.08);
+}
+
+.atlas-bundle-option.is-selected {
+    color: #17323d;
+    background: linear-gradient( 145deg, #fffdf7, #fff9eb );
+    border-color: #b98b2e;
+    box-shadow: inset 0 0 0 1px #b98b2e, 0 8px 22px rgba(93, 66, 12, 0.08);
+}
+
+.atlas-bundle-badge {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    padding: 5px 10px;
+    color: #102f39;
+    font-size: 8px;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    background: linear-gradient( 135deg, #bc8d31, #edd076 );
+    border-radius: 30px;
+    transform: translateX(-50%);
+}
+
+.atlas-bundle-name {
+    margin-bottom: 4px;
+    color: #17323d;
+    font-size: 15px;
+    line-height: 1.2;
+    font-weight: 700;
+}
+
+.atlas-bundle-saving {
+    min-height: 16px;
+    margin-bottom: 10px;
+    color: #a17b29;
+    font-size: 10px;
+    line-height: 1.2;
+    font-weight: 600;
+}
+
+.atlas-bundle-total {
+    margin-bottom: 4px;
+    color: #17323d;
+    font-size: 18px;
+    line-height: 1.1;
+    font-weight: 700;
+}
+
+.atlas-bundle-each {
+    color: #99938a;
+    font-size: 9px;
+    line-height: 1.2;
+}
+
+.atlas-bundle-note {
+    margin: 10px 0 0;
+    color: #8d8981;
+    font-size: 10px;
+    line-height: 1.5;
+    text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+    .atlas-bundle-options {
+        gap: 6px;
+    }
+
+    .atlas-bundle-option {
+        min-height: 125px;
+        padding: 16px 6px 11px;
+        border-radius: 11px;
+    }
+
+    .atlas-bundle-name {
+        font-size: 12px;
+    }
+
+    .atlas-bundle-saving {
+        font-size: 9px;
+    }
+
+    .atlas-bundle-total {
+        font-size: 14px;
+    }
+
+    .atlas-bundle-each {
+        font-size: 8px;
+    }
+
+    .atlas-bundle-badge {
+        padding: 4px 7px;
+        font-size: 7px;
+    }
+}
+
+/* Connected Products — Vials, Pens & Alternative Formats
+   Atlas Longevity | Snippet: 08-connected-product-formats
+   Standalone CSS. No <style> tags. Desktop and responsive styles included.
+*/
+
+.atlas-connected-formats {
+    width: 100%;
+    margin: 22px 0 10px;
+    padding-top: 18px;
+    border-top: 1px solid #eee5d2;
+}
+
+.atlas-connected-heading {
+    margin-bottom: 10px;
+    color: #98701b;
+    font-size: 10px;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+}
+
+.atlas-connected-grid {
+    display: grid;
+    gap: 8px;
+}
+
+.atlas-connected-item {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    width: 100%;
+    padding: 10px 12px;
+    color: #17333d;
+    text-decoration: none;
+    background: #fffdf8;
+    border: 1px solid #eadbb6;
+    border-radius: 11px;
+    transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+}
+
+.atlas-connected-item:hover {
+    color: #17333d;
+    background: #fff9eb;
+    border-color: #c99d3b;
+    transform: translateY(-1px);
+}
+
+.atlas-connected-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    flex: 0 0 48px;
+    overflow: hidden;
+    background: #ffffff;
+    border-radius: 8px;
+}
+
+.atlas-connected-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.atlas-connected-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+}
+
+.atlas-connected-name {
+    margin-bottom: 3px;
+    color: #17333d;
+    font-size: 12px;
+    line-height: 1.35;
+    font-weight: 600;
+}
+
+.atlas-connected-price {
+    color: #b98a31;
+    font-size: 11px;
+    line-height: 1.2;
+    font-weight: 600;
+}
+
+.atlas-connected-arrow {
+    color: #b98a31;
+    font-size: 18px;
+    line-height: 1;
+}
+
+@media only screen and (max-width: 767px) {
+    .atlas-connected-formats {
+        margin-top: 17px;
+        padding-top: 15px;
+    }
+
+    .atlas-connected-item {
+        padding: 9px 10px;
+    }
+
+    .atlas-connected-image {
+        width: 43px;
+        height: 43px;
+        flex-basis: 43px;
+    }
+
+    .atlas-connected-name {
+        font-size: 11px;
+    }
+
+    .atlas-connected-price {
+        font-size: 10px;
+    }
+}

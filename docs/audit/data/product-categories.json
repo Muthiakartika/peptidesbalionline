@@ -1,0 +1,252 @@
+[
+  {
+    "id": 57,
+    "name": "Atlas Longevity",
+    "slug": "atlas-longevity-pen-peptides",
+    "parent": 24,
+    "count": 43,
+    "permalink": "https://peptidesbali.online/product-category/pen-peptides/atlas-longevity-pen-peptides/",
+    "image": "https://peptidesbali.online/wp-content/uploads/2026/08/atlas-longevity-elite-stack-bali.jpg-300x240-1.webp",
+    "description": ""
+  },
+  {
+    "id": 66,
+    "name": "Beauty/ Skin Stacks",
+    "slug": "beauty-skin-stacks",
+    "parent": 61,
+    "count": 1,
+    "permalink": "https://peptidesbali.online/product-category/peptide-protocols/beauty-skin-stacks/",
+    "image": "https://peptidesbali.online/wp-content/uploads/2026/04/Untitled-design-2026-04-25T124029.559.png",
+    "description": ""
+  },
+  {
+    "id": 30,
+    "name": "Brain & Cognitive Enhancement",
+    "slug": "brain-cognitive-enhancement",
+    "parent": 18,
+    "count": 12,
+    "permalink": "https://peptidesbali.online/product-category/vial/brain-cognitive-enhancement/",
+    "image": "https://peptidesbali.online/wp-content/uploads/2026/10/Neural-Clarity-and-Cognitive-Performance.webp",
+    "description": "Memory, focus, neuroprotection"
+  },
+  {
+    "id": 136,
+    "name": "Bundles",
+    "slug": "bundles",
+    "parent": 0,
+    "count": 5,
+    "permalink": "https://peptidesbali.online/product-category/bundles/",
+    "image": "https://peptidesbali.online/wp-content/uploads/2026/07/atlas-longevity-summer-cut-bundle.webp.webp",
+    "description": "Save with expertly selected peptide bundles for weight management, recovery, longevity, cognitive performance and skin wellness. Premium quality with fast delivery across Bali."
+  },
+  {
+    "id": 27,
+    "name": "Fat Loss & Metabolic Health",
+    "slug": "fat-loss-metabolic-health",
+    "parent": 18,
+    "count": 15,
+    "permalink": "https://peptidesbali.online/product-category/vial/fat-loss-metabolic-health/",
+    "image": "https://peptidesbali.online/wp-content/uploads/2026/10/Metabolism-Boost-Fitness-Infographic.webp",
+    "description": "Weight loss, glucose control, body composition"
+  },
+  {
+    "id": 62,
+    "name": "Fat Loss Stacks",
+    "slug": "fat-loss-stacks",
+    "parent": 61,
+    "count": 3,
+    "permalink": "https://peptidesbali.online/product-category/peptide-protocols/fat-loss-stacks/",
+    "image": "https://peptidesbali.online/wp-content/uploads/2026/05/atlas-mass-elite-stack-bali.jpg.webp",
+    "description": ""
+  },
+  {
+    "id": 26,
+    "name": "Healing & Recovery",
+    "slug": "healing-recovery",
+    "parent": 18,
+    "count": 11,
+    "permalink": "https://peptidesbali.online/product-category/vial/healing-recovery/",
+    "image": "https://peptidesbali.online/wp-content/uploads/2026/10/Golden-Knee-Recovery-Infographic.webp",
+    "description": "Injury recovery, tissue repair, inflammation"
+  },
+  {
+    "id": 51,
+    "name": "Hormone Optimization",
+    "slug": "hormone-optimization",
+    "parent": 18,
+    "count": 6,
+    "permalink": "https://peptidesbali.online/product-category/vial/hormone-optimization/",
+    "image": "https://peptidesbali.online/wp-content/uploads/2026/10/Golden-Hormone-Optimisation-Infographic.webp",
+    "description": "Testosterone, HGH, HCG etc"
+  },
+  {
+    "id": 31,
+    "name": "Libido & Sexual Wellness",
+    "slug": "libido-sexual-wellness",
+    "parent": 18,
+    "count": 5,
+    "permalink": "https://peptidesbali.online/product-category/vial/libido-sexual-wellness/",
+    "image": "https://peptidesbali.online/wp-content/uploads/2026/10/Golden-Intimacy-Wellness-Infographic.webp",
+    "description": "Sexual performance & reproductive peptides"
+  },
+  {
+    "id": 65,
+    "name": "Longevity / Wellness Stacks",
+    "slug": "longevity-wellness-stacks",
+    "parent": 61,
+    "count": 2,
+    "permalink": "https://peptidesbali.online/product-category/peptide-protocols/longevity-wellness-stacks/",
+    "image": "https://peptidesbali.online/wp-content/uploads/2026/05/atlas-longevity-elite-stack-bali.jpg.webp",
+    "description": ""
+  },
+  {
+    "id": 29,
+    "name": "Longevity & Healthy Ageing",
+    "slug": "longevity-healthy-aging",
+    "parent": 18,
+    "count": 12,
+    "permalink": "https://peptidesbali.online/product-category/vial/longevity-healthy-aging/",
+    "image": "https://peptidesbali.online/wp-content/uploads/2026/10/Golden-DNA-Journey-to-Healthy-Ageing.webp",
+    "description": "Mitochondria, skin, cellular health, anti-ageing"
+  },
+  {
+    "id": 67,
+    "name": "Men’s Performance Stacks",
+    "slug": "mens-performance-stacks",
+    "parent": 61,
+    "count": 1,
+    "permalink": "https://peptidesbali.online/product-category/peptide-protocols/mens-performance-stacks/",
+    "image": "https://peptidesbali.online/wp-content/uploads/2026/05/atlas-lean-growth-stack-bali.jpg.webp",
+    "description": ""
+  },
+  {
+    "id": 140,
+    "name": "Muscle Growth & Performance",
+    "slug": "muscle-growth-performance",
+    "parent": 18,
+    "count": 11,
+    "permalink": "https://peptidesbali.online/product-category/vial/muscle-growth-performance/",
+    "image": "https://peptidesbali.online/wp-content/uploads/2026/10/Golden-Molecular-Fitness-Performance.webp",
+    "description": "GH secretagogues, anabolic support, muscle building"
+  },
+  {
+    "id": 63,
+    "name": "Muscle Growth Stacks",
+    "slug": "muscle-growth-stacks",
+    "parent": 61,
+    "count": 2,
+    "permalink": "https://peptidesbali.online/product-category/peptide-protocols/muscle-growth-stacks/",
+    "image": "https://peptidesbali.online/wp-content/uploads/2026/07/4-how-does-bpc-157-work-rehabilitation.png",
+    "description": ""
+  },
+  {
+    "id": 25,
+    "name": "Other",
+    "slug": "other",
+    "parent": 0,
+    "count": 30,
+    "permalink": "https://peptidesbali.online/product-category/other/",
+    "image": "https://peptidesbali.online/wp-content/uploads/2026/05/insulin-syringe-0-5ml-20pcs-bali.jpg.webp",
+    "description": ""
+  },
+  {
+    "id": 184,
+    "name": "Peptide Blends Bali",
+    "slug": "blends",
+    "parent": 18,
+    "count": 13,
+    "permalink": "https://peptidesbali.online/product-category/vial/blends/",
+    "image": "https://peptidesbali.online/wp-content/uploads/2026/11/peptide-blends-bali-atlas-longevity.webp.png",
+    "description": "Peptide Blends Bali – Research Peptide Combinations\r\n\r\nExplore the Atlas Longevity Peptide Blends Collection, featuring carefully selected multi-peptide research formulations in convenient vial formats.\r\n\r\nOur collection includes experimental combinations containing two or more peptides, developed for research into different biological signalling pathways.\r\n\r\nExplore Our Peptide Blend Collection\r\n\r\nDiscover formulations across several research categories:\r\n\r\nHealing & Recovery Research: BPC-157 + TB-500, Wolverine Blend and KPV combinations.\r\n\r\nSkin & Cellular Research: GHK-Cu + KPV, Glow Blend and KLOW Blend.\r\n\r\nMetabolic Research: Retatrutide + Cagrilintide and Cagrilintide + Semaglutide.\r\n\r\nCognitive Research: Semax + Selank combinations.\r\n\r\nHormonal Research: CJC-1295 + Ipamorelin and Tesamorelin + Ipamorelin.\r\n\r\nWhy Explore Atlas Longevity Peptide Blends?\r\n\r\nOur collection makes it easier to compare peptide combinations by their ingredients, labelled strengths and areas of scientific investigation.\r\n\r\nBrowse individual product pages for formulation details, specifications and available batch-specific analytical documentation.\r\n\r\nPeptide Blends in Bali & Indonesia\r\n\r\nAtlas Longevity provides information about experimental peptide formulations, with a focus on clear product specifications, transparent documentation and knowledgeable customer support.\r\n\r\nExplore our peptide blends collection below.\r\n\r\nResearch compounds are not necessarily approved for human use. The safety, effectiveness and compatibility of combined formulations must be evaluated independently. Product availability is subject to applicable regulations."
+  },
+  {
+    "id": 52,
+    "name": "Peptide Nasal Sprays",
+    "slug": "nasal-spray-peptides",
+    "parent": 0,
+    "count": 17,
+    "permalink": "https://peptidesbali.online/product-category/nasal-spray-peptides/",
+    "image": "https://peptidesbali.online/wp-content/uploads/2026/10/Semax-10mg-Selank-10mg-Blend-Nasal-Spray-peptide-nasal-spray-bali.webp",
+    "description": ""
+  },
+  {
+    "id": 24,
+    "name": "Peptide Pens",
+    "slug": "pen-peptides",
+    "parent": 0,
+    "count": 51,
+    "permalink": "https://peptidesbali.online/product-category/pen-peptides/",
+    "image": "https://peptidesbali.online/wp-content/uploads/2026/10/Luxury-Peptide-Pen-Kit-Essentials-1.png",
+    "description": ""
+  },
+  {
+    "id": 61,
+    "name": "Peptide Protocols",
+    "slug": "peptide-protocols",
+    "parent": 0,
+    "count": 12,
+    "permalink": "https://peptidesbali.online/product-category/peptide-protocols/",
+    "image": "https://peptidesbali.online/wp-content/uploads/2026/05/atlas-longevity-peptide-protocols-guide-bali.jpgatlas-longevity-peptide-protocols-guide-bali.jpg.webp",
+    "description": "Get personalized peptide protocols in Bali. Expert guidance for fat loss, recovery, longevity, muscle growth, sleep, wellness and performance optimization."
+  },
+  {
+    "id": 18,
+    "name": "Peptide Vials",
+    "slug": "vial",
+    "parent": 0,
+    "count": 104,
+    "permalink": "https://peptidesbali.online/product-category/vial/",
+    "image": "https://peptidesbali.online/wp-content/uploads/2026/08/5-Amino-1MQ-50mg.webp",
+    "description": ""
+  },
+  {
+    "id": 64,
+    "name": "Recovery Stacks",
+    "slug": "recovery-stacks",
+    "parent": 61,
+    "count": 2,
+    "permalink": "https://peptidesbali.online/product-category/peptide-protocols/recovery-stacks/",
+    "image": "https://peptidesbali.online/wp-content/uploads/2026/07/4-best-recovery-peptides-guide-recovery-strategy.png",
+    "description": ""
+  },
+  {
+    "id": 142,
+    "name": "Research Compounds",
+    "slug": "research-compounds",
+    "parent": 18,
+    "count": 4,
+    "permalink": "https://peptidesbali.online/product-category/vial/research-compounds/",
+    "image": "https://peptidesbali.online/wp-content/uploads/2026/10/Advanced-Research-in-a-Golden-Lab.webp",
+    "description": "Experimental peptides with less mainstream use"
+  },
+  {
+    "id": 32,
+    "name": "Supplies",
+    "slug": "supplies",
+    "parent": 18,
+    "count": 22,
+    "permalink": "https://peptidesbali.online/product-category/vial/supplies/",
+    "image": "https://peptidesbali.online/wp-content/uploads/2026/10/Atlas-Longevity-Medical-Supply-Kit.webp",
+    "description": ""
+  },
+  {
+    "id": 68,
+    "name": "VIP Stacks",
+    "slug": "vip-stacks",
+    "parent": 61,
+    "count": 1,
+    "permalink": "https://peptidesbali.online/product-category/peptide-protocols/vip-stacks/",
+    "image": "https://peptidesbali.online/wp-content/uploads/2026/04/VIP-10mg-2-1.webp",
+    "description": ""
+  },
+  {
+    "id": 141,
+    "name": "Vitamins & Wellness Injections",
+    "slug": "vitamins-wellness-injections",
+    "parent": 18,
+    "count": 8,
+    "permalink": "https://peptidesbali.online/product-category/vial/vitamins-wellness-injections/",
+    "image": "https://peptidesbali.online/wp-content/uploads/2026/08/Untitled-design-2026-08-09T121048.679.png",
+    "description": "Injectable nutrients"
+  }
+]

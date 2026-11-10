@@ -1,0 +1,161 @@
+/*
+ * Tailwind only looks for class names in our own code (src/). src/content holds HTML copied from
+ * the live site and src/styles/legacy its Elementor CSS: their class names (some look like Tailwind
+ * margin utilities) must not become real utilities, because the live site has no Tailwind and they
+ * would change the spacing.
+ */
+@import "tailwindcss" source("..");
+@source not "../content";
+@source not "../styles/legacy";
+
+/*
+ * The same HTML also uses a few class names that our own code uses as Tailwind utilities (e.g.
+ * "flex", "border", "px-6"). Inside that HTML (elements marked data-legacy-html) they must do
+ * nothing, as on the live site. This rule sits in Tailwind's utilities layer with a stronger
+ * selector; "revert-layer" drops what the utilities set, so the theme CSS decides as on live.
+ * The list comes from scripts/audit/check_tailwind_collisions.py: run it after re-exporting the
+ * snapshot and add any new names here.
+ */
+@layer utilities {
+  [data-legacy-html] :is(.absolute, .bg-white, .border, .container, .contents, .flex, .flex-1, .flex-wrap, .font-display, .font-semibold, .gap-1, .gap-1\.5, .gap-3, .grid, .h-full, .hidden, .inline, .italic, .items-center, .items-end, .items-start, .max-w-2xl, .mb-1, .mb-3, .md\:grid-cols-2, .mt-1, .mt-3, .mt-4, .mt-6, .mx-auto, .overflow-hidden, .p-6, .px-2, .px-6, .py-1\.5, .relative, .rounded-full, .size-full, .text-\[11px\], .text-center, .text-gold, .text-ink, .text-left, .text-white, .uppercase, .w-full) {
+    all: revert-layer;
+  }
+}
+
+/*
+ * Design tokens measured on the live site (docs/audit/visual-reference/design-tokens.json).
+ * Tailwind v4 turns each variable below into utility classes, for example:
+ *   --color-gold        → bg-gold, text-gold, border-gold
+ *   --radius-card       → rounded-card
+ *   --shadow-header     → shadow-header
+ *   --container-site    → max-w-site
+ *   --breakpoint-desktop → desktop:flex  (min-width: 1025px)
+ * Do not add values that were not measured on the site.
+ */
+@theme {
+  /* Brand golds */
+  --color-gold: #b8952a;
+  --color-gold-strong: #8a6d16;
+  --color-gold-on-soft: #826615;
+  --color-gold-soft: #f5f0e1;
+  --color-gold-light: #d1b157;
+  --color-gold-accent: #b79127;
+  --color-gold-price: #b98b24;
+  --color-gold-price-card: #b88a22;
+  --color-gold-bronze: #a56c1e;
+  --color-gold-sand: #cda582;
+  --color-gold-border-button: #d5b45d;
+  --color-gold-border-card-button: #d4bf8b;
+  --color-gold-border-card: #e7d6aa;
+  --color-alternative: #fbbc34;
+
+  /* Surfaces */
+  --color-cream: #fefbf4;
+  --color-cream-light: #fefdf9;
+  --color-cream-tint-60: rgb(252 245 226 / 0.6);
+  --color-cream-tint-37: rgb(252 245 226 / 0.37);
+  --color-cream-tint-50: rgb(254 250 241 / 0.5);
+  --color-sand-tint-27: rgb(245 238 221 / 0.27);
+  --color-grey-tint: rgb(242 242 242 / 0.7);
+  --color-dark: #111111;
+  --color-near-black: #0d0d0d;
+  --color-overlay: rgb(0 0 0 / 0.8);
+
+  /* Text */
+  --color-body: #767676;
+  --color-body-alt: #7a7a7a;
+  --color-title: #242424;
+  --color-entity-title: #333333;
+  --color-navy: #132f3a;
+  --color-navy-card: #102f3a;
+  --color-navy-button: #102d37;
+  --color-navy-card-button: #112e39;
+  --color-brown: #38291a;
+  --color-ink: #0b0b0b;
+  --color-dark-1: #202020;
+  --color-dark-2: #2a2a2a;
+  --color-dark-3: #383838;
+  --color-footer-heading: #898989;
+  --color-footer-link: #9e9d9d;
+  --color-footer-copyright: #9e9e9e;
+
+  /* Borders */
+  --color-border-quantity: #ded7ca;
+  --color-border-form: rgb(0 0 0 / 0.1);
+  --color-border-form-focus: rgb(0 0 0 / 0.15);
+
+  /* Radii */
+  --radius-base: 12px;
+  --radius-form: 35px;
+  --radius-card: 20px;
+  --radius-popup: 22px;
+  --radius-header: 35px;
+  --radius-pill: 999px; /* buttons, quantity box: same value as the live site (not Tailwind's rounded-full) */
+
+  /* Shadows */
+  --shadow-header: 0 12px 35px rgb(0 0 0 / 0.12), 0 3px 10px rgb(0 0 0 / 0.05);
+  --shadow-card: 0 8px 25px rgb(0 0 0 / 0.035);
+  --shadow-add-to-cart: 0 8px 22px rgb(181 132 41 / 0.18);
+  --shadow-popup: 2px 8px 23px 3px rgb(0 0 0 / 0.2);
+
+  /* Layout widths */
+  --container-site: 1222px;
+  --container-header: 1100px;
+
+  /* Breakpoints used by the live site (Elementor: mobile ≤767, tablet ≤1024).
+     The Tailwind defaults (sm, md, lg…) still exist; prefer these two. */
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 1025px;
+
+  /* Letter spacing seen on labels */
+  --tracking-eyebrow: 2.5344px;
+  --tracking-stat: 2.42px;
+  --tracking-pill: 2.2px;
+  --tracking-display: 1.11px;
+}
+
+/* Fonts come from next/font (src/lib/fonts.ts) as CSS variables on <html>. */
+@theme inline {
+  --font-body: var(--font-urbanist), Arial, Helvetica, sans-serif;
+  --font-display: var(--font-anton), Arial, Helvetica, sans-serif;
+  --font-label: var(--font-inter), Arial, Helvetica, sans-serif;
+  --font-label-alt: var(--font-jost), Arial, Helvetica, sans-serif;
+  --font-serif: var(--font-cormorant), Georgia, serif;
+  --font-misc: var(--font-poppins), Arial, Helvetica, sans-serif;
+  --font-icons: var(--font-woodmart);
+}
+
+/* Site-wide base styles (Woodmart: --wd-text-font-size 15px, line-height 1.6, colour #767676). */
+@layer base {
+  /* As the theme: the page never scrolls sideways (some live sections are wider than the screen,
+     e.g. the stretched block under "Add to cart") and the vertical scrollbar is always there. */
+  html {
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+
+  body {
+    overflow-x: clip;
+    /* The theme's text rendering (it changes letter spacing and edge smoothing slightly). */
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #ffffff;
+    color: var(--color-body);
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.6;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--color-title);
+    font-family: var(--font-body);
+    font-weight: 600;
+  }
+}

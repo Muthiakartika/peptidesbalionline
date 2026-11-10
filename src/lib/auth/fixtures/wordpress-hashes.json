@@ -1,0 +1,45 @@
+{
+ "note": "Hashes of made-up test passwords, made with PHP 8.3 the way WordPress 7.1.4 makes them (wp_hash_password, class-phpass.php).",
+ "vectors": [
+  {
+   "password": "Local-test-2026!",
+   "wp": "$wp$2y$10$lSsAwBPOvJaGQ8yMBXCw6.JMUmT2yj5i51wKm164/ihQWUIdmjS.2",
+   "wpUntrimmed": "$wp$2y$10$lCFpn/xpI/EsJBj0e00C..4LxTO5glfEc8OIXGbQZMQr10o6XiQC2",
+   "phpass": "$P$Bb1ErICTlNASYL8FLTDlsO7/s/GSez1",
+   "bcrypt": "$2y$10$XCtemc6wROwr1dDUfONRc.bcSOLk4Kmu4oi0.dBo8VZnQOyEVudce",
+   "md5": "095ea7594e41762a904e6052962c6e98"
+  },
+  {
+   "password": "short",
+   "wp": "$wp$2y$10$j9h.sljUDN5gb.0irutkRulVaHYH3/.omQGLGQ9..0UNKv471Cy3K",
+   "wpUntrimmed": "$wp$2y$10$dbXWfXBx38JvzuI3v7VrZeG/RTXw80MD3Go7pmcJHooUfDyJw8dla",
+   "phpass": "$P$Bx4hCmHyR0rr3h1IcT4ywwtC.yZuLM.",
+   "bcrypt": "$2y$10$BpnQVxazlCMLDY18zySgXObvSMKFFq8johIK0lgwNXA5QZfHHkUT.",
+   "md5": "4f09daa9d95bcb166a302407a0e0babe"
+  },
+  {
+   "password": "pässwörd 日本",
+   "wp": "$wp$2y$10$83vWuRoZ6egNvPoT06dNm.FiE8/BzEzrQr5RBpzxw6IHA39vYiRby",
+   "wpUntrimmed": "$wp$2y$10$i9cGcmxWffy2pGzgsYA7cOCadwXAaBUtTf5Y3kmljdYJdf3XpGiJe",
+   "phpass": "$P$BTV8VGoZilrBHW1w7TJAqOJtXm5paY.",
+   "bcrypt": "$2y$10$kbMKCrCB6.QaZmIgB/NKZu47h1.GI.FSc0acDFNtF4Kct4ze5DNZi",
+   "md5": "5bf1e23797397714bd83e787b0780429"
+  },
+  {
+   "password": " spaced ",
+   "wp": "$wp$2y$10$BfwF5.GaHrkBT.XAeHSmB.bYJtqDmsgnOCyu0vL9cWQv6NbSZ1LaO",
+   "wpUntrimmed": "$wp$2y$10$kUINe7t0CYDYSW0qCqbn3u.4.NwL23I64uxsBaUCIggzuoP4MXVoe",
+   "phpass": "$P$BuH53tqYOpXogZoTiz70E9pUIEYvfU/",
+   "bcrypt": "$2y$10$Rrd3oHBQhftd5sI9z4JQX.oJLbqfSmUJQx1nGdD64RX5I.f7znnmC",
+   "md5": "469e83417090f17f1f8956687fa6e347"
+  },
+  {
+   "password": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+   "wp": "$wp$2y$10$6LZXoeH5vmeYQv4J8moTMONXxYONJJvm/.5kD6uA4gw4Og33pdgPq",
+   "wpUntrimmed": "$wp$2y$10$wLScUF9lFfbrSt/tT7rNReFLRS41G5bv8VCCsflt49sZTYEbNzNmK",
+   "phpass": "$P$B3kTKremRkWoHRsvvNb1fGpAwuoaOX/",
+   "bcrypt": "$2y$10$ChIgB14ZnIKbSAWbUyR0Oe0X0ktxq5v5kddLvAjZg6T9vagqZXpU6",
+   "md5": "aed563ecafb4bcc5654c597a421547b2"
+  }
+ ]
+}

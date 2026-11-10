@@ -1,0 +1,1580 @@
+{
+ "capturedAt": "2026-11-04",
+ "source": "admin-ajax.php?action=woodmart_ajax_search&number=20&post_type=product&include_cat_search=yes",
+ "samples": [
+  {
+   "query": "bpc",
+   "suggestions": [
+    {
+     "group": "product",
+     "value": "BPC-157 + TB-500 + KPV 30mg Pen Bali",
+     "path": "/product/bpc-157-tb-500-kpv-30mg-peptide-pen-bali/",
+     "id": 12509,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "BPC-157 TB-500 KPV Blend 30mg Bali | Atlas",
+     "path": "/product/bpc-157-tb-500-kpv-blend-30mg-bali-atlas/",
+     "id": 12453,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Hangover Recovery Stack | Thymosin Alpha-1, Glutathione & BPC-157 | Atlas Longevity",
+     "path": "/product/hangover-recovery-stack/",
+     "id": 4973,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "BPC-157  Pen",
+     "path": "/product/bpc157-5mg-pen/",
+     "id": 4573,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Wolverine Blend – TB-500 + BPC-157  Pen",
+     "path": "/product/tb500-bpc157-pen/",
+     "id": 3933,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Wolverine Stack Blend  – BPC-157 5mg & TB-500 5mg",
+     "path": "/product/bpc-157-tb-500-blend-10mg/",
+     "id": 1216,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "GLOW Blend 70mg – 50 mg GHK-Cu + 10 mg TB-500 + 10 mg BPC-157",
+     "path": "/product/glow-blend/",
+     "id": 821,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "BPC-157",
+     "path": "/product/bpc-157/",
+     "id": 991,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "KLOW Blend 80mg – BPC‑157 10 mg + GHK‑Cu 50 mg + TB‑500 10 mg + KPV 10 mg blend",
+     "path": "/product/klow-blend-80mg/",
+     "id": 979,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Glow Plus 70mg Pen (GHK-Cu + BPC-157 + TB-500)",
+     "path": "/product/glow-plus-pen/",
+     "id": 755,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "KLOW 80mg Pen (GHK-Cu + KPV + BPC-157 + TB-500)",
+     "path": "/product/klow-pen/",
+     "id": 726,
+     "hasThumb": true,
+     "hasPrice": true
+    }
+   ]
+  },
+  {
+   "query": "glp",
+   "suggestions": [
+    {
+     "group": "product",
+     "value": "GLP-1 SMA 10mg Peptide Pen – Atlas Longevity",
+     "path": "/product/glp-1-sma-peptide-pen-bali/",
+     "id": 12540,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "GLP-3 RTA+ Cagrilintide 15mg Blend Bali",
+     "path": "/product/glp-3-rta-cagrilintide-blend-15mg-bali/",
+     "id": 12488,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Cagrilintide + GLP-1 SMA 10mg Blend Bali | Atlas Longevity",
+     "path": "/product/glp-1-10mg-cagrilintide-blend/",
+     "id": 8603,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Summer Cut Bundle | GLP-3 RTA, GHK-Cu & Tesamorelin | Atlas Longevity",
+     "path": "/product/summer-cut-bundle/",
+     "id": 4976,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "GLP-3 RTA 10mg + Cagrilintide 2mg Pen",
+     "path": "/product/glp-3-10mg-cagrilintide-pen/",
+     "id": 4709,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "GLP-3 RTA Pen",
+     "path": "/product/glp-3-10mg-pen/",
+     "id": 4704,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "GLP-3 RTA 20mg + Cagrilintide 4mg Pen",
+     "path": "/product/glp-3-20mg-cagrilintide-pen/",
+     "id": 4698,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "GLP-3 RTA 30mg + Cagrilintide 6mg Pen",
+     "path": "/product/glp-3-30mg-cagrilintide-pen/",
+     "id": 4697,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "GLP-3 RTA",
+     "path": "/product/glp-3-5mg/",
+     "id": 4687,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "GLP-2 TRZ Peptide Pen",
+     "path": "/product/glp-2-10mg-pen/",
+     "id": 4672,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "GLP-2 TRZ",
+     "path": "/product/glp-2-5mg/",
+     "id": 4663,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "GLP-1 SMA",
+     "path": "/product/glp-1-5mg/",
+     "id": 3684,
+     "hasThumb": true,
+     "hasPrice": true
+    }
+   ]
+  },
+  {
+   "query": "pen",
+   "suggestions": [
+    {
+     "group": "categories",
+     "value": "",
+     "path": "",
+     "id": null,
+     "hasThumb": false,
+     "hasPrice": false
+    },
+    {
+     "group": "categories",
+     "value": "Atlas Longevity",
+     "path": "/product-category/pen-peptides/atlas-longevity-pen-peptides/",
+     "id": null,
+     "hasThumb": false,
+     "hasPrice": false
+    },
+    {
+     "group": "categories",
+     "value": "Peptide Pens",
+     "path": "/product-category/pen-peptides/",
+     "id": null,
+     "hasThumb": true,
+     "hasPrice": false
+    },
+    {
+     "group": "product",
+     "value": "",
+     "path": "",
+     "id": null,
+     "hasThumb": false,
+     "hasPrice": false
+    },
+    {
+     "group": "product",
+     "value": "Tesamorelin + Ipamorelin 30mg Pen Bali | Atlas",
+     "path": "/product/tesamorelin-ipamorelin-30mg-peptide-pen-bali/",
+     "id": 12566,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Semax + Selank 10mg & 20mg Pen Bali | Atlas",
+     "path": "/product/semax-selank-blend-peptide-pen-bali/",
+     "id": 12556,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "GLP-1 SMA 10mg Peptide Pen – Atlas Longevity",
+     "path": "/product/glp-1-sma-peptide-pen-bali/",
+     "id": 12540,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "GHK-Cu + KPV 60mg Peptide Pen Bali | Atlas",
+     "path": "/product/ghk-cu-kpv-60mg-peptide-pen-bali/",
+     "id": 12524,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "CJC-1295 No DAC 5mg + Ipamorelin 5mg Pen (Copy)",
+     "path": "/product/cjc-1295-no-dac-ipamorelin-20mg-pen-bali/",
+     "id": 12512,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "BPC-157 + TB-500 + KPV 30mg Pen Bali",
+     "path": "/product/bpc-157-tb-500-kpv-30mg-peptide-pen-bali/",
+     "id": 12509,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Peptide Travel Cooler & Insulin Pen Fridge Case Bali",
+     "path": "/product/peptide-pen-vial-travel-cooler/",
+     "id": 10701,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "HCG Pen 10,000 IU & 5000 IU Bali | Atlas",
+     "path": "/product/hcg-5000iu/",
+     "id": 9952,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Tesamorelin Pen",
+     "path": "/product/tesamorelin-pen/",
+     "id": 9479,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Tesamorelin + Ipamorelin 15mg Pen Bali | Atlas Longevity",
+     "path": "/product/tesamorelin-ipamorelin-15mg-pen/",
+     "id": 8858,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Melanotan II 10mg Pen Bali | Atlas Longevity",
+     "path": "/product/melanotan-ii-10mg-pen/",
+     "id": 6335,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "GLP-3 RTA 10mg + Cagrilintide 2mg Pen",
+     "path": "/product/glp-3-10mg-cagrilintide-pen/",
+     "id": 4709,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "GLP-3 RTA Pen",
+     "path": "/product/glp-3-10mg-pen/",
+     "id": 4704,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "GLP-3 RTA 20mg + Cagrilintide 4mg Pen",
+     "path": "/product/glp-3-20mg-cagrilintide-pen/",
+     "id": 4698,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "GLP-3 RTA 30mg + Cagrilintide 6mg Pen",
+     "path": "/product/glp-3-30mg-cagrilintide-pen/",
+     "id": 4697,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "GLP-2 TRZ Peptide Pen",
+     "path": "/product/glp-2-10mg-pen/",
+     "id": 4672,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "NAD+ Pen",
+     "path": "/product/nad-500mg-pen/",
+     "id": 4577,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Epithalon Peptide Pen",
+     "path": "/product/epithalon-10mg-pen/",
+     "id": 4575,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "BPC-157  Pen",
+     "path": "/product/bpc157-5mg-pen/",
+     "id": 4573,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "TB-500 Pen",
+     "path": "/product/tb500-10mg-pen/",
+     "id": 4502,
+     "hasThumb": true,
+     "hasPrice": true
+    }
+   ]
+  },
+  {
+   "query": "retatrutide",
+   "suggestions": [
+    {
+     "group": "product",
+     "value": "GLP-3 RTA+ Cagrilintide 15mg Blend Bali",
+     "path": "/product/glp-3-rta-cagrilintide-blend-15mg-bali/",
+     "id": 12488,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Summer Cut Bundle | GLP-3 RTA, GHK-Cu & Tesamorelin | Atlas Longevity",
+     "path": "/product/summer-cut-bundle/",
+     "id": 4976,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "GLP-3 RTA 10mg + Cagrilintide 2mg Pen",
+     "path": "/product/glp-3-10mg-cagrilintide-pen/",
+     "id": 4709,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "GLP-3 RTA Pen",
+     "path": "/product/glp-3-10mg-pen/",
+     "id": 4704,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "GLP-3 RTA 20mg + Cagrilintide 4mg Pen",
+     "path": "/product/glp-3-20mg-cagrilintide-pen/",
+     "id": 4698,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "GLP-3 RTA 30mg + Cagrilintide 6mg Pen",
+     "path": "/product/glp-3-30mg-cagrilintide-pen/",
+     "id": 4697,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "GLP-3 RTA",
+     "path": "/product/glp-3-5mg/",
+     "id": 4687,
+     "hasThumb": true,
+     "hasPrice": true
+    }
+   ]
+  },
+  {
+   "query": "nasal",
+   "suggestions": [
+    {
+     "group": "categories",
+     "value": "",
+     "path": "",
+     "id": null,
+     "hasThumb": false,
+     "hasPrice": false
+    },
+    {
+     "group": "categories",
+     "value": "Peptide Nasal Sprays",
+     "path": "/product-category/nasal-spray-peptides/",
+     "id": null,
+     "hasThumb": true,
+     "hasPrice": false
+    },
+    {
+     "group": "product",
+     "value": "",
+     "path": "",
+     "id": null,
+     "hasThumb": false,
+     "hasPrice": false
+    },
+    {
+     "group": "product",
+     "value": "Semax + Selank Nasal Spray 10mg Bali | Atlas",
+     "path": "/product/semax-selank-nasal-spray-10mg-bali/",
+     "id": 12500,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Semax 10mg + Selank 10mg Nasal Spray 20mg Bali | Atlas Longevity",
+     "path": "/product/semax-selank-nasal-spray-20mg/",
+     "id": 8837,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "VIP Nasal Spray 10mg Bali | Atlas Longevity",
+     "path": "/product/vip-nasal-spray-10mg/",
+     "id": 8834,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Kisspeptin-10 Nasal Spray 10mg Bali | Atlas Longevity",
+     "path": "/product/kisspeptin-10-nasal-spray-10mg/",
+     "id": 8831,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "DSIP Nasal Spray 5mg Bali | Atlas Longevity",
+     "path": "/product/dsip-nasal-spray-5mg/",
+     "id": 6218,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Epithalon Nasal Spray 10mg",
+     "path": "/product/epithalon-nasal-spray-10mg/",
+     "id": 4504,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Oxytocin Nasal Spray 2mg",
+     "path": "/product/oxytocin-nasal-spray-2mg/",
+     "id": 4209,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Melanotan II Nasal Spray 10mg",
+     "path": "/product/melanotan-ii-nasal-spray-10mg/",
+     "id": 4207,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "NAD+ Nasal Spray 500mg",
+     "path": "/product/nad-nasal-spray-500mg/",
+     "id": 4205,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "GHK-Cu Nasal Spray 50mg",
+     "path": "/product/ghk-cu-nasal-spray-50mg/",
+     "id": 4203,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "DSIP Nasal Spray 10mg",
+     "path": "/product/dsip-nasal-spray-10mg/",
+     "id": 4201,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Reconstitution Service for Peptide Nasal Sprays",
+     "path": "/product/peptide-nasal-spray-reconstitution/",
+     "id": 4052,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Empty Nasal Spray Bottle for Peptides",
+     "path": "/product/empty-nasal-spray-bottle/",
+     "id": 4044,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Semax Nasal Spray 10mg",
+     "path": "/product/semax-nasal-spray/",
+     "id": 3691,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Selank Nasal Spray 10mg",
+     "path": "/product/selank-nasal-spray/",
+     "id": 3677,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "PT-141 Nasal Spray 10mg",
+     "path": "/product/pt-141-nasal-spray/",
+     "id": 3641,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Dihexa Nasal Spray 10mg",
+     "path": "/product/dihexa-nasal-spray/",
+     "id": 3465,
+     "hasThumb": true,
+     "hasPrice": true
+    }
+   ]
+  },
+  {
+   "query": "vial",
+   "suggestions": [
+    {
+     "group": "categories",
+     "value": "",
+     "path": "",
+     "id": null,
+     "hasThumb": false,
+     "hasPrice": false
+    },
+    {
+     "group": "categories",
+     "value": "Peptide Vials",
+     "path": "/product-category/vial/",
+     "id": null,
+     "hasThumb": true,
+     "hasPrice": false
+    },
+    {
+     "group": "product",
+     "value": "",
+     "path": "",
+     "id": null,
+     "hasThumb": false,
+     "hasPrice": false
+    },
+    {
+     "group": "product",
+     "value": "Tesamorelin + Ipamorelin 30mg Vial Bali",
+     "path": "/product/tesamorelin-ipamorelin-blend-30mg-bali/",
+     "id": 12497,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Semax + Selank Blend 10mg Vial Bali | Atlas",
+     "path": "/product/semax-selank-blend-10mg-bali/",
+     "id": 12494,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Mazdutide 10mg Vial Bali | Atlas Longevity",
+     "path": "/product/mazdutide-10mg-bali/",
+     "id": 12483,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Peptide Vial Caps – 3ml & 10ml | Atlas Longevity Bali",
+     "path": "/product/peptide-vial-protective-caps/",
+     "id": 10683,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Premium Peptide Vial Storage Case – 13 Vials Bali",
+     "path": "/product/premium-peptide-vial-storage-case-13-vials/",
+     "id": 10678,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "10ml Vial Holder & Storage Case – 2 or 4 Vials",
+     "path": "/product/10ml-vial-storage-case/",
+     "id": 10663,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "3ml Peptide Vial Storage Case – 6, 7 & 10 Vials | Bali",
+     "path": "/product/3ml-6-vial-peptide-case/",
+     "id": 6362,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Reconstitution Service for Peptide Vials",
+     "path": "/product/peptide-reconstitution-service/",
+     "id": 4046,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "HCG Vial 5,000 IU & 10,000 IU Bali | Atlas Longevity",
+     "path": "/product/hcg-5000iu-vial/",
+     "id": 1254,
+     "hasThumb": true,
+     "hasPrice": true
+    }
+   ]
+  },
+  {
+   "query": "bundle",
+   "suggestions": [
+    {
+     "group": "categories",
+     "value": "",
+     "path": "",
+     "id": null,
+     "hasThumb": false,
+     "hasPrice": false
+    },
+    {
+     "group": "categories",
+     "value": "Bundles",
+     "path": "/product-category/bundles/",
+     "id": null,
+     "hasThumb": true,
+     "hasPrice": false
+    },
+    {
+     "group": "product",
+     "value": "",
+     "path": "",
+     "id": null,
+     "hasThumb": false,
+     "hasPrice": false
+    },
+    {
+     "group": "product",
+     "value": "Mind Bundle Bali | Semax, Selank & Pinealon | Atlas Longevity",
+     "path": "/product/mind-bundle/",
+     "id": 4971,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Summer Cut Bundle | GLP-3 RTA, GHK-Cu & Tesamorelin | Atlas Longevity",
+     "path": "/product/summer-cut-bundle/",
+     "id": 4976,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Bali Glow Bundle | KLOW Blend, Melanotan II & CJC-1295 + Ipamorelin | Atlas Longevity",
+     "path": "/product/glow-bundle/",
+     "id": 4972,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Atlas Shred Elite Stack™ – Premium Fat Loss & Transformation Bundle",
+     "path": "/product/atlas-shred-elite-stack/",
+     "id": 4257,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Atlas Lean Launch Stack™ – Beginner Weight Loss & Appetite Control Bundle",
+     "path": "/product/atlas-lean-launch-stack/",
+     "id": 4253,
+     "hasThumb": true,
+     "hasPrice": true
+    }
+   ]
+  },
+  {
+   "query": "stack",
+   "suggestions": [
+    {
+     "group": "categories",
+     "value": "",
+     "path": "",
+     "id": null,
+     "hasThumb": false,
+     "hasPrice": false
+    },
+    {
+     "group": "categories",
+     "value": "Beauty/ Skin Stacks",
+     "path": "/product-category/peptide-protocols/beauty-skin-stacks/",
+     "id": null,
+     "hasThumb": false,
+     "hasPrice": false
+    },
+    {
+     "group": "categories",
+     "value": "Fat Loss Stacks",
+     "path": "/product-category/peptide-protocols/fat-loss-stacks/",
+     "id": null,
+     "hasThumb": false,
+     "hasPrice": false
+    },
+    {
+     "group": "categories",
+     "value": "Longevity / Wellness Stacks",
+     "path": "/product-category/peptide-protocols/longevity-wellness-stacks/",
+     "id": null,
+     "hasThumb": false,
+     "hasPrice": false
+    },
+    {
+     "group": "categories",
+     "value": "Men's Performance Stacks",
+     "path": "/product-category/peptide-protocols/mens-performance-stacks/",
+     "id": null,
+     "hasThumb": false,
+     "hasPrice": false
+    },
+    {
+     "group": "categories",
+     "value": "Muscle Growth Stacks",
+     "path": "/product-category/peptide-protocols/muscle-growth-stacks/",
+     "id": null,
+     "hasThumb": false,
+     "hasPrice": false
+    },
+    {
+     "group": "categories",
+     "value": "Recovery Stacks",
+     "path": "/product-category/peptide-protocols/recovery-stacks/",
+     "id": null,
+     "hasThumb": false,
+     "hasPrice": false
+    },
+    {
+     "group": "categories",
+     "value": "VIP Stacks",
+     "path": "/product-category/peptide-protocols/vip-stacks/",
+     "id": null,
+     "hasThumb": false,
+     "hasPrice": false
+    },
+    {
+     "group": "product",
+     "value": "",
+     "path": "",
+     "id": null,
+     "hasThumb": false,
+     "hasPrice": false
+    },
+    {
+     "group": "product",
+     "value": "Hangover Recovery Stack | Thymosin Alpha-1, Glutathione & BPC-157 | Atlas Longevity",
+     "path": "/product/hangover-recovery-stack/",
+     "id": 4973,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Atlas Elite Transformation Stack™ – Complete Premium Transformation Protocol",
+     "path": "/product/atlas-elite-transformation-stack/",
+     "id": 4282,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Atlas Vitality Elite Stack™ – Performance, Energy & Men’s Optimisation System",
+     "path": "/product/atlas-vitality-elite-stack/",
+     "id": 4280,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Atlas Glow & Repair Stack™ – Skin, Hair & Beauty Optimisation System",
+     "path": "/product/atlas-glow-repair-stack/",
+     "id": 4278,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Atlas Deep Reset Stack™ – Sleep, Recovery & Stress Optimisation System",
+     "path": "/product/atlas-deep-reset-stack/",
+     "id": 4276,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Atlas Longevity Elite Stack™ – Advanced Longevity, Energy & Wellness Optimisation System",
+     "path": "/product/atlas-longevity-elite-stack/",
+     "id": 4274,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Atlas Surf Recovery Stack™ – Recovery & Performance Support System",
+     "path": "/product/atlas-surf-recovery-stack/",
+     "id": 4271,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Atlas Wolverine Recovery Stack™ – Recovery, Mobility & Joint Support System",
+     "path": "/product/atlas-wolverine-recovery-stack/",
+     "id": 4269,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Atlas Mass Elite Stack™ – Ultimate Muscle Growth & Recovery System",
+     "path": "/product/atlas-mass-elite-stack/",
+     "id": 4267,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Atlas Lean Growth Stack™ – Recovery, Growth & Performance System",
+     "path": "/product/atlas-lean-growth-stack/",
+     "id": 4261,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Atlas Balance & Burn Stack™ – Women’s Hormonal Weight Loss System",
+     "path": "/product/atlas-balance-burn-stack/",
+     "id": 4259,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Atlas Shred Elite Stack™ – Premium Fat Loss & Transformation Bundle",
+     "path": "/product/atlas-shred-elite-stack/",
+     "id": 4257,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Atlas Lean Launch Stack™ – Beginner Weight Loss & Appetite Control Bundle",
+     "path": "/product/atlas-lean-launch-stack/",
+     "id": 4253,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Wolverine Stack Blend  – BPC-157 5mg & TB-500 5mg",
+     "path": "/product/bpc-157-tb-500-blend-10mg/",
+     "id": 1216,
+     "hasThumb": true,
+     "hasPrice": true
+    }
+   ]
+  },
+  {
+   "query": "ghk cu",
+   "suggestions": [
+    {
+     "group": "product",
+     "value": "GHK-Cu + KPV 60mg Peptide Pen Bali | Atlas",
+     "path": "/product/ghk-cu-kpv-60mg-peptide-pen-bali/",
+     "id": 12524,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "GHK-Cu + KPV Blend 60mg Bali | Atlas Longevity",
+     "path": "/product/ghk-cu-kpv-blend-60mg-bali/",
+     "id": 12461,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Summer Cut Bundle | GLP-3 RTA, GHK-Cu & Tesamorelin | Atlas Longevity",
+     "path": "/product/summer-cut-bundle/",
+     "id": 4976,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "GHK-Cu  Peptide Pen",
+     "path": "/product/ghk-cu-50mg-pen/",
+     "id": 4214,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "GHK-Cu Nasal Spray 50mg",
+     "path": "/product/ghk-cu-nasal-spray-50mg/",
+     "id": 4203,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "GLOW Blend 70mg – 50 mg GHK-Cu + 10 mg TB-500 + 10 mg BPC-157",
+     "path": "/product/glow-blend/",
+     "id": 821,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "GHK-Cu",
+     "path": "/product/ghk-cu-50mg/",
+     "id": 862,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "KLOW Blend 80mg – BPC‑157 10 mg + GHK‑Cu 50 mg + TB‑500 10 mg + KPV 10 mg blend",
+     "path": "/product/klow-blend-80mg/",
+     "id": 979,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Glow Plus 70mg Pen (GHK-Cu + BPC-157 + TB-500)",
+     "path": "/product/glow-plus-pen/",
+     "id": 755,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "KLOW 80mg Pen (GHK-Cu + KPV + BPC-157 + TB-500)",
+     "path": "/product/klow-pen/",
+     "id": 726,
+     "hasThumb": true,
+     "hasPrice": true
+    }
+   ]
+  },
+  {
+   "query": "10mg",
+   "suggestions": [
+    {
+     "group": "product",
+     "value": "Semax + Selank 10mg & 20mg Pen Bali | Atlas",
+     "path": "/product/semax-selank-blend-peptide-pen-bali/",
+     "id": 12556,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "GLP-1 SMA 10mg Peptide Pen – Atlas Longevity",
+     "path": "/product/glp-1-sma-peptide-pen-bali/",
+     "id": 12540,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Semax + Selank Nasal Spray 10mg Bali | Atlas",
+     "path": "/product/semax-selank-nasal-spray-10mg-bali/",
+     "id": 12500,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Semax + Selank Blend 10mg Vial Bali | Atlas",
+     "path": "/product/semax-selank-blend-10mg-bali/",
+     "id": 12494,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Mazdutide 10mg Vial Bali | Atlas Longevity",
+     "path": "/product/mazdutide-10mg-bali/",
+     "id": 12483,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Melatonin 10mg Bali | Atlas Longevity",
+     "path": "/product/melatonin-10mg/",
+     "id": 9552,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Vesugen 10mg Bali | KED Research Peptide | Atlas Longevity",
+     "path": "/product/vesugen-10mg/",
+     "id": 9546,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Semax 10mg + Selank 10mg Nasal Spray 20mg Bali | Atlas Longevity",
+     "path": "/product/semax-selank-nasal-spray-20mg/",
+     "id": 8837,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "VIP Nasal Spray 10mg Bali | Atlas Longevity",
+     "path": "/product/vip-nasal-spray-10mg/",
+     "id": 8834,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Kisspeptin-10 Nasal Spray 10mg Bali | Atlas Longevity",
+     "path": "/product/kisspeptin-10-nasal-spray-10mg/",
+     "id": 8831,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Semax 10mg + Selank 10mg 20mg Blend Bali | Atlas Longevity",
+     "path": "/product/semax-selank-20mg-blend/",
+     "id": 8826,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "CJC-1295 No DAC 10mg + Ipamorelin 10mg 20mg Bali | Atlas Longevity",
+     "path": "/product/cjc-1295-no-dac-ipamorelin-20mg/",
+     "id": 8822,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Survodutide 10mg Bali | Research Peptide | Atlas Longevity",
+     "path": "/product/survodutide-10mg/",
+     "id": 8612,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Cagrilintide + GLP-1 SMA 10mg Blend Bali | Atlas Longevity",
+     "path": "/product/glp-1-10mg-cagrilintide-blend/",
+     "id": 8603,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "ARA-290 10mg Bali | Premium Research Peptide | Atlas Longevity",
+     "path": "/product/ara-290-10mg/",
+     "id": 8515,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Melanotan II 10mg Pen Bali | Atlas Longevity",
+     "path": "/product/melanotan-ii-10mg-pen/",
+     "id": 6335,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Melanotan I 10mg Bali | Melanotan 1 | Atlas Longevity",
+     "path": "/product/melanotan-1-10mg/",
+     "id": 6194,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "GLP-3 RTA 10mg + Cagrilintide 2mg Pen",
+     "path": "/product/glp-3-10mg-cagrilintide-pen/",
+     "id": 4709,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "SNAP-8 10mg",
+     "path": "/product/snap8-10mg/",
+     "id": 4521,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Epithalon Nasal Spray 10mg",
+     "path": "/product/epithalon-nasal-spray-10mg/",
+     "id": 4504,
+     "hasThumb": true,
+     "hasPrice": true
+    }
+   ]
+  },
+  {
+   "query": "bpc -pen",
+   "suggestions": [
+    {
+     "group": "product",
+     "value": "BPC-157 TB-500 KPV Blend 30mg Bali | Atlas",
+     "path": "/product/bpc-157-tb-500-kpv-blend-30mg-bali-atlas/",
+     "id": 12453,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Hangover Recovery Stack | Thymosin Alpha-1, Glutathione & BPC-157 | Atlas Longevity",
+     "path": "/product/hangover-recovery-stack/",
+     "id": 4973,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Wolverine Stack Blend  – BPC-157 5mg & TB-500 5mg",
+     "path": "/product/bpc-157-tb-500-blend-10mg/",
+     "id": 1216,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "GLOW Blend 70mg – 50 mg GHK-Cu + 10 mg TB-500 + 10 mg BPC-157",
+     "path": "/product/glow-blend/",
+     "id": 821,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "BPC-157",
+     "path": "/product/bpc-157/",
+     "id": 991,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "KLOW Blend 80mg – BPC‑157 10 mg + GHK‑Cu 50 mg + TB‑500 10 mg + KPV 10 mg blend",
+     "path": "/product/klow-blend-80mg/",
+     "id": 979,
+     "hasThumb": true,
+     "hasPrice": true
+    }
+   ]
+  },
+  {
+   "query": "xyzxyz",
+   "suggestions": [
+    {
+     "group": "product",
+     "value": "No products found",
+     "path": "",
+     "id": null,
+     "hasThumb": false,
+     "hasPrice": false
+    }
+   ]
+  },
+  {
+   "query": "sup",
+   "suggestions": [
+    {
+     "group": "categories",
+     "value": "",
+     "path": "",
+     "id": null,
+     "hasThumb": false,
+     "hasPrice": false
+    },
+    {
+     "group": "categories",
+     "value": "Supplies",
+     "path": "/product-category/vial/supplies/",
+     "id": null,
+     "hasThumb": false,
+     "hasPrice": false
+    },
+    {
+     "group": "product",
+     "value": "",
+     "path": "",
+     "id": null,
+     "hasThumb": false,
+     "hasPrice": false
+    },
+    {
+     "group": "product",
+     "value": "Super Human Blend 865mg Bali | Atlas Longevity",
+     "path": "/product/super-human-blend-865mg/",
+     "id": 8534,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Atlas Surf Recovery Stack™ – Recovery & Performance Support System",
+     "path": "/product/atlas-surf-recovery-stack/",
+     "id": 4271,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Atlas Wolverine Recovery Stack™ – Recovery, Mobility & Joint Support System",
+     "path": "/product/atlas-wolverine-recovery-stack/",
+     "id": 4269,
+     "hasThumb": true,
+     "hasPrice": true
+    }
+   ]
+  },
+  {
+   "query": "peptide",
+   "suggestions": [
+    {
+     "group": "categories",
+     "value": "",
+     "path": "",
+     "id": null,
+     "hasThumb": false,
+     "hasPrice": false
+    },
+    {
+     "group": "categories",
+     "value": "Atlas Longevity",
+     "path": "/product-category/pen-peptides/atlas-longevity-pen-peptides/",
+     "id": null,
+     "hasThumb": false,
+     "hasPrice": false
+    },
+    {
+     "group": "categories",
+     "value": "Peptide Blends Bali",
+     "path": "/product-category/vial/blends/",
+     "id": null,
+     "hasThumb": false,
+     "hasPrice": false
+    },
+    {
+     "group": "categories",
+     "value": "Peptide Nasal Sprays",
+     "path": "/product-category/nasal-spray-peptides/",
+     "id": null,
+     "hasThumb": true,
+     "hasPrice": false
+    },
+    {
+     "group": "categories",
+     "value": "Peptide Pens",
+     "path": "/product-category/pen-peptides/",
+     "id": null,
+     "hasThumb": true,
+     "hasPrice": false
+    },
+    {
+     "group": "categories",
+     "value": "Peptide Protocols",
+     "path": "/product-category/peptide-protocols/",
+     "id": null,
+     "hasThumb": true,
+     "hasPrice": false
+    },
+    {
+     "group": "categories",
+     "value": "Peptide Vials",
+     "path": "/product-category/vial/",
+     "id": null,
+     "hasThumb": true,
+     "hasPrice": false
+    },
+    {
+     "group": "product",
+     "value": "",
+     "path": "",
+     "id": null,
+     "hasThumb": false,
+     "hasPrice": false
+    },
+    {
+     "group": "product",
+     "value": "GLP-1 SMA 10mg Peptide Pen – Atlas Longevity",
+     "path": "/product/glp-1-sma-peptide-pen-bali/",
+     "id": 12540,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "GHK-Cu + KPV 60mg Peptide Pen Bali | Atlas",
+     "path": "/product/ghk-cu-kpv-60mg-peptide-pen-bali/",
+     "id": 12524,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Peptide Travel Cooler & Insulin Pen Fridge Case Bali",
+     "path": "/product/peptide-pen-vial-travel-cooler/",
+     "id": 10701,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Portable Peptide Cooler & Insulin Travel Fridge Bali",
+     "path": "/product/portable-peptide-insulin-cooler-fridge/",
+     "id": 10695,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Peptide Vial Caps – 3ml & 10ml | Atlas Longevity Bali",
+     "path": "/product/peptide-vial-protective-caps/",
+     "id": 10683,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Premium Peptide Vial Storage Case – 13 Vials Bali",
+     "path": "/product/premium-peptide-vial-storage-case-13-vials/",
+     "id": 10678,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Vesugen 10mg Bali | KED Research Peptide | Atlas Longevity",
+     "path": "/product/vesugen-10mg/",
+     "id": 9546,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Cartalax 20mg Bali | Research Peptide | Atlas Longevity",
+     "path": "/product/cartalax-20mg/",
+     "id": 8819,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Survodutide 10mg Bali | Research Peptide | Atlas Longevity",
+     "path": "/product/survodutide-10mg/",
+     "id": 8612,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "PE-22-28 5mg Bali | Research Peptide | Atlas Longevity",
+     "path": "/product/pe-22-28-5mg/",
+     "id": 8609,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "LL-37 5mg Bali | Research Peptide | Atlas Longevity",
+     "path": "/product/ll-37-5mg/",
+     "id": 8606,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "ARA-290 10mg Bali | Premium Research Peptide | Atlas Longevity",
+     "path": "/product/ara-290-10mg/",
+     "id": 8515,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "ADAMAX-984 5mg Bali | Research Peptide | Atlas Longevity",
+     "path": "/product/adamax-984-5mg/",
+     "id": 8511,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "3ml Peptide Vial Storage Case – 6, 7 & 10 Vials | Bali",
+     "path": "/product/3ml-6-vial-peptide-case/",
+     "id": 6362,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "GLP-2 TRZ Peptide Pen",
+     "path": "/product/glp-2-10mg-pen/",
+     "id": 4672,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Epithalon Peptide Pen",
+     "path": "/product/epithalon-10mg-pen/",
+     "id": 4575,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Peptide Pen Case With Ice Pack",
+     "path": "/product/peptide-pen-case-with-ice-pack/",
+     "id": 4249,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "GHK-Cu  Peptide Pen",
+     "path": "/product/ghk-cu-50mg-pen/",
+     "id": 4214,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Reconstitution Service for Peptide Nasal Sprays",
+     "path": "/product/peptide-nasal-spray-reconstitution/",
+     "id": 4052,
+     "hasThumb": true,
+     "hasPrice": true
+    },
+    {
+     "group": "product",
+     "value": "Reconstitution Service for Reusable Peptide Pen Cartridges",
+     "path": "/product/reusable-peptide-pen-cartridge-reconstitution/",
+     "id": 4050,
+     "hasThumb": true,
+     "hasPrice": true
+    }
+   ]
+  }
+ ]
+}

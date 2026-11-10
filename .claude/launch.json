@@ -1,0 +1,33 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
+      "port": 3000
+    },
+    {
+      "name": "prod",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "next",
+        "start",
+        "-p",
+        "3005"
+      ],
+      "port": 3005
+    },
+    {
+      "name": "prod-local-db",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "scripts/dev/start-local-db.mjs"
+      ],
+      "port": 3006
+    }
+  ]
+}

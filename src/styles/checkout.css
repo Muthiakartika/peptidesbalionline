@@ -1,0 +1,181 @@
+/*
+ * The checkout (Phase 5): the Woodmart theme's rules for the checkout page (woo-page-checkout,
+ * woo-page-checkout-predefined, the closed select2 box of woo-lib-select2 and base.css's ".optional"),
+ * written for this project with the live values (open question Q-34), as ":where(.woo-page) <the
+ * theme's selector>" like src/styles/cart.css (whose table, price and variable rules the checkout also
+ * uses). The owner's own checkout CSS is in checkout-owner.css. Reference:
+ * docs/audit/visual-reference/screenshots/checkout-{small,large}/ and markup/checkout-*.html.
+ */
+
+.woo-page {
+  --bgcolor-gray-200: #f7f7f7;
+  --bgcolor-white: #fff;
+  --color-gray-900: #242424;
+}
+
+/* ── "Returning customer? Click here to login" and the hidden login form ── */
+:where(.woo-page) .woocommerce-form-login-toggle > div {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 5px 7px;
+  margin-bottom: 25px;
+  padding: 0 !important;
+  min-height: 0;
+  background-color: transparent !important;
+  color: var(--color-gray-900) !important;
+  font-weight: 600;
+  text-align: unset;
+}
+:where(.woo-page) .woocommerce-form-login-toggle > div .showlogin { color: var(--wd-primary-color) !important; }
+:where(.woo-page) .woocommerce-form-login-toggle > div::before { content: none !important; }
+:where(.woo-page) .woocommerce-form-login.hidden-form {
+  position: relative;
+  margin-bottom: 25px;
+  padding: 30px;
+  max-width: 470px;
+  border: 2px solid var(--brdcolor-gray-200);
+  border-radius: var(--wd-brd-radius);
+  text-align: start;
+}
+
+/* ── The form: customer details on the left, the order on the right (woo-page-checkout-predefined) ── */
+:where(.woo-page) form.woocommerce-checkout { --wd-row-gap: 30px; --wd-col-gap: 30px; display: flex; flex-wrap: wrap; align-items: flex-start; gap: var(--wd-row-gap) var(--wd-col-gap); }
+:where(.woo-page) form.woocommerce-checkout > * { order: -1; flex: 1 1 100%; width: 100%; }
+:where(.woo-page) form.woocommerce-checkout > :is(.customer-details, .checkout-order-review) { order: unset; flex: 1 0 0; width: auto; max-width: 50%; }
+:where(.woo-page) form.woocommerce-checkout > :is(.customer-details, .woocommerce-NoticeGroup) > * { margin-bottom: 20px; }
+:where(.woo-page) form.woocommerce-checkout > :is(.customer-details, .woocommerce-NoticeGroup) > *:last-child { margin-bottom: 0; }
+:where(.woo-page) .woocommerce-checkout > .checkout-order-review { position: relative; padding: 30px; background-color: var(--bgcolor-gray-200); }
+:where(.woo-page) .woocommerce-checkout > .checkout-order-review::before,
+:where(.woo-page) .woocommerce-checkout > .checkout-order-review::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  height: 10px;
+  background-image: radial-gradient(farthest-side, transparent 6px, var(--bgcolor-gray-200) 0);
+  background-size: 15px 15px;
+}
+:where(.woo-page) .woocommerce-checkout > .checkout-order-review::before { top: -10px; background-position: -2px -6px, 0 0; }
+:where(.woo-page) .woocommerce-checkout > .checkout-order-review::after { bottom: -10px; background-position: -2px 1px, 0 0; }
+:where(.woo-page) #order_review_heading { text-align: center; text-transform: uppercase; }
+:where(.woo-page) .checkout-order-review > .woocommerce-checkout-review-order .wd-table-wrapper {
+  overflow-x: auto;
+  margin-bottom: 20px;
+  padding: 5px 25px;
+  border-radius: var(--wd-brd-radius);
+  background-color: var(--bgcolor-white);
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+}
+:where(.woo-page.wd-builder-off) #place_order { width: 100%; }
+@media (min-width: 769px) {
+  :where(.woo-page) .woocommerce-checkout > .customer-details .woocommerce-billing-fields { margin-top: 30px; }
+}
+@media (max-width: 768.98px) {
+  :where(.woo-page) form.woocommerce-checkout > :is(.customer-details, .checkout-order-review) { flex-basis: 100%; width: 100%; max-width: 100%; }
+}
+@media (max-width: 576px) {
+  :where(.woo-page) .woocommerce-checkout > .checkout-order-review { padding: 20px; }
+}
+@media (min-width: 769px) and (max-width: 1024px) {
+  :where(.woo-page) form.woocommerce-checkout > .checkout-order-review { flex-grow: 1.2; max-width: 60%; }
+}
+
+/* ── The customer details (woo-page-checkout) ── */
+:where(.woo-page) .woocommerce-invalid { --wd-form-brd-color: #ca1919; scroll-margin-top: 200px; }
+:where(.woo-page) .woocommerce-billing-fields > h3 { text-transform: uppercase; }
+:where(.woo-page) .woocommerce-billing-fields__field-wrapper { text-align: start; }
+:where(.woo-page) .woocommerce-account-fields p.create-account,
+:where(.woo-page) .woocommerce-account-fields p.create-account label { margin-bottom: 0; }
+:where(.woo-page) .woocommerce-account-fields p.create-account label { font-weight: var(--wd-title-font-weight); }
+:where(.woo-page) .woocommerce-shipping-fields > h3 { font-size: unset; font-family: unset; margin-bottom: 0; }
+:where(.woo-page) .woocommerce-shipping-fields > h3 > label { color: unset; font-weight: unset; }
+:where(.woo-page) .shipping_address { margin-top: 20px; text-align: start; }
+:where(.woo-page) .woocommerce-additional-fields > h3 { text-transform: uppercase; font-size: 22px; }
+:where(.woo-page) .woocommerce-additional-fields__field-wrapper { text-align: start; }
+:where(.woo-page) .optional { position: relative; top: -5px; font-size: 0.8em; color: var(--color-gray-300); }
+:where(.woo-page) .woocommerce-input-wrapper { display: block; }
+
+/* ── The order table (woo-page-checkout) ── */
+:where(.woo-page) .woocommerce-checkout-review-order-table { display: flex; flex-direction: column; margin-bottom: 0; }
+:where(.woo-page) .woocommerce-checkout-review-order-table :is(thead, tbody, tfoot) { display: block; }
+:where(.woo-page) .woocommerce-checkout-review-order-table tr { display: flex; border-bottom: 1px solid var(--brdcolor-gray-300); }
+:where(.woo-page) .woocommerce-checkout-review-order-table :is(th, td) { border: none; }
+:where(.woo-page) .woocommerce-checkout-review-order-table thead tr { border-width: 2px; }
+:where(.woo-page) .woocommerce-checkout-review-order-table thead th { flex-basis: 50%; }
+:where(.woo-page) .woocommerce-checkout-review-order-table tfoot tr { align-items: center; }
+:where(.woo-page) .woocommerce-checkout-review-order-table tfoot tr:last-child { border: none; }
+:where(.woo-page) .woocommerce-checkout-review-order-table tfoot td { flex-grow: 1; }
+:where(.woo-page) .woocommerce-checkout-review-order-table .cart_item .product-name { flex-grow: 1; }
+:where(.woo-page) .woocommerce-checkout-review-order-table .product-quantity { font-weight: 600; }
+/* A line's subtotal in the text colour (woo-mod-shop-table), the totals below in the theme's gold. */
+:where(.woo-page) tr.cart_item .product-total > .amount { color: var(--wd-text-color); font-weight: 400; }
+
+/* ── The fields' placeholder (base.css: "::placeholder { color: var(--wd-form-placeholder-color) }",
+ * which is "inherit": the field's own colour) ── */
+:where(.woo-page) ::placeholder { color: var(--wd-form-placeholder-color, inherit); }
+
+/* ── The province field: a native select drawn as the theme's closed select2 box (woo-lib-select2:
+ * "body .select2-container--default .select2-selection--single" and its arrow, 42px wide with the
+ * theme's chevron centred, auto × 18px). On live select2 hides the <select> and draws a <span>, so the
+ * owner's ".woocommerce-checkout select { … !important }" (snippet 13) only reaches the hidden select;
+ * here the select is the visible box, so it takes the select2 look back over that rule. ── */
+:where(.woo-page) select.state_select { padding-inline: 15px 30px; font-size: 14px; }
+.woocommerce-checkout select.state_select {
+  min-height: var(--wd-form-height);
+  height: var(--wd-form-height);
+  padding: 0 30px 0 15px !important;
+  border: var(--wd-form-brd-width) solid var(--wd-form-brd-color) !important;
+  border-radius: var(--wd-form-brd-radius) !important;
+  background: var(--wd-form-bg) url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNSIgaGVpZ2h0PSIyNSIgZmlsbD0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2U9IiNiYmIiPjxwYXRoIGQ9Ik02IDlsNiA2IDYtNiIvPjwvc3ZnPg==") no-repeat right 12px top 50% / auto 18px !important;
+}
+
+/* ── <abbr> (base.css): the terms checkbox's "*" (abbr.required: also ".required", elementor-page.css) ── */
+:where(.woo-page) abbr { border-bottom: 1px dotted; color: #d62432; text-decoration: none; }
+:where(.woo-page) abbr[title] { border: none; }
+
+/* ── The payment methods, the terms and "Place order" (woo-page-checkout-el-payment-methods; the
+ * owner's snippet 14 restyles most of it, checkout-owner.css) ── */
+:where(.woo-page) .payment_methods { --li-pl: 0; list-style: none; --li-mb: 15px; }
+:where(.woo-page) .payment_methods li img { margin-inline-start: 5px; margin-inline-end: 5px; max-height: 40px; }
+:where(.woo-page) .payment_methods li > label { display: inline; margin-bottom: 0; }
+:where(.woo-page) .payment_methods .payment_box {
+  --wd-tags-mb: 10px;
+  position: relative;
+  margin-top: 15px;
+  padding: 15px;
+  background-color: var(--bgcolor-white);
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+  border-radius: var(--wd-brd-radius);
+}
+:where(.woo-page) .payment_methods .payment_box p:last-child { margin-bottom: 0; }
+:where(.woo-page) .payment_methods .payment_box::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 25px;
+  bottom: 100%;
+  background-color: inherit;
+  width: 15px;
+  height: 15px;
+  clip-path: polygon(50% 50%, 0% 103%, 100% 103%);
+}
+:where(.woo-page) .payment_methods fieldset { margin: 5px 0 0 0; padding: 0; border: none; }
+:where(.woo-page) .woocommerce-terms-and-conditions-wrapper { padding-top: 20px; border-top: 1px solid var(--brdcolor-gray-300); }
+:where(.woo-page) .woocommerce-terms-and-conditions-wrapper a { font-weight: 600; }
+:where(.woo-page) .woocommerce-checkout-payment .woocommerce-privacy-policy-text:not(:last-child) { margin-bottom: 20px; border-bottom: 1px solid var(--brdcolor-gray-300); }
+:where(.woo-page) .woocommerce-checkout-payment .woocommerce-privacy-policy-text:empty { display: none; }
+:where(.woo-page) .place-order .woocommerce-form__label span { vertical-align: middle; }
+:where(.woo-page) .place-order .woocommerce-invalid .woocommerce-form__label :is(span, a) { color: #ca1919; }
+:where(.woo-page) #place_order {
+  padding: 5px 28px;
+  min-height: 48px;
+  font-size: 14px;
+  border-radius: var(--btn-accented-brd-radius);
+  color: var(--btn-accented-color);
+  box-shadow: var(--btn-accented-box-shadow);
+  background-color: var(--btn-accented-bgcolor);
+  text-transform: var(--btn-accented-transform, var(--btn-transform, uppercase));
+  font-weight: var(--btn-accented-font-weight, var(--btn-font-weight, 600));
+  font-family: var(--btn-accented-font-family, var(--btn-font-family, inherit));
+  font-style: var(--btn-accented-font-style, var(--btn-font-style, unset));
+}
+:where(.woo-page) #place_order:hover { color: var(--btn-accented-color-hover); box-shadow: var(--btn-accented-box-shadow-hover); background-color: var(--btn-accented-bgcolor-hover); }
+:where(.woo-page) #place_order:active { box-shadow: var(--btn-accented-box-shadow-active); bottom: var(--btn-accented-bottom-active, 0); }

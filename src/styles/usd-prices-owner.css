@@ -1,0 +1,118 @@
+/*
+ * The site owner's "Secondary USD Prices" CSS (WPCode snippet 09), copied WORD FOR WORD from the
+ * live site. Used by the product page (after product-owner.css) and the cart / checkout pages.
+ */
+
+/* Secondary USD Prices Across Store
+   Atlas Longevity | Snippet: 09-secondary-usd-prices
+   Standalone CSS. No <style> tags. Desktop and responsive styles included.
+*/
+
+.atlas-usd-price {
+    display: inline-block;
+    margin-left: 6px;
+    color: #aaa3a5;
+    font-size: 0.62em;
+    line-height: 1;
+    font-weight: 400;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+.products .product-grid-item .atlas-usd-price {
+    margin-left: 5px;
+    color: #aaa3a5;
+    font-size: 11px;
+    font-weight: 400;
+}
+
+.single-product .summary .atlas-usd-price {
+    margin-left: 8px;
+    color: #9d9998;
+    font-size: 14px;
+}
+
+.woocommerce-cart .atlas-usd-price {
+    margin-left: 5px;
+    color: #999;
+    font-size: 11px;
+}
+
+.widget_shopping_cart .atlas-usd-price,
+.cart-widget-side .atlas-usd-price {
+    margin-left: 4px;
+    color: #999;
+    font-size: 10px;
+}
+
+.woocommerce-checkout .atlas-usd-price {
+    margin-left: 5px;
+    color: #999;
+    font-size: 11px;
+}
+
+.order-total .atlas-usd-price {
+    color: #8f8a83;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+@media only screen and (max-width: 767px) {
+    .products .product-grid-item .atlas-usd-price {
+        margin-left: 3px;
+        font-size: 9px;
+    }
+
+    .single-product .summary .atlas-usd-price {
+        margin-left: 5px;
+        font-size: 11px;
+    }
+
+    .woocommerce-cart .atlas-usd-price,
+    .woocommerce-checkout .atlas-usd-price {
+        font-size: 9px;
+    }
+}
+
+.products .product-grid-item .atlas-grid-usd {
+    display: inline-block;
+    margin-left: 6px;
+    color: #aaa3a5;
+    font-size: 11px;
+    line-height: 1;
+    font-weight: 400;
+    white-space: nowrap;
+}
+
+.atlas-bundle-usd-total {
+    display: block;
+    margin-top: 3px;
+    color: #aaa3a5;
+    font-size: 10px;
+    line-height: 1.2;
+    font-weight: 400;
+}
+
+.atlas-bundle-usd-each {
+    color: #aaa3a5;
+    font-size: 9px;
+    font-weight: 400;
+    white-space: nowrap;
+}
+
+@media only screen and (max-width: 767px) {
+    .products .product-grid-item .atlas-grid-usd {
+        margin-left: 4px;
+        font-size: 9px;
+    }
+
+    .atlas-bundle-usd-total {
+        font-size: 9px;
+    }
+
+    .atlas-bundle-usd-each {
+        display: block;
+        margin-top: 2px;
+        font-size: 8px;
+    }
+}

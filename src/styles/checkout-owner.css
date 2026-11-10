@@ -1,0 +1,663 @@
+/*
+ * The site owner's own CSS for the checkout, copied from the live site (6 Nov 2026), rule for rule:
+ *   * WPCode CSS snippets 17 to 13 (WhatsApp help, address map, delivery slot, payment methods, form and
+ *     terms), word for word from the live page and IN THE LIVE PAGE'S ORDER: WPCode prints the snippets
+ *     from the highest number down (… 17, 16, 15, 14, 13 … 11, 10, 09), so with equal specificity 13
+ *     wins over 14–17 (e.g. ".woocommerce-checkout h3" sizes the delivery slot's and the map box's
+ *     headings). The page imports this file before cart-owner.css (11, 10) and usd-prices-owner.css (09);
+ *   * the <style> blocks of the PHP snippets "add country code at checkout" (8811), "Card Payment Minimum"
+ *     (11168) and "DISABLE COD BELOW RP2,500,000" (8698), read in wp-admin (blank lines left out).
+ * Do not edit them here to fix a layout problem: the theme rules are in src/styles/checkout.css.
+ */
+
+/* Checkout — WhatsApp Order Help
+   Atlas Longevity | Snippet: 17-checkout-whatsapp-help
+   Standalone CSS. No <style> tags. Desktop and responsive styles included.
+*/
+
+.checkout-whatsapp-order {
+    margin-top: 14px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.checkout-whatsapp-order a {
+    color: #25D366;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.checkout-whatsapp-order a:hover {
+    color: #128C7E;
+}
+
+/* Checkout — Address Autocomplete & Map
+   Atlas Longevity | Snippet: 16-checkout-address-map
+   Standalone CSS. No <style> tags. Desktop and responsive styles included.
+*/
+
+.atlas-location-box {
+    width: 100%;
+    margin: 0 0 28px;
+    padding: 24px;
+    background: linear-gradient( 145deg, #ffffff, #fffdf8 );
+    border: 1px solid #e7d7ae;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(27, 39, 43, 0.055);
+}
+
+.atlas-location-heading {
+    margin-bottom: 18px;
+}
+
+.atlas-location-kicker {
+    display: block;
+    margin-bottom: 5px;
+    color: #a57920;
+    font-size: 9px;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+}
+
+.atlas-location-heading h3 {
+    margin: 0 0 6px;
+    color: #17333d;
+    font-size: 19px;
+    line-height: 1.3;
+    font-weight: 700;
+}
+
+.atlas-location-heading p {
+    max-width: 600px;
+    margin: 0;
+    color: #85898b;
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+.atlas-address-search-wrap {
+    margin-bottom: 14px;
+}
+
+.atlas-address-search-wrap label {
+    display: block;
+    margin-bottom: 7px;
+    color: #17333d;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.atlas-address-search-wrap .required {
+    color: #b88931;
+}
+
+.atlas-address-input-wrap {
+    position: relative;
+}
+
+.atlas-address-icon {
+    position: absolute;
+    top: 50%;
+    left: 14px;
+    z-index: 2;
+    color: #b98a31;
+    font-size: 17px;
+    transform: translateY(-50%);
+}
+
+#atlas_delivery_address {
+    width: 100%;
+    height: 50px;
+    margin: 0;
+    padding: 0 16px 0 42px;
+    color: #17333d;
+    font-size: 13px;
+    background: #ffffff;
+    border: 1px solid #ded5c2;
+    border-radius: 9px;
+    box-shadow: none;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#atlas_delivery_address:focus {
+    outline: none;
+    border-color: #c99d3b;
+    box-shadow: 0 0 0 3px rgba(201, 157, 59, 0.10);
+}
+
+#atlas_delivery_address::placeholder {
+    color: #aaa8a4;
+}
+
+.pac-container {
+    z-index: 999999 !important;
+    margin-top: 4px;
+    background: #ffffff;
+    border: 1px solid #e5d8b8;
+    border-radius: 9px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+}
+
+.pac-item {
+    min-height: 44px;
+    padding: 8px 12px;
+    color: #707578;
+    font-size: 11px;
+    border-top: 1px solid #f1ece0;
+    cursor: pointer;
+}
+
+.pac-item:first-child {
+    border-top: 0;
+}
+
+.pac-item:hover {
+    background: #fffaf0;
+}
+
+.pac-item-query {
+    color: #17333d;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.atlas-address-status {
+    min-height: 16px;
+    margin-top: 6px;
+    font-size: 10px;
+    line-height: 1.4;
+}
+
+.atlas-address-status.is-success {
+    color: #8a6a20;
+}
+
+.atlas-address-status.is-error {
+    color: #b13c3c;
+}
+
+.atlas-map-wrap {
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid #e3d8bd;
+    border-radius: 12px;
+}
+
+.atlas-checkout-map {
+    width: 100%;
+    height: 320px;
+    background: #f5f3ee;
+}
+
+.atlas-map-note {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 10px 13px;
+    color: #7e7f7c;
+    font-size: 10px;
+    line-height: 1.4;
+    background: #fffdf8;
+    border-top: 1px solid #eee4cc;
+}
+
+.atlas-map-pin {
+    color: #c99d3b;
+    font-size: 10px;
+}
+
+@media only screen and (max-width: 767px) {
+    .atlas-location-box {
+        padding: 17px;
+        border-radius: 11px;
+    }
+
+    .atlas-location-heading h3 {
+        font-size: 17px;
+    }
+
+    .atlas-location-heading p {
+        font-size: 11px;
+    }
+
+    #atlas_delivery_address {
+        height: 47px;
+        padding-left: 39px;
+        font-size: 12px;
+    }
+
+    .atlas-checkout-map {
+        height: 260px;
+    }
+}
+
+/* Checkout — Delivery Day and Time Fields
+   Atlas Longevity | Snippet: 15-checkout-delivery-slots
+   Standalone CSS. No <style> tags. Desktop and responsive styles included.
+*/
+
+.sleeks-delivery-box {
+    margin: 0 0 25px;
+    padding: 24px;
+    border: 1px solid #e5e8ec;
+    border-radius: 12px;
+    background: #fff;
+}
+
+.sleeks-delivery-box h3 {
+    margin: 0 0 5px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.sleeks-delivery-box .required {
+    color: #e2401c;
+}
+
+.delivery-slot-description {
+    margin: 0 0 8px;
+    font-size: 13px;
+    color: #667085;
+}
+
+.delivery-slot-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.delivery-slot-row .form-row {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.delivery-slot-row select {
+    width: 100%;
+    min-height: 45px;
+    margin: 0;
+    padding: 8px 40px 8px 14px;
+    border: 1px solid #d6dae1;
+    border-radius: 7px;
+    background-color: #fff;
+}
+
+.delivery-slot-help {
+    margin: 7px 0 0;
+    font-size: 12px;
+    color: #8b93a1;
+}
+
+@media only screen and (max-width: 600px) {
+    .sleeks-delivery-box {
+        padding: 18px;
+    }
+
+    .delivery-slot-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Checkout — Payment Methods, Button, Discounts & Fees
+   Atlas Longevity | Snippet: 14-checkout-payment-methods
+   Standalone CSS. No <style> tags. Desktop and responsive styles included.
+*/
+
+.woocommerce-checkout #place_order {
+    width: 100%;
+    min-height: 56px;
+    margin-top: 15px;
+    border-radius: 50px;
+    background: #000;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: none;
+}
+
+.woocommerce-checkout #place_order:hover {
+    background: #222;
+}
+
+.woocommerce-checkout #payment {
+    margin-top: 20px;
+    padding: 22px;
+    background: #ffffff;
+    border: 1px solid #dedede;
+    border-radius: 12px;
+    box-shadow: none;
+}
+
+.woocommerce-checkout #payment::before {
+    content: "HOW WOULD YOU LIKE TO PAY?";
+    display: block;
+    margin-bottom: 14px;
+    color: #52606a;
+    font-size: 12px;
+    line-height: 1.2;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+}
+
+.woocommerce-checkout #payment ul.payment_methods {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    list-style: none;
+}
+
+.woocommerce-checkout #payment ul.payment_methods > li {
+    position: relative;
+    margin: 0 0 8px;
+    padding: 0;
+    background: #ffffff;
+    border: 1px solid #dedede;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.woocommerce-checkout #payment ul.payment_methods > li:last-child {
+    margin-bottom: 0;
+}
+
+.woocommerce-checkout #payment ul.payment_methods > li:hover {
+    border-color: #cba344;
+}
+
+.woocommerce-checkout #payment ul.payment_methods > li:has( input[type="radio"]:checked ) {
+    background: #fffaf0;
+    border-color: #c99d3b;
+    box-shadow: 0 0 0 1px rgba(201, 157, 59, 0.08);
+}
+
+.woocommerce-checkout #payment ul.payment_methods > li > label {
+    display: flex;
+    align-items: center;
+    min-height: 54px;
+    margin: 0;
+    padding: 11px 15px 11px 40px;
+    color: #18323c;
+    font-size: 13px;
+    line-height: 1.35;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.woocommerce-checkout #payment input[type="radio"] {
+    position: absolute;
+    top: 19px;
+    left: 14px;
+    width: 14px;
+    height: 14px;
+    margin: 0;
+    accent-color: #c39732;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    border: 1px solid #aaa;
+    border-radius: 50%;
+}
+
+.woocommerce-checkout #payment ul.payment_methods img {
+    max-height: 24px;
+    width: auto;
+    margin-left: auto;
+}
+
+.woocommerce-checkout #payment .payment_box {
+    margin: -7px 0 0;
+    padding: 0 15px 12px 40px;
+    color: #8a8a8a;
+    font-size: 11px;
+    line-height: 1.45;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.woocommerce-checkout #payment .payment_box::before {
+    display: none;
+}
+
+.woocommerce-checkout #payment .payment_box p {
+    margin: 0;
+    color: #858585;
+    font-size: 11px;
+    line-height: 1.45;
+}
+
+.woocommerce-checkout #payment input[type="radio"]:checked {
+    border-color: #bd902f;
+    box-shadow: inset 0 0 0 3px #ffffff;
+    background: #c69a36;
+}
+
+.woocommerce-checkout #payment .wc_payment_method {
+    box-shadow: none;
+}
+
+.woocommerce-checkout #payment .wc_payment_method > label::before,
+.woocommerce-checkout #payment .wc_payment_method > label::after {
+    display: none;
+}
+
+.woocommerce-checkout #payment .place-order {
+    margin-top: 18px;
+    padding: 0;
+    background: transparent;
+    border: 0;
+}
+
+.woocommerce-checkout #payment #place_order {
+    width: 100%;
+    min-height: 52px;
+    color: #102d37;
+    font-size: 13px;
+    font-weight: 700;
+    background: linear-gradient( 135deg, #b98a31 0%, #e6c76c 50%, #bd9036 100% );
+    border: 1px solid #d5b45d;
+    border-radius: 9px;
+    box-shadow: 0 8px 22px rgba(181, 132, 41, 0.16);
+    transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease;
+}
+
+.woocommerce-checkout #payment #place_order:hover {
+    color: #102d37;
+    filter: brightness(1.05);
+    transform: translateY(-1px);
+    box-shadow: 0 11px 26px rgba(181, 132, 41, 0.23);
+}
+
+@media only screen and (max-width: 767px) {
+    .woocommerce-checkout #payment {
+        padding: 15px;
+        border-radius: 10px;
+    }
+
+    .woocommerce-checkout #payment::before {
+        margin-bottom: 12px;
+        font-size: 11px;
+    }
+
+    .woocommerce-checkout #payment ul.payment_methods > li {
+        margin-bottom: 7px;
+    }
+
+    .woocommerce-checkout #payment ul.payment_methods > li > label {
+        min-height: 52px;
+        padding: 10px 12px 10px 38px;
+        font-size: 12px;
+    }
+
+    .woocommerce-checkout #payment input[type="radio"] {
+        top: 18px;
+        left: 13px;
+    }
+
+    .woocommerce-checkout #payment .payment_box {
+        padding: 0 12px 11px 38px;
+        font-size: 10px;
+    }
+}
+
+.atlas-payment-saving {
+    margin: 4px 0 7px;
+    color: #a47a1e;
+    font-size: 12px;
+    line-height: 1.4;
+    font-weight: 700;
+}
+
+.atlas-payment-fee-message {
+    margin: 4px 0 7px;
+    color: #9b6e19;
+    font-size: 12px;
+    line-height: 1.4;
+    font-weight: 700;
+}
+
+.atlas-payment-usd {
+    color: #aaa3a5;
+    font-weight: 400;
+}
+
+@media only screen and (max-width: 767px) {
+    .atlas-payment-saving,
+    .atlas-payment-fee-message {
+        font-size: 11px;
+    }
+}
+
+/* Checkout — Form, Order Review & Terms
+   Atlas Longevity | Snippet: 13-checkout-form-and-terms
+   Standalone CSS. No <style> tags. Desktop and responsive styles included.
+*/
+
+.woocommerce-checkout .woocommerce-terms-and-conditions-wrapper .form-row {
+    padding: 16px 18px !important;
+    border: 1px solid #d6b77f;
+    border-radius: 16px;
+    background: #faf9f7;
+}
+
+.woocommerce-checkout .woocommerce-terms-and-conditions-wrapper label {
+    display: flex !important;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 0 !important;
+    font-size: 14px !important;
+    line-height: 1.5;
+    font-weight: 500;
+}
+
+.woocommerce-checkout .woocommerce-terms-and-conditions-wrapper input[type="checkbox"] {
+    width: 18px !important;
+    height: 18px !important;
+    margin: 2px 0 0 !important;
+    flex: 0 0 18px;
+}
+
+.woocommerce-checkout input.input-text,
+.woocommerce-checkout textarea,
+.woocommerce-checkout select {
+    min-height: 50px;
+    padding: 12px 15px !important;
+    border: 1px solid #ddd !important;
+    border-radius: 12px !important;
+    background: #fff !important;
+    box-shadow: none !important;
+}
+
+.woocommerce-checkout textarea {
+    min-height: 100px;
+}
+
+.woocommerce-checkout input.input-text:focus,
+.woocommerce-checkout textarea:focus,
+.woocommerce-checkout select:focus {
+    border-color: #111 !important;
+}
+
+.woocommerce-checkout h3 {
+    margin-bottom: 18px;
+    font-size: 22px;
+    font-weight: 700;
+    color: #111;
+}
+
+.woocommerce-checkout .woocommerce-billing-fields,
+.woocommerce-checkout .woocommerce-additional-fields,
+.woocommerce-checkout #order_review {
+    padding: 24px;
+    border: 1px solid #e5e5e5;
+    border-radius: 18px;
+    background: #f8f8f8;
+}
+
+.woocommerce-checkout-review-order-table {
+    border: 0 !important;
+    background: transparent !important;
+}
+
+.woocommerce-checkout-review-order-table th,
+.woocommerce-checkout-review-order-table td {
+    padding: 14px 0 !important;
+    border-color: #ddd !important;
+}
+
+@media (max-width: 768px) {
+    .woocommerce-checkout .woocommerce-billing-fields,
+    .woocommerce-checkout .woocommerce-additional-fields,
+    .woocommerce-checkout #order_review {
+        padding: 18px;
+        border-radius: 14px;
+    }
+}
+
+/* ===== Snippet "add country code at checkout" (8811) ===== */
+.woocommerce-checkout #billing_phone_country_code_field { width: 38% !important; float: left !important; clear: left !important; margin-right: 0 !important; }
+.woocommerce-checkout #billing_phone_field { width: 60% !important; float: right !important; clear: none !important; margin-left: 0 !important; }
+.woocommerce-checkout #billing_phone_country_code,
+.woocommerce-checkout #billing_phone { width: 100% !important; min-height: 46px !important; height: 46px !important; box-sizing: border-box !important; }
+.woocommerce-checkout #billing_phone_country_code { cursor: pointer !important; padding-left: 12px !important; padding-right: 28px !important; }
+.woocommerce-checkout #billing_phone_country_code_field .select2-container { width: 100% !important; }
+.woocommerce-checkout #billing_phone_country_code_field .select2-selection { min-height: 46px !important; }
+.woocommerce-checkout #billing_phone_country_code_field .select2-selection__rendered { line-height: 44px !important; padding-left: 12px !important; padding-right: 30px !important; }
+.woocommerce-checkout #billing_phone_country_code_field .select2-selection__arrow { height: 44px !important; }
+@media only screen and (max-width: 767px) {
+    .woocommerce-checkout #billing_phone_country_code_field { width: 39% !important; float: left !important; clear: left !important; }
+    .woocommerce-checkout #billing_phone_field { width: 59% !important; float: right !important; clear: none !important; }
+    .woocommerce-checkout #billing_phone_country_code { font-size: 11px !important; }
+    .woocommerce-checkout #billing_phone { font-size: 13px !important; }
+}
+
+/* ===== Snippet "Card Payment Minimum" (11168) ===== */
+.atlas-card-minimum-locked > label { color: #8d8d8d !important; opacity: 0.75; cursor: not-allowed !important; }
+.atlas-card-minimum-locked input[type="radio"] { cursor: not-allowed !important; }
+.atlas-card-minimum-locked .payment_box { display: none !important; }
+.atlas-card-minimum-note { display: block; clear: both; box-sizing: border-box; width: auto; margin: 10px 12px 10px 18px; padding: 13px 16px; background: #fdf9ef; border: 1px solid #e8d49e; border-radius: 11px; color: #99958c; text-align: left; line-height: 1.5; }
+.atlas-card-minimum-note strong { display: block; margin: 0 0 3px; color: #b98a31; font-size: 12px; line-height: 1.45; font-weight: 600; }
+.atlas-card-minimum-note span { display: block; color: #a29e96; font-size: 11px; line-height: 1.5; font-weight: 400; }
+@media only screen and (max-width: 767px) {
+    .atlas-card-minimum-note { margin: 14px 5px 3px 12px; padding: 12px 13px; border-radius: 9px; }
+    .atlas-card-minimum-note strong { font-size: 11px; }
+    .atlas-card-minimum-note span { font-size: 10px; }
+}
+
+/* ===== Snippet "DISABLE COD BELOW RP2,500,000" (8698) ===== */
+#payment_method_cod:disabled { cursor: not-allowed !important; }
+.wc_payment_method.atlas-cod-locked { opacity: 0.60; }
+.wc_payment_method.atlas-cod-locked > label { cursor: not-allowed !important; }
+.atlas-cod-lock-message { display: block !important; margin: 8px 10px 8px 28px !important; padding: 10px 12px !important; background: #fff9eb !important; border: 1px solid #dfc783 !important; border-radius: 8px !important; color: #17333d !important; font-size: 11px !important; line-height: 1.5 !important; opacity: 1 !important; visibility: visible !important; }
+.atlas-cod-lock-message strong { display: block !important; margin-bottom: 2px !important; color: #9c7119 !important; font-size: 11px !important; font-weight: 700 !important; }
+.atlas-cod-lock-message span { display: block !important; color: #7c7972 !important; font-size: 10px !important; }

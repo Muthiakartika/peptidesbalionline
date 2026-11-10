@@ -1,0 +1,209 @@
+/*
+ * My Account for a logged-in customer (Phase 5): the Woodmart theme's rules from the live site's own
+ * files (woo-page-my-account, woo-page-my-account-predefined, woo-mod-grid, woo-mod-order-details and
+ * base.css's .wd-nav, .wd-grid-col, mark, fieldset), written as ":where(.woo-page) <the theme's
+ * selector>" like the other WooCommerce styles, so each rule weighs what it weighs on live. The rules the
+ * theme writes with ".wd-builder-off" (the predefined layout) keep it as it is: that class is on <main>.
+ * The login and registration forms a visitor sees are in src/styles/woocommerce.css. The theme's grey
+ * variables (--color-gray-*) are written as their values: Tailwind defines variables of the same names.
+ */
+
+.woo-page {
+  --wd-navigation-color: 51, 51, 51;
+  --bgcolor-black-rgb: 0, 0, 0;
+}
+
+/* ── The layout: menu (3 of 12 columns, 4 on tablets, all on phones) and content (base.css, woo-mod-grid) ── */
+:where(.woo-page) .wd-grid-col { grid-column: auto / span var(--wd-col); }
+@media (min-width: 769px) {
+  :where(.woo-page) .wd-my-account-sidebar { padding-inline-end: 30px; border-inline-end: 1px solid var(--brdcolor-gray-300); }
+}
+
+/* ── The menu (woo-page-my-account-predefined) ── */
+.wd-builder-off .woocommerce-MyAccount-title {
+  font-size: 18px;
+  padding-inline: 15px 10px;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--brdcolor-gray-300);
+}
+.wd-builder-off .woocommerce-MyAccount-navigation ul { --list-mb: 0; --li-mb: 0; --li-pl: 0; list-style: none; }
+.wd-builder-off .woocommerce-MyAccount-navigation ul > li > a {
+  --wd-link-color: #242424;
+  --wd-link-color-hover: #242424;
+  display: flex;
+  align-items: center;
+  min-height: 42px;
+  padding: 5px 15px;
+  font-weight: 600;
+  border-radius: var(--wd-brd-radius);
+  text-decoration: none;
+}
+.wd-builder-off .woocommerce-MyAccount-navigation ul > li > a:hover { background-color: rgba(var(--bgcolor-black-rgb), 0.03); }
+.wd-builder-off .woocommerce-MyAccount-navigation ul > li.is-active > a { background-color: rgba(var(--bgcolor-black-rgb), 0.06); }
+
+/* ── The dashboard's link tiles (base.css .wd-nav, woo-page-my-account, the predefined variables) ── */
+:where(.woo-page) .wd-nav {
+  --list-mb: 0;
+  --li-mb: 0;
+  --li-pl: 0;
+  --nav-gap: 20px;
+  --nav-gap-v: 5px;
+  --nav-pd: 5px 0;
+  --nav-color: rgba(var(--wd-navigation-color), 1);
+  --nav-color-hover: rgba(var(--wd-navigation-color), 0.7);
+  --nav-color-active: var(--nav-color-hover);
+  --nav-bg: none;
+  --nav-bg-hover: var(--nav-bg);
+  --nav-bg-active: var(--nav-bg-hover);
+  --nav-shadow: none;
+  --nav-shadow-hover: var(--nav-shadow);
+  --nav-shadow-active: var(--nav-shadow-hover);
+  --nav-border: none;
+  --nav-border-hover: var(--nav-border);
+  --nav-border-active: var(--nav-border-hover);
+  --nav-radius: var(--wd-brd-radius);
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: var(--text-align, var(--wd-align));
+  text-align: start;
+  gap: var(--nav-gap-v) var(--nav-gap);
+  list-style: none;
+}
+:where(.woo-page) .wd-nav > li { position: relative; }
+:where(.woo-page) .wd-nav > li > a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 42px;
+  padding: var(--nav-pd);
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 1.4;
+  text-decoration: none;
+  color: var(--nav-color);
+  background-color: var(--nav-bg);
+  box-shadow: var(--nav-shadow);
+  border: var(--nav-border);
+  border-radius: var(--nav-radius);
+}
+:where(.woo-page) .wd-nav > li > a .wd-nav-icon { margin-inline-end: 7px; font-size: var(--nav-icon-size, 1.15em); }
+:where(.woo-page) .wd-nav:where(:not(.wd-dis-hover)) > li:where(.wd-opened, :hover) > a {
+  color: var(--nav-color-hover);
+  background-color: var(--nav-bg-hover);
+  box-shadow: var(--nav-shadow-hover);
+  border: var(--nav-border-hover);
+}
+:where(.woo-page) .wd-nav-my-acc > li > a { justify-content: var(--wd-align, start); font-size: unset; text-transform: unset; }
+:where(.woo-page) .wd-nav-my-acc.wd-grid-g { display: grid; gap: var(--wd-gap); }
+:where(.woo-page) .wd-nav-my-acc > li > a .wd-nav-icon { width: 1em; line-height: 1; text-align: center; transition: all 0.25s ease; }
+:where(.woo-page) .wd-nav-my-acc > li > a .wd-nav-icon::before { content: var(--wd-my-acc-nav-icon, "\f140"); display: block; font-weight: 400; font-family: var(--font-icons); }
+:where(.woo-page) .wd-nav-my-acc.wd-icon-top > li > a { flex-direction: column; align-items: var(--wd-align, start); text-align: var(--wd-align, start); }
+:where(.woo-page) .wd-nav-my-acc.wd-icon-top > li > a .wd-nav-icon { margin-inline-end: 0; margin-bottom: 10px; }
+:where(.woo-page) .wd-my-acc-edit-account { --wd-my-acc-nav-icon: "\f135"; }
+:where(.woo-page) .wd-my-acc-orders { --wd-my-acc-nav-icon: "\f138"; }
+:where(.woo-page) .wd-my-acc-downloads { --wd-my-acc-nav-icon: "\f136"; }
+:where(.woo-page) .wd-my-acc-payment-methods { --wd-my-acc-nav-icon: "\f142"; }
+:where(.woo-page) .wd-my-acc-edit-address { --wd-my-acc-nav-icon: "\f139"; }
+:where(.woo-page) .wd-my-acc-customer-logout { --wd-my-acc-nav-icon: "\f137"; }
+.wd-builder-off .wd-nav-my-acc {
+  --wd-col-lg: 3;
+  --wd-col-md: 2;
+  --wd-col-sm: 1;
+  --nav-pd: 20px;
+  --nav-color-hover: rgba(var(--wd-navigation-color), 1);
+  --nav-bg-hover: rgba(var(--bgcolor-black-rgb), 0.03);
+  --nav-shadow: 0px 0px 4px rgba(0, 0, 0, 0.18);
+  --nav-radius: var(--wd-brd-radius);
+  --wd-align: center;
+  --nav-icon-size: 55px;
+}
+.wd-builder-off .wd-nav-my-acc > li > a .wd-nav-icon { color: #bbb; }
+.wd-builder-off .wd-nav-my-acc > li:hover > a .wd-nav-icon { color: var(--wd-primary-color); }
+.wd-builder-off .wd-nav-my-acc .wd-my-acc-dashboard { display: none; }
+
+/* ── The content (woo-page-my-account) ── */
+:where(.woo-page) .woocommerce-MyAccount-content > *:not(:last-child) { margin-bottom: 20px; }
+:where(.woo-page) .woocommerce-MyAccount-content p:not(.form-row):last-child { --wd-tags-mb: 0.001px; }
+:where(.woo-page) .woocommerce-MyAccount-content :is(address, .woocommerce-Message, .woocommerce-info, .woocommerce-orders-table):last-child { margin-bottom: 0; }
+:where(.woo-page) .woocommerce-orders-table th { --wd-link-color: #333; --wd-link-color-hover: #767676; --wd-link-decor: none; --wd-link-decor-hover: none; }
+:where(.woo-page) .woocommerce-orders-table td::before { color: #333; font-weight: 600; }
+:where(.woo-page) :is(.woocommerce-MyAccount-content > .button, .woocommerce-pagination .button, button[name="save_account_details"], button[name="save_address"], :is(.woocommerce-order-downloads, .woocommerce-order-details) .button) {
+  border-radius: var(--btn-accented-brd-radius);
+  color: var(--btn-accented-color);
+  box-shadow: var(--btn-accented-box-shadow);
+  background-color: var(--btn-accented-bgcolor);
+  text-transform: var(--btn-accented-transform, var(--btn-transform, uppercase));
+  font-weight: var(--btn-accented-font-weight, var(--btn-font-weight, 600));
+  font-family: var(--btn-accented-font-family, var(--btn-font-family, inherit));
+  font-style: var(--btn-accented-font-style, var(--btn-font-style, unset));
+}
+:where(.woo-page) :is(.woocommerce-MyAccount-content > .button, .woocommerce-pagination .button, button[name="save_account_details"], button[name="save_address"], :is(.woocommerce-order-downloads, .woocommerce-order-details) .button):hover {
+  color: var(--btn-accented-color-hover);
+  box-shadow: var(--btn-accented-box-shadow-hover);
+  background-color: var(--btn-accented-bgcolor-hover);
+}
+:where(.woo-page) .woocommerce-Address-title .edit { color: var(--wd-link-color); font-weight: var(--wd-text-font-weight); font-style: var(--wd-text-font-style); font-family: var(--wd-text-font); font-size: 1.1em; }
+:where(.woo-page) .woocommerce-Address-title .edit::before { margin-inline-end: 7px; font-weight: 400; content: "\f116"; font-family: var(--font-icons); }
+:where(.woo-page) .woocommerce-EditAccountForm fieldset { margin-top: 40px; }
+@media (min-width: 1025px) {
+  :where(.woo-page) .woocommerce-orders-table td.woocommerce-orders-table__cell-order-actions a:not(:last-child) { margin-inline-end: 5px; }
+}
+
+/* ── Two columns: the addresses, and the half-width form rows from 1025px (woo-mod-grid) ── */
+:where(.woo-page) .col2-set { display: flex; flex-wrap: wrap; gap: 30px; }
+:where(.woo-page) .col2-set :is(.col-1, .col-2) { flex: 1 0 0; max-width: 100%; padding-inline: 0; }
+@media (min-width: 1025px) {
+  :where(.woo-page) p:where(.form-row-first, .form-row-last) { overflow: visible; width: 48%; }
+  :where(.woo-page) p.form-row-first { float: left; }
+  :where(.woo-page) p.form-row-last { float: right; }
+}
+@media (max-width: 768.98px) {
+  :where(.woo-page) .col2-set :is(.col-1, .col-2) { flex-basis: 100%; }
+}
+:where(.woo-page) p.form-row-wide { clear: both; }
+:where(.woo-page) .clear { clear: both; width: 100%; }
+/* An address as base.css prints it (also "You have not set up this type of address yet."). */
+:where(.woo-page) address { margin-bottom: 20px; font-style: italic; font-size: 1.1em; line-height: 1.8; }
+
+/* ── Order details and the order summary's highlights (woo-mod-order-details, base.css) ── */
+:where(.woo-page) :is(.woocommerce-order-downloads, .woocommerce-order-details) .shop_table:last-child { margin-bottom: 0; }
+:where(.woo-page) .woocommerce-order-details :is(address, .woocommerce-column__title) { text-align: start; }
+:where(.woo-page) mark { display: inline-block; padding: 5px 8px; background-color: #f7f7f7; color: #242424; font-weight: 600; line-height: 1; }
+:where(.woo-page) fieldset { margin-bottom: 20px; padding: 20px 40px; border: 2px solid var(--brdcolor-gray-300); border-radius: var(--wd-brd-radius); }
+:where(.woo-page) fieldset legend { margin-bottom: 0; padding-right: 15px; padding-left: 15px; width: auto; }
+/* base.css makes legends uppercase, then its title rule (legend, h1…h6) sets the title transform: none. */
+:where(.woo-page) legend { text-transform: none; font-size: 22px; }
+
+/* ── Tablets: the orders table as stacked rows (woo-page-my-account) ── */
+@media (min-width: 769px) and (max-width: 1024px) {
+  :where(.woo-page) .woocommerce-orders-table { display: block; }
+  :where(.woo-page) .woocommerce-orders-table thead { display: none; }
+  :where(.woo-page) .woocommerce-orders-table :is(tbody, tfoot) { display: block; }
+  :where(.woo-page) .woocommerce-orders-table tr { position: relative; display: flex; flex-direction: column; gap: 5px; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid var(--brdcolor-gray-300); }
+  :where(.woo-page) .woocommerce-orders-table tr:last-child { margin-bottom: 0; }
+  :where(.woo-page) .woocommerce-orders-table :is(th, td) { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; padding: 0; border-bottom: none; }
+  :where(.woo-page) .woocommerce-orders-table :is(th, td):not(:last-child) { padding-bottom: 5px; border-bottom: 1px dashed var(--brdcolor-gray-300); }
+  :where(.woo-page) .woocommerce-orders-table :is(th, td)::before { content: attr(data-title); margin-inline-end: auto; }
+}
+
+/* ── The thank-you page's order overview (woo-thank-you-page, -predefined) and the order table columns
+ * (woo-mod-order-details); used by /checkout/order-received/<n>/ and My Account → View order ── */
+:where(.woo-page) :is(.woocommerce-thankyou-order-details, .wc-bacs-bank-details) { --list-mb: 0.001px; --li-mb: 0.001px; --li-pl: 0; display: flex; flex-wrap: wrap; gap: 20px; list-style: none; }
+:where(.woo-page) :is(.woocommerce-thankyou-order-details, .wc-bacs-bank-details) li { display: flex; flex-direction: column; gap: 10px; flex: 1 1 0%; }
+:where(.woo-page) :is(.woocommerce-thankyou-order-details, .wc-bacs-bank-details) li:not(:last-child) { padding-inline-end: 20px; border-inline-end: 1px solid var(--brdcolor-gray-300); }
+:where(.woo-page) :is(.woocommerce-thankyou-order-details, .wc-bacs-bank-details) :is(strong, .amount) { color: #242424; }
+.wd-builder-off :is(.woocommerce-thankyou-order-details li, .woocommerce-thankyou-order-failed-actions) { text-align: center; }
+:where(.woo-page) .woocommerce-table--order-details :is(th, td) { max-width: 50%; width: 50%; }
+:where(.woo-page) .woocommerce-customer-details address { --wd-tags-mb: 0.001px; margin-bottom: 0; }
+:where(.woo-page) .woocommerce-OrderUpdates { --wd-tags-mb: 10px; }
+@media (max-width: 768.98px) {
+  :where(.woo-page) :is(.woocommerce-thankyou-order-details, .wc-bacs-bank-details) li { flex-basis: 250px; max-width: 50%; }
+  :where(.woo-page) :is(.woocommerce-thankyou-order-details, .wc-bacs-bank-details) li:nth-child(even) { border-inline-end: none; }
+}
+@media (max-width: 576px) {
+  :where(.woo-page) :is(.woocommerce-thankyou-order-details, .wc-bacs-bank-details) li { padding-bottom: 20px; max-width: 100%; border-bottom: 1px solid var(--brdcolor-gray-300); }
+  :where(.woo-page) :is(.woocommerce-thankyou-order-details, .wc-bacs-bank-details) li:not(:last-child) { padding-inline-end: 0; border-inline-end: none; }
+}

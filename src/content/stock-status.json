@@ -1,0 +1,89 @@
+{
+  "generatedAt": "2026-11-07T05:15:37Z",
+  "backorder": {
+    "5642": {
+      "notify": true
+    },
+    "5679": {
+      "notify": true
+    },
+    "5764": {
+      "notify": true
+    },
+    "5842": {
+      "notify": true
+    },
+    "5911": {
+      "notify": true
+    },
+    "8612": {
+      "notify": true
+    },
+    "9547": {
+      "notify": true
+    },
+    "9558": {
+      "notify": true
+    },
+    "10304": {
+      "notify": true
+    },
+    "10305": {
+      "notify": true
+    },
+    "10306": {
+      "notify": true
+    },
+    "10659": {
+      "notify": true
+    },
+    "10663": {
+      "notify": true
+    },
+    "10669": {
+      "notify": true
+    },
+    "10670": {
+      "notify": true
+    },
+    "10675": {
+      "notify": true
+    },
+    "10678": {
+      "notify": true
+    },
+    "10683": {
+      "notify": true
+    },
+    "10689": {
+      "notify": true
+    },
+    "10690": {
+      "notify": true
+    },
+    "12453": {
+      "notify": true
+    },
+    "12459": {
+      "notify": true
+    },
+    "12472": {
+      "notify": true
+    },
+    "12473": {
+      "notify": true
+    },
+    "12483": {
+      "notify": true
+    },
+    "12488": {
+      "notify": true
+    },
+    "12497": {
+      "notify": true
+    },
+    "12509": {
+      "notify": true
+    }
+  }
+}

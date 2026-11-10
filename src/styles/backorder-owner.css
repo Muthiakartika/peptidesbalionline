@@ -1,0 +1,91 @@
+/*
+ * The site owner's CSS for the backorder badges, the <style> block of the PHP snippet "Backorder notice
+ * in Cart + Mini-cart" (10824), copied from wp-admin (7 Nov 2026) rule for rule (blank lines left out).
+ * Live prints it on every page (wp_head): the cart page and the side cart import it here.
+ */
+
+/* Backorder badge */
+.atlas-cart-backorder {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    width: fit-content;
+    max-width: 100%;
+    margin: 9px 0 0;
+    padding: 6px 11px;
+    box-sizing: border-box;
+    background: #f0faf2;
+    border: 1px solid #bfe7c8;
+    border-radius: 7px;
+    color: #347443;
+    font-size: 11px;
+    line-height: 1.4;
+    font-weight: 500;
+    white-space: normal;
+}
+
+/* Green status dot */
+.atlas-cart-backorder-dot {
+    display: inline-block;
+    flex: 0 0 7px;
+    width: 7px;
+    height: 7px;
+    background: #4b994f;
+    border-radius: 50%;
+}
+
+/* Main cart: keep badge beneath product name */
+.woocommerce-cart
+.product-name > .atlas-cart-backorder {
+    display: flex;
+    margin-top: 10px;
+}
+
+/*
+ * Style WooCommerce's existing backorder
+ * notification the same way.
+ */
+.woocommerce-cart
+.product-name .backorder_notification {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    width: fit-content;
+    max-width: 100%;
+    margin: 10px 0 0;
+    padding: 6px 11px;
+    background: #f0faf2;
+    border: 1px solid #bfe7c8;
+    border-radius: 7px;
+    color: #347443;
+    font-size: 11px;
+    line-height: 1.4;
+    font-weight: 500;
+}
+
+/* WoodMart mini-cart */
+.woocommerce-mini-cart-item
+.atlas-cart-backorder,
+.widget_shopping_cart
+.atlas-cart-backorder {
+    display: flex;
+    margin: 7px 0 0;
+    padding: 5px 9px;
+    font-size: 10px;
+    line-height: 1.35;
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+    .atlas-cart-backorder,
+    .woocommerce-cart
+    .product-name .backorder_notification {
+        padding: 5px 9px;
+        font-size: 10px;
+    }
+    .atlas-cart-backorder-dot {
+        flex-basis: 6px;
+        width: 6px;
+        height: 6px;
+    }
+}

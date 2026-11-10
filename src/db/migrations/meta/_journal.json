@@ -1,0 +1,76 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1793691558811,
+      "tag": "0000_initial_catalog",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1793938057290,
+      "tag": "0001_commerce_and_auth",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1794013107846,
+      "tag": "0002_account_names",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1794015884533,
+      "tag": "0003_orders_key_and_options",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1794018159042,
+      "tag": "0004_password_nag_and_role",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1794020921594,
+      "tag": "0005_affiliates_and_coupon_usage",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1794024159777,
+      "tag": "0006_coupon_usage_recorded",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1794186583894,
+      "tag": "0007_legacy_passwords",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1794198507618,
+      "tag": "0008_catalog_admin",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1794211862365,
+      "tag": "0009_categories_attributes",
+      "breakpoints": true
+    }
+  ]
+}

@@ -1,0 +1,452 @@
+/*
+ * The blog (Phase 3f): the black title band, the post cards of the archives and of /insights/, a
+ * single post (header, share buttons, "Newer / Older" links, comment form) and the pagination.
+ * These are the Woodmart theme's rules (page-title, blog-loop-base, blog-loop-design-masonry,
+ * post-types-mod-*, blog-mod-*, blog-single-predefined, el-social-icons, post-types-el-page-navigation,
+ * post-types-mod-comments, mod-load-more-button), written for this project with the live values
+ * (open question Q-34). Rules are written as ":where(.blog-page, .elementor-page) <the theme's
+ * selector>", so they weigh as much as on the live site; /insights/ is an Elementor page.
+ *
+ * Imported by the blog's routes and by ElementorPage (for the /insights/ post grid).
+ */
+
+/* ── The page title band ("Blog", an archive's name, "Insights", "Search Results for: …"). The
+ * theme settings give it a black background; color-scheme-light turns its text white. ── */
+.wd-page-title {
+  --wd-align: start;
+  --wd-title-sp: 15px;
+  --wd-title-font-s: 36px;
+  position: relative;
+  padding-block: var(--wd-title-sp);
+  background-color: rgb(0 0 0);
+}
+.wd-page-title.title-design-centered { --wd-align: center; }
+@media (min-width: 1025px) {
+  .wd-page-title.title-size-default { --wd-title-sp: 60px; --wd-title-font-s: 68px; }
+}
+.wd-page-title.color-scheme-light {
+  --wd-title-color: #fff;
+  --wd-text-color: rgba(255, 255, 255, 0.8);
+  --wd-link-color: rgba(255, 255, 255, 0.9);
+  --wd-link-color-hover: #fff;
+  color: var(--wd-text-color);
+}
+.wd-page-title .wd-page-title-bg { position: absolute; inset: 0; }
+.wd-page-title .container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: var(--wd-align);
+  gap: 10px;
+  width: 100%;
+  max-width: var(--wd-container-w, 1222px);
+  margin-inline: auto;
+  padding-inline: 15px;
+  text-align: var(--wd-align);
+}
+.wd-page-title .title {
+  display: block;
+  margin-bottom: 0;
+  color: var(--wd-title-color);
+  font-family: var(--font-body);
+  font-size: var(--wd-title-font-s);
+  font-weight: 600;
+  line-height: 1.2;
+}
+/* Breadcrumbs (base theme): grey links, the last one bold, "/" between them. */
+.wd-page-title .wd-breadcrumbs {
+  --wd-link-color: rgba(255, 255, 255, 0.7);
+  --wd-link-color-hover: rgba(255, 255, 255, 0.9);
+  --wd-bcrumb-color-active: #fff;
+}
+.wd-page-title .wd-breadcrumbs a { color: var(--wd-link-color); text-decoration: none; transition: all 0.25s ease; }
+.wd-page-title .wd-breadcrumbs a:hover { color: var(--wd-link-color-hover); }
+.wd-page-title .wd-breadcrumbs > :is(span, a):last-child { color: var(--wd-bcrumb-color-active); font-weight: 600; }
+.wd-page-title .wd-breadcrumbs .wd-delimiter { margin-inline: 8px; }
+.wd-page-title .wd-breadcrumbs .wd-delimiter::after { content: "/"; }
+.wd-page-title .wd-breadcrumbs .wd-delimiter:last-child { display: none; }
+
+/* ── Theme colours the blog uses (theme settings). The theme's greys (--color-gray-*) are written as
+ * their values: Tailwind uses the same variable names for its own greys. ── */
+.blog-page,
+.elementor-page {
+  --wd-primary-color: rgb(184, 149, 42);
+  --wd-text-font-size: 15px;
+  --bgcolor-white: #fff;
+  --bgcolor-gray-300: #f1f1f1;
+  --brdcolor-gray-300: rgba(0, 0, 0, 0.105);
+  --brdcolor-gray-500: rgba(0, 0, 0, 0.2);
+}
+
+/* ── Grid of post cards (archives, search results, /insights/). Without a gap set on the grid the
+ * theme uses 50px (40px on tablets). ── */
+:where(.blog-page, .elementor-page) .wd-posts:not([style*="wd-gap"]) { --wd-gap-lg: 50px; --wd-gap-md: 40px; }
+
+/* ── A post card, "masonry" design with a background and a shadow ── */
+:where(.blog-page, .elementor-page) .wd-post-thumb { position: relative; overflow: hidden; border-radius: var(--wd-brd-radius); transform: translate3d(0, 0, 0); }
+:where(.blog-page, .elementor-page) .wd-post-thumb img { width: 100%; }
+:where(.blog-page, .elementor-page) .wd-post-img { transition: all 0.5s cubic-bezier(0, 0, 0.44, 1.18); }
+:where(.blog-page, .elementor-page) .wd-post:hover .wd-post-img { transform: scale(1.1); }
+:where(.blog-page, .elementor-page) .wd-post-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: var(--wd-post-align, start);
+  gap: 10px;
+  text-align: var(--wd-post-align, start);
+}
+:where(.blog-page, .elementor-page) .wd-post .wd-post-meta { display: inline-flex; flex-wrap: wrap; align-items: center; justify-content: var(--wd-post-align, start); gap: 10px; }
+:where(.blog-page, .elementor-page) .wd-post .wd-post-title { --wd-tags-mb: 0; margin-bottom: 0; font-size: 22px; }
+:where(.blog-page, .elementor-page) .wd-post-read-more.wd-style-link {
+  --wd-link-color: var(--wd-primary-color);
+  --wd-link-color-hover: var(--wd-primary-color);
+  font-size: 0.9em;
+  font-weight: 600;
+  text-transform: var(--btn-transform, uppercase);
+}
+:where(.blog-page, .elementor-page) .wd-post-read-more.wd-style-link a { text-decoration: none; }
+:where(.blog-page, .elementor-page) .wd-post-read-more.wd-style-link a:hover { opacity: 0.8; }
+:where(.blog-page, .elementor-page) .blog-style-bg .wd-post-content { padding: 25px; }
+@media (max-width: 576px) {
+  :where(.blog-page, .elementor-page) .blog-style-bg .wd-post-content { padding-inline: 15px; }
+}
+:where(.blog-page, .elementor-page) .blog-design-masonry { --wd-post-align: center; }
+:where(.blog-page, .elementor-page) .blog-design-masonry .wd-post-cat { margin-top: calc(-25px - 1.1em); }
+:where(.blog-page, .elementor-page) .blog-design-masonry .wd-post-content { padding-top: 25px; }
+:where(.blog-page, .elementor-page) .blog-design-masonry .wd-post-excerpt { max-width: 100%; }
+:where(.blog-page, .elementor-page) .blog-design-masonry.blog-style-bg .wd-post-inner { border-radius: var(--wd-brd-radius); }
+:where(.blog-page, .elementor-page) .blog-design-masonry.blog-style-bg .wd-post-thumb { border-bottom-right-radius: 0; border-bottom-left-radius: 0; }
+:where(.blog-page, .elementor-page) .blog-design-masonry.blog-style-bg .wd-post-content { border-radius: var(--wd-brd-radius); background-color: var(--bgcolor-white); }
+:where(.blog-page, .elementor-page) .blog-design-masonry.blog-style-bg.has-post-thumbnail .wd-post-content { border-top-left-radius: 0; border-top-right-radius: 0; }
+:where(.blog-page, .elementor-page) .blog-design-masonry.wd-add-shadow .wd-post-inner { box-shadow: 0 0 4px rgba(0, 0, 0, 0.12); transition: box-shadow 0.5s cubic-bezier(0, 0, 0.44, 1.18); }
+:where(.blog-page, .elementor-page) .blog-design-masonry.wd-add-shadow:hover .wd-post-inner { box-shadow: 0 0 9px rgba(0, 0, 0, 0.2); }
+
+/* The day and month on the card's picture. */
+:where(.blog-page, .elementor-page) .wd-post-date.wd-style-with-bg {
+  position: absolute;
+  top: 15px;
+  inset-inline-start: 15px;
+  z-index: 2;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 53px;
+  padding: 7px;
+  border-radius: calc(var(--wd-brd-radius) / 1.5);
+  background-color: var(--bgcolor-white);
+  box-shadow: 0 0 9px rgba(0, 0, 0, 0.1);
+  color: #333;
+  line-height: 1;
+  text-align: center;
+}
+:where(.blog-page, .elementor-page) .wd-post-date.wd-style-with-bg .post-date-day { font-size: 22px; }
+:where(.blog-page, .elementor-page) .wd-post-date.wd-style-with-bg .post-date-month { font-size: 12px; font-weight: 600; text-transform: uppercase; }
+
+/* The category label (gold pill). */
+:where(.blog-page, .elementor-page) .wd-post-cat.wd-style-with-bg {
+  --wd-link-color: #fff;
+  --wd-link-color-hover: rgba(255, 255, 255, 0.8);
+  display: inline-block;
+  overflow: hidden;
+  height: 2em;
+  padding-inline: 10px;
+  border-radius: calc(var(--wd-brd-radius) / 1.5);
+  background-color: var(--wd-primary-color);
+  color: #fff;
+  font-size: 0.8em;
+  font-weight: 600;
+  line-height: 2em;
+  text-transform: uppercase;
+}
+:where(.blog-page, .elementor-page) .wd-post-cat a { text-decoration: none; }
+
+/* "Posted by …", the date WordPress hides (modified), the share button and the comment count. */
+:where(.blog-page, .elementor-page) .wd-post-author {
+  --wd-link-color: #a5a5a5;
+  --wd-link-color-hover: #767676;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px;
+  color: #a5a5a5;
+}
+:where(.blog-page, .elementor-page) .wd-post-author img { border-radius: 50%; }
+@media (max-width: 768.98px) {
+  :where(.blog-page, .elementor-page) .wd-post-author > span { display: none; }
+}
+:where(.blog-page, .elementor-page) .wd-modified-date { display: none; color: #a5a5a5; }
+:where(.blog-page, .elementor-page) .wd-post-date.wd-style-default { color: #a5a5a5; }
+:where(.blog-page, .elementor-page) .wd-post-share { color: #a5a5a5; font-size: 1.1em; transition: all 0.25s ease; }
+:where(.blog-page, .elementor-page) .wd-post-share::after {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.2em;
+  height: 1.5em;
+  content: "\f117";
+  font-family: var(--font-icons);
+}
+:where(.blog-page, .elementor-page) .wd-post-share:hover { color: #767676; }
+:where(.blog-page, .elementor-page) .wd-post-share .wd-social-icons { flex-wrap: nowrap; }
+:where(.blog-page, .elementor-page) .wd-post-reply { --wd-link-color: #a5a5a5; --wd-link-color-hover: #767676; }
+:where(.blog-page, .elementor-page) .wd-post-reply.wd-style-1 { font-size: 1.1em; }
+:where(.blog-page, .elementor-page) .wd-post-reply.wd-style-1 a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.2em;
+  height: 1.5em;
+  text-decoration: none;
+}
+:where(.blog-page, .elementor-page) .wd-post-reply.wd-style-1 a::after { content: "\f103"; font-family: var(--font-icons); }
+:where(.blog-page, .elementor-page) .wd-post-reply.wd-style-1 .wd-replies-count {
+  position: absolute;
+  top: -5%;
+  inset-inline-start: 55%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.4em;
+  height: 1.4em;
+  padding-inline: 0.2em;
+  border-radius: 1em;
+  background-color: var(--wd-primary-color);
+  color: #fff;
+  font-size: 0.6em;
+  line-height: 1;
+}
+
+/* Tooltips (base theme): the share icons appear above the share button on hover. */
+:where(.blog-page, .elementor-page) .tooltip { --wd-tooltip-bg: rgba(0, 0, 0, 0.9); --wd-tooltip-color: #fff; position: absolute; z-index: 1110; opacity: 0; pointer-events: none; }
+:where(.blog-page, .elementor-page) .tooltip .tooltip-inner {
+  width: max-content;
+  max-width: 200px;
+  padding: 7px 15px;
+  border-radius: calc(var(--wd-brd-radius) / 1.5);
+  background-color: var(--wd-tooltip-bg);
+  color: var(--wd-tooltip-color);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.6;
+  text-align: center;
+  text-transform: none;
+  word-break: break-word;
+}
+:where(.blog-page, .elementor-page) .tooltip .tooltip-arrow { position: absolute; width: 10px; height: 10px; background-color: var(--wd-tooltip-bg); }
+:where(.blog-page, .elementor-page) .tooltip.top .tooltip-arrow { top: calc(100% - 1px); left: 50%; clip-path: polygon(0 0, 50% 50%, 100% 0); transform: translateX(-50%); }
+:where(.blog-page, .elementor-page) .wd-tltp { position: relative; }
+:where(.blog-page, .elementor-page) .wd-tltp .tooltip { margin: 0; }
+:where(.blog-page, .elementor-page) .wd-tltp .tooltip.top { bottom: 100%; left: 50%; margin-bottom: 8px; transform: translateX(-50%); }
+:where(.blog-page, .elementor-page) .wd-tltp .tooltip.top .tooltip-inner::after { position: absolute; inset: auto 0 -8px 0; width: 100%; height: 8px; content: ""; }
+:where(.blog-page, .elementor-page) .wd-tltp:is(:hover, :focus, :focus-within) .tooltip { opacity: 1; pointer-events: unset; animation: blog-fade-in 0.3s ease; }
+/* The share button's tooltip: just the icons, tighter than other tooltips. */
+:where(.blog-page, .elementor-page) .wd-post-share .tooltip-inner { max-width: fit-content; padding: 5px; }
+@keyframes blog-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ── Share icons (Woodmart's icon font) ── */
+:where(.blog-page, .elementor-page) .wd-social-icons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: var(--wd-align);
+  gap: var(--wd-social-gap, calc(var(--wd-social-size, 40px) / 4));
+}
+:where(.blog-page, .elementor-page) .wd-social-icons > a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--wd-social-size, 40px);
+  height: var(--wd-social-size, 40px);
+  border: var(--wd-social-brd) var(--wd-social-brd-color);
+  border-radius: var(--wd-social-radius);
+  background-color: var(--wd-social-bg, unset);
+  box-shadow: var(--wd-social-shadow);
+  color: var(--wd-social-color);
+  font-size: var(--wd-social-icon-size, calc(var(--wd-social-size, 40px) / 2.5));
+  line-height: 1;
+  text-decoration: none;
+}
+:where(.blog-page, .elementor-page) .wd-social-icons > a:hover {
+  border-color: var(--wd-social-brd-color-hover, var(--wd-social-brd-color));
+  background-color: var(--wd-social-bg-hover, var(--wd-social-bg));
+  box-shadow: var(--wd-social-shadow-hover);
+  color: var(--wd-social-color-hover, var(--wd-social-color));
+}
+:where(.blog-page, .elementor-page) .wd-social-icons .wd-icon::before { content: var(--wd-social-icon, unset); font-family: var(--font-icons); }
+:where(.blog-page, .elementor-page) .social-facebook { --wd-social-brand-color: #365493; --wd-social-icon: "\f180"; }
+:where(.blog-page, .elementor-page) .social-twitter { --wd-social-brand-color: #000; --wd-social-icon: "\f154"; }
+:where(.blog-page, .elementor-page) .social-pinterest { --wd-social-brand-color: #cb2027; --wd-social-icon: "\f156"; }
+:where(.blog-page, .elementor-page) .social-linkedin { --wd-social-brand-color: #0274b3; --wd-social-icon: "\f158"; }
+:where(.blog-page, .elementor-page) .social-tg { --wd-social-brand-color: #37aee2; --wd-social-icon: "\f179"; }
+:where(.blog-page, .elementor-page) .wd-social-icons.wd-style-default { --wd-social-color: rgba(0, 0, 0, 0.6); --wd-social-color-hover: rgba(0, 0, 0, 0.8); gap: 0; }
+:where(.blog-page, .elementor-page) .wd-social-icons.wd-style-default > a { width: auto; min-width: 24px; height: auto; padding: var(--wd-social-gap, calc(var(--wd-social-size, 40px) / 6)); }
+:where(.blog-page, .elementor-page) .wd-social-icons.wd-style-default.color-scheme-light { --wd-social-color: #fff; --wd-social-color-hover: rgba(255, 255, 255, 0.6); color: rgba(255, 255, 255, 0.8); }
+:where(.blog-page, .elementor-page) .wd-social-icons.wd-style-colored { --wd-social-color: #fff; --wd-social-shadow-hover: inset 0 0 200px rgba(0, 0, 0, 0.15); }
+:where(.blog-page, .elementor-page) .wd-social-icons.wd-style-colored > a { --wd-social-bg: var(--wd-social-brand-color); }
+:where(.blog-page, .elementor-page) .wd-social-icons.wd-size-small { --wd-social-size: 30px; --wd-social-gap: 6px; --wd-social-icon-size: 14px; }
+:where(.blog-page, .elementor-page) .wd-social-icons.wd-shape-circle { --wd-social-radius: 50%; }
+
+/* Titles of posts and of the "Newer / Older" links (base theme: .wd-entities-title, with the theme
+ * settings' title font, Urbanist 500). */
+:where(.blog-page, .wd-blog-element) .wd-entities-title { display: block; font-family: var(--font-body); font-weight: 500; line-height: 1.4; overflow-wrap: break-word; }
+
+/* Pictures with a caption in a post's text (WordPress's wp-blocks rules). */
+:where(.blog-page) :is(.alignleft, .aligncenter, .alignright, .alignnone)[id*="attachment"] { max-width: 100%; }
+:where(.blog-page) .aligncenter[id*="attachment"] { text-align: center; }
+
+/* ── A single post ── */
+:where(.blog-page) .post-single-page { margin-bottom: 40px; }
+:where(.blog-page) .wd-single-post-header { --wd-align: center; display: flex; flex-direction: column; align-items: center; gap: 15px; margin-bottom: 30px; text-align: center; }
+:where(.blog-page) .wd-single-post-header .wd-post-meta { display: inline-flex; flex-wrap: wrap; align-items: center; justify-content: var(--wd-align); gap: 10px; }
+:where(.blog-page) .wd-single-post-header .wd-post-title { --wd-tags-mb: 0; margin-bottom: 0; font-size: 28px; }
+:where(.blog-page) .wd-single-post-header .title { color: var(--wd-entities-title-color); }
+@media (max-width: 768.98px) {
+  :where(.blog-page) .wd-single-post-header .title { font-size: 22px; }
+}
+:where(.blog-page) .wd-post-image { position: relative; display: inline-block; }
+:where(.blog-page) .wd-post-image img { display: inline; max-width: 100%; height: auto; border-radius: var(--wd-brd-radius); vertical-align: middle; }
+:where(.blog-page) .wd-single-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 40px; }
+
+/* "Newer / Back to list / Older" */
+:where(.blog-page) .wd-page-nav { display: flex; align-items: center; border-block: 2px solid var(--brdcolor-gray-300); }
+:where(.blog-page) .wd-page-nav:not(:last-child) { margin-bottom: 40px; }
+:where(.blog-page) .back-to-archive {
+  --wd-link-color: #bbb;
+  --wd-link-color-hover: #242424;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  font-size: 0;
+  text-decoration: none !important;
+}
+:where(.blog-page) .back-to-archive::after { content: "\f122"; font-family: var(--font-icons); font-size: 20px; }
+:where(.blog-page) .wd-page-nav-icon {
+  position: absolute;
+  top: calc(50% - 20px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--brdcolor-gray-300);
+  border-radius: 50%;
+  color: #333;
+  font-size: 16px;
+  line-height: 1;
+}
+:where(.blog-page) .prev-btn .wd-page-nav-icon { inset-inline-start: 0; }
+:where(.blog-page) .prev-btn .wd-page-nav-icon::after { content: "\f114"; font-family: var(--font-icons); }
+:where(.blog-page) .next-btn .wd-page-nav-icon { inset-inline-end: 0; }
+:where(.blog-page) .next-btn .wd-page-nav-icon::after { content: "\f113"; font-family: var(--font-icons); }
+:where(.blog-page) .wd-page-nav-btn { flex: 0 1 50%; max-width: 50%; }
+:where(.blog-page) .wd-page-nav-btn a { position: relative; display: block; padding-block: 25px; text-decoration: none !important; }
+:where(.blog-page) .wd-page-nav-btn .wd-entities-title { transition: all 0.25s ease; }
+:where(.blog-page) .wd-page-nav-btn:hover .wd-entities-title { color: var(--wd-primary-color); }
+:where(.blog-page) .wd-page-nav-btn.prev-btn a { padding-inline: 55px 20px; }
+:where(.blog-page) .wd-page-nav-btn.next-btn { text-align: end; }
+:where(.blog-page) .wd-page-nav-btn.next-btn a { padding-inline: 20px 55px; }
+:where(.blog-page) .wd-label { color: #333; font-weight: 600; }
+@media (min-width: 769px) {
+  :where(.blog-page) .wd-page-nav-btn .wd-label { display: block; margin-bottom: 5px; color: #bbb; font-weight: inherit; }
+}
+@media (max-width: 768.98px) {
+  :where(.blog-page) .wd-page-nav-btn a { padding-block: 15px; }
+  :where(.blog-page) .wd-page-nav-btn .wd-entities-title { display: none; }
+}
+
+/* The comment form (WordPress markup, Woodmart rules) */
+:where(.blog-page) .comments-area .comment-respond { margin-top: 30px; }
+:where(.blog-page) .comments-area .comment-reply-title { margin-bottom: 20px; color: var(--wd-title-color); font-family: var(--font-body); font-size: 22px; font-weight: 600; line-height: 1.4; }
+:where(.blog-page) .comments-area .comment-reply-title a { color: inherit; text-decoration: none; }
+:where(.blog-page) .comments-area .comment-reply-title small { vertical-align: middle; }
+:where(.blog-page) .comments-area #cancel-comment-reply-link { display: inline-block; margin-inline-start: 10px; font-size: 0; vertical-align: middle; }
+:where(.blog-page) .comment-form { display: flex; flex-wrap: wrap; margin-inline: -10px; }
+:where(.blog-page) .comment-form > p { flex: 1 1 max(400px, 50%); margin-bottom: 15px; padding-inline: 10px; }
+:where(.blog-page) .comment-form :is(.comment-notes, .comment-form-comment, .form-submit, .comment-form-cookies-consent) { flex-basis: 100%; width: 100%; max-width: 100%; }
+:where(.blog-page) .comment-form .comment-form-cookies-consent label { display: inline; }
+:where(.blog-page) .comment-form .comment-notes { margin-bottom: 20px; }
+:where(.blog-page) .comment-form .form-submit { margin-block: 5px 0; }
+:where(.blog-page) .comment-form .submit {
+  border-radius: 35px;
+  background-color: rgb(184, 149, 42);
+  box-shadow: none;
+  color: #333;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+:where(.blog-page) .comment-form-comment { width: 100% !important; }
+/* The text fields, the checkbox and ".required" have the theme's form look: src/styles/elementor-page.css. */
+
+/* ── Pagination under an archive (base theme) and /insights/' "Load more posts" button ── */
+:where(.blog-page, .elementor-page) .wd-loop-footer { margin-top: 30px; text-align: center; }
+:where(.blog-page, .elementor-page) nav[class*="-pagination"] ul { display: inline-flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 3px; margin: 0; padding: 0; list-style: none; }
+:where(.blog-page, .elementor-page) nav[class*="-pagination"] li { margin: 0; }
+:where(.blog-page, .elementor-page) nav[class*="-pagination"] li .page-numbers {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  height: 34px;
+  padding-inline: 5px;
+  border-radius: calc(var(--wd-brd-radius) / 1.5);
+  color: #242424;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+:where(.blog-page, .elementor-page) nav[class*="-pagination"] li .current { background-color: var(--wd-primary-color); color: #fff; }
+:where(.blog-page, .elementor-page) nav[class*="-pagination"] li :is(.next, .prev) { font-size: 0; }
+:where(.blog-page, .elementor-page) nav[class*="-pagination"] li :is(.next, .prev)::before { content: "\f113"; font-family: var(--font-icons); font-size: 12px; }
+:where(.blog-page, .elementor-page) nav[class*="-pagination"] li .prev::before { content: "\f114"; }
+:where(.blog-page, .elementor-page) nav[class*="-pagination"] a:hover { background-color: var(--bgcolor-gray-300); }
+:where(.blog-page, .elementor-page) .wd-load-more {
+  --btn-color: #333;
+  --btn-color-hover: #333;
+  --btn-brd-color: var(--brdcolor-gray-300);
+  --btn-brd-color-hover: var(--brdcolor-gray-500);
+  --btn-bgcolor: transparent;
+  --btn-bgcolor-hover: transparent;
+  --btn-brd-width: 2px;
+}
+:where(.blog-page, .elementor-page) .wd-load-more.loading { display: none; }
+:where(.blog-page, .elementor-page) .wd-load-more-loader { display: none; }
+:where(.blog-page, .elementor-page) .wd-load-more.loading + .wd-load-more-loader { display: inline-flex; animation: blog-fade-in 0.3s ease both; }
+:where(.blog-page, .elementor-page) .wd-load-more-loader .load-more-loading { display: flex; align-items: center; justify-content: center; }
+:where(.blog-page, .elementor-page) .wd-load-more-loader .load-more-loading::before {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-inline: -8px 8px;
+  border: 1px solid transparent;
+  border-left-color: #242424;
+  border-radius: 50%;
+  content: "";
+  vertical-align: middle;
+  animation: blog-rotate 450ms infinite linear;
+}
+@keyframes blog-rotate {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Search results: the summary under each result (WordPress's excerpt; a product's short
+ * description keeps its bold words and lists, styled as everywhere on the theme). ── */
+:where(.blog-page) .entry-summary p { margin-bottom: var(--wd-tags-mb, 20px); }
+:where(.blog-page) .entry-summary :is(strong, b) { font-weight: 600; }
+:where(.blog-page) .entry-summary :is(ul, ol) { margin-bottom: 20px; padding-left: 17px; }
+:where(.blog-page) .entry-summary ul { list-style: disc; }
+:where(.blog-page) .entry-summary ol { list-style: decimal; }
+:where(.blog-page) .entry-summary li { margin-bottom: 10px; }
+:where(.blog-page) .entry-summary li:last-child { margin-bottom: 0; }
+
+/* ── Search results with nothing found (page-search-results) ── */
+:where(.blog-page) article.not-found { text-align: center; }
+:where(.blog-page) article.not-found::before { display: inline-block; margin-bottom: 10px; color: var(--wd-primary-color); content: "\f130"; font-family: var(--font-icons); font-size: 100px; line-height: 1; }
+:where(.blog-page) article.not-found .title { font-size: 30px; }

@@ -1,0 +1,164 @@
+{
+  "$description": "Design tokens OBSERVED on https://peptidesbali.online on 2026-11-03 (computed styles + theme CSS variables). Nothing here is invented: every value has a 'source'. Phase 3 turns this into the Tailwind theme. Values marked 'needsConfirmation' were measured on one element only and must be re-checked per template.",
+  "meta": {
+    "theme": "Woodmart (folder woodmart-1-1) + Elementor 4.3.5 + PRO Elements",
+    "measuredAtViewport": "1440x900 (scrollbar makes the layout viewport 1425px)"
+  },
+  "color": {
+    "brand": {
+      "gold": { "value": "#B8952A", "source": "--wd-primary-color rgb(184,149,42); top bar background; protocol builder --arp-primary" },
+      "goldStrong": { "value": "#8A6D16", "source": "--arp-primary-strong (protocol builder)" },
+      "goldOnSoft": { "value": "#826615", "source": "--arp-primary-on-soft" },
+      "goldSoft": { "value": "#F5F0E1", "source": "--arp-primary-soft" },
+      "goldLight": { "value": "#D1B157", "source": "--e-global-color-a3176e9; reviews strip base colour rgb(209,177,87)" },
+      "goldAccentText": { "value": "#B79127", "source": "--e-global-color-b210d34; eyebrow headings rgb(183,145,39)" },
+      "goldPriceSingle": { "value": "#B98B24", "source": "single product price rgb(185,139,36)" },
+      "goldPriceCard": { "value": "#B88A22", "source": "product card price rgb(184,138,34)" },
+      "goldBronze": { "value": "#A56C1E", "source": "hero eyebrow button text rgb(165,108,30)" },
+      "goldSand": { "value": "#CDA582", "source": "--e-global-color-c8c2113" },
+      "goldBorderButton": { "value": "#D5B45D", "source": "single add-to-cart border rgb(213,180,93)" },
+      "goldBorderCardButton": { "value": "#D4BF8B", "source": "card add-to-cart border rgb(212,191,139)" },
+      "goldBorderCard": { "value": "#E7D6AA", "source": "product card border rgb(231,214,170)" },
+      "alternative": { "value": "#FBBC34", "source": "--wd-alternative-color" }
+    },
+    "gradient": {
+      "reviewsStrip": { "value": "linear-gradient(105deg, oklch(0.6 0.1 78) 0%, oklch(0.78 0.1 85) 28%, oklch(0.86 0.075 90) …)", "source": "home section e6a6b92 (truncated in measurement — copy full value from Elementor CSS in Phase 3)", "needsConfirmation": true },
+      "shopByGoal": { "value": "linear-gradient(141deg, #FEFBF4 0%, rgba(255,244,219,0.86) 100%)", "source": "home section 56d0696" }
+    },
+    "surface": {
+      "white": { "value": "#FFFFFF", "source": "--wd-main-bgcolor, body background" },
+      "cream": { "value": "#FEFBF4", "source": "home sections 3aaf3e0, 5377828 rgb(254,251,244)" },
+      "creamLight": { "value": "#FEFDF9", "source": "--e-global-color-762eb97" },
+      "creamTint60": { "value": "rgba(252,245,226,0.6)", "source": "--e-global-color-52a6ca6 #FCF5E299; home nasal sprays section" },
+      "creamTint37": { "value": "rgba(252,245,226,0.37)", "source": "home 'Why education matters' section" },
+      "creamTint50": { "value": "rgba(254,250,241,0.5)", "source": "home 'Est. 2024' section" },
+      "sandTint27": { "value": "rgba(245,238,221,0.27)", "source": "home 'Trust' section" },
+      "greyTint": { "value": "rgba(242,242,242,0.7)", "source": "--e-global-color-1aa88e1 #F2F2F2B3" },
+      "dark": { "value": "#111111", "source": "home Google reviews section" },
+      "black": { "value": "#000000", "source": "blog post page-title band" },
+      "nearBlack": { "value": "#0D0D0D", "source": "--e-global-color-d6049f6" },
+      "overlay": { "value": "rgba(0,0,0,0.8)", "source": "age-gate popup overlay" }
+    },
+    "text": {
+      "body": { "value": "#767676", "source": "--wd-text-color, body color" },
+      "bodyAlt": { "value": "#7A7A7A", "source": "--e-global-color-text" },
+      "title": { "value": "#242424", "source": "--wd-title-color" },
+      "entityTitle": { "value": "#333333", "source": "--wd-entities-title-color, --wd-link-color" },
+      "linkHover": { "value": "#242424", "source": "--wd-link-color-hover" },
+      "display": { "value": "#000000", "source": "Anton H1/H2 on home" },
+      "navy": { "value": "#132F3A", "source": "single product title rgb(19,47,58)" },
+      "navyCard": { "value": "#102F3A", "source": "product card title rgb(16,47,58)" },
+      "navyButton": { "value": "#102D37", "source": "single add-to-cart text rgb(16,45,55)" },
+      "navyCardButton": { "value": "#112E39", "source": "card add-to-cart text rgb(17,46,57)" },
+      "brown": { "value": "#38291A", "source": "home stats labels rgb(56,41,26)" },
+      "ink": { "value": "#0B0B0B", "source": "home icon-box titles (Cormorant) rgb(11,11,11)" },
+      "dark1": { "value": "#202020", "source": "--e-global-color-30c7944" },
+      "dark2": { "value": "#2A2A2A", "source": "--e-global-color-667cbde" },
+      "dark3": { "value": "#383838", "source": "--e-global-color-fd7fe59" },
+      "footerHeading": { "value": "#898989", "source": "footer column heading rgb(137,137,137)" },
+      "footerLink": { "value": "#9E9D9D", "source": "footer link rgb(158,157,157)" },
+      "footerCopyright": { "value": "#9E9E9E", "source": "footer last paragraph rgb(158,158,158)" },
+      "onDark": { "value": "#FFFFFF", "source": "top bar text, reviews heading" },
+      "onDarkMuted": { "value": "rgba(255,255,255,0.8)", "source": "blog page-title band text" }
+    },
+    "border": {
+      "quantity": { "value": "#DED7CA", "source": "quantity input border rgb(222,215,202)" },
+      "form": { "value": "rgba(0,0,0,0.1)", "source": "--wd-form-brd-color" },
+      "formFocus": { "value": "rgba(0,0,0,0.15)", "source": "--wd-form-brd-color-focus" }
+    },
+    "unusedElementorDefaults": {
+      "$note": "Elementor kit defaults that appear unused on the site; do not use unless found on a page.",
+      "primary": "#6EC1E4", "secondary": "#54595F", "accent": "#61CE70"
+    }
+  },
+  "font": {
+    "family": {
+      "body": { "value": "Urbanist", "weights": [400, 500, 600, 700], "source": "--wd-text-font, --wd-title-font, --wd-header-el-font (Google Fonts)" },
+      "display": { "value": "Anton", "weights": [400], "source": "home H1/H2 (rendered at 500/600 with synthetic bold)" },
+      "label": { "value": "Inter", "weights": [300, 400, 500, 600], "source": "eyebrows, hero pill button, footer headings" },
+      "labelAlt": { "value": "Jost", "weights": [600], "source": "home stats labels" },
+      "serif": { "value": "Cormorant Garamond", "weights": [400, 600], "styles": ["normal"], "source": "home counter numbers (48px/48px, 600, #B79127) and icon-box titles such as 'The Atlas Standard' (24px/23px, 400, #0B0B0B). Corrected 2026-11-03: the gold italic accent words in headings are Anton italic, not Cormorant." },
+      "misc": { "value": "Poppins", "weights": [600], "source": "loaded on home (exact usage to map in Phase 3)", "needsConfirmation": true },
+      "icons": { "value": "woodmart-font, Font Awesome 6 Free (900)", "source": "theme icon font + Unlimited Elements" }
+    },
+    "style": {
+      "body": { "family": "Urbanist", "size": "15px", "weight": 400, "lineHeight": "1.6 (24px)", "color": "#767676" },
+      "nav": { "family": "Urbanist", "size": "14px", "weight": 700, "transform": "uppercase", "color": "#333333" },
+      "topBar": { "family": "Urbanist", "size": "14px", "weight": 400, "transform": "uppercase", "color": "#FFFFFF" },
+      "homeH1": { "family": "Anton", "size": "55px", "weight": 600, "lineHeight": "65px", "letterSpacing": "1.11px", "transform": "uppercase", "color": "#000000; second line <span> #A56C1E (goldBronze)" },
+      "homeH2": { "family": "Anton", "size": "48px", "weight": 500, "lineHeight": "47px", "letterSpacing": "1.11px" },
+      "headingAccent": { "family": "Anton", "style": "italic (browser-synthesised slant, inside <i>)", "weight": 500, "color": "#B79127 (goldAccentText)", "source": "e.g. 'Exceptional Service. *Trusted Across Bali.*', 'Experience the *Atlas Difference*'; 48px or 57px depending on the heading" },
+      "counterNumber": { "family": "Cormorant Garamond", "size": "48px", "weight": 600, "lineHeight": "48px", "color": "#B79127" },
+      "iconBoxTitle": { "family": "Cormorant Garamond", "size": "24px", "weight": 400, "lineHeight": "23px", "color": "#0B0B0B" },
+      "homeH2Dark": { "family": "Anton", "size": "40px", "lineHeight": "40px", "color": "#FFFFFF" },
+      "eyebrow": { "family": "Inter", "size": "12px", "weight": 500, "lineHeight": "25px", "letterSpacing": "2.5344px", "transform": "uppercase", "color": "#B79127" },
+      "statLabel": { "family": "Jost", "size": "11px", "weight": 600, "lineHeight": "16px", "letterSpacing": "2.42px", "transform": "uppercase", "color": "#38291A" },
+      "heroPill": { "family": "Inter", "size": "11px", "weight": 500, "letterSpacing": "2.2px", "transform": "uppercase", "color": "#A56C1E", "padding": "9px 19px", "radius": "33px" },
+      "productTitle": { "family": "Urbanist", "size": "42px", "weight": 600, "lineHeight": "48.3px", "color": "#132F3A" },
+      "productPrice": { "family": "Urbanist", "size": "29px", "weight": 600, "lineHeight": "34.8px", "color": "#B98B24" },
+      "cardTitle": { "family": "Urbanist", "size": "16px", "weight": 700, "color": "#102F3A", "note": "title limited to 2 lines (woo-opt-title-limit)" },
+      "cardPrice": { "family": "Urbanist", "size": "18px", "weight": 700, "color": "#B88A22" },
+      "cardButton": { "family": "Urbanist", "size": "12px", "weight": 600, "color": "#112E39" },
+      "singleAddToCart": { "family": "Urbanist", "size": "13px", "weight": 700, "transform": "uppercase", "color": "#102D37" },
+      "blogTitle": { "family": "Urbanist", "size": "28px", "weight": 500, "lineHeight": "39.2px", "color": "#333333" },
+      "footerHeading": { "family": "Inter", "size": "15px", "weight": 500, "color": "#898989" },
+      "footerLink": { "family": "Urbanist", "size": "15px", "weight": 400, "color": "#9E9D9D" },
+      "widgetTitle": { "family": "Urbanist", "size": "16px", "weight": 600, "transform": "uppercase", "color": "#333333" }
+    }
+  },
+  "layout": {
+    "containerWidth": { "value": "1222px", "source": "--wd-container-w (content 1192px after 15px side padding)" },
+    "blockSpacing": { "value": "20px", "source": "--wd-block-spacing" },
+    "header": {
+      "topBarHeight": { "desktop": "40px", "mobile": "43px" },
+      "mainHeight": { "desktop": "56px", "mobile": "60px", "sticky": "60px" },
+      "pill": { "maxWidth": "1100px", "marginTop": "15px", "paddingX": "22px", "radius": "35px", "background": "#FFFFFF", "shadow": "0 12px 35px rgba(0,0,0,0.12), 0 3px 10px rgba(0,0,0,0.05)" },
+      "logo": { "width": "90px", "height": "56px", "paddingY": "5px" }
+    },
+    "sectionPaddingAt1440": { "value": ["35.75px", "47.67px", "59.59px", "71.52px", "83.44px"], "note": "Multiples of about 11.9px, so a fluid unit. Copy the exact Elementor rule (em/vw/clamp) in Phase 3.", "needsConfirmation": true },
+    "homeHeroHeight": { "value": "848px", "padding": "131.1px 0", "source": "home section a71a952 at 1440" },
+    "productGrid": { "columnsDesktop": 4, "cardWidthAt1440": "286px", "imageSize": "284x284" }
+  },
+  "radius": {
+    "base": { "value": "12px", "source": "--wd-brd-radius" },
+    "form": { "value": "35px", "source": "--wd-form-brd-radius" },
+    "card": { "value": "20px", "source": "product card" },
+    "pill": { "value": "999px", "source": "add-to-cart buttons, quantity input" },
+    "popup": { "value": "22px", "source": "age-gate modal" }
+  },
+  "shadow": {
+    "header": { "value": "0 12px 35px rgba(0,0,0,0.12), 0 3px 10px rgba(0,0,0,0.05)" },
+    "card": { "value": "0 8px 25px rgba(0,0,0,0.035)" },
+    "addToCart": { "value": "0 8px 22px rgba(181,132,41,0.18)" },
+    "popup": { "value": "2px 8px 23px 3px rgba(0,0,0,0.2)" }
+  },
+  "form": {
+    "height": "42px",
+    "borderWidth": "2px",
+    "borderColor": "rgba(0,0,0,0.1)",
+    "borderColorFocus": "rgba(0,0,0,0.15)",
+    "radius": "35px",
+    "background": "transparent",
+    "focusOutline": "2px dotted"
+  },
+  "component": {
+    "productCard": { "background": "#FFFFFF", "border": "1px solid #E7D6AA", "radius": "20px", "shadow": "0 8px 25px rgba(0,0,0,0.035)", "padding": "0", "hover": "wd-hover-standard (no second image)" },
+    "cardButton": { "height": "42px", "background": "#FFFFFF", "border": "1px solid #D4BF8B", "radius": "999px" },
+    "singleAddToCart": { "height": "52px", "padding": "13px 30px", "border": "1px solid #D5B45D", "radius": "999px", "background": "transparent", "shadow": "0 8px 22px rgba(181,132,41,0.18)" },
+    "quantity": { "width": "128px", "height": "52px", "border": "1px solid #DED7CA", "radius": "999px", "background": "#FFFFFF" },
+    "pageTitleBand": { "background": "#000000", "padding": "60px 0", "textColor": "rgba(255,255,255,0.8)", "source": "blog post" }
+  },
+  "breakpoint": {
+    "elementor": { "mobile": "max 767px", "tablet": "max 1024px", "disabled": ["mobile_extra 880", "tablet_extra 1200", "laptop 1366", "widescreen 2400"] },
+    "woodmart": { "mobileHeaderBelow": "1025px", "carousel": { "sm": "0–768.98px", "md": "768.98–1024px", "lg": "1025px+" } }
+  },
+  "motion": {
+    "marquee": "continuous horizontal scroll (Woodmart wd_marquee)",
+    "paymentBadge": "4 states × 3s = 12s loop",
+    "ageGateDelay": "1s after page load",
+    "ajaxSearchDelay": "300ms",
+    "stickyAddToCartOffset": "250px",
+    "entrance": "Elementor entrance animations on scroll (exact animation names per element to be read from Elementor data in Phase 3)",
+    "buttonHover": "Elementor 'grow' hover animation used on some buttons"
+  }
+}

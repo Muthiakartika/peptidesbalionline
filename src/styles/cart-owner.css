@@ -1,0 +1,298 @@
+/*
+ * The site owner's own CSS for the cart (and the checkout's coupon box), copied WORD FOR WORD from
+ * the live site's "WPCode" snippets 11 and 10 (read 6 Nov 2026), in the live page's order (WPCode prints
+ * the highest number first; see checkout-owner.css). Do not edit them here to fix a layout problem: the
+ * theme rules they sit on top of are in src/styles/cart.css. Snippet 11 also hides the cart table's own
+ * coupon field (.wd-coupon-form): on the live site coupons are entered at checkout.
+ */
+
+/* Cart — Collapsible Affiliate/Coupon Code
+   Atlas Longevity | Snippet: 11-cart-affiliate-coupon
+   Standalone CSS. No <style> tags. Desktop and responsive styles included.
+*/
+
+.sleeks-coupon-total-row td {
+    padding-top: 16px;
+    border-bottom: 0;
+}
+
+.sleeks-coupon-box {
+    width: 100%;
+    text-align: left;
+}
+
+.sleeks-coupon-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 13px 15px;
+    color: #17333d;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: left;
+    background: #fffaf1;
+    border: 1px solid #e5d3a5;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.sleeks-coupon-toggle:hover {
+    background: #fff7e5;
+    border-color: #cfa94d;
+}
+
+.sleeks-coupon-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    color: #9b741f;
+    font-size: 18px;
+    line-height: 1;
+    font-weight: 400;
+}
+
+.sleeks-coupon-content {
+    display: none;
+    padding-top: 10px;
+}
+
+.sleeks-coupon-fields {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+}
+
+.sleeks-coupon-fields input {
+    width: 100%;
+    min-height: 42px;
+    margin: 0;
+    padding: 9px 12px;
+    color: #17333d;
+    font-size: 13px;
+    background: #ffffff;
+    border: 1px solid #ded6c4;
+    border-radius: 7px;
+    box-sizing: border-box;
+}
+
+.sleeks-coupon-fields input:focus {
+    outline: none;
+    border-color: #c79d3c;
+    box-shadow: 0 0 0 3px rgba(199, 157, 60, 0.10);
+}
+
+.sleeks-coupon-fields .sleeks-apply-coupon {
+    min-height: 42px;
+    padding: 9px 18px;
+    color: #102d37;
+    background: linear-gradient( 135deg, #bd9034, #e7c96d );
+    border: 1px solid #d3ad50;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: none;
+}
+
+.sleeks-coupon-response {
+    margin-top: 7px;
+    font-size: 12px;
+}
+
+.sleeks-coupon-response.success {
+    color: #16803c;
+}
+
+.sleeks-coupon-response.error {
+    color: #c62828;
+}
+
+@media only screen and (max-width: 500px) {
+    .sleeks-coupon-fields {
+        grid-template-columns: 1fr;
+    }
+
+    .sleeks-coupon-fields .sleeks-apply-coupon {
+        width: 100%;
+    }
+}
+
+.wd-coupon-form {
+    display: none !important;
+}
+
+/* Cart — Top-up and Add-on Products
+   Atlas Longevity | Snippet: 10-cart-top-up-products
+   Standalone CSS. No <style> tags. Desktop and responsive styles included.
+*/
+
+.sleeks-cart-topup {
+    clear: both;
+    width: 100%;
+    margin: 24px 0 10px;
+    padding: 16px;
+    border: 1px solid #e4e8ec;
+    border-radius: 14px;
+    background: #fff;
+}
+
+.sleeks-topup-header {
+    margin-bottom: 12px;
+}
+
+.sleeks-topup-header h2 {
+    margin: 0 0 3px;
+    font-size: 16px;
+    line-height: 1.3;
+    font-weight: 600;
+    color: #132f3a;
+}
+
+.sleeks-topup-header p {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.45;
+    color: #7b8790;
+}
+
+.sleeks-topup-products {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.sleeks-topup-product {
+    display: grid;
+    grid-template-columns: 42px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    padding: 9px 10px;
+    border: 1px solid #e2e7eb;
+    border-radius: 11px;
+    background: #fff;
+}
+
+.sleeks-topup-image {
+    display: block;
+    width: 42px;
+    height: 42px;
+    overflow: hidden;
+    border-radius: 6px;
+    background: #f7f7f7;
+}
+
+.sleeks-topup-image img {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    object-fit: contain;
+}
+
+.sleeks-topup-info {
+    min-width: 0;
+}
+
+.sleeks-topup-name {
+    display: block;
+    overflow: hidden;
+    margin-bottom: 2px;
+    color: #183642;
+    font-size: 12px;
+    line-height: 1.3;
+    font-weight: 500;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sleeks-topup-name:hover {
+    color: #183642;
+    text-decoration: underline;
+}
+
+.sleeks-topup-price {
+    font-size: 11px;
+    line-height: 1.3;
+    color: #7a8790;
+}
+
+.sleeks-topup-price del {
+    opacity: 0.55;
+}
+
+.sleeks-topup-price ins {
+    text-decoration: none;
+}
+
+.sleeks-topup-add.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 30px;
+    margin: 0;
+    padding: 4px 11px;
+    border: 1px solid #54ce8a;
+    border-radius: 999px;
+    background: transparent;
+    box-shadow: none;
+    color: #20a663;
+    font-size: 12px;
+    line-height: 1;
+    font-weight: 500;
+    text-transform: none;
+}
+
+.sleeks-topup-add.button:hover,
+.sleeks-topup-add.button:focus {
+    border-color: #20a663;
+    background: #20a663;
+    color: #fff;
+}
+
+.sleeks-topup-add.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.sleeks-topup-add.added {
+    border-color: #20a663;
+    background: #20a663;
+    color: #fff;
+}
+
+.sleeks-cart-topup .added_to_cart {
+    display: none !important;
+}
+
+@media (max-width: 767px) {
+    .sleeks-cart-topup {
+        padding: 14px;
+    }
+
+    .sleeks-topup-products {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 420px) {
+    .sleeks-topup-product {
+        grid-template-columns: 38px minmax(0, 1fr) auto;
+        gap: 8px;
+        padding: 8px;
+    }
+
+    .sleeks-topup-image {
+        width: 38px;
+        height: 38px;
+    }
+
+    .sleeks-topup-add.button {
+        min-height: 28px;
+        padding: 4px 9px;
+        font-size: 11px;
+    }
+}

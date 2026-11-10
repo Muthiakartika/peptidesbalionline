@@ -1,0 +1,237 @@
+/*
+ * Elementor pages copied from the live site (the homepage, the landing pages): the theme's page
+ * frame and the theme / plugin rules that their widgets need, written for this project. Every value
+ * is the live one. Imported by src/components/elementor/ElementorPage.tsx (after the Elementor CSS,
+ * like the theme). The blog's pages (main.blog-page, src/components/blog/) use the same frame and
+ * theme rules.
+ */
+
+/* Theme rules are written as ":where(.elementor-page, .blog-page) <the theme's selector>", so they weigh exactly
+ * as much as on the live site (the page's own Elementor CSS still wins where it did there). */
+
+/* ── Page frame (Woodmart): main.wd-content-layout.container > .wd-content-area > article ── */
+:is(.elementor-page, .blog-page).wd-content-layout { padding-block: 40px; }
+:is(.elementor-page, .blog-page).container { width: 100%; max-width: var(--wd-container-w, 1222px); margin-inline: auto; padding-inline: 15px; }
+
+/* Theme settings used below: rounded corners and link / product-title colours. */
+.elementor-page,
+.blog-page {
+  --wd-brd-radius: 12px;
+  --wd-link-color: #333333;
+  --wd-link-color-hover: #242424;
+  --wd-entities-title-color: #333333;
+  --wd-entities-title-color-hover: rgb(51 51 51 / 65%);
+}
+:where(.elementor-page, .blog-page) a { color: var(--wd-link-color); transition: all 0.25s ease; }
+:where(.elementor-page, .blog-page) a:hover { color: var(--wd-link-color-hover); }
+:where(.elementor-page, .blog-page) .wd-entities-title { color: var(--wd-entities-title-color); }
+:where(.elementor-page, .blog-page) .wd-fill { position: absolute; inset: 0; }
+
+/* ── The theme's base look for buttons, labels and text fields, used by the search boxes (the
+ * Elementor widget's own CSS overrides most of it). The --btn-* variables aren't set on the live
+ * site, so their fallbacks apply; the form variables are the live values. ── */
+.elementor-page,
+.blog-page {
+  --wd-title-color: #242424;
+  --wd-form-height: 42px;
+  --wd-form-brd-width: 2px;
+  --wd-form-brd-color: rgba(0, 0, 0, 0.1);
+  --wd-form-brd-radius: 35px;
+  --wd-form-bg: transparent;
+}
+:where(.elementor-page, .blog-page) :is(.btn, .button, button, [type="submit"], [type="button"]) {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-height: var(--btn-height, 42px);
+  padding: var(--btn-padding, 5px 20px);
+  border: var(--btn-brd-width, 0px) var(--btn-brd-style, solid) var(--btn-brd-color, #e9e9e9);
+  border-radius: var(--btn-brd-radius, 0px);
+  outline: none;
+  background-color: var(--btn-bgcolor, #f3f3f3);
+  box-shadow: var(--btn-box-shadow, unset);
+  color: var(--btn-color, #3e3e3e);
+  font-size: var(--btn-font-size, 13px);
+  font-weight: var(--btn-font-weight, 600);
+  line-height: 1.2;
+  text-transform: var(--btn-transform, uppercase);
+  vertical-align: middle;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+:where(.elementor-page, .blog-page) label { display: block; margin-bottom: 5px; color: var(--wd-title-color); vertical-align: middle; }
+:where(.elementor-page, .blog-page) :is(input[type="email"], input[type="date"], input[type="search"], input[type="number"], input[type="text"], input[type="tel"], input[type="url"], input[type="password"]) {
+  width: 100%;
+  max-width: 100%;
+  height: var(--wd-form-height);
+  padding: 0 15px;
+  border: var(--wd-form-brd-width) solid var(--wd-form-brd-color);
+  border-radius: var(--wd-form-brd-radius);
+  background-color: var(--wd-form-bg);
+  box-shadow: none;
+  color: var(--wd-form-color);
+  font-size: 14px;
+  vertical-align: middle;
+  appearance: none;
+  transition: border-color 0.5s;
+}
+/* From the theme's copy of normalize.css: the padding of a search field is added to its width. */
+:where(.elementor-page, .blog-page) input[type="search"] { box-sizing: content-box; appearance: textfield; }
+/* The rest of the theme's form look (Woodmart base.css), for the forms in the content: the comment
+ * form, the Elementor forms (contact, consultation, affiliate application; their widget CSS overrides
+ * most of it) and AffiliateWP's login and registration forms (fieldset, legend). */
+/* ":root" as in the theme (":root textarea", ":root select"), so these weigh as much as there. */
+:root :where(.elementor-page, .blog-page) :is(textarea, select) {
+  width: 100%;
+  max-width: 100%;
+  height: var(--wd-form-height);
+  padding: 0 15px;
+  border: var(--wd-form-brd-width) solid var(--wd-form-brd-color);
+  border-radius: var(--wd-form-brd-radius);
+  background-color: var(--wd-form-bg);
+  box-shadow: none;
+  color: var(--wd-form-color);
+  font-size: 14px;
+  vertical-align: middle;
+  appearance: none;
+  transition: border-color 0.5s ease;
+}
+:root :where(.elementor-page, .blog-page) textarea { overflow: auto; min-height: 190px; padding: 10px 15px; resize: vertical; }
+:root :where(.elementor-page, .blog-page) select {
+  padding-right: 30px;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNSIgaGVpZ2h0PSIyNSIgZmlsbD0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2U9IiNiYmIiPjxwYXRoIGQ9Ik02IDlsNiA2IDYtNiIvPjwvc3ZnPg==");
+  background-position: right 10px top 50%;
+  background-size: auto 18px;
+  background-repeat: no-repeat;
+}
+:root :where(.elementor-page, .blog-page) select option { background-color: var(--bgcolor-white); }
+:where(.elementor-page, .blog-page) :is(input[type="email"], input[type="date"], input[type="search"], input[type="number"], input[type="text"], input[type="tel"], input[type="url"], input[type="password"], textarea, select):focus {
+  border-color: rgba(0, 0, 0, 0.15);
+  outline: none;
+  transition: border-color 0.4s ease;
+}
+:where(.elementor-page, .blog-page) :is(input[type="radio"], input[type="checkbox"]) {
+  box-sizing: border-box;
+  margin-top: 0;
+  margin-inline-end: 5px;
+  padding: 0;
+  vertical-align: middle;
+  cursor: pointer;
+}
+:where(.elementor-page, .blog-page) .required { border: none; color: #e01020; font-size: 16px; line-height: 1; }
+:where(.elementor-page, .blog-page) fieldset {
+  margin-bottom: 20px;
+  padding: 20px 40px;
+  border: 2px solid var(--brdcolor-gray-300);
+  border-radius: var(--wd-brd-radius);
+}
+:where(.elementor-page, .blog-page) legend {
+  display: block;
+  margin-bottom: 20px;
+  color: var(--wd-title-color);
+  font-family: var(--font-body);
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+:where(.elementor-page, .blog-page) fieldset legend { width: auto; margin-bottom: 0; padding-inline: 15px; }
+/* The theme's rules for Elementor's form widget (int-elementor-pro.css, int-elem-base.css): the
+ * fields keep Elementor's height and small radius, and the select uses the theme's chevron (above)
+ * instead of Elementor's caret. */
+:where(.elementor-page, .blog-page) .elementor-element :is(.elementor-field-textual, .elementor-search-form__input) { height: auto; }
+:where(.elementor-page, .blog-page) .elementor-field.elementor-size-sm { border-radius: 3px; }
+:where(.elementor-page, .blog-page) .elementor-select-wrapper .select-caret-down-wrapper { display: none; }
+
+/* ── The owner's code snippet "21-lab-copy-icon" (on every live page): a code followed by a small
+ * icon that copies it (/lab-results-certificates-of-analysis/; behaviour: CopyIcon.tsx). ── */
+.copy-item { display: inline-flex; align-items: center; gap: 5px; }
+.copy-icon { font-size: 12px; color: #aaa; cursor: pointer; line-height: 1; }
+.copy-icon:hover { color: #555; }
+
+/* ── Elementor "stretched" sections: as wide as the visible page (the window minus its scrollbar),
+ * whatever the column they sit in. Elementor's script measures that width and sets it in pixels.
+ * Here CSS does it: .elementor-page-width (the wrapper around <main>) is a "container", so 100cqw
+ * is its width, i.e. the visible page. (100vw is no use: whether it includes the scrollbar depends
+ * on the browser version.) The page column is centred, so moving the section left by half the
+ * difference lines it up with the window's left edge.
+ * Woodmart's own stretched sections (.wd-section-stretch) use its 100vw formula instead, exactly as
+ * on the live site: src/styles/legacy-content.css. */
+.elementor-page-width { container-type: inline-size; }
+.elementor-page .elementor-section.elementor-section-stretched {
+  position: relative;
+  left: calc(50% - 50cqw);
+  width: 100cqw;
+  /* Elementor's script measures where the section really is, side margins included, so a stretched
+     section always ends up at the window's left edge (one homepage section has a −2% margin on
+     phones). Without side margins this formula gives the same result. */
+  margin-inline: 0 !important;
+}
+
+/* ── Woodmart responsive grids (--wd-col-lg / -md / -sm and gaps), as in the theme ── */
+:is(.elementor-page, .blog-page) [class*="wd-grid"] { --wd-col: var(--wd-col-lg); --wd-gap: var(--wd-gap-lg); --wd-col-lg: 1; --wd-gap-lg: 20px; }
+:is(.elementor-page, .blog-page) .wd-grid-g { display: grid; grid-template-columns: repeat(var(--wd-col), minmax(0, 1fr)); gap: var(--wd-gap); }
+/* An item marked "wider" (the first category on /peptide/) takes 2 columns and 2 rows. */
+:is(.elementor-page, .blog-page) .wd-grid-g > .wd-wider { grid-column: auto / span 2; grid-row: auto / span 2; }
+@media (max-width: 1024px) {
+  :is(.elementor-page, .blog-page) [class*="wd-grid"] { --wd-col: var(--wd-col-md); --wd-gap: var(--wd-gap-md); --wd-col-md: var(--wd-col-lg); --wd-gap-md: var(--wd-gap-lg); }
+}
+@media (max-width: 768.98px) {
+  :is(.elementor-page, .blog-page) [class*="wd-grid"] { --wd-col: var(--wd-col-sm); --wd-gap: var(--wd-gap-sm); --wd-col-sm: var(--wd-col-md); --wd-gap-sm: var(--wd-gap-md); }
+}
+@media (max-width: 576px) {
+  :is(.elementor-page, .blog-page) [class*="wd-grid"] { --wd-col: var(--wd-col-xs); --wd-gap: var(--wd-gap-xs); --wd-col-xs: var(--wd-col-sm); --wd-gap-xs: var(--wd-gap-sm); }
+}
+:is(.elementor-page, .blog-page) .wd-hide { display: none !important; }
+/* The theme's flex grids ("wd-grid-f-…"): columns as flex items, e.g. /my-account/'s login | register. */
+:where(.elementor-page, .blog-page) [class*="wd-grid-f"] { display: flex; flex-wrap: wrap; gap: var(--wd-gap); }
+:where(.elementor-page, .blog-page) .wd-grid-f-col { gap: 0; margin: 0 calc(var(--wd-gap) / -2) calc(var(--wd-gap) * -1); }
+:where(.elementor-page, .blog-page) .wd-grid-f-col > .wd-col {
+  flex: 0 0 calc(100% / var(--wd-col) * var(--wd-col-wider, 1));
+  width: 100%;
+  max-width: calc(100% / var(--wd-col) * var(--wd-col-wider, 1));
+  min-height: 1px;
+  margin-bottom: var(--wd-gap);
+  padding-inline: calc(var(--wd-gap) / 2);
+}
+:where(.elementor-page, .blog-page) .wd-grid-f-col > .wd-wider { --wd-col-wider: 2; }
+
+/* The theme's alignment classes on widgets (Woodmart base.css), e.g. "text-left" on a text block. */
+:where(.elementor-page, .blog-page) .text-left { --text-align: left; --content-align: flex-start; --wd-align: flex-start; text-align: var(--text-align); }
+:where(.elementor-page, .blog-page) .text-center { --text-align: center; --content-align: center; --wd-align: center; text-align: var(--text-align); }
+:where(.elementor-page, .blog-page) .text-right { --text-align: right; --content-align: flex-end; --wd-align: flex-end; text-align: var(--text-align); }
+
+/* ── Woodmart product categories (design "alt", with shadow): picture, then the name in capitals.
+ * The whole card is a link (a.wd-fill on top); on desktop the picture zooms in on hover. The
+ * widget's own radius (--wd-cat-brd-radius, e.g. 20px on /peptide/) wins over the theme's. ── */
+:where(.elementor-page, .blog-page) .wd-cat { text-align: center; }
+:where(.elementor-page, .blog-page) .wd-cat img { width: 100%; }
+:where(.elementor-page, .blog-page) .wd-cat-inner { position: relative; }
+:where(.elementor-page, .blog-page) .wd-cat-content { padding: 10px; }
+:where(.elementor-page, .blog-page) .wd-cat .wd-entities-title { margin-bottom: 0; font-size: 20px; text-transform: uppercase; }
+:where(.elementor-page, .blog-page) .category-grid-item .wd-cat-thumb { position: relative; overflow: hidden; border-radius: var(--wd-cat-brd-radius, var(--wd-brd-radius)); transform: translate3d(0, 0, 0); }
+:where(.elementor-page, .blog-page) .category-grid-item .wd-cat-image { display: block; margin: -1px; transition: transform 0.5s cubic-bezier(0, 0, 0.44, 1.18); }
+:where(.elementor-page, .blog-page) .category-grid-item:hover .wd-cat-image { transform: scale3d(1.1, 1.1, 1); }
+:where(.elementor-page, .blog-page) .category-grid-item .wd-cat-inner { border-radius: var(--wd-cat-brd-radius, var(--wd-brd-radius)); }
+:where(.elementor-page, .blog-page) .category-grid-item .wd-cat-inner > a { z-index: 5; }
+:where(.elementor-page, .blog-page) .cat-design-alt .wd-cat-thumb { max-width: var(--wd-cat-img-width); margin-inline: auto; }
+:where(.elementor-page, .blog-page) .cat-design-alt.categories-with-shadow .wd-cat-thumb { box-shadow: 1px 1px 2px rgb(0 0 0 / 0.12); }
+@media (max-width: 768.98px) {
+  :where(.elementor-page, .blog-page) .category-grid-item .wd-entities-title { font-size: 16px; }
+  :where(.elementor-page, .blog-page) .category-grid-item:hover .wd-cat-image { transform: none; }
+}
+
+/* ── Owl Carousel (Unlimited Elements "Content Carousel"): the sizes Owl's script sets in pixels,
+ * as CSS. Each item is (carousel width + gap) / items per view − gap, rounded down to whole pixels
+ * as that script does (e.g. 223px at 768px wide, 180px at 1440px); 100cqw is the carousel's width
+ * (it's a "container"). OwlCarousel.tsx sets --owl-count (items incl. copies) and --owl-position;
+ * --owl-items and --owl-gap come from the widget's responsive options. The rest (items side by
+ * side, hidden overflow) is Owl's own CSS, public/legacy/vendor/unlimited-elements-for-elementor/owl.carousel.css. */
+.elementor-page .owl-carousel { container-type: inline-size; }
+.elementor-page .owl-carousel .owl-stage {
+  --owl-item-w: round(down, (100cqw + var(--owl-gap, 0px)) / var(--owl-items, 1) - var(--owl-gap, 0px), 1px);
+  width: calc(var(--owl-count) * (var(--owl-item-w) + var(--owl-gap, 0px)));
+  transform: translate3d(calc(var(--owl-position) * -1 * (var(--owl-item-w) + var(--owl-gap, 0px)) + var(--owl-drag, 0px)), 0, 0);
+}
+.elementor-page .owl-carousel .owl-item { width: var(--owl-item-w); margin-right: var(--owl-gap, 0px); }

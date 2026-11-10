@@ -1,0 +1,57 @@
+glyph view list: \uf12a font=woodmart-font size=27px color=rgb(187, 187, 187) transform=none margin=0px weight=400
+glyph view 3: \uf12c font=woodmart-font size=27px color=rgb(187, 187, 187) transform=none margin=0px weight=400
+glyph view 4: \uf12d font=woodmart-font size=27px color=rgb(51, 51, 51) transform=none margin=0px weight=400
+glyph cat toggle: \uf129 font=woodmart-font size=10px color=rgb(187, 187, 187) transform=none margin=0px weight=400
+glyph page next: \uf113 font=woodmart-font size=12px color=rgb(36, 36, 36) transform=none margin=0px weight=600
+glyph carousel next: \uf113 font=woodmart-font size=24px color=rgb(165, 165, 165) transform=none margin=0px weight=400
+glyph carousel prev: \uf114 font=woodmart-font size=24px color=rgb(165, 165, 165) transform=none margin=0px weight=400
+glyph quick view: \uf130 font=woodmart-font size=20px color=rgb(51, 51, 51) transform=none margin=0px weight=400
+## perpage current: [903.5,483.4,27,24] color:rgb(51, 51, 51); font-weight:600; text-decoration-line:none
+## perpage other: [876.3,483.4,21.9,24] color:rgb(118, 118, 118); font-weight:400
+## view current: [1084.4,481.4,22.8,28] color:rgb(51, 51, 51)
+## order select bg: [1127.2,480.4,189,30] background-position:100% 50%; background-size:auto 18px; background-repeat:no-repeat; appearance:none; border-radius:0px; font-family:Urbanist, Arial, Helvetica, sans-serif; font-size:15px; width:189px; min-width:0px; max-width:100%
+## grid 4col: [463,540.4,897,1908.1] grid-template-columns:209.234px 209.25px 209.25px 209.25px; gap:20px
+## card 4col title: [481,791.7,173.2,108] font-size:16px; line-height:21.6px
+## pagination prev?: missing
+pagination text p1 per_page=12: 1 2 3 4 … 14 15 16 → https://peptidesbali.online/shop/page/2/?per_page=12&shop_view=grid&per_row=4 https://peptidesbali.online/shop/page/3/?per_page=12&shop_view=grid&per_row=4 https://peptidesbali.online/shop/page/4/?per_page=12&shop_view=grid&per_row=4 https://peptidesbali.online/shop/page/14/?per_page=12&shop_view=grid&per_row=4 https://peptidesbali.online/shop/page/15/?per_page=12&shop_view=grid&per_row=4 https://peptidesbali.online/shop/page/16/?per_page=12&shop_view=grid&per_row=4 https://peptidesbali.online/shop/page/2/?per_page=12&shop_view=grid&per_row=4
+pagination p5:  <ul class="page-numbers"> <li><a class="prev page-numbers" href="https://peptidesbali.online/shop/page/4/">←</a></li> <li><a aria-label="Page 1" class="page-numbers" href="https://peptidesbali.online/shop/">1</a></li> <li><a aria-label="Page 2" class="page-numbers" href="https://peptidesbali.online/shop/page/2/">2</a></li> <li><a aria-label="Page 3" class="page-numbers" href="https://peptidesbali.online/shop/page/3/">3</a></li> <li><a aria-label="Page 4" class="page-numbers" href="https://peptidesbali.online/shop/page/4/">4</a></li> <li><span aria-label="Page 5" aria-current="page" class="page-numbers current">5</span></li> <li><a aria-label="Page 6" class="page-numbers" href="https://peptidesbali.online/shop/page/6/">6</a></li> <li><a aria-label="Page 7" class="page-numbers" href="https://peptidesbali.online/shop/page/7/">7</a></li> <li><a aria-label="Page 8" class="page-numbers" href="https://peptidesbali.online/shop/page/8/">8</a></li> <li><a aria-label="Page 9" class="page-numbers" href="https://peptidesbali.online/shop/page/9/">9</a></li> <li><a class="next page-numbers" href="https://peptidesbali.online/shop/page/6/">→</a></li> </ul> 
+glyph page prev: \uf114 font=woodmart-font size=12px color=rgb(36, 36, 36) transform=none margin=0px weight=600
+## current li: [129.1,913.8,256.5,37] color:rgb(118, 118, 118); font-weight:400; background-color:rgba(0, 0, 0, 0); border-color:rgb(118, 118, 118); padding:0px; margin:0px; display:flex; transform:none; line-height:21px; font-size:15px
+## current a: [129.1,913.8,221.5,37] color:rgb(51, 51, 51); font-weight:600; background-color:rgba(0, 0, 0, 0); border-color:rgb(51, 51, 51); padding:8px 5px 8px 0px; margin:0px; display:block; transform:none; line-height:21px; font-size:15px
+## current count: [355.6,921.8,30,20] color:rgb(255, 255, 255); font-weight:400; background-color:rgb(184, 149, 42); border-color:rgb(184, 149, 42); padding:0px 5px; margin:8px 0px 0px 5px; display:block; transform:none; line-height:18px; font-size:12px
+## parent a: [114.1,802.8,236.5,37] color:rgb(118, 118, 118); font-weight:400; background-color:rgba(0, 0, 0, 0); border-color:rgb(118, 118, 118); padding:8px 5px 8px 0px; margin:0px; display:block; transform:none; line-height:21px; font-size:15px
+## parent count: [355.6,810.8,30,20] color:rgb(118, 118, 118); font-weight:400; background-color:rgba(0, 0, 0, 0); border-color:rgba(0, 0, 0, 0.106); padding:0px 5px; margin:8px 0px 0px 5px; display:block; transform:none; line-height:18px; font-size:12px
+## parent children: [114.1,839.8,271.5,407] color:rgb(118, 118, 118); font-weight:400; background-color:rgba(0, 0, 0, 0); border-color:rgb(118, 118, 118); padding:0px 0px 0px 15px; margin:0px; display:block; transform:none; line-height:21px; font-size:15px
+## parent toggle: [388.6,809.8,22,22] color:rgb(118, 118, 118); font-weight:400; background-color:rgb(241, 241, 241); border-color:rgb(118, 118, 118); padding:0px; margin:0px; display:block; transform:matrix(-1, 0, 0, -1, 0, 0); line-height:22px; font-size:10px
+## child li: [129.1,839.8,256.5,37] color:rgb(118, 118, 118); font-weight:400; background-color:rgba(0, 0, 0, 0); border-color:rgb(118, 118, 118); padding:0px; margin:0px; display:flex; transform:none; line-height:21px; font-size:15px
+## child a: [129.1,839.8,221.5,37] color:rgb(118, 118, 118); font-weight:400; background-color:rgba(0, 0, 0, 0); border-color:rgb(118, 118, 118); padding:8px 5px 8px 0px; margin:0px; display:block; transform:none; line-height:21px; font-size:15px
+## child count: [355.6,847.8,30,20] color:rgb(118, 118, 118); font-weight:400; background-color:rgba(0, 0, 0, 0); border-color:rgba(0, 0, 0, 0.106); padding:0px 5px; margin:8px 0px 0px 5px; display:block; transform:none; line-height:18px; font-size:12px
+glyph toggle open: \uf129 font=woodmart-font size=10px color=rgb(118, 118, 118) transform=none margin=0px weight=400
+## toggle open cls: [388.6,809.8,22,22] transform:matrix(-1, 0, 0, -1, 0, 0); color:rgb(118, 118, 118); background-color:rgb(241, 241, 241)
+toggle classes: wd-cats-toggle toggle-active wd-role-btn
+h1: 184.421875x144 Healing & Recovery
+result: Showing all 11 results
+glyph sort icon: \u6e\u6f\u6e\u65 font=Urbanist, Arial, Helvetica, sans-serif size=15px color=rgb(118, 118, 118) transform=none margin=0px weight=400
+glyph sort icon form after: \uf119 font=woodmart-font size=18px color=rgb(36, 36, 36) transform=none margin=0px weight=400
+glyph burger: \uf15a font=woodmart-font size=18px color=rgb(51, 51, 51) transform=none margin=0px 5.4px 0px 0px weight=400
+## offcanvas btn a: [27.4,466.8,115.4,18] font-size:15px; font-weight:600; line-height:15px; color:rgb(51, 51, 51); display:flex; gap:normal; align-items:center; padding:0px; text-transform:none
+## offcanvas btn a before: [27.4,466.8,115.4,18] font-size:18px; width:18px; height:18px; margin:0px 5.4px 0px 0px; content:""; font-family:woodmart-font
+## carousel prev disabled: [-18,314.3,40,40] opacity:1; color:rgb(118, 118, 118); pointer-events:auto; visibility:visible
+## carousel next: [368,314.3,40,40] opacity:1; color:rgb(118, 118, 118); pointer-events:auto
+offcanvas DOM: elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-958640d wd-col-offcanvas-sm wd-alignment-left wd-side-hidden wd-inited wd-left wd-scroll wd-opened | <div class="wd-heading"><div class="close-side-widget wd-action-btn wd-style-text wd-cross-icon"><a href="#" rel="nofollow">Close</a></div></div> <div class="elementor-widget-wrap elementor-element-populated wd-scroll-content"> <div class="elementor-element elementor-element-1c77d26 elementor-widget elementor-widget-wd_sidebar" data-id="1c77d26" data-element_type="widget" data-e-type="widget" data-settings="{&quot;sticky&quot;:&quot;top&quot;,&quot;sticky_on&quot;:[&quot;desktop&quot;],&quot;sticky_parent&quot;:&quot;yes&quot;,&quot;sticky_offset&quot;:0,&quot;sticky_effects_offset&quot;:0,&quot;sticky_anchor_link_offset&quot;:0}" data-widget_type="wd_sidebar.default"> <div class="elementor-widget-container"> <div id="woocommerce_product_categories-2" class="wd-widget widget sidebar-widget woocommerce widget_product_categories"><h5 class="widget-title">Product categories</h5>…
+## offcanvas col open: [0,0,300,900] transform:none; box-shadow:none; width:300px; z-index:500; transition:transform 0.5s cubic-bezier(0.19, 1, 0.22, 1); top:0.001px; left:0px; height:900px; padding:0px
+overlay: wd-close-side wd-fill wd-close-side-opened bg=rgba(0, 0, 0, 0.7) z=400 opacity=1
+## 900 hover-img: [0,0,0,0] display:none
+## 900 grid: [273.3,558.5,616.7,4172.2] grid-template-columns:192.219px 192.219px 192.219px; gap:20px
+## 900 side col: [10,428.5,250.7,4366.2] position:relative; transform:none; width:250.734px
+## 900 offcanvas btn: [283.3,501.5,115.4,24] display:block
+## 1024 hover-img: [0,0,0,0] display:none
+## 1024 qv: [520.6,580.6,0,0] display:flex; opacity:1; visibility:visible; width:0px; height:0px
+## 1024 grid: [310.4,569.6,703.6,4320.6] grid-template-columns:221.188px 221.188px 221.188px; gap:20px
+## 1025 hover-img: [553.1,577.9,219.4,219.4] display:flex
+## 1025 qv: [491.1,587.9,50,45] display:flex; opacity:0; visibility:hidden; width:50px; height:45px
+## 767 side col: [-300,0,300,900] position:fixed; transform:matrix(1, 0, 0, 1, -300, 0); width:300px
+## 767 card title: [37.9,902.4,327.6,37.8] font-size:14px
+## 767 grid: [24.9,509.2,717.1,7031.4] grid-template-columns:353.562px 353.562px; gap:10px
+## 769 grid: [234.1,564.8,524.9,4278.8] grid-template-columns:161.625px 161.625px 161.625px; gap:20px
+## 769 card title: [252.1,768.5,125.6,129.6] font-size:16px

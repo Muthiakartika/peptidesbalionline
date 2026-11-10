@@ -1,0 +1,115 @@
+/*
+ * "Click to enlarge" on product pages: PhotoSwipe 4 with its default skin, as the live theme uses it
+ * (Woodmart's lib-photoswipe.css). Same class names, sizes, colours and timings, so it looks the same.
+ * PhotoSwipe is MIT licensed (Dmitry Semenov); its icon sprite is in public/legacy/photoswipe/
+ * together with the licence. The behaviour is rebuilt in src/components/product/PhotoSwipe.tsx.
+ */
+.pswp {
+  position: fixed;
+  inset: 0;
+  z-index: 1500;
+  display: none;
+  overflow: hidden;
+  outline: none;
+  -webkit-text-size-adjust: 100%;
+  touch-action: none;
+  backface-visibility: hidden;
+}
+.pswp img { max-width: none; }
+.pswp--open { display: block; }
+.pswp__bg,
+.pswp__scroll-wrap,
+.pswp__share-modal { position: absolute; inset: 0; }
+.pswp__bg { background: #000000; opacity: 0; transition: opacity 333ms cubic-bezier(0.4, 0, 0.22, 1); will-change: opacity; }
+.pswp--visible .pswp__bg { opacity: 1; }
+.pswp__scroll-wrap { overflow: hidden; }
+.pswp__container,
+.pswp__zoom-wrap { position: absolute; inset: 0; touch-action: none; backface-visibility: hidden; }
+.pswp__container,
+.pswp__img { -webkit-tap-highlight-color: transparent; user-select: none; -webkit-touch-callout: none; }
+.pswp__zoom-wrap { width: 100%; transform-origin: left top; transition: transform 333ms cubic-bezier(0.4, 0, 0.22, 1); }
+.pswp--dragging .pswp__zoom-wrap { transition: none; }
+.pswp__item { position: absolute; inset: 0; overflow: hidden; opacity: 0; transition: opacity 333ms cubic-bezier(0.4, 0, 0.22, 1); }
+.pswp--visible .pswp__item { opacity: 1; }
+.pswp__img { position: absolute; top: 0; left: 0; width: auto; height: auto; border-radius: var(--wd-brd-radius, 0.001px); }
+.pswp--zoom-allowed .pswp__img { cursor: zoom-in; }
+.pswp--zoomed-in .pswp__img { cursor: grab; }
+.pswp--dragging .pswp__img { cursor: grabbing; }
+
+/* Buttons (sprite of the default skin) */
+.pswp__button {
+  position: relative;
+  float: right;
+  width: 44px;
+  height: 44px;
+  min-height: unset;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  opacity: 0.75;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  appearance: none;
+}
+.pswp__button:hover { background-color: unset; opacity: 1; }
+.pswp__button,
+[class*="pswp__button--arrow--"]::before { background: url("/legacy/photoswipe/default-skin.png") 0 0 no-repeat; background-size: 264px 88px; }
+@media (-webkit-min-device-pixel-ratio: 1.1), (min-resolution: 105dpi), (min-resolution: 1.1dppx) {
+  .pswp--svg .pswp__button,
+  .pswp--svg [class*="pswp__button--arrow--"]::before { background-image: url("/legacy/photoswipe/default-skin.svg"); }
+  .pswp--svg [class*="pswp__button--arrow--"] { background: none; }
+}
+.pswp__button--close { background-position: 0 -44px; }
+.pswp__button--share { background-position: -44px -44px; }
+.pswp__button--fs { display: none; }
+.pswp--supports-fs .pswp__button--fs { display: block; }
+.pswp--fs .pswp__button--fs { background-position: -44px 0; }
+.pswp__button--zoom { display: none; background-position: -88px 0; }
+.pswp--zoom-allowed .pswp__button--zoom { display: block; }
+.pswp--zoomed-in .pswp__button--zoom { background-position: -132px 0; }
+[class*="pswp__button--arrow--"] { position: absolute; top: 50%; width: 70px; height: 100px; margin-top: -50px; background: none; }
+[class*="pswp__button--arrow--"]::before { content: ""; position: absolute; top: 35px; width: 32px; height: 30px; background-color: rgb(0 0 0 / 0.3); }
+.pswp__button--arrow--left { left: 0; }
+.pswp__button--arrow--left::before { left: 6px; background-position: -138px -44px; }
+.pswp__button--arrow--right { right: 0; }
+.pswp__button--arrow--right::before { right: 6px; background-position: -94px -44px; }
+
+/* Share menu */
+.pswp__counter,
+.pswp__share-modal { user-select: none; }
+.pswp__share-modal { z-index: 1600; padding: 10px; background: rgb(0 0 0 / 0.5); opacity: 0; transition: opacity 0.25s ease-out; backface-visibility: hidden; }
+.pswp__share-modal--hidden { display: none; }
+.pswp__share-tooltip {
+  position: absolute;
+  top: 56px;
+  right: 44px;
+  z-index: 1620;
+  border-radius: var(--wd-brd-radius, 0.001px);
+  background: #ffffff;
+  transform: translateY(6px);
+  transition: transform 0.25s;
+  backface-visibility: hidden;
+}
+.pswp__share-tooltip a { display: block; padding: 8px 12px; color: #000000; font-size: 14px; line-height: 18px; text-decoration: none; }
+.pswp__share-tooltip a:hover { color: #ffffff; }
+.pswp__share-tooltip::before { content: ""; position: absolute; top: -12px; right: 15px; display: block; border: 6px solid transparent; border-bottom-color: #ffffff; }
+.pswp__share-modal--fade-in { opacity: 1; }
+.pswp__share-modal--fade-in .pswp__share-tooltip { transform: none; }
+.pswp__share--facebook:hover { background: #365493; }
+.pswp__share--twitter:hover { background: #000000; }
+.pswp__share--pinterest:hover { background: #ce272d; }
+.pswp__share--download:hover { background: var(--color-gold, #b8952a); }
+
+/* Top bar, counter */
+.pswp__counter { position: absolute; top: 0; left: 0; height: 44px; padding: 0 10px; color: #ffffff; font-size: 13px; line-height: 44px; opacity: 0.75; }
+.pswp__ui { z-index: 1550; visibility: visible; opacity: 1; -webkit-font-smoothing: auto; }
+.pswp__top-bar { position: absolute; top: 0; left: 0; width: 100%; height: 44px; background-color: rgb(0 0 0 / 0.5); transition: opacity 333ms cubic-bezier(0.4, 0, 0.22, 1); }
+/* Screens wider than 1200px: lighter bar ("fit" controls). */
+.pswp__ui--fit .pswp__top-bar { background-color: rgb(0 0 0 / 0.3); }
+[class*="pswp__button--arrow--"] { transition: opacity 333ms cubic-bezier(0.4, 0, 0.22, 1); }
+/* A tap on a touch screen hides the controls; the next tap brings them back. */
+.pswp__ui--hidden :is(.pswp__top-bar, [class*="pswp__button--arrow--"]) { opacity: 0.001; }
+.pswp__ui--one-slide :is([class*="pswp__button--arrow--"], .pswp__counter) { display: none; }
+/* Touch screens: no arrows, swipe instead. */
+.pswp--touch [class*="pswp__button--arrow--"] { visibility: hidden; }

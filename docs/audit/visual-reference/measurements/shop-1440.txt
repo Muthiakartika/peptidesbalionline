@@ -1,0 +1,256 @@
+## main (1) rect=109,112,1222,4979.8 "Shop / Home / Shop / Peptide Vials / Peptide Pens / Peptide Nasal Spra"
+   padding:40px 15px; margin:0px 109px; max-width:1222px
+## band section (1) rect=0,152,1440,252.7 "Shop / Home / Shop / Peptide Vials / Peptide Pens / Peptide Nasal Spra"
+   position:relative; background-color:rgb(243, 243, 243); padding:35.75px 0px; transition:background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s; top:0px; right:124px; bottom:0px; left:-124px
+## band container (1) rect=70,187.8,1300,181.2 "Shop / Home / Shop / Peptide Vials / Peptide Pens / Peptide Nasal Spra"
+   display:flex; position:relative; margin:0px 70px; max-width:1300px; top:0px; right:0px; bottom:0px; left:0px
+## band col (1) rect=70,187.8,1300,181.2 "Shop / Home / Shop / Peptide Vials / Peptide Pens / Peptide Nasal Spra"
+   display:flex; position:relative; padding:10px; top:0px; right:0px; bottom:0px; left:0px
+## inner section (1) rect=80,197.8,1280,161.2 "Shop / Home / Shop / Peptide Vials / Peptide Pens / Peptide Nasal Spra"
+   position:relative; top:0px; right:0px; bottom:0px; left:0px
+## col left (1) rect=70,197.8,204.4,161.2 "Shop / Home / Shop"
+   display:flex; position:relative; min-height:1px; top:0px; right:0px; bottom:0px; left:0px
+## col left wrap (1) rect=70,197.8,204.4,161.2 "Shop / Home / Shop"
+   display:flex; position:relative; padding:10px; align-items:center; top:0px; right:0px; bottom:0px; left:0px
+## col right (1) rect=274.4,197.8,1095.6,161.2 "Peptide Vials / Peptide Pens / Peptide Nasal Sprays / Bundles / Pept"
+   display:flex; position:relative; min-height:1px; top:0px; right:0px; bottom:0px; left:0px
+## h1 widget (1) rect=80,233.3,184.4,48 "Shop"
+   position:relative; margin:0px 0px 18px; transition:background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s, transform 0.4s; top:0px; right:0px; bottom:0px; left:0px
+## h1 (1) rect=80,233.3,184.4,48 "Shop"
+   font-family:"Cormorant Garamond", sans-serif; font-size:48px; font-weight:600; line-height:48px; color:rgb(0, 0, 0)
+## bc widget (1) rect=80,299.3,184.4,24 "Home / Shop"
+   position:relative; text-align:left; top:0px; right:0px; bottom:0px; left:0px
+## bc nav (1) rect=80,299.3,95.5,24 "Home / Shop"
+   display:inline-flex; align-items:center
+## bc link (1) rect=80,299.3,39.3,24 "Home"
+   transition:0.25s; cursor:pointer
+## bc delim (1) rect=127.3,299.3,5.3,24 ""
+   margin:0px 8px
+## bc delim after (1) rect=127.3,299.3,5.3,24 ""
+   display:inline; font-family:Urbanist, Arial, Helvetica, sans-serif; font-size:15px; font-weight:400; font-style:normal; line-height:24px; letter-spacing:normal; text-transform:none; text-align:left; color:rgb(118, 118, 118); white-space:normal; cursor:auto; width:auto; height:auto; content:"/"
+## bc last (1) rect=140.5,299.3,34.9,24 "Shop"
+   font-weight:600; color:rgb(36, 36, 36)
+## cats widget (1) rect=284.4,207.8,1075.6,141.2 "Peptide Vials / Peptide Pens / Peptide Nasal Sprays / Bundles / Pept"
+   position:relative; top:0px; right:0px; bottom:0px; left:0px
+## carousel (1) rect=274.4,192.8,1095.6,171.2 "Peptide Vials / Peptide Pens / Peptide Nasal Sprays / Bundles / Pept"
+   position:relative; padding:15px 0px; margin:0px -10px; overflow:clip; top:0px; right:0px; bottom:0px; left:0px
+## carousel item (6) rect=274.4,207.8,182.6,141.2 "Peptide Vials"
+   position:relative; padding:0px 10px; transform:matrix(1, 0, 0, 1, 0, 0); max-width:16.6667%; transition:transform; top:0px; right:0px; bottom:0px; left:0px
+## cat item 2 (6) rect=457,207.8,182.6,141.2 "Peptide Pens"
+   position:relative; padding:0px 10px; transform:matrix(1, 0, 0, 1, 0, 0); max-width:16.6667%; transition:transform; top:0px; right:0px; bottom:0px; left:0px
+## cat inner (6) rect=284.4,207.8,162.6,141.2 "Peptide Vials"
+   position:relative; border-radius:300px; top:0px; right:0px; bottom:0px; left:0px
+## cat thumb (6) rect=314.2,207.8,103,103 ""
+   position:relative; border-radius:300px; margin:0px 29.7969px; transform:matrix(1, 0, 0, 1, 0, 0); overflow:hidden; max-width:103px; top:0px; right:0px; bottom:0px; left:0px
+## cat img link (6) rect=313.2,206.8,105,105 ""
+   color:rgb(51, 51, 51); margin:-1px; transition:transform 0.5s cubic-bezier(0, 0, 0.44, 1.18); cursor:pointer
+## cat img (6) rect=313.2,206.8,105,105 ""
+   display:inline; overflow:clip; max-width:100%; aspect-ratio:auto 100 / 100
+## cat content (6) rect=284.4,310.8,162.6,38.2 "Peptide Vials"
+   padding:10px
+## cat title (6) rect=294.4,320.8,142.6,18.2 "Peptide Vials"
+   font-size:13px; font-weight:600; line-height:18.2px; text-transform:capitalize; color:rgb(51, 51, 51)
+## arrows (1) rect=284.4,363.9,1075.6,0 ""
+   
+## arrow prev (1) rect=204.4,253.3,50,50 ""
+   position:absolute; opacity:0; transform:matrix(1, 0, 0, 1, -30, 0); z-index:250; transition:0.25s; top:60.5938px; right:1075.56px; bottom:60.5938px; left:-50px
+## arrow next (1) rect=1390,253.3,50,50 ""
+   position:absolute; opacity:0; transform:matrix(1, 0, 0, 1, 30, 0); z-index:250; transition:0.25s; top:60.5938px; right:-50px; bottom:60.5938px; left:1075.56px
+## arrow inner (1) rect=1390,253.3,50,50 ""
+   display:inline-flex; line-height:15px; color:rgb(165, 165, 165); justify-content:center; align-items:center; transition:0.25s
+## arrow inner after (1) rect=1390,253.3,50,50 ""
+   font-family:woodmart-font; font-size:24px; font-weight:400; font-style:normal; line-height:24px; letter-spacing:normal; text-transform:none; text-align:start; color:rgb(165, 165, 165); white-space:normal; cursor:auto; width:12.75px; height:24px; content:""
+## sec2 (1) rect=0,404.7,1440,4647.1 "PRODUCT CATEGORIES / Bundles / 5 / Other / 30 / Peptide Nasal Sprays / 1"
+   position:relative; padding:35.75px 0px 0px; top:0px; right:124px; bottom:0px; left:-124px
+## sec2 container (1) rect=70,440.4,1300,4611.3 "PRODUCT CATEGORIES / Bundles / 5 / Other / 30 / Peptide Nasal Sprays / 1"
+   display:flex; position:relative; margin:0px 70px; max-width:1300px; top:0px; right:0px; bottom:0px; left:0px
+## sec2 col (1) rect=70,440.4,1300,4611.3 "PRODUCT CATEGORIES / Bundles / 5 / Other / 30 / Peptide Nasal Sprays / 1"
+   display:flex; position:relative; padding:10px; top:0px; right:0px; bottom:0px; left:0px
+## inner2 (1) rect=80,450.4,1280,4591.3 "PRODUCT CATEGORIES / Bundles / 5 / Other / 30 / Peptide Nasal Sprays / 1"
+   position:relative; top:0px; right:0px; bottom:0px; left:0px
+## side col (1) rect=80,450.4,364.7,4591.3 "PRODUCT CATEGORIES / Bundles / 5 / Other / 30 / Peptide Nasal Sprays / 1"
+   display:flex; position:relative; min-height:1px; top:0px; right:0px; bottom:0px; left:0px
+## side col wrap (1) rect=80,468.7,364.7,4573.1 "PRODUCT CATEGORIES / Bundles / 5 / Other / 30 / Peptide Nasal Sprays / 1"
+   display:flex; position:relative; padding:10px; margin:18.2344px 0px 0px; top:0px; right:0px; bottom:0px; left:0px
+## side widget (1) rect=90,478.7,344.7,322.2 "PRODUCT CATEGORIES / Bundles / 5 / Other / 30 / Peptide Nasal Sprays / 1"
+   position:relative; top:0px; right:0px; bottom:0px; left:0px
+## side widget container (1) rect=90,478.7,344.7,322.2 "PRODUCT CATEGORIES / Bundles / 5 / Other / 30 / Peptide Nasal Sprays / 1"
+   background-color:rgb(246, 246, 246); border-radius:19px; padding:37.9062px 24.125px; transition:background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s, transform 0.4s
+## widget (1) rect=114.1,516.6,296.5,254.4 "PRODUCT CATEGORIES / Bundles / 5 / Other / 30 / Peptide Nasal Sprays / 1"
+   line-height:21px
+## widget title (1) rect=114.1,516.6,296.5,22.4 "PRODUCT CATEGORIES"
+   font-size:16px; font-weight:600; line-height:22.4px; text-transform:uppercase; color:rgb(51, 51, 51); margin:0px 0px 10px
+## cat list (1) rect=114.1,549,296.5,222 "Bundles / 5 / Other / 30 / Peptide Nasal Sprays / 17 / Peptide Pens / 51 / P"
+   padding:0px 25px 0px 0px; margin:0px 0px -8px
+## cat li (6) rect=114.1,549,271.5,37 "Bundles / 5"
+   display:flex; position:relative; align-items:flex-start; top:0px; right:0px; bottom:0px; left:0px
+## cat li 4 (6) rect=114.1,660,271.5,37 "Peptide Pens / 51"
+   display:flex; position:relative; align-items:flex-start; top:0px; right:0px; bottom:0px; left:0px
+## cat a (6) rect=114.1,549,236.5,37 "Bundles"
+   padding:8px 5px 8px 0px; align-items:baseline; transition:0.25s; cursor:pointer
+## cat count (6) rect=355.6,557,30,20 "5"
+   font-size:12px; line-height:18px; text-align:center; border-top:1px solid rgba(0, 0, 0, 0.106); border-right:1px solid rgba(0, 0, 0, 0.106); border-bottom:1px solid rgba(0, 0, 0, 0.106); border-left:1px solid rgba(0, 0, 0, 0.106); border-radius:35px; padding:0px 5px; margin:8px 0px 0px 5px; transition:color 0.25s, background-color 0.25s, border-color 0.25s
+## cat toggle (3) rect=388.6,667,22,22 ""
+   position:absolute; font-size:10px; line-height:22px; text-align:center; color:rgb(187, 187, 187); border-radius:50%; transition:0.25s; cursor:pointer; top:7px; right:-25px; bottom:8px; left:274.453px
+## cat toggle after (3) rect=388.6,667,22,22 ""
+   display:inline; font-family:woodmart-font; font-size:10px; font-weight:400; font-style:normal; line-height:22px; letter-spacing:normal; text-transform:none; text-align:center; color:rgb(187, 187, 187); white-space:normal; cursor:pointer; width:auto; height:auto; content:""
+## children (3) rect=0,0,0,0 "Atlas Longevity 43"
+   display:none; padding:0px 0px 0px 15px
+## main col (1) rect=444.7,450.4,915.3,4591.3 "Showing 1–21 of 182 results /  / Show  / 9 / 12 / 18 / 24 / Sort by popula"
+   display:flex; position:relative; min-height:1px; top:0px; right:0px; bottom:0px; left:0px
+## main col wrap (1) rect=444.7,450.4,915.3,4591.3 "Showing 1–21 of 182 results /  / Show  / 9 / 12 / 18 / 24 / Sort by popula"
+   display:flex; position:relative; padding:0px 0px 0px 18.2969px; top:0px; right:0px; bottom:0px; left:0px
+## toolbar (1) rect=463,450.4,897,90 "Showing 1–21 of 182 results /  / Show  / 9 / 12 / 18 / 24 / Sort by popula"
+   display:flex; position:relative; background-color:rgb(255, 255, 255); padding:20px 0px; gap:20px; align-items:center; transition:background 0.3s, border 0.3s, box-shadow 0.3s, transform 0.4s; top:0px; right:0px; bottom:0px; left:0px
+## toolbar left (1) rect=463,473.4,260.1,44 "Showing 1–21 of 182 results"
+   display:flex; position:relative; padding:10px; gap:20px; flex-direction:column; transition:background 0.3s, border 0.3s, box-shadow 0.3s, transform 0.4s; top:0px; right:0px; bottom:0px; left:0px
+## result count w (1) rect=473,483.4,240.1,24 "Showing 1–21 of 182 results"
+   position:relative; gap:20px; max-width:100%; top:0px; right:0px; bottom:0px; left:0px
+## result count (1) rect=473,483.4,240.1,24 "Showing 1–21 of 182 results"
+   
+## toolbar right (1) rect=743.1,470.4,583,50 "Show  / 9 / 12 / 18 / 24 / Sort by popularity / Sort by latest / Sort by p"
+   display:flex; position:relative; padding:10px; gap:20px; justify-content:flex-end; align-items:center; transition:background 0.3s, border 0.3s, box-shadow 0.3s, transform 0.4s; top:0px; right:0px; bottom:0px; left:0px
+## offcanvas btn w (1) rect=0,0,0,0 "Show sidebar"
+   display:none; position:relative; gap:20px; max-width:100%
+## perpage w (1) rect=832.4,483.4,164.4,24 "Show  / 9 / 12 / 18 / 24"
+   position:relative; gap:20px; max-width:100%; top:0px; right:0px; bottom:0px; left:0px
+## perpage (1) rect=832.4,483.4,164.4,24 "Show  / 9 / 12 / 18 / 24"
+   display:inline-flex; align-items:center
+## perpage label (1) rect=832.4,483.4,44.7,24 "Show"
+   font-weight:600; color:rgb(51, 51, 51)
+## perpage label after (1) rect=832.4,483.4,44.7,24 "Show"
+   display:inline; font-family:Urbanist, Arial, Helvetica, sans-serif; font-size:15px; font-weight:600; font-style:normal; line-height:24px; letter-spacing:normal; text-transform:none; text-align:start; color:rgb(51, 51, 51); white-space:normal; cursor:auto; width:auto; height:auto; content:":"
+## perpage a (4) rect=877.1,483.4,21.9,24 "9"
+   padding:0px 7px; transition:0.25s; cursor:pointer
+## perpage border (4) rect=899,483.4,5.3,24 ""
+   
+## perpage border after (4) rect=899,483.4,5.3,24 ""
+   display:inline; font-family:Urbanist, Arial, Helvetica, sans-serif; font-size:15px; font-weight:400; font-style:normal; line-height:24px; letter-spacing:normal; text-transform:none; text-align:start; color:rgb(118, 118, 118); white-space:normal; cursor:auto; width:auto; height:auto; content:"/"
+## view w (1) rect=1016.9,481.4,90.3,28 ""
+   position:relative; line-height:15px; gap:20px; max-width:100%; top:0px; right:0px; bottom:0px; left:0px
+## view (1) rect=1016.9,481.4,90.3,28 ""
+   display:inline-flex; gap:10px 13.5px; align-items:center
+## view a (3) rect=1016.9,481.4,20.3,28 ""
+   color:rgb(187, 187, 187); transition:0.25s; cursor:pointer
+## view a before (3) rect=1016.9,481.4,20.3,28 ""
+   display:inline; font-family:woodmart-font; font-size:27px; font-weight:400; font-style:normal; line-height:27px; letter-spacing:normal; text-transform:none; text-align:start; color:rgb(187, 187, 187); white-space:normal; cursor:pointer; width:auto; height:auto; content:""
+## view a3 (3) rect=1050.6,481.4,20.3,28 ""
+   color:rgb(187, 187, 187); transition:0.25s; cursor:pointer
+## view a3 before (3) rect=1050.6,481.4,20.3,28 ""
+   display:inline; font-family:woodmart-font; font-size:27px; font-weight:400; font-style:normal; line-height:27px; letter-spacing:normal; text-transform:none; text-align:start; color:rgb(187, 187, 187); white-space:normal; cursor:pointer; width:auto; height:auto; content:""
+## view a4 before (3) rect=1084.4,481.4,22.8,28 ""
+   display:inline; font-family:woodmart-font; font-size:27px; font-weight:400; font-style:normal; line-height:27px; letter-spacing:normal; text-transform:none; text-align:start; color:rgb(187, 187, 187); white-space:normal; cursor:pointer; width:auto; height:auto; content:""
+## order w (1) rect=1127.2,480.4,189,30 "Sort by popularity / Sort by latest / Sort by price: low to high"
+   position:relative; gap:20px; max-width:100%; top:0px; right:0px; bottom:0px; left:0px
+## order form (1) rect=1127.2,480.4,189,30 "Sort by popularity / Sort by latest / Sort by price: low to high"
+   
+## order select (1) rect=1127.2,480.4,189,30 "Sort by popularity / Sort by latest / Sort by price: low to high"
+   display:inline-block; font-weight:600; line-height:18px; color:rgb(36, 36, 36); background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNSIgaGVpZ2h0PSIyNSIgZmlsbD0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2U9IiNiYmIiPjxwYXRoIGQ9Ik02IDlsNiA2IDYtNiIvPjwvc3ZnPg=="); border-bottom:2px solid rgba(0, 0, 0, 0.1); padding:5px 20px 5px 2px; align-items:center; white-space:pre; overflow:clip; max-width:100%; transition:border-color 0.5s; cursor:pointer
+## notices w (1) rect=0,0,0,0 ""
+   display:none; position:relative; margin:0px 0px 20px
+## products w (1) rect=463,540.4,897,4501.3 "Bali Glow Bundle | KLOW Blend, Melanotan II & CJC-1295 + Ipa"
+   position:relative; top:0px; right:0px; bottom:0px; left:0px
+## grid (1) rect=463,540.4,897,4437.3 "Bali Glow Bundle | KLOW Blend, Melanotan II & CJC-1295 + Ipa"
+   display:grid; position:relative; gap:20px; grid-template-columns:285.656px 285.656px 285.672px; align-items:stretch; transition:0.25s; top:0px; right:0px; bottom:0px; left:0px
+## card (21) rect=463,540.4,285.7,667.8 "Bali Glow Bundle | KLOW Blend, Melanotan II & CJC-1295 + Ipa"
+   position:relative; line-height:21px; text-align:center; background-color:rgb(255, 255, 255); border-top:1px solid rgb(231, 214, 170); border-right:1px solid rgb(231, 214, 170); border-bottom:1px solid rgb(231, 214, 170); border-left:1px solid rgb(231, 214, 170); border-radius:20px; box-shadow:rgba(0, 0, 0, 0.035) 0px 8px 25px 0px; overflow:hidden; transition:transform 0.3s, box-shadow 0.3s, border-color 0.3s; top:0px; right:0px; bottom:0px; left:0px
+## card2 (21) rect=768.7,540.4,285.7,667.8 "Choose an option / Disposable Pen / Reusable Pen / Cartridge /  /  / 60 "
+   position:relative; line-height:21px; text-align:center; background-color:rgb(255, 255, 255); border-top:1px solid rgb(231, 214, 170); border-right:1px solid rgb(231, 214, 170); border-bottom:1px solid rgb(231, 214, 170); border-left:1px solid rgb(231, 214, 170); border-radius:20px; box-shadow:rgba(0, 0, 0, 0.035) 0px 8px 25px 0px; overflow:hidden; transition:transform 0.3s, box-shadow 0.3s, border-color 0.3s; top:0px; right:0px; bottom:0px; left:0px
+## card4 (21) rect=463,1228.3,285.7,635.9 "Choose an option / Disposable Pen / Reusable Pen / Cartridge /  /  / GLP"
+   position:relative; line-height:21px; text-align:center; background-color:rgb(255, 255, 255); border-top:1px solid rgb(231, 214, 170); border-right:1px solid rgb(231, 214, 170); border-bottom:1px solid rgb(231, 214, 170); border-left:1px solid rgb(231, 214, 170); border-radius:20px; box-shadow:rgba(0, 0, 0, 0.035) 0px 8px 25px 0px; overflow:hidden; transition:transform 0.3s, box-shadow 0.3s, border-color 0.3s; top:0px; right:0px; bottom:0px; left:0px
+## wrapper (21) rect=464,541.4,283.7,665.8 "Bali Glow Bundle | KLOW Blend, Melanotan II & CJC-1295 + Ipa"
+   display:flex; background-color:rgb(245, 245, 245); border-radius:12px; box-shadow:rgba(0, 0, 0, 0.12) 0px 0px 4px 0px; padding:0px 0px 18px; gap:12px; flex-direction:column
+## top (21) rect=464,541.4,283.7,283.7 ""
+   position:relative; background-color:rgb(255, 255, 255); border-radius:19px 19px 0px 0px; transform:matrix(1, 0, 0, 1, 0, 0); overflow:hidden; aspect-ratio:1 / 1; top:0px; right:0px; bottom:0px; left:0px
+## img link (21) rect=464,541.4,283.7,283.7 ""
+   position:relative; color:rgb(51, 51, 51); overflow:hidden; transition:0.25s; cursor:pointer; top:0px; right:0px; bottom:0px; left:0px
+## img (21) rect=464,541.4,283.7,283.7 ""
+   background-color:rgb(255, 255, 255); overflow:clip; object-fit:contain; aspect-ratio:auto 768 / 615; transition:transform 0.35s
+## hover img (20) rect=769.7,541.4,283.7,283.7 ""
+   display:flex; position:absolute; background-color:rgb(255, 255, 255); justify-content:center; align-items:center; opacity:0; transition:opacity 0.5s, transform 2s cubic-bezier(0, 0, 0.44, 1.18); top:0px; right:0px; bottom:0px; left:0px
+## qv buttons (21) rect=707.7,551.4,50,45 ""
+   display:flex; position:absolute; background-color:rgb(255, 255, 255); border-radius:10px; box-shadow:rgba(0, 0, 0, 0.1) 1px 1px 1px 0px; flex-direction:column; opacity:0; transform:matrix(1, 0, 0, 1, 20, 0); z-index:4; transition:0.3s; top:10px; right:10px; bottom:228.656px; left:223.656px; visibility:hidden
+## qv a (21) rect=707.7,551.4,50,45 ""
+   display:flex; position:relative; font-size:0px; line-height:0px; color:rgb(51, 51, 51); flex-direction:column; justify-content:center; align-items:center; transition:0.25s; cursor:pointer; top:0px; right:0px; bottom:0px; left:0px
+## qv a before (21) rect=707.7,551.4,50,45 ""
+   font-family:woodmart-font; font-size:20px; font-weight:400; font-style:normal; line-height:0px; letter-spacing:normal; text-transform:none; text-align:center; color:rgb(51, 51, 51); white-space:normal; transition:opacity 0.15s; cursor:pointer; width:19.6875px; height:0px; content:""; visibility:hidden
+## bottom (21) rect=464,837.1,283.7,352.2 "Bali Glow Bundle | KLOW Blend, Melanotan II & CJC-1295 + Ipa"
+   display:flex; gap:12px; flex-direction:column
+## title (21) rect=481,868.1,249.7,64.8 "Bali Glow Bundle | KLOW Blend, Melanotan II & CJC-1295 + Ipa"
+   font-size:16px; font-weight:700; line-height:21.6px; text-align:left; color:rgb(16, 47, 58); margin:0px 17px 10px; overflow:hidden
+## title a (21) rect=481,869.1,224.8,62.2 "Bali Glow Bundle | KLOW Blend, Melanotan II & CJC-1295 + Ipa"
+   display:inline; transition:0.25s; cursor:pointer
+## cats (21) rect=481,837.1,249.7,13 "BUNDLES"
+   font-size:10px; font-weight:700; line-height:13px; letter-spacing:1.1px; text-transform:uppercase; text-align:left; color:rgb(167, 123, 32); margin:0px 17px 6px
+## cats a (41) rect=481,837.1,50.5,13 "BUNDLES"
+   display:inline; transition:0.25s; cursor:pointer
+## price (21) rect=481,954.9,249.7,21.6 "Rp4,080,000.00 / ~$247.27"
+   display:flex; font-size:18px; font-weight:700; line-height:21.6px; text-align:left; color:rgb(184, 138, 34); margin:0px 17px 12px; gap:7px; align-items:baseline
+## price amount (41) rect=481,954.9,128.5,21.6 "Rp4,080,000.00"
+   font-weight:600; color:rgb(184, 149, 42)
+## usd (21) rect=621.5,961.9,44.6,11 "~$247.27"
+   font-size:11px; font-weight:400; line-height:11px; color:rgb(170, 163, 165); margin:0px 0px 0px 5px; white-space:nowrap
+## add btn w (21) rect=481,1147.3,249.7,42 "Add to cart"
+   display:flex; margin:146.812px 17px 0px; gap:12px; justify-content:center
+## add btn (21) rect=481,1147.3,249.7,42 "Add to cart"
+   display:flex; position:relative; font-size:12px; font-weight:600; line-height:12px; color:rgb(17, 46, 57); background-color:rgb(255, 255, 255); border-top:1px solid rgb(212, 191, 139); border-right:1px solid rgb(212, 191, 139); border-bottom:1px solid rgb(212, 191, 139); border-left:1px solid rgb(212, 191, 139); border-radius:999px; gap:5px; justify-content:center; align-items:center; overflow:hidden; min-height:42px; transition:background-color 0.25s, border-color 0.25s, color 0.25s; cursor:pointer; top:0px; right:0px; bottom:0px; left:0px
+## add btn span (21) rect=561.3,1150.3,89,36 "Add to cart"
+   display:flex; padding:5px 14px; justify-content:center; align-items:center; min-height:36px; transition:transform 0.25s, opacity 0.15s
+## form (20) rect=786.7,849.1,249.7,152 "Choose an option / Disposable Pen / Reusable Pen / Cartridge /  /  / 60 "
+   display:flex; font-size:0px; line-height:0px; margin:12px 17px 14px; gap:0px
+## var table (20) rect=786.7,849.1,249.7,152 "Choose an option / Disposable Pen / Reusable Pen / Cartridge /  /  / 60 "
+   display:table; position:relative; transition:margin-bottom 0.3s; top:0px; right:0px; bottom:0px; left:0px
+## var tr (29) rect=786.7,849.1,249.7,42 "Choose an option / Disposable Pen / Reusable Pen / Cartridge"
+   display:table-row
+## var th (29) rect=0,0,0,0 "Pen Type"
+   display:none
+## var td (29) rect=786.7,849.1,249.7,42 "Choose an option / Disposable Pen / Reusable Pen / Cartridge"
+   display:table-cell
+## var select (29) rect=786.7,849.1,249.7,42 "Choose an option / Disposable Pen / Reusable Pen / Cartridge"
+   display:inline-block; font-size:12px; line-height:16.8px; text-align:start; color:rgb(23, 51, 61); background-color:rgb(255, 255, 255); border-top:1px solid rgb(222, 222, 222); border-right:1px solid rgb(222, 222, 222); border-bottom:1px solid rgb(222, 222, 222); border-left:1px solid rgb(222, 222, 222); border-radius:25px; padding:0px 14px; align-items:center; white-space:pre; overflow:clip; min-height:42px; max-width:260px; transition:border-color 0.5s; cursor:default
+## var select2 (29) rect=0,0,0,0 "Choose an option60 MG5 MG10 MG20 MG30 MG40 MG50 MG"
+   display:none; font-size:12px; line-height:16.8px; text-align:start; color:rgb(23, 51, 61); background-color:rgb(255, 255, 255); border-top:1px solid rgb(222, 222, 222); border-right:1px solid rgb(222, 222, 222); border-bottom:1px solid rgb(222, 222, 222); border-left:1px solid rgb(222, 222, 222); border-radius:25px; padding:0px 14px; margin:10px 0px 0px; align-items:center; white-space:pre; overflow:clip; min-height:42px; max-width:260px; transition:border-color 0.5s; cursor:default
+## swatches (9) rect=803.7,897.1,215.7,94 "60 MG / 5 MG / 10 MG / 20 MG / 30 MG / 40 MG / 50 MG"
+   display:flex; text-align:left; padding:0px 0px 3px; margin:6px 17px 10px; gap:5px; justify-content:flex-start; align-items:flex-start; overflow:hidden auto; max-width:100%
+## swatch (28) rect=803.7,897.1,56.5,27 "60 MG"
+   display:flex; position:relative; font-size:10px; font-weight:600; line-height:10px; text-align:center; color:rgb(23, 51, 61); background-color:rgb(255, 255, 255); border-top:1px solid rgb(222, 212, 191); border-right:1px solid rgb(222, 212, 191); border-bottom:1px solid rgb(222, 212, 191); border-left:1px solid rgb(222, 212, 191); border-radius:999px; padding:4px 9px; justify-content:center; align-items:center; white-space:nowrap; min-height:27px; max-width:100%; transition:0.25s; cursor:pointer; top:0px; right:0px; bottom:0px; left:0px
+## swatch text (28) rect=813.7,904.6,36.5,12 "60 MG"
+   font-size:12px; line-height:12px
+## reset (20) rect=0,0,0,0 "Clear"
+   display:none; margin:5px 0px 0px
+## single var wrap (20) rect=0,0,0,0 "GLP-3 RTA Pen quantity / 	 /  / 			 / 	 / 	 /  / 	Add to cart"
+   display:none; margin:5px 0px 0px
+## card2 price (1) rect=786.7,1101.7,249.7,21.6 "Rp2,500,000.00 / Price range: Rp2,500,000.00 through Rp8,500,0"
+   display:flex; font-size:18px; font-weight:700; line-height:21.6px; text-align:left; color:rgb(184, 138, 34); margin:0px 17px 12px; gap:7px; align-items:baseline
+## card2 title (1) rect=786.7,1058.1,249.7,21.6 "GLP-3 RTA Pen"
+   font-size:16px; font-weight:700; line-height:21.6px; text-align:left; color:rgb(16, 47, 58); margin:0px 17px 10px; overflow:hidden
+## card2 cats (1) rect=786.7,1027.1,249.7,13 "PEPTIDE PENS, ATLAS LONGEVITY"
+   font-size:10px; font-weight:700; line-height:13px; letter-spacing:1.1px; text-transform:uppercase; text-align:left; color:rgb(167, 123, 32); margin:0px 17px 6px
+## card2 add (1) rect=786.7,1147.3,249.7,42 "Select options / This product has multiple variants. The optio"
+   display:flex; margin:0px 17px; gap:12px; justify-content:center
+## price 2nd amount (2) rect=0,0,0,0 "Rp8,500,000.00"
+   display:none; font-weight:600; color:rgb(184, 149, 42)
+## price dash (3) rect=0,0,0,0 "–"
+   display:none
+## footer loop (1) rect=463,5007.8,897,34 "1 / 2 / 3 / 4 / … / 7 / 8 / 9 / →"
+   text-align:center; margin:30px 0px 0px
+## pagination (1) rect=463,5007.8,897,34 "1 / 2 / 3 / 4 / … / 7 / 8 / 9 / →"
+   
+## page ul (1) rect=746.5,5007.8,330,34 "1 / 2 / 3 / 4 / … / 7 / 8 / 9 / →"
+   display:inline-flex; gap:3px; justify-content:center; align-items:center
+## page li (9) rect=746.5,5007.8,34,34 "1"
+   display:list-item
+## page current (1) rect=746.5,5007.8,34,34 "1"
+   display:inline-flex; font-size:14px; font-weight:600; line-height:22.4px; color:rgb(255, 255, 255); background-color:rgb(184, 149, 42); border-radius:8px; padding:0px 5px; justify-content:center; align-items:center; transition:0.2s
+## page a (7) rect=783.5,5007.8,34,34 "2"
+   display:inline-flex; font-size:14px; font-weight:600; line-height:22.4px; color:rgb(36, 36, 36); border-radius:8px; padding:0px 5px; justify-content:center; align-items:center; transition:0.2s; cursor:pointer
+## page dots (1) rect=894.5,5007.8,34,34 "…"
+   display:inline-flex; font-size:14px; font-weight:600; line-height:22.4px; color:rgb(36, 36, 36); border-radius:8px; padding:0px 5px; justify-content:center; align-items:center; transition:0.2s
+## page next (1) rect=1042.5,5007.8,34,34 "→"
+   display:inline-flex; font-size:0px; font-weight:600; line-height:0px; color:rgb(36, 36, 36); border-radius:8px; padding:0px 5px; justify-content:center; align-items:center; transition:0.2s; cursor:pointer
+## page next before (1) rect=1042.5,5007.8,34,34 "→"
+   font-family:woodmart-font; font-size:12px; font-weight:600; font-style:normal; line-height:19.2px; letter-spacing:normal; text-transform:none; text-align:center; color:rgb(36, 36, 36); white-space:normal; cursor:pointer; width:6.375px; height:19.1875px; content:""
+## page next after (1) rect=1042.5,5007.8,34,34 "→"
+   font-family:Urbanist, Arial, Helvetica, sans-serif; font-size:0px; font-weight:600; font-style:normal; line-height:0px; letter-spacing:normal; text-transform:none; text-align:center; color:rgb(36, 36, 36); white-space:normal; cursor:pointer; width:auto; height:auto; content:none
+## site footer (1) rect=0,5091.8,1440,1094.5 "Driving innovation in science with high-purity research mate"
+   

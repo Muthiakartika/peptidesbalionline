@@ -1,0 +1,714 @@
+/*
+ * Shop, category and search pages (Woodmart layout #9495 + the owner's custom CSS).
+ * Every value was measured on https://peptidesbali.online/shop/ at 1440, 1280, 1024, 900, 769,
+ * 768, 767 and 390 px wide (docs/audit/visual-reference/measurements/, 4 Nov 2026).
+ *
+ * Breakpoints used by the live site (they are not all the same, which is why this file has four):
+ *   ≥ 1025px  desktop           hover image, quick-view button, toolbar in one row
+ *   ≤ 1024px  tablet            "Show sidebar" + sort icon, carousel 4 per view
+ *   ≤ 768px   Woodmart "small"  2 product columns, 10px gaps, carousel 3 per view
+ *   ≤ 767px   Elementor mobile  smaller card text, sidebar becomes a drawer
+ *
+ * Percentages copy Elementor's: they are relative to the parent's width, exactly as on the live site.
+ */
+
+/* ───────────────────────── Page frame ───────────────────────── */
+.shop-archive {
+  /* The theme's content area: 1222px max, 15px side padding. Section paddings are 3% of its inner width. */
+  --shop-inner: calc(min(100%, 1222px) - 30px);
+  padding-block: 40px;
+}
+
+/* ───────────────────────── Grey title band ───────────────────────── */
+.shop-band {
+  padding-block: calc(var(--shop-inner) * 0.03);
+  background-color: #f3f3f3;
+}
+.shop-band__container {
+  display: flex;
+  max-width: 1300px;
+  margin-inline: auto;
+  padding-block: 10px;
+}
+.shop-band__title-col { display: flex; width: 15.725%; }
+.shop-band__title-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  padding: 10px;
+}
+.shop-band__tiles-col { width: 84.275%; }
+.shop-band__tiles-wrap { padding: 10px; }
+
+.shop-band__title {
+  margin-bottom: 18px;
+  color: #000000;
+  font-family: var(--font-serif);
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.shop-breadcrumbs {
+  display: inline-flex;
+  align-self: flex-start;
+  flex-wrap: wrap;
+  align-items: center;
+  color: var(--color-body);
+  font-size: 15px;
+  line-height: 24px;
+}
+.shop-breadcrumbs a { transition: color 0.25s; }
+.shop-breadcrumbs a:hover { color: #555555; }
+.shop-breadcrumbs__delimiter { margin-inline: 8px; }
+.shop-breadcrumbs__delimiter::after { content: "/"; }
+.shop-breadcrumbs__last { color: var(--color-title); font-weight: 600; }
+
+/* Round category images (Woodmart carousel: 6 / 4 / 3 per view) */
+.cat-carousel { position: relative; margin-block: -15px; }
+.cat-carousel__viewport { margin-inline: -10px; padding-block: 15px; overflow: clip; touch-action: pan-y; }
+.cat-carousel__track { display: flex; transition: transform 0.3s ease; }
+.cat-carousel__item { flex: 0 0 16.6667%; max-width: 16.6667%; padding-inline: 10px; }
+.cat-tile { position: relative; text-align: center; }
+.cat-tile__thumb {
+  position: relative;
+  max-width: 103px;
+  margin-inline: auto;
+  overflow: hidden;
+  border-radius: 300px;
+}
+.cat-tile__image {
+  display: block;
+  margin: -1px;
+  color: #333333;
+  transition: transform 0.5s cubic-bezier(0, 0, 0.44, 1.18);
+}
+.cat-tile__image img { display: block; width: 100%; height: auto; }
+.cat-tile:hover .cat-tile__image { transform: scale(1.1); }
+.cat-tile__content { padding: 10px; }
+.cat-tile__title {
+  color: var(--color-entity-title);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-transform: capitalize;
+}
+.cat-tile__link { position: absolute; inset: 0; z-index: 1; }
+
+.cat-carousel__arrow {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 250;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  margin-block: auto;
+  color: #a5a5a5;
+  font-size: 24px;
+  line-height: 1;
+  opacity: 0;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.cat-carousel__arrow--prev { left: -50px; transform: translateX(-30px); }
+.cat-carousel__arrow--next { right: -50px; transform: translateX(30px); }
+.cat-carousel:hover .cat-carousel__arrow:not(:disabled) { opacity: 1; transform: none; }
+.cat-carousel__arrow:not(:disabled):hover { color: #333333; }
+.cat-carousel__arrow:disabled { pointer-events: none; }
+
+/* ───────────────────────── Sidebar + products ───────────────────────── */
+.shop-body { padding-top: calc(var(--shop-inner) * 0.03); }
+.shop-body__container { max-width: 1300px; margin-inline: auto; padding: 10px; }
+.shop-body__row { display: flex; }
+
+.shop-sidebar { display: flex; width: 28.492%; }
+.shop-sidebar__heading { display: none; }
+.shop-sidebar__wrap { width: 100%; margin-top: 5%; padding: 10px; }
+.shop-sidebar__overlay { display: none; }
+@media (min-width: 1025px) {
+  /* Elementor "sticky: top" on desktop */
+  .shop-widget { position: sticky; top: 0; }
+}
+
+.shop-widget {
+  padding: 11% 7%;
+  border-radius: 19px;
+  background-color: #f6f6f6;
+  line-height: 21px;
+}
+.shop-widget__title {
+  margin-bottom: 10px;
+  color: var(--color-entity-title);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+.shop-cats { margin-bottom: -8px; padding-right: 25px; }
+.shop-cats__item { position: relative; display: flex; flex-wrap: wrap; align-items: flex-start; }
+.shop-cats__item > a { flex: 1 1 0; padding: 8px 5px 8px 0; transition: color 0.25s; }
+.shop-cats__item > a:hover { color: var(--color-entity-title); }
+.shop-cats__item[data-current] > a { color: var(--color-entity-title); font-weight: 600; }
+.shop-cats__count {
+  min-width: 30px;
+  margin: 8px 0 0 5px;
+  padding: 0 5px;
+  border: 1px solid rgb(0 0 0 / 0.106);
+  border-radius: 35px;
+  font-size: 12px;
+  line-height: 18px;
+  text-align: center;
+  transition: color 0.25s, background-color 0.25s, border-color 0.25s;
+}
+.shop-cats__item:hover > .shop-cats__count,
+.shop-cats__item[data-current] > .shop-cats__count {
+  border-color: var(--color-gold);
+  background-color: var(--color-gold);
+  color: #ffffff;
+}
+.shop-cats__toggle {
+  position: absolute;
+  top: 7px;
+  right: -25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  color: #bbbbbb;
+  font-size: 10px;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.shop-cats__toggle:hover { color: var(--color-entity-title); }
+.shop-cats__toggle[data-open] { transform: rotate(180deg); background-color: #f1f1f1; color: var(--color-body); }
+.shop-cats__children { flex: 0 0 100%; padding-left: 15px; }
+
+.shop-main { display: flex; width: 71.508%; }
+.shop-main__wrap { width: 100%; padding-left: 2%; }
+
+/* Toolbar */
+.shop-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding-block: 20px;
+  background-color: #ffffff;
+}
+.shop-toolbar__left { display: flex; flex-direction: column; gap: 20px; width: 29%; padding: 10px; }
+.shop-toolbar__right { display: flex; align-items: center; justify-content: flex-end; gap: 20px; width: 65%; padding: 10px; }
+.shop-result-count { line-height: 24px; }
+.shop-toolbar__sidebar-button { display: none; }
+
+.shop-per-page { display: inline-flex; align-items: center; }
+.shop-per-page__label { color: var(--color-entity-title); font-weight: 600; }
+.shop-per-page__label::after { content: ":"; }
+.shop-per-page__link { padding-inline: 7px; transition: all 0.25s; }
+.shop-per-page__link:hover,
+.shop-per-page__link[data-current] { color: var(--color-entity-title); }
+.shop-per-page__link[data-current] { font-weight: 600; }
+.shop-per-page__border::after { content: "/"; }
+.shop-per-page__border:last-child { display: none; }
+
+.shop-view { display: inline-flex; align-items: center; gap: 10px 13.5px; line-height: 15px; }
+.shop-view__link { display: inline-flex; color: #bbbbbb; transition: all 0.25s; }
+.shop-view__link .font-icons { font-size: 27px; line-height: 28px; }
+.shop-view__link:hover { color: #666666; }
+.shop-view__link[data-current] { color: var(--color-entity-title); }
+
+.shop-ordering { position: relative; display: flex; align-items: center; }
+.shop-ordering__select {
+  max-width: 100%;
+  height: 30px;
+  padding: 5px 20px 5px 2px;
+  border: none;
+  border-bottom: 2px solid rgb(0 0 0 / 0.1);
+  border-radius: 0;
+  background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNSIgaGVpZ2h0PSIyNSIgZmlsbD0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2U9IiNiYmIiPjxwYXRoIGQ9Ik02IDlsNiA2IDYtNiIvPjwvc3ZnPg==") no-repeat right center / auto 18px;
+  color: var(--color-title);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 18px;
+  appearance: none;
+  cursor: pointer;
+  transition: border-color 0.5s;
+}
+.shop-ordering__select:focus { border-bottom-color: rgb(0 0 0 / 0.15); outline: none; }
+
+.shop-sidebar-button { display: inline-flex; vertical-align: middle; }
+.shop-sidebar-button a {
+  display: flex;
+  align-items: center;
+  color: var(--color-entity-title);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 15px;
+}
+.shop-sidebar-button a::before {
+  content: "\f15a";
+  margin-right: 0.3em;
+  font-family: var(--font-icons);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 18px;
+}
+
+/* ───────────────────────── Product grid + card ───────────────────────── */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr));
+  align-items: stretch;
+  gap: 20px;
+}
+
+.product-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--color-gold-border-card);
+  border-radius: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 8px 25px rgb(0 0 0 / 0.035);
+  line-height: 21px;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+.product-card__wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
+  padding-bottom: 18px;
+  border-radius: 12px;
+  background-color: #f5f5f5;
+  box-shadow: 0 0 4px rgb(0 0 0 / 0.12);
+}
+/* Woodmart grid option "bordered grid, inside" (the homepage grids, class products-bordered-grid-ins):
+ * a thin border round the inner card, and no grey background or shadow, because those come from the
+ * shop grid's own options ("with background", "with shadow"), which these grids don't have. */
+.products-bordered-grid-ins .product-card__wrapper { border: 1px solid rgba(0, 0, 0, 0.105); background-color: transparent; box-shadow: none; }
+.product-card__top {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 19px 19px 0 0;
+  background-color: #ffffff;
+  transform: translate(0);
+}
+.product-card__image-link { position: relative; display: block; height: 100%; overflow: hidden; color: #333333; }
+.product-card__image-link img,
+.product-card__hover-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background-color: #ffffff;
+}
+.product-card__image-link img { transition: transform 0.35s; }
+.product-card__hover-image {
+  position: absolute;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s, transform 2s cubic-bezier(0, 0, 0.44, 1.18);
+}
+.product-card__buttons {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 4;
+  display: none;
+  flex-direction: column;
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 1px 1px 1px rgb(0 0 0 / 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(20px);
+  transition: all 0.3s;
+}
+.product-card__quick-view {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 45px;
+  color: #333333;
+  font-size: 0;
+  line-height: 0;
+}
+.product-card__quick-view .font-icons { font-size: 20px; }
+/* While the quick view loads: the icon gives way to a spinner (theme "loading" action button). */
+.product-card__quick-view { position: relative; }
+.product-card__quick-view--loading { pointer-events: none; }
+.product-card__quick-view--loading .font-icons { opacity: 0; }
+.product-card__quick-view--loading::after {
+  content: "";
+  position: absolute;
+  top: calc(50% - 10px);
+  left: calc(50% - 10px);
+  width: 20px;
+  height: 20px;
+  border: 1px solid transparent;
+  border-left-color: #242424;
+  border-radius: 50%;
+  animation: product-card-spin 450ms infinite linear;
+}
+@keyframes product-card-spin { to { transform: rotate(360deg); } }
+
+@media (min-width: 1025px) {
+  .product-card:hover {
+    border-color: #caa347;
+    box-shadow: 0 15px 35px rgb(70 50 10 / 0.09);
+    transform: translateY(-4px);
+  }
+  .product-card__hover-image { display: flex; }
+  .product-card__buttons { display: flex; }
+  .product-card:hover .product-card__image-link img { transform: scale(1.035); }
+  .product-card:hover .product-card__hover-image { opacity: 1; transform: scale(1.09); }
+  .product-card:hover .product-card__buttons { opacity: 1; visibility: visible; transform: translateX(0); }
+}
+
+.product-card__bottom { display: flex; flex: 1 1 auto; flex-direction: column; gap: 12px; }
+
+.product-card__cats {
+  margin: 0 17px 6px;
+  color: #a77b20;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 1.1px;
+  text-align: left;
+  text-transform: uppercase;
+}
+.product-card__cats a { transition: all 0.25s; }
+
+.product-card__title {
+  margin: 0 17px 10px;
+  overflow: hidden;
+  color: var(--color-navy-card);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: left;
+}
+.product-card__title a { transition: all 0.25s; }
+.product-card__title a:hover { color: #a77b20; }
+
+.product-card .price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 7px;
+  margin: 0 17px 12px;
+  color: var(--color-gold-price-card);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: left;
+}
+.price__amount { display: block; color: var(--color-gold); font-weight: 600; }
+/* A sale (ProductCard): Woodmart's rules (woocommerce-base.min.css): `.price del { color: #bbb; font-size:
+ * 90% }`, `del .amount { color: #bbb; font-weight: 400 }`, `.price ins { padding: 0; background-color:
+ * transparent; text-decoration: none; opacity: 1 }`. */
+.product-card .price del { color: #bbb; font-size: 90%; }
+.product-card .price del .price__amount { color: #bbb; font-weight: 400; }
+.product-card .price ins { padding: 0; background-color: transparent; text-decoration: none; opacity: 1; }
+.price__dash,
+.price__amount--max { display: none; }
+.price__usd {
+  display: block;
+  margin-left: 5px;
+  color: #aaa3a5;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.product-card__add { display: flex; justify-content: center; gap: 12px; margin: auto 17px 0; }
+.product-card__button {
+  position: relative;
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-height: 42px;
+  overflow: hidden;
+  border: 1px solid var(--color-gold-border-card-button);
+  border-radius: var(--radius-pill);
+  background-color: #ffffff;
+  color: var(--color-navy-card-button);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  transition: background-color 0.25s, border-color 0.25s, color 0.25s;
+}
+.product-card__button:hover { border-color: #d0a840; background-color: #ead17b; color: #071922; }
+.product-card__button span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 5px 14px;
+  transition: transform 0.25s, opacity 0.15s;
+}
+
+/* Quick shop (variation choice inside the card) */
+.quick-shop { display: flex; margin: 12px 17px 14px; font-size: 0; line-height: 0; }
+/* Woodmart's variation table: no margin, no cell borders or padding. (Said explicitly because inside
+ * page content, e.g. the homepage, the theme's table style would add them.) */
+.quick-shop__table { width: 100%; margin: 0; border-collapse: collapse; }
+.quick-shop__label { display: none; }
+.quick-shop__value { padding: 0; border: none; text-align: inherit; vertical-align: middle; }
+.quick-shop__select {
+  display: inline-block;
+  width: 100%;
+  max-width: 260px;
+  height: 42px; /* Woodmart --wd-form-height; phones only lower the min-height */
+  min-height: 42px;
+  padding: 0 14px;
+  border: 1px solid #dedede;
+  border-radius: 25px;
+  background-color: #ffffff;
+  color: #17333d;
+  font-size: 12px;
+  line-height: 16.8px;
+  appearance: none;
+  cursor: default;
+  transition: border-color 0.5s;
+}
+.quick-shop__value[data-swatches="true"] .quick-shop__select { display: none; margin-top: 10px; }
+.quick-shop tr + tr .quick-shop__value[data-swatches="false"] .quick-shop__select { margin-top: 10px; }
+.swatches {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 5px;
+  max-width: 100%;
+  margin: 6px 17px 10px;
+  padding-bottom: 3px;
+  overflow: hidden auto;
+  text-align: left;
+}
+.swatch {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  min-height: 27px;
+  padding: 4px 9px;
+  border: 1px solid #ded4bf;
+  border-radius: var(--radius-pill);
+  background-color: #ffffff;
+  color: #17333d;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.swatch__text { font-size: 12px; line-height: 1; }
+.swatch:hover { border-color: #c99d3b; background-color: #fffaf0; color: #896416; }
+.swatch[data-active="true"] { border-color: #c99d3b; background-color: #fff7e4; box-shadow: inset 0 0 0 1px #c99d3b; color: #74520d; }
+
+/* ───────────────────────── List view (?shop_view=list) ─────────────────────────
+ * Woodmart's list item (theme file woo-product-loop-list) under the owner's card CSS, which applies
+ * too (live list items keep the class "product-grid-item"). Measured on /shop/?shop_view=list at 1440,
+ * 768 and 390px (7 Nov 2026). From 769px: picture (300px) on the left, details on the right with the
+ * short description; up to 768px a one-column card like the grid's, without the description. */
+.product-grid[data-view="list"] { grid-template-columns: minmax(0, 1fr); gap: 30px; }
+/* "Products with background": a list item has no bottom border (the owner's card border keeps 3 sides). */
+.product-card[data-view="list"] { border-bottom: 0; }
+.product-card[data-view="list"] .product-card__wrapper,
+.product-card[data-view="list"] .product-card__bottom { gap: 12px; }
+/* The button in the theme's "accented" style (gold, uppercase; the owner's border stays). */
+.product-card[data-view="list"] .product-card__button {
+  min-height: 0;
+  border-radius: 35px;
+  background-color: rgb(184, 149, 42);
+  box-shadow: none;
+  color: #333333;
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+}
+.product-card[data-view="list"] .product-card__button:hover { border-color: #d0a840; background-color: rgb(184, 149, 42); color: #333333; }
+.product-card__short { display: none; }
+@media (min-width: 769px) {
+  .product-card[data-view="list"] { text-align: start; }
+  .product-card[data-view="list"] .product-card__wrapper { flex-direction: row; align-items: center; gap: 15px; }
+  .product-card[data-view="list"] .product-card__top { flex: 0 0 300px; }
+  .product-card[data-view="list"] .product-card__bottom { gap: 18px; }
+  /* The heading grows to 130% (19.5px, so its line is 26.3px tall); the owner's 16px stays on the link. */
+  .product-card[data-view="list"] .product-card__title { font-size: 130%; }
+  .product-card[data-view="list"] .product-card__title a { font-size: 16px; }
+  .product-card[data-view="list"] .price { font-size: 140%; }
+  .product-card[data-view="list"] .product-card__add { justify-content: start; }
+  .product-card[data-view="list"] .quick-shop__table { display: inline-flex; }
+  /* At most 11 lines' worth (11em), then it scrolls with the theme's thin scrollbar (.wd-scroll). */
+  .product-card__short {
+    display: block;
+    max-height: 11em;
+    margin-block: -4.5px;
+    padding-inline-end: 2px;
+    overflow-y: auto;
+    line-height: 1.6;
+  }
+  .product-card__short::-webkit-scrollbar { width: 5px; }
+  .product-card__short::-webkit-scrollbar-track { background-color: rgb(0 0 0 / 0.05); }
+  .product-card__short::-webkit-scrollbar-thumb { background-color: rgb(0 0 0 / 0.12); }
+}
+@media (max-width: 768.98px) {
+  .product-grid[data-view="list"] { gap: 20px; }
+}
+
+/* ───────────────────────── Pagination ───────────────────────── */
+.shop-pagination-wrap { margin-top: 30px; text-align: center; }
+.shop-pagination ul { display: inline-flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 3px; }
+.shop-pagination__item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  height: 34px;
+  padding: 0 5px;
+  border-radius: 8px;
+  color: var(--color-title);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 22.4px;
+  transition: all 0.2s;
+}
+a.shop-pagination__item:hover { background-color: #f1f1f1; }
+.shop-pagination__item[data-current] { background-color: var(--color-gold); color: #ffffff; }
+.shop-pagination__arrow .font-icons { font-size: 12px; }
+
+/* ───────────────────────── No results ───────────────────────── */
+.shop-no-products { margin-bottom: 20px; }
+.shop-notice { padding: 15px 30px; border-radius: 12px; background-color: #f5f5f5; color: var(--color-title); }
+.shop-no-products__search { position: relative; max-width: 600px; margin-inline: auto; }
+.shop-no-products__search input[type="text"] {
+  width: 100%;
+  height: 42px;
+  padding: 0 50px 0 15px;
+  border: 1px solid rgb(0 0 0 / 0.1);
+  border-radius: 35px;
+  color: var(--color-body);
+  font-size: 14px;
+}
+.shop-no-products__search button { position: absolute; top: 0; right: 0; height: 42px; padding: 0 15px; color: var(--color-title); font-weight: 600; }
+
+/* ───────────────────────── Tablet (≤ 1024px) ───────────────────────── */
+@media (max-width: 1024px) {
+  .cat-carousel__viewport { margin-inline: -5px; }
+  .cat-carousel__item { flex-basis: 25%; max-width: 25%; padding-inline: 5px; }
+  .cat-carousel__arrow { width: 40px; height: 40px; color: #333333; font-size: 16px; opacity: 1; transform: none; }
+  .cat-carousel__arrow--prev { left: -28px; }
+  .cat-carousel__arrow--next { right: -28px; }
+
+  .shop-toolbar { flex-direction: column; align-items: stretch; }
+  .shop-toolbar__left,
+  .shop-toolbar__right { width: 100%; }
+  .shop-toolbar__right { justify-content: space-between; }
+  .shop-result-count,
+  .shop-per-page,
+  .shop-view { display: none; }
+  .shop-toolbar__sidebar-button { display: block; line-height: 24px; }
+
+  /* Sort icon: the real <select> sits invisibly on top of it */
+  .shop-ordering { justify-content: center; width: 30px; height: 30px; z-index: 1; }
+  .shop-ordering::after { content: "\f119"; color: var(--color-title); font-family: var(--font-icons); font-size: 18px; line-height: 1; pointer-events: none; }
+  .shop-ordering__select {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: none;
+    background: none;
+    color: transparent;
+    font-size: 16px;
+    line-height: 19.2px;
+  }
+}
+
+/* ───────────────────────── Woodmart "small" (≤ 768px) ───────────────────────── */
+@media (max-width: 768.98px) {
+  .cat-carousel__item { flex-basis: 33.3333%; max-width: 33.3333%; }
+  .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+}
+
+/* ───────────────────────── Phones (≤ 767px) ───────────────────────── */
+@media (max-width: 767px) {
+  .shop-band { margin-top: -20px; padding-block: calc(var(--shop-inner) * 0.02) calc(var(--shop-inner) * 0.01); }
+  .shop-band__container { flex-direction: column; }
+  .shop-band__title-col,
+  .shop-band__tiles-col { width: 100%; }
+  .shop-band__title-wrap { margin: 0 0 2% 3%; }
+  .shop-band__title { margin-bottom: 9px; font-size: 38px; }
+  .cat-tile__thumb { max-width: 95px; }
+  .cat-tile__title { font-size: 12px; }
+
+  .shop-body { padding-top: 0; }
+  .shop-main { width: 100%; }
+  .shop-main__wrap { padding: 2%; }
+  .shop-toolbar { padding-block: 0; }
+  .shop-toolbar__left { display: none; }
+
+  /* The sidebar becomes a drawer */
+  .shop-sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 500;
+    flex-direction: column;
+    width: 300px;
+    overflow: hidden auto;
+    background-color: #ffffff;
+    transform: translateX(-100%);
+    transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  .shop-sidebar[data-open="true"] { transform: none; }
+  .shop-sidebar__heading {
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px 15px;
+    border-bottom: 1px solid rgb(0 0 0 / 0.106);
+  }
+  .shop-sidebar__overlay { display: block; }
+  .shop-sidebar__wrap { margin-top: 15px; }
+
+  .product-card { border-radius: 16px; font-size: 13.5px; line-height: 18.9px; }
+  .product-card__wrapper { gap: 10px; padding-bottom: 13px; }
+  .product-card__top { border-radius: 15px 15px 0 0; }
+  .product-card__bottom { gap: 10px; }
+  .product-card__cats { margin: 0 12px 5px; font-size: 9px; }
+  .product-card__title { margin: 0 12px 8px; font-size: 14px; }
+  .product-card .price { margin: 0 12px 10px; font-size: 16px; }
+  .price__usd { margin-left: 3px; font-size: 9px; }
+  .product-card__add { gap: 10px; margin-inline: 12px; }
+  .product-card__button { min-height: 38px; font-size: 11px; }
+  .product-card__button span { font-size: 12px; }
+  .quick-shop { margin: 12px 12px 11px; }
+  .quick-shop__select { min-height: 38px; }
+  .quick-shop__value[data-swatches="true"] .quick-shop__select,
+  .quick-shop tr + tr .quick-shop__value[data-swatches="false"] .quick-shop__select { margin-top: 8px; }
+  .swatches { gap: 4px; margin: 5px 12px 8px; }
+  .swatch { min-height: 24px; padding: 3px 7px; font-size: 9px; }
+  .swatch__text { font-size: 9px; }
+}

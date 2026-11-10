@@ -1,0 +1,18 @@
+/*
+ * The compound-name note of the searches (src/components/layout/search/AliasNotice.tsx): the owner's
+ * CSS from the live site, copied as it is. Only this project's class names for the two search boxes
+ * are added next to the live ones: .search-overlay (live .wd-search-full-screen) and
+ * .mobile-nav__results (live .wd-dropdown-results).
+ */
+.glp-search-notice{position:relative;background:#faf6ec;border:1px solid #eadcb5;border-left:4px solid #c9a24d;border-radius:6px;margin:0 0 20px;font-size:14px;line-height:1.55;color:#333;text-align:left;transition:opacity .2s,border-color .2s}
+.glp-search-notice:hover{border-color:#c9a24d}
+.glp-search-notice.glp-closing{opacity:0}
+.glp-search-notice p{margin:0}
+.glp-search-notice p+p{border-top:1px solid #eadcb5}
+.glp-search-notice .glp-search-notice-link{display:block;padding:12px 44px 12px 16px;color:#333;text-decoration:none}
+.glp-search-notice .glp-search-notice-link:hover,.glp-search-notice .glp-search-notice-link:focus-visible{color:#111;text-decoration:underline}
+.glp-search-notice strong{color:#111}
+.glp-search-notice .glp-search-notice-close{position:absolute;z-index:1;top:9px;right:8px;width:28px;height:28px;min-height:0;margin:0;padding:0;border:0;border-radius:50%;background:transparent;box-shadow:none;color:#8a7440;font-size:20px;font-weight:400;line-height:28px;text-align:center;text-transform:none;letter-spacing:0;cursor:pointer}
+.glp-search-notice .glp-search-notice-close:hover,.glp-search-notice .glp-search-notice-close:focus-visible{background:#eadcb5;color:#111}
+:is(.wd-search-full-screen, .search-overlay)>.glp-search-notice{width:calc(100% - 30px);max-width:var(--wd-container-w,1222px);margin:0 auto 20px}
+:is(.wd-dropdown-results, .mobile-nav__results) .glp-search-notice{margin:10px 10px 0}

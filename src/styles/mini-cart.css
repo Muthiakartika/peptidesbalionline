@@ -1,0 +1,146 @@
+/*
+ * The side cart's product list and footer (Woodmart's header-el-cart-side and woo-widget-shopping-cart
+ * rules, with the live values; open question Q-34). The drawer frame, heading and empty state are in
+ * site-chrome.css (.side-drawer). The drawer is on every page, so the theme's variables it needs are set
+ * on it here (values read on the live site, 6 Nov 2026). Reference:
+ * docs/audit/visual-reference/screenshots/mini-cart/ and markup/mini-cart.html.
+ */
+.cart-widget-side {
+  --wd-primary-color: rgb(184, 149, 42);
+  --wd-text-color: #767676;
+  --wd-text-font: "Urbanist", Arial, Helvetica, sans-serif;
+  --wd-entities-title-color: #333;
+  --wd-entities-title-color-hover: rgb(51 51 51 / 65%);
+  --wd-entities-title-font: "Urbanist", Arial, Helvetica, sans-serif;
+  --wd-entities-title-font-weight: 500;
+  --color-gray-300: #bbb;
+  --color-gray-800: #333;
+  --color-gray-900: #242424;
+  --bgcolor-gray-100: #f7f7f7;
+  --bgcolor-white: #fff;
+  --brdcolor-gray-300: rgba(0, 0, 0, 0.105);
+  --btn-default-brd-radius: 35px;
+  --btn-default-color: #333;
+  --btn-default-bgcolor: rgb(184, 149, 42);
+  --btn-accented-brd-radius: 35px;
+  --btn-accented-color: #333;
+  --btn-accented-bgcolor: rgb(184, 149, 42);
+}
+
+/* ── header-el-cart-side: the list fills the drawer, the footer stays at the bottom ── */
+/* Line height 1.4 inside the mini cart: measured on the live screenshots (the "Subtotal" box is 58px,
+   1px border + 2 × 15px + 27.3px = 1.4 × 19.5px; the "1 × Rp…" line sits as with 1.4), the rule
+   itself is not in the theme files read so far. */
+.cart-widget-side .widget_shopping_cart { position: relative; display: flex; flex: 1 1 100%; flex-direction: column; line-height: 1.4; }
+.cart-widget-side .widget_shopping_cart_content { display: flex; flex: 1 1 auto; flex-direction: column; height: 100%; }
+.cart-widget-side .shopping-cart-widget-body { position: relative; flex: 1 1 auto; }
+.cart-widget-side .wd-scroll-content { position: absolute; inset: 0; max-height: 100%; overflow-y: auto; overscroll-behavior: none; }
+.cart-widget-side .woocommerce-mini-cart { margin: 0; padding: 0; list-style: none; }
+/* woo-widget-product-list: a line under each product but the last. */
+.cart-widget-side .woocommerce-mini-cart > li { border-bottom: 1px solid var(--brdcolor-gray-300); }
+.cart-widget-side .woocommerce-mini-cart > li:last-child { border-bottom: none; }
+.cart-widget-side .woocommerce-mini-cart .mini_cart_item { margin-bottom: 0; padding: 15px; transition: background-color 0.3s ease; }
+.cart-widget-side .woocommerce-mini-cart .mini_cart_item:hover { background-color: var(--bgcolor-gray-100); }
+.cart-widget-side .woocommerce-mini-cart .remove { top: 13px; inset-inline-end: 10px; }
+.cart-widget-side .shopping-cart-widget-footer { flex: 0 0 auto; padding-bottom: 15px; }
+.cart-widget-side .shopping-cart-widget-footer > * { padding-inline: 15px; }
+.cart-widget-side .woocommerce-mini-cart__total { margin-top: 0; }
+
+/* ── woo-widget-shopping-cart: one product ── */
+.cart-widget-side li:hover .cart-info .wd-entities-title { color: var(--wd-entities-title-color-hover); }
+.cart-widget-side .woocommerce-mini-cart > li { position: relative; display: flex; align-items: flex-start; }
+.cart-widget-side .woocommerce-mini-cart > li a { margin-bottom: 0; }
+.cart-widget-side .wd-fill { position: absolute; inset: 0; }
+.cart-widget-side .woocommerce-mini-cart .remove {
+  position: absolute;
+  z-index: 2;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  color: var(--color-gray-800);
+  text-align: center;
+  font-size: 0;
+  line-height: 20px;
+  text-decoration: none;
+}
+.cart-widget-side .woocommerce-mini-cart .remove::after { font-size: 10px; content: "\f112"; font-family: var(--font-icons); }
+.cart-widget-side .woocommerce-mini-cart .remove:hover { background-color: var(--bgcolor-white); box-shadow: 0 0 3px rgba(0, 0, 0, 0.1); }
+.cart-widget-side .cart-item-link { z-index: 1; font-size: 0; }
+.cart-widget-side .cart-item-image { position: relative; flex: 0 0 auto; overflow: hidden; margin-inline-end: 15px; }
+/* woo-widget-product-list: 65px pictures with the theme's radius (12px / 1.5). */
+.cart-widget-side .cart-item-image img { display: block; float: none !important; min-width: 65px; max-width: 65px; height: auto; margin-inline-end: 0 !important; border-radius: 8px; transition: opacity 0.6s ease; }
+.cart-widget-side .cart-item-image::after {
+  position: absolute;
+  top: calc(50% - 10px);
+  left: calc(50% - 10px);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0);
+  border-left-color: var(--color-gray-900);
+  border-radius: 50%;
+  vertical-align: middle;
+  animation: wd-rotate 450ms infinite linear var(--wd-anim-state, paused);
+}
+.cart-widget-side .removing-process .cart-item-image::after { opacity: 1; --wd-anim-state: running; }
+.cart-widget-side .removing-process .cart-item-image img { opacity: 0.2; }
+@keyframes wd-rotate { 100% { transform: rotate(360deg); } }
+.cart-widget-side .cart-info { flex: 1 1 auto; padding-inline-end: 20px; }
+.cart-widget-side .cart-info .wd-entities-title {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--wd-entities-title-color);
+  font-family: var(--wd-entities-title-font);
+  font-weight: var(--wd-entities-title-font-weight);
+  line-height: 1.4;
+  transition: all 0.25s ease;
+}
+.cart-widget-side .cart-info ul.variation { margin: 0 0 6px; padding: 0; list-style: none; font-size: 90%; }
+.cart-widget-side .cart-info ul.variation li { margin-bottom: 5px; }
+.cart-widget-side .cart-info ul.variation p { display: inline; margin: 0; }
+.cart-widget-side .cart-info ul.variation .item-variation-name { color: var(--color-gray-800); font-weight: 600; }
+.cart-widget-side .cart-info span.quantity { display: block; color: var(--color-gray-300); font-size: 90%; }
+.cart-widget-side .amount { color: var(--wd-primary-color); font-weight: 600; }
+
+/* ── woo-widget-shopping-cart: the footer ── */
+.cart-widget-side .shopping-cart-widget-footer > * { margin-bottom: 10px; }
+.cart-widget-side .shopping-cart-widget-footer > *:last-child { margin-bottom: 0; }
+.cart-widget-side .shopping-cart-widget-footer .woocommerce-mini-cart__total { margin-bottom: 0; }
+.cart-widget-side .woocommerce-mini-cart__total {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-block: 15px;
+  font-size: 130%;
+  border-top: 1px solid var(--brdcolor-gray-300);
+}
+.cart-widget-side .woocommerce-mini-cart__total strong { color: var(--color-gray-900); font-weight: 600; }
+.cart-widget-side .woocommerce-mini-cart__total .woocommerce-Price-amount { flex-grow: 1; text-align: end; }
+.cart-widget-side .woocommerce-mini-cart__buttons { display: block; margin: 0; text-align: center; }
+.cart-widget-side .woocommerce-mini-cart__buttons > * { margin-bottom: 10px; width: 100%; }
+.cart-widget-side .woocommerce-mini-cart__buttons > *:last-child { margin-bottom: 0; }
+/* The theme's button (base.css) with the default / accented colours. */
+.cart-widget-side .woocommerce-mini-cart__buttons .button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-height: 42px;
+  padding: 5px 20px;
+  border: 0;
+  vertical-align: middle;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.cart-widget-side .woocommerce-mini-cart__buttons .btn-cart { border-radius: var(--btn-default-brd-radius); color: var(--btn-default-color); background-color: var(--btn-default-bgcolor); }
+.cart-widget-side .woocommerce-mini-cart__buttons .checkout { border-radius: var(--btn-accented-brd-radius); color: var(--btn-accented-color); background-color: var(--btn-accented-bgcolor); }

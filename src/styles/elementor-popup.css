@@ -1,0 +1,11 @@
+/*
+ * The Elementor popups of the homepage (src/components/elementor/ElementorPopup.tsx). Elementor's
+ * frame CSS (dialog + Pro popup) is in src/styles/legacy/elementor-core.css and each popup's own CSS
+ * in public/legacy/elementor/post-<id>.css. Only this is added: Pro's CSS hides a popup document
+ * until Elementor's script shows it (it sets "display: block" on it); here the document is only
+ * rendered inside an open dialog, so it is shown there.
+ */
+.elementor-popup-modal [data-elementor-type="popup"] { display: block; }
+/* The theme's only popup rule (Woodmart int-elementor-pro.css): a section's negative-gap container
+ * is 20px wider than the popup, so without it the 5% offer gets a horizontal scrollbar. */
+.elementor-location-popup { overflow-x: hidden; }
