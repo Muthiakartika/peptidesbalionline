@@ -1,13 +1,14 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
 
 import { ColorAnnotation, ColorInput } from "../../components/ColorInput";
+import { DividerPreview } from "../../components/DividerPreview";
 import { HtmlInput } from "../../components/HtmlInput";
 import { KeptFormatting } from "../../components/KeptFormatting";
 
 /**
  * Rich text like Elementor's text editor: paragraph / Heading 1–6 / quote, bold, italic, underline,
  * strikethrough, code, superscript, subscript, links, text colour, bullet and numbered lists,
- * pictures (from the R2 media library) and, for what plain rich text can't hold, HTML.
+ * pictures (from the R2 media library), divider lines and, for what plain rich text can't hold, HTML.
  *
  * Text converted from WordPress may carry "Original formatting" marks and hidden attributes: they keep
  * the page looking exactly as it did. Leave them be; new text doesn't need them.
@@ -124,6 +125,7 @@ export const richText = defineType({
       of: [inlineImage, inlineHtml],
     }),
     defineArrayMember({ type: "imageBlock" }),
+    defineArrayMember({ type: "dividerBlock" }),
     defineArrayMember({ type: "htmlBlock" }),
     defineArrayMember({ type: "wrapperBlock" }),
   ],
@@ -151,6 +153,18 @@ export const imageBlock = defineType({
   type: "object",
   fields: [defineField({ name: "image", title: "Picture", type: "r2Image" }), defineField({ name: "attrs", type: "string", hidden: true })],
   preview: { select: { alt: "image.alt", url: "image.url" }, prepare: ({ alt, url }) => ({ title: alt || "Picture", subtitle: String(url ?? "").split("/").pop() }) },
+});
+
+/** A horizontal line between parts of the text (<hr>). */
+export const dividerBlock = defineType({
+  name: "dividerBlock",
+  title: "Divider line",
+  type: "object",
+  icon: () => "―",
+  // Hidden: attributes the line had on WordPress (e.g. a class); a new line needs none.
+  fields: [defineField({ name: "attrs", type: "string", hidden: true })],
+  preview: { prepare: () => ({ title: "Divider line" }) },
+  components: { preview: DividerPreview },
 });
 
 export const htmlBlock = defineType({

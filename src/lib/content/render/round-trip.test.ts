@@ -60,6 +60,33 @@ describe("site settings round trip", () => {
   });
 });
 
+describe("divider lines", () => {
+  // Every array of blocks in every converted document.
+  const blockArrays = (value: unknown): unknown[][] =>
+    Array.isArray(value)
+      ? [value, ...value.flatMap(blockArrays)]
+      : value && typeof value === "object"
+        ? Object.values(value).flatMap(blockArrays)
+        : [];
+  const all = [...content.pages, ...content.shared, ...content.popups, ...(content as unknown as { posts: unknown[]; products: unknown[] }).posts, ...(content as unknown as { products: unknown[] }).products];
+  const blocks = blockArrays(all).flat() as { _type?: string; html?: string; attrs?: string }[];
+
+  it("every <hr> is a divider line, not HTML", () => {
+    expect(blocks.filter((b) => b._type === "dividerBlock").length).toBeGreaterThan(1000);
+    expect(blocks.filter((b) => b._type === "htmlBlock" && /^\s*<hr\b[^>]*>\s*$/.test(b.html ?? ""))).toEqual([]);
+  });
+
+  it("drops ChatGPT's position marks, keeps other attributes", () => {
+    const dividers = blocks.filter((b) => b._type === "dividerBlock");
+    expect(dividers.filter((b) => /data-start|data-end/.test(b.attrs ?? ""))).toEqual([]);
+    expect(dividers.some((b) => /"class"/.test(b.attrs ?? ""))).toBe(true);
+  });
+
+  it("a divider line added in the Studio is a plain <hr>", () => {
+    expect(renderRichText([{ _type: "dividerBlock", _key: "a" }])).toBe("<hr>");
+  });
+});
+
 describe("Sanity limits", () => {
   // Sanity refuses documents nested deeper than 20 levels.
   const depth = (value: unknown, level = 0): number => (value && typeof value === "object" ? Math.max(level, ...Object.values(value).map((v) => depth(v, level + 1))) : level);

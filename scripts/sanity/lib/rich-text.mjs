@@ -7,6 +7,7 @@
 //     data-*, style) in the hidden "bodyMeta" field, keyed by the block's _key; spans with attributes
 //     as the "spanAttrs" annotation; whole elements Portable Text can't hold (tables, forms, iframes,
 //     lists with paragraphs inside…) as an "htmlBlock" the editor can still edit as HTML;
+//   * <hr> becomes a "dividerBlock" (a line in the editor, not HTML);
 //   * <div>/<section> wrappers become "wrapperBlock"s holding their own rich text.
 // The round-trip test (src/lib/content/render/round-trip.test.ts) checks every page.
 import { attrsJson, collapse, isBlankText, isTag, isText, keyFor, serialize } from "./dom.mjs";
@@ -193,6 +194,8 @@ export function htmlToRichText(nodes, seed, { boxes = 3 } = {}) {
         blocks.length = before;
         asHtml(node);
       }
+    } else if (node.name === "hr" && !node.children.length) {
+      blocks.push(dividerBlock(node.attribs, seedHere));
     } else if (WRAPPERS.has(node.name) && boxes > 0) {
       // Sanity stores at most 20 levels per document, so boxes inside boxes stop after a few levels
       // (`boxes`); deeper ones stay HTML.
@@ -204,6 +207,20 @@ export function htmlToRichText(nodes, seed, { boxes = 3 } = {}) {
   }
   flushRun();
   return { blocks, meta };
+}
+
+/**
+ * Position marks ChatGPT puts on what it writes; they come along when its text is pasted into
+ * WordPress. Nothing reads them, so a divider line doesn't keep them (the round-trip test ignores
+ * them on <hr>: src/lib/content/render/compare.ts).
+ */
+export const PASTE_MARKS = ["data-start", "data-end"];
+
+/** <hr> → a "Divider line" block, keeping its other attributes (e.g. a class) hidden. */
+export function dividerBlock(attribs, seed) {
+  const kept = Object.fromEntries(Object.entries(attribs ?? {}).filter(([name]) => !PASTE_MARKS.includes(name)));
+  const attrs = attrsJson(kept);
+  return { _type: "dividerBlock", _key: keyFor(seed), ...(attrs ? { attrs } : {}) };
 }
 
 function listBlocks(list, level, seed, blocks, setMeta) {

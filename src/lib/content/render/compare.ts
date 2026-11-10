@@ -6,7 +6,9 @@
  *     to block elements (paragraphs, list items, divs…) or at the edges of the button / icon list
  *     texts don't count;
  *   * <b> = <strong>, <i> = <em>, <del>/<strike> = <s> (the theme styles them alike) when they have no
- *     attributes; empty ones of those (they show nothing) and two of the same written side by side.
+ *     attributes; empty ones of those (they show nothing) and two of the same written side by side;
+ *   * ChatGPT's position marks (data-start, data-end) on <hr>: nothing reads them and the converter
+ *     doesn't keep them on a divider line (scripts/sanity/lib/rich-text.mjs).
  */
 import { isElement, parse, Text, type ChildNode, type Element } from "./html";
 
@@ -16,6 +18,7 @@ const BLOCK = new Set(
 const TRIM_BOXES = ["elementor-button-text", "elementor-icon-list-text"];
 const ALIASES: Record<string, string> = { b: "strong", i: "em", del: "s", strike: "s" };
 const DECORATORS = new Set(["strong", "em", "u", "s", "code", "sup", "sub"]);
+const HR_PASTE_MARKS = new Set(["data-start", "data-end"]);
 
 const isBlock = (node: ChildNode | undefined): boolean =>
   isElement(node) && (BLOCK.has(node.name) || TRIM_BOXES.some((name) => (node.attribs.class ?? "").split(/\s+/).includes(name)));
@@ -121,6 +124,7 @@ function print(nodes: ChildNode[], depth: number, lines: string[]) {
     if (node instanceof Text) lines.push(`${pad}"${node.data}"`);
     else if (isElement(node)) {
       const attrs = Object.keys(node.attribs)
+        .filter((name) => !(node.name === "hr" && HR_PASTE_MARKS.has(name)))
         .sort()
         .map((name) => ` ${name}="${normalizeAttr(name, node.attribs[name])}"`)
         .join("");

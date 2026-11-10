@@ -147,6 +147,8 @@ export function renderRichText(blocks: RichText | undefined, metaJson?: string):
       parts.push(block.html ?? "");
     } else if (block._type === "imageBlock") {
       parts.push(renderImageBlock(block, blockMeta));
+    } else if (block._type === "dividerBlock") {
+      parts.push(`<hr${attrString(parseAttrs(block.attrs))}>`);
     } else if (block._type === "wrapperBlock") {
       const tag = block.tag && SAFE_TAG.test(block.tag) ? block.tag : "div";
       parts.push(`<${tag}${attrString(parseAttrs(block.attrs))}>${renderRichText(block.body, block.bodyMeta)}</${tag}>`);

@@ -32,7 +32,9 @@ export type TextBlock = {
 export type HtmlBlock = { _type: "htmlBlock"; _key?: string; html?: string };
 export type ImageBlock = { _type: "imageBlock"; _key?: string; image?: R2Image; /** hidden */ attrs?: string };
 export type WrapperBlock = { _type: "wrapperBlock"; _key?: string; tag?: string; /** hidden */ attrs?: string; body?: RichText; /** hidden */ bodyMeta?: string };
-export type RichText = (TextBlock | HtmlBlock | ImageBlock | WrapperBlock)[];
+/** A horizontal line (<hr>). */
+export type DividerBlock = { _type: "dividerBlock"; _key?: string; /** hidden */ attrs?: string };
+export type RichText = (TextBlock | HtmlBlock | ImageBlock | DividerBlock | WrapperBlock)[];
 
 /** What a block's HTML had besides its text (hidden "bodyMeta", JSON keyed by block _key). */
 export type BlockMeta = { attrs?: Record<string, string>; bare?: boolean; list?: { attrs?: Record<string, string> } };

@@ -10,7 +10,7 @@ import { elementorObjects } from "./objects/elementor";
 import { imageWithAlt } from "./objects/imageWithAlt";
 import { legacyHtml } from "./objects/legacyHtml";
 import { r2Image } from "./objects/r2Image";
-import { htmlBlock, imageBlock, inlineText, richText, wrapperBlock } from "./objects/richText";
+import { dividerBlock, htmlBlock, imageBlock, inlineText, richText, wrapperBlock } from "./objects/richText";
 import { seo } from "./objects/seo";
 
 // Every content type editors see in Sanity Studio (/studio).
@@ -23,6 +23,7 @@ export const schemaTypes = [
   richText,
   inlineText,
   imageBlock,
+  dividerBlock,
   htmlBlock,
   wrapperBlock,
   ...elementorObjects,
