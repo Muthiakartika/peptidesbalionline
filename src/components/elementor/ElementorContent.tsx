@@ -25,6 +25,8 @@ import parse, { attributesToProps, domToReact, Element, type DOMNode, type HTMLR
 import { cleanLegacyHtml } from "@/lib/legacy-html";
 
 import { BlogGridIsland, type BlogGridProps } from "../blog/BlogGridIsland";
+import { CoaLibrary } from "../coa/CoaLibrary";
+import type { CoaLibraryProps } from "../coa/types";
 import { ContentAccordion, ElementorToggle, WoodmartAccordion } from "./Accordions";
 import { CopyIcon } from "./CopyIcon";
 import { ElementorCounter } from "./ElementorCounter";
@@ -75,6 +77,15 @@ const optionsFor = (path: string): HTMLReactParserOptions => ({
       return (
         <Tag {...props(node, "data-island", "data-island-props")}>
           <BlogGridIsland {...grid} sharePath={path} />
+        </Tag>
+      );
+    }
+    // The COA library on the lab results page (put in place of its COA cards by src/lib/coa/library.ts).
+    if (attribs["data-island"] === "coa-library") {
+      const library = JSON.parse(attribs["data-island-props"]) as CoaLibraryProps;
+      return (
+        <Tag {...props(node, "data-island", "data-island-props")}>
+          <CoaLibrary {...library} />
         </Tag>
       );
     }

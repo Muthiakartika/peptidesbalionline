@@ -24,6 +24,7 @@ import { notFound } from "next/navigation";
 
 import { ElementorPage } from "@/components/elementor/ElementorPage";
 import { InsightsPage } from "@/components/insights/InsightsPage";
+import { withCoaLibrary } from "@/lib/coa/library";
 import { archiveMetadata } from "@/components/shop/archive-metadata";
 import { getElementorPage, landingPageNames } from "@/lib/elementor/pages";
 
@@ -54,5 +55,7 @@ export default async function LandingPage({ params }: PageProps<"/landing/[name]
   // /insights/ has its own design since 11 Nov 2026 (src/components/insights/InsightsPage.tsx);
   // only its SEO texts still come from the page content.
   if (page.family === "blog" || page.path === "/insights/") return <InsightsPage page={page} />;
+  // The lab results page: its COA cards become the interactive COA library (src/lib/coa/library.ts).
+  if (page.path === "/lab-results-certificates-of-analysis/") return <ElementorPage page={withCoaLibrary(page)} linkedStyles />;
   return <ElementorPage page={page} linkedStyles />;
 }
