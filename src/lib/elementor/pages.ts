@@ -55,11 +55,15 @@ export function isElementorPageName(name: string): name is ElementorPageName {
 
 /** The page with this name, or null. Each page's file is loaded only when it's asked for, so a page
  * doesn't carry the other 52 with it. */
+/** Pages never read from Sanity (and hidden in the Studio, src/sanity/structure.ts). */
+export const FIXED_PAGES = new Set(["calculator"]);
+
 export async function getElementorPage(name: string): Promise<ElementorPageData | null> {
   if (!isElementorPageName(name)) return null;
   // Edited in Sanity (CONTENT_SOURCE=sanity, src/lib/content/sanity.ts); a page missing there falls
-  // back to its copy in src/content/pages/.
-  if (contentFromSanity) {
+  // back to its copy in src/content/pages/. The tool pages (/calculator/, like /protocol-builder/)
+  // are not editable: they always come from their copy here (owner's choice, 11 Nov 2026).
+  if (contentFromSanity && !FIXED_PAGES.has(name)) {
     const page = await getSanityPage(name);
     if (page) return page;
   }

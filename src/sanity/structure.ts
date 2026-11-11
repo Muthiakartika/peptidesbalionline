@@ -16,10 +16,17 @@ export const structure: StructureResolver = (S) =>
           S.list()
             .title("Pages")
             .items([
+              // The tool pages (/calculator/; /protocol-builder/ isn't in Sanity at all) are fixed in
+              // code, so they are left out here (see FIXED_PAGES in src/lib/elementor/pages.ts).
               S.listItem()
                 .title("All pages")
                 .id("all-pages")
-                .child(S.documentTypeList("page").title("All pages").defaultOrdering([{ field: "path", direction: "asc" }])),
+                .child(
+                  S.documentTypeList("page")
+                    .title("All pages")
+                    .filter('_type == "page" && family != "tools"')
+                    .defaultOrdering([{ field: "path", direction: "asc" }]),
+                ),
               S.divider(),
               ...FAMILIES.map((family) =>
                 S.listItem()
