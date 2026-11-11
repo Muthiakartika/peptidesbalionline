@@ -1,0 +1,95 @@
+{
+ "generatedAt": "2026-11-11T03:49:03Z",
+ "path": "/protocol-builder/",
+ "postId": 10970,
+ "articleClass": "entry-content post-10970 page type-page status-publish hentry",
+ "pageTitleHtml": "<div class=\"wd-page-title page-title  page-title-default title-size-default title-design-centered color-scheme-light\" style=\"\">\n\t\t\t\t\t<div class=\"wd-page-title-bg wd-fill\">\n\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"container\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<h1 class=\"entry-title title\">\n\t\t\t\t\t\t\t\t\tProtocol Builder\t\t\t\t\t\t\t\t</h1>\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<nav class=\"wd-breadcrumbs\"><a href=\"/\">Home</a><span class=\"wd-delimiter\"></span><span class=\"wd-last\">Protocol Builder</span></nav>\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t</div>",
+ "html": "<link rel=\"stylesheet\" id=\"arp-planner-inline-css\" href=\"/legacy/vendor/atlas-research-planner/planner.css\" media=\"all\" />\n<div class=\"arp-planner\" id=\"arp-planner\" style=\"--arp-primary:#b8952a;--arp-primary-strong:#8a6d16;--arp-accent:#242424;--arp-primary-soft:#f5f0e1;--arp-primary-on-soft:#826615\">\n\t<header class=\"arp-hero\">\n\t\t\t\t<p class=\"arp-hero__eyebrow\">Atlas Longevity · Research tools</p>\n\t\t<h2 class=\"arp-hero__title\">Protocol Builder</h2>\n\t\t\t\t\t<div class=\"arp-hero__intro\"><p>Build your research protocol: choose your products, enter your own amounts, how often and for how long, and add exactly what you need to your cart.</p>\n</div>\n\t\t\t\t<ol class=\"arp-steps\">\n\t\t\t<li class=\"arp-steps__item\">\n\t\t\t\t<span class=\"arp-steps__number\" aria-hidden=\"true\">1</span>\n\t\t\t\t<span class=\"arp-steps__text\">\n\t\t\t\t\t<strong>Choose products</strong>\n\t\t\t\t\t<span>Pick a popular combination or add products from the research catalogue to your protocol.</span>\n\t\t\t\t</span>\n\t\t\t</li>\n\t\t\t<li class=\"arp-steps__item\">\n\t\t\t\t<span class=\"arp-steps__number\" aria-hidden=\"true\">2</span>\n\t\t\t\t<span class=\"arp-steps__text\">\n\t\t\t\t\t<strong>Plan quantities</strong>\n\t\t\t\t\t<span>Enter your own amount per use, times per week and duration. The builder never recommends amounts and fills them in only from a pre-built protocol you choose.</span>\n\t\t\t\t</span>\n\t\t\t</li>\n\t\t\t<li class=\"arp-steps__item\">\n\t\t\t\t<span class=\"arp-steps__number\" aria-hidden=\"true\">3</span>\n\t\t\t\t<span class=\"arp-steps__text\">\n\t\t\t\t\t<strong>Add to cart</strong>\n\t\t\t\t\t<span>Review whole-unit quantities and add them to your cart in one step.</span>\n\t\t\t\t</span>\n\t\t\t</li>\n\t\t</ol>\n\t\t<div class=\"arp-hero__disclaimer\" role=\"note\">\n\t\t\t<p>For laboratory research inventory only. This planner performs arithmetic on the values in your protocol; it does not provide medical advice or recommend amounts, schedules or uses.</p>\n\t\t\t<a class=\"arp-hero__disclaimer-link\" href=\"#arp-disclaimer\" data-arp-disclaimer-trigger>Read the full disclaimer</a>\n\t\t</div>\n\t</header>\n\n\t<div class=\"arp-app\" data-arp-root aria-busy=\"true\">\n\t\t\t\t\t<div class=\"arp-skeleton\" aria-hidden=\"true\">\n\t\t\t\t<div class=\"arp-layout\">\n\t\t\t\t\t<div class=\"arp-main\">\n\t\t\t\t\t\t<div class=\"arp-card arp-sk arp-sk--toolbar\"></div>\n\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"arp-sk arp-sk--choice\"></div>\n\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"arp-sk arp-sk--tabs\"></div>\n\t\t\t\t\t\t<div class=\"arp-card arp-sk-card\">\n\t\t\t\t\t\t\t<div class=\"arp-sk arp-sk--heading\"></div>\n\t\t\t\t\t\t\t<div class=\"arp-sk arp-sk--input\"></div>\n\t\t\t\t\t\t\t<div class=\"arp-sk-chips\">\n\t\t\t\t\t\t\t\t<span class=\"arp-sk arp-sk--chip\"></span>\n\t\t\t\t\t\t\t\t<span class=\"arp-sk arp-sk--chip\"></span>\n\t\t\t\t\t\t\t\t<span class=\"arp-sk arp-sk--chip\"></span>\n\t\t\t\t\t\t\t\t<span class=\"arp-sk arp-sk--chip\"></span>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"arp-sk-grid\">\n\t\t\t\t\t\t\t\t<span class=\"arp-sk arp-sk--product\"></span>\n\t\t\t\t\t\t\t\t<span class=\"arp-sk arp-sk--product\"></span>\n\t\t\t\t\t\t\t\t<span class=\"arp-sk arp-sk--product\"></span>\n\t\t\t\t\t\t\t\t<span class=\"arp-sk arp-sk--product\"></span>\n\t\t\t\t\t\t\t\t<span class=\"arp-sk arp-sk--product\"></span>\n\t\t\t\t\t\t\t\t<span class=\"arp-sk arp-sk--product\"></span>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<p class=\"arp-sr-only arp-loading-status\" role=\"status\">Loading the protocol builder…</p>\n\t\t\t<noscript>\n\t\t\t\t<style>.arp-skeleton,.arp-loading-status{display:none!important}</style>\n\t\t\t\t<div class=\"arp-notice arp-notice--warning\">\n\t\t\t\t\t<p>\n\t\t\t\t\t\tThe protocol builder needs JavaScript to calculate quantities. Please enable JavaScript in your browser, or continue browsing the shop.\t\t\t\t\t\t<a href=\"/shop/\">Go to the shop</a>\n\t\t\t\t\t</p>\n\t\t\t\t</div>\n\t\t\t</noscript>\n\t\t\t</div>\n\t<!--arp-config-->\n\n\t<section class=\"arp-info\" aria-labelledby=\"arp-how-title\">\n\t\t<h2 id=\"arp-how-title\" class=\"arp-info__title\">How the calculation works</h2>\n\t\t<div class=\"arp-info__grid\">\n\t\t\t<div class=\"arp-info__block\">\n\t\t\t\t<h3>The formula</h3>\n\t\t\t\t<ol class=\"arp-info__list\">\n\t\t\t\t\t<li>Total required = amount per use × times per week × duration in weeks.</li>\n\t\t\t\t\t<li>Capacity per unit = merchant-verified amount per container × containers per purchase unit.</li>\n\t\t\t\t\t<li>Units to buy = total required ÷ capacity per unit, rounded up to the next whole unit. You can change the number of units yourself, for example to add one spare.</li>\n\t\t\t\t\t<li>Each vial lasts = capacity of one vial ÷ (amount per use × times per week), shown in weeks and in uses.</li>\n\t\t\t\t\t<li>Left over = units × capacity per unit − total required. If you choose fewer units than calculated, the difference is shown as a shortfall with the date the supply runs out.</li>\n\t\t\t\t\t<li>Price = units × current store price per unit.</li>\n\t\t\t\t</ol>\n\t\t\t</div>\n\t\t\t<div class=\"arp-info__block\">\n\t\t\t\t<h3>Rounding and units</h3>\n\t\t\t\t<ul class=\"arp-info__list\">\n\t\t\t\t\t<li>Purchase quantities are always whole units, rounded up.</li>\n\t\t\t\t\t<li>Values accept up to 4 decimal places. All arithmetic is exact decimal arithmetic, without floating-point rounding.</li>\n\t\t\t\t\t<li>Units are only converted within the same kind: mcg, mg and g. Mass, IU, mL, actuations and pieces are never converted into each other.</li>\n\t\t\t\t\t<li>Displayed amounts are rounded half-up to 4 decimal places; percentages are truncated to one decimal place.</li>\n\t\t\t\t\t<li>Products without merchant-verified data cannot be calculated until the store verifies them.</li>\n\t\t\t\t</ul>\n\t\t\t</div>\n\t\t</div>\n\t</section>\n\n\t<section class=\"arp-faq\" aria-labelledby=\"arp-faq-title\">\n\t\t<h2 id=\"arp-faq-title\" class=\"arp-info__title\">Frequently asked questions</h2>\n\t\t<details class=\"arp-faq__item\">\n\t\t\t<summary>Does the planner recommend amounts?</summary>\n\t\t\t<p>No. The builder never suggests or recommends amounts, schedules or uses. Amounts and frequencies start empty unless you choose a pre-built protocol, which fills in the values the store wrote; you can change every one of them. Only a few other values start pre-set, and you can change all of them: the protocol start date (today), the duration in weeks (the store default) and, for items that can only be bought by quantity (such as supplies and bundles), a purchase quantity of 1. The builder performs arithmetic on the research values in your protocol and converts the result into whole purchase units.</p>\n\t\t</details>\n\t\t<details class=\"arp-faq__item\">\n\t\t\t<summary>How are prices calculated?</summary>\n\t\t\t<p>Estimates multiply the whole units by the current WooCommerce store price. They exclude shipping, taxes and discounts. WooCommerce calculates the final total in your cart and at checkout.</p>\n\t\t</details>\n\t\t<details class=\"arp-faq__item\">\n\t\t\t<summary>Is my protocol stored?</summary>\n\t\t\t<p>Your workspace is saved only in this browser on this device. It is stored in your account only if you sign in and choose to save it, and you can delete it at any time. Share links are private, expire and can be revoked.</p>\n\t\t</details>\n\t\t<details class=\"arp-faq__item\">\n\t\t\t<summary>What are popular combinations?</summary>\n\t\t\t<p>Lists of products put together by the store. Adding a combination only adds the products to your protocol: no amounts or schedules are included, and you enter your own values for each product.</p>\n\t\t</details>\n\t\t<details class=\"arp-faq__item\">\n\t\t\t<summary>What are pre-built protocols?</summary>\n\t\t\t<p>Protocols written by the store: products with an amount per use, times per week and weeks. Choosing one copies its values into your protocol, where you check them and can change every value before you order. The store, not the builder, is responsible for what a pre-built protocol contains.</p>\n\t\t</details>\n\t\t<details class=\"arp-faq__item\">\n\t\t\t<summary>What is a research inventory review?</summary>\n\t\t\t<p>With a protocol start date, the timeline marks dates on which the estimated inventory changes: the start, a container estimated to be used up, an estimated run-out and the end of the protocol. They are checkpoints for reviewing stock, not dosing or administration reminders.</p>\n\t\t</details>\n\t</section>\n\n\t<section class=\"arp-disclaimer-full\" id=\"arp-disclaimer\" aria-labelledby=\"arp-disclaimer-title\" tabindex=\"-1\">\n\t\t<h2 id=\"arp-disclaimer-title\" class=\"arp-info__title\">Disclaimer</h2>\n\t\t<div class=\"arp-disclaimer-full__body\" data-arp-disclaimer-body>\n\t\t\t<p>This planner is an arithmetic tool for laboratory inventory and procurement. It does not provide medical advice and does not recommend amounts, schedules or uses. All values are entered by you and are treated as research data. Products are supplied for laboratory research use only.</p>\n\t\t\t<p>Estimates use current store prices and exclude shipping, taxes and discounts. WooCommerce calculates the final total in your cart and at checkout.</p>\n\t\t</div>\n\t</section>\n</div>",
+ "config": {
+  "title": "Protocol Builder",
+  "intro": "Build your research protocol: choose your products, enter your own amounts, how often and for how long, and add exactly what you need to your cart.",
+  "disclaimer": "This planner is an arithmetic tool for laboratory inventory and procurement. It does not provide medical advice and does not recommend amounts, schedules or uses. All values are entered by you and are treated as research data. Products are supplied for laboratory research use only.",
+  "store_protocol_notice": "Written by the store for research use. Check every value before you order. Not medical advice.",
+  "max_lines": 25,
+  "allowed_formats": [
+   "vial",
+   "pen",
+   "nasal_spray"
+  ],
+  "format_labels": {
+   "vial": "Vials",
+   "pen": "Pens",
+   "nasal_spray": "Nasal sprays",
+   "bundle": "Kits & bundles",
+   "supply": "Supplies",
+   "other": "Other"
+  },
+  "format_order": [
+   "vial",
+   "pen",
+   "nasal_spray",
+   "bundle",
+   "supply",
+   "other"
+  ],
+  "default_period_unit": "week",
+  "default_periods": 8,
+  "show_images": true,
+  "show_timeline": true,
+  "sticky_summary": true,
+  "color_primary": "#b8952a",
+  "color_accent": "#242424",
+  "logo": null,
+  "price_display_policy": "estimate",
+  "stale_price_minutes": 15,
+  "share_default_days": 30,
+  "share_max_days": 90,
+  "max_plans_per_user": 50,
+  "whatsapp_number": "",
+  "whatsapp_template": "",
+  "version": "1.7.1",
+  "currency": {
+   "code": "IDR",
+   "symbol": "Rp",
+   "position": "left",
+   "decimals": 2,
+   "decimal_separator": ".",
+   "thousand_separator": ","
+  },
+  "locale": "en-US",
+  "timezone": "+00:00",
+  "features": {
+   "account_plans": false,
+   "account_plans_enabled": true,
+   "sharing": true,
+   "exports": true,
+   "whatsapp": false,
+   "product_entry": false,
+   "prices": true
+  },
+  "limits": {
+   "max_events_per_period": 1000,
+   "max_periods_day": 3660,
+   "max_periods_week": 520,
+   "max_periods_month": 120,
+   "max_event_count": 1000000,
+   "max_quantity": 9999
+  },
+  "primary_text": "#8a6d16",
+  "preselect": {
+   "products": [],
+   "category": ""
+  },
+  "store_protocols_any": true,
+  "store_protocols_members": true
+ },
+ "assetVersion": "1794058324",
+ "seo": {
+  "title": "Protocol Builder - Atlas Longevity",
+  "description": "Plan a peptide research protocol: enter the amount per use, frequency and duration to calculate how many units to buy and how long each vial will last.",
+  "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+  "ogType": "article",
+  "ogTitle": "Protocol Builder - Atlas Longevity",
+  "ogDescription": "Plan a peptide research protocol: enter the amount per use, frequency and duration to calculate how many units to buy and how long each vial will last."
+ }
+}

@@ -1,0 +1,1 @@
+{"capturedAt":"2026-11-11","route":"store-protocols?limit=0","status":400,"response":{"code":"rest_invalid_param","message":"Invalid parameter(s): limit","data":{"status":400,"params":{"limit":"limit must be between 1 (inclusive) and 50 (inclusive)"},"details":{"limit":{"code":"rest_out_of_bounds","message":"limit must be between 1 (inclusive) and 50 (inclusive)","data":null}}}}}

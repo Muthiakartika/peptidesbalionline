@@ -1,0 +1,30 @@
+{
+ "features": {
+  "account_plans": false,
+  "account_plans_enabled": true,
+  "sharing": true,
+  "exports": true,
+  "whatsapp": false,
+  "product_entry": false,
+  "prices": true
+ },
+ "limits": {
+  "max_events_per_period": 1000,
+  "max_periods_day": 3660,
+  "max_periods_week": 520,
+  "max_periods_month": 120,
+  "max_event_count": 1000000,
+  "max_quantity": 9999,
+  "max_lines": 25
+ },
+ "currency": {
+  "code": "IDR",
+  "symbol": "Rp",
+  "decimals": 2,
+  "decimal_separator": ".",
+  "thousand_separator": ",",
+  "position": "left"
+ },
+ "locale": "en_US",
+ "timezone": "+00:00"
+}

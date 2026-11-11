@@ -1,0 +1,1 @@
+{"capturedAt":"2026-11-11","request":{"lines":"x"},"status":400,"response":{"code":"rest_invalid_param","message":"Invalid parameter(s): lines","data":{"status":400,"params":{"lines":"Invalid parameter."},"details":[]}}}

@@ -42,7 +42,8 @@ describe("proxy", () => {
   });
 
   it("leaves other addresses to their routes (unknown ones get the 404 page there)", async () => {
-    for (const address of ["/no-such-page/", "/peptide/nowhere/", "/protocol-builder/"]) {
+    // /protocol-builder/ has its own route (src/app/(store)/protocol-builder/page.tsx); the others none.
+    for (const address of ["/no-such-page/", "/peptide/nowhere/", "/protocol-builder/", "/protocol-builder/foo/"]) {
       expect((await run(address)).headers.get("x-middleware-next")).toBe("1");
     }
   });

@@ -26,10 +26,11 @@ describe("sitemaps", () => {
     expect(xml).not.toMatch(/&(?!amp;|lt;|gt;|quot;|apos;)/);
   });
 
-  it("lists only addresses the rebuild serves (the Protocol Builder comes in Phase 6c)", async () => {
-    const pages = new Set(["/shop/", ...Object.keys(elementorPageNames)]);
+  it("lists only addresses the rebuild serves", async () => {
+    // /shop/ and /protocol-builder/ have routes of their own; the other pages come from the page content.
+    const pages = new Set(["/shop/", "/protocol-builder/", ...Object.keys(elementorPageNames)]);
     const missing = sitemapEntries("page").map((entry) => entry.path).filter((path) => !pages.has(path));
-    expect(missing).toEqual(["/protocol-builder/"]);
+    expect(missing).toEqual([]);
     const posts = new Set(Object.keys(blogPostSlugs));
     expect(sitemapEntries("post").every((entry) => posts.has(entry.path))).toBe(true);
     const products = new Set(["/shop/", ...(await getAllProducts()).map((product) => product.path)]);

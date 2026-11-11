@@ -1,0 +1,407 @@
+{
+ "all_count": 3,
+ "groups": [
+  {
+   "key": "fat-metabolism",
+   "label": "Fat metabolism",
+   "count": 3
+  }
+ ],
+ "product_counts": [
+  [
+   760,
+   1
+  ],
+  [
+   3903,
+   1
+  ],
+  [
+   4023,
+   1
+  ]
+ ],
+ "version": "7668d00ada80",
+ "items": [
+  {
+   "id": "5-amino-1mq-vial-recommended",
+   "name": "5-Amino-1MQ vial · recommended",
+   "group": {
+    "key": "fat-metabolism",
+    "label": "Fat metabolism"
+   },
+   "description": "Commonly used for: Fat loss, Healthy metabolism, Improved body composition, Reduced fat accumulation, Exercise performance",
+   "products": [
+    {
+     "product_id": 4023,
+     "name": "5-Amino-1MQ",
+     "format": "vial",
+     "image": {
+      "src": "https://peptidesbali.online/wp-content/uploads/2026/08/5-Amino-1MQ-10mg-300x300.webp",
+      "srcset": "https://peptidesbali.online/wp-content/uploads/2026/08/5-Amino-1MQ-10mg-300x300.webp 300w, https://peptidesbali.online/wp-content/uploads/2026/08/5-Amino-1MQ-10mg-1024x1024.webp 1024w, https://peptidesbali.online/wp-content/uploads/2026/08/5-Amino-1MQ-10mg-150x150.webp 150w, https://peptidesbali.online/wp-content/uploads/2026/08/5-Amino-1MQ-10mg-768x768.webp 768w, https://peptidesbali.online/wp-content/uploads/2026/08/5-Amino-1MQ-10mg-600x600.webp 600w, https://peptidesbali.online/wp-content/uploads/2026/08/5-Amino-1MQ-10mg-80x80.webp 80w, https://peptidesbali.online/wp-content/uploads/2026/08/5-Amino-1MQ-10mg.webp 1254w",
+      "sizes": "(max-width: 300px) 100vw, 300px",
+      "alt": "5-Amino-1MQ",
+      "width": 300,
+      "height": 300,
+      "placeholder": false
+     }
+    }
+   ],
+   "lead": {
+    "product_id": 4023,
+    "amount": "2.5",
+    "unit": "mg",
+    "events_per_period": 7,
+    "periods": 1,
+    "start_week": 1
+   },
+   "line_count": 2,
+   "total_weeks": 2,
+   "from_price": "1200000.00",
+   "currency_code": "IDR"
+  },
+  {
+   "id": "5-amino-1mq-pen-recommended",
+   "name": "5-Amino-1MQ pen · recommended",
+   "group": {
+    "key": "fat-metabolism",
+    "label": "Fat metabolism"
+   },
+   "description": "Commonly used for: Fat metabolism, Daily energy, Body composition, Lean muscle preservation, Metabolic health",
+   "products": [
+    {
+     "product_id": 760,
+     "name": "5-AMINO-1MQ",
+     "format": "pen",
+     "image": {
+      "src": "https://peptidesbali.online/wp-content/uploads/2026/04/5-AMINO-1MQ-50mg-3-Peptide-Pen-Bali-1-300x300.png",
+      "srcset": "https://peptidesbali.online/wp-content/uploads/2026/04/5-AMINO-1MQ-50mg-3-Peptide-Pen-Bali-1-300x300.png 300w, https://peptidesbali.online/wp-content/uploads/2026/04/5-AMINO-1MQ-50mg-3-Peptide-Pen-Bali-1-1024x1024.png 1024w, https://peptidesbali.online/wp-content/uploads/2026/04/5-AMINO-1MQ-50mg-3-Peptide-Pen-Bali-1-150x150.png 150w, https://peptidesbali.online/wp-content/uploads/2026/04/5-AMINO-1MQ-50mg-3-Peptide-Pen-Bali-1-768x768.png 768w, https://peptidesbali.online/wp-content/uploads/2026/04/5-AMINO-1MQ-50mg-3-Peptide-Pen-Bali-1-600x600.png 600w, https://peptidesbali.online/wp-content/uploads/2026/04/5-AMINO-1MQ-50mg-3-Peptide-Pen-Bali-1-80x80.png 80w, https://peptidesbali.online/wp-content/uploads/2026/04/5-AMINO-1MQ-50mg-3-Peptide-Pen-Bali-1.png 1254w",
+      "sizes": "(max-width: 300px) 100vw, 300px",
+      "alt": "5-Amino-1MQ 50mg peptide pen for fat metabolism and body composition in Bali",
+      "width": 300,
+      "height": 300,
+      "placeholder": false
+     }
+    }
+   ],
+   "lead": {
+    "product_id": 760,
+    "amount": "5",
+    "unit": "mg",
+    "events_per_period": 7,
+    "periods": 1,
+    "start_week": 1
+   },
+   "line_count": 2,
+   "total_weeks": 6,
+   "from_price": "3700000.00",
+   "currency_code": "IDR"
+  },
+  {
+   "id": "aod-9604-pen-recommended-once-daily",
+   "name": "AOD-9604 pen · recommended once daily",
+   "group": {
+    "key": "fat-metabolism",
+    "label": "Fat metabolism"
+   },
+   "description": "Commonly used for: Fat metabolism, Body composition, Exercise and cardio programmes, Lean muscle preservation, Metabolic health",
+   "products": [
+    {
+     "product_id": 3903,
+     "name": "AOD-9604 10mg Pen",
+     "format": "pen",
+     "image": {
+      "src": "https://peptidesbali.online/wp-content/uploads/2026/05/AOD-9604-10mg-3-Peptide-Pen-Bali-1-300x300.png",
+      "srcset": "https://peptidesbali.online/wp-content/uploads/2026/05/AOD-9604-10mg-3-Peptide-Pen-Bali-1-300x300.png 300w, https://peptidesbali.online/wp-content/uploads/2026/05/AOD-9604-10mg-3-Peptide-Pen-Bali-1-1024x1024.png 1024w, https://peptidesbali.online/wp-content/uploads/2026/05/AOD-9604-10mg-3-Peptide-Pen-Bali-1-150x150.png 150w, https://peptidesbali.online/wp-content/uploads/2026/05/AOD-9604-10mg-3-Peptide-Pen-Bali-1-768x768.png 768w, https://peptidesbali.online/wp-content/uploads/2026/05/AOD-9604-10mg-3-Peptide-Pen-Bali-1-600x600.png 600w, https://peptidesbali.online/wp-content/uploads/2026/05/AOD-9604-10mg-3-Peptide-Pen-Bali-1-80x80.png 80w, https://peptidesbali.online/wp-content/uploads/2026/05/AOD-9604-10mg-3-Peptide-Pen-Bali-1.png 1254w",
+      "sizes": "(max-width: 300px) 100vw, 300px",
+      "alt": "AOD-9604 10mg peptide pen for fat metabolism and body composition in Bali - AOD 9604 Bali peptide for weight management support",
+      "width": 300,
+      "height": 300,
+      "placeholder": false
+     }
+    }
+   ],
+   "lead": {
+    "product_id": 3903,
+    "amount": "250",
+    "unit": "mcg",
+    "events_per_period": 7,
+    "periods": 1,
+    "start_week": 1
+   },
+   "line_count": 2,
+   "total_weeks": 8,
+   "from_price": "3200000.00",
+   "currency_code": "IDR"
+  }
+ ],
+ "details": {
+  "5-amino-1mq-vial-recommended": {
+   "id": "5-amino-1mq-vial-recommended",
+   "name": "5-Amino-1MQ vial · recommended",
+   "group": {
+    "key": "fat-metabolism",
+    "label": "Fat metabolism"
+   },
+   "description": "Commonly used for: Fat loss, Healthy metabolism, Improved body composition, Reduced fat accumulation, Exercise performance",
+   "notes": "Most customers continue for 2-4 weeks before taking a short break or moving onto a larger vial for a longer protocol.\nWeek 2 onwards: if well tolerated.",
+   "products": [
+    {
+     "product_id": 4023,
+     "name": "5-Amino-1MQ",
+     "format": "vial",
+     "image": {
+      "src": "https://peptidesbali.online/wp-content/uploads/2026/08/5-Amino-1MQ-10mg-300x300.webp",
+      "srcset": "https://peptidesbali.online/wp-content/uploads/2026/08/5-Amino-1MQ-10mg-300x300.webp 300w, https://peptidesbali.online/wp-content/uploads/2026/08/5-Amino-1MQ-10mg-1024x1024.webp 1024w, https://peptidesbali.online/wp-content/uploads/2026/08/5-Amino-1MQ-10mg-150x150.webp 150w, https://peptidesbali.online/wp-content/uploads/2026/08/5-Amino-1MQ-10mg-768x768.webp 768w, https://peptidesbali.online/wp-content/uploads/2026/08/5-Amino-1MQ-10mg-600x600.webp 600w, https://peptidesbali.online/wp-content/uploads/2026/08/5-Amino-1MQ-10mg-80x80.webp 80w, https://peptidesbali.online/wp-content/uploads/2026/08/5-Amino-1MQ-10mg.webp 1254w",
+      "sizes": "(max-width: 300px) 100vw, 300px",
+      "alt": "5-Amino-1MQ",
+      "width": 300,
+      "height": 300,
+      "placeholder": false
+     },
+     "permalink": "/product/5-amino-1mq-10mg/"
+    }
+   ],
+   "plan": {
+    "schema": "arp-plan",
+    "version": 1,
+    "title": "5-Amino-1MQ vial · recommended",
+    "start_date": null,
+    "lines": [
+     {
+      "id": "s1",
+      "product_id": 4023,
+      "variation_id": 0,
+      "variation_attributes": {},
+      "mode": "schedule",
+      "amount": "2.5",
+      "unit": "mg",
+      "events_per_period": 7,
+      "period_unit": "week",
+      "periods": 1,
+      "start_date": null,
+      "override_quantity": null,
+      "manual_quantity": null,
+      "label": "Week 1"
+     },
+     {
+      "id": "s2",
+      "product_id": 4023,
+      "variation_id": 0,
+      "variation_attributes": {},
+      "mode": "schedule",
+      "amount": "5",
+      "unit": "mg",
+      "events_per_period": 7,
+      "period_unit": "week",
+      "periods": 1,
+      "start_date": null,
+      "override_quantity": null,
+      "manual_quantity": null,
+      "label": "Week 2 onwards"
+     }
+    ],
+    "notes": ""
+   },
+   "start_weeks": {
+    "s1": 1,
+    "s2": 2
+   },
+   "lines": [
+    {
+     "id": "s1",
+     "default_variation_id": 5625,
+     "variation_label": ""
+    },
+    {
+     "id": "s2",
+     "default_variation_id": 5625,
+     "variation_label": ""
+    }
+   ],
+   "line_count": 2,
+   "total_weeks": 2,
+   "from_price": "1200000.00",
+   "currency_code": "IDR",
+   "version": "7668d00ada80"
+  },
+  "5-amino-1mq-pen-recommended": {
+   "id": "5-amino-1mq-pen-recommended",
+   "name": "5-Amino-1MQ pen · recommended",
+   "group": {
+    "key": "fat-metabolism",
+    "label": "Fat metabolism"
+   },
+   "description": "Commonly used for: Fat metabolism, Daily energy, Body composition, Lean muscle preservation, Metabolic health",
+   "notes": "Most customers continue for 6-8 weeks.\nWeek 2 onwards: if well tolerated.\nTiming (week 1): same time each day.",
+   "products": [
+    {
+     "product_id": 760,
+     "name": "5-AMINO-1MQ",
+     "format": "pen",
+     "image": {
+      "src": "https://peptidesbali.online/wp-content/uploads/2026/04/5-AMINO-1MQ-50mg-3-Peptide-Pen-Bali-1-300x300.png",
+      "srcset": "https://peptidesbali.online/wp-content/uploads/2026/04/5-AMINO-1MQ-50mg-3-Peptide-Pen-Bali-1-300x300.png 300w, https://peptidesbali.online/wp-content/uploads/2026/04/5-AMINO-1MQ-50mg-3-Peptide-Pen-Bali-1-1024x1024.png 1024w, https://peptidesbali.online/wp-content/uploads/2026/04/5-AMINO-1MQ-50mg-3-Peptide-Pen-Bali-1-150x150.png 150w, https://peptidesbali.online/wp-content/uploads/2026/04/5-AMINO-1MQ-50mg-3-Peptide-Pen-Bali-1-768x768.png 768w, https://peptidesbali.online/wp-content/uploads/2026/04/5-AMINO-1MQ-50mg-3-Peptide-Pen-Bali-1-600x600.png 600w, https://peptidesbali.online/wp-content/uploads/2026/04/5-AMINO-1MQ-50mg-3-Peptide-Pen-Bali-1-80x80.png 80w, https://peptidesbali.online/wp-content/uploads/2026/04/5-AMINO-1MQ-50mg-3-Peptide-Pen-Bali-1.png 1254w",
+      "sizes": "(max-width: 300px) 100vw, 300px",
+      "alt": "5-Amino-1MQ 50mg peptide pen for fat metabolism and body composition in Bali",
+      "width": 300,
+      "height": 300,
+      "placeholder": false
+     },
+     "permalink": "/product/5-amino-1mq-pen/"
+    }
+   ],
+   "plan": {
+    "schema": "arp-plan",
+    "version": 1,
+    "title": "5-Amino-1MQ pen · recommended",
+    "start_date": null,
+    "lines": [
+     {
+      "id": "s1",
+      "product_id": 760,
+      "variation_id": 0,
+      "variation_attributes": {},
+      "mode": "schedule",
+      "amount": "5",
+      "unit": "mg",
+      "events_per_period": 7,
+      "period_unit": "week",
+      "periods": 1,
+      "start_date": null,
+      "override_quantity": null,
+      "manual_quantity": null,
+      "label": "Week 1"
+     },
+     {
+      "id": "s2",
+      "product_id": 760,
+      "variation_id": 0,
+      "variation_attributes": {},
+      "mode": "schedule",
+      "amount": "10",
+      "unit": "mg",
+      "events_per_period": 7,
+      "period_unit": "week",
+      "periods": 5,
+      "start_date": null,
+      "override_quantity": null,
+      "manual_quantity": null,
+      "label": "Week 2 onwards"
+     }
+    ],
+    "notes": ""
+   },
+   "start_weeks": {
+    "s1": 1,
+    "s2": 2
+   },
+   "lines": [
+    {
+     "id": "s1",
+     "default_variation_id": 9572,
+     "variation_label": ""
+    },
+    {
+     "id": "s2",
+     "default_variation_id": 9572,
+     "variation_label": ""
+    }
+   ],
+   "line_count": 2,
+   "total_weeks": 6,
+   "from_price": "3700000.00",
+   "currency_code": "IDR",
+   "version": "7668d00ada80"
+  },
+  "aod-9604-pen-recommended-once-daily": {
+   "id": "aod-9604-pen-recommended-once-daily",
+   "name": "AOD-9604 pen · recommended once daily",
+   "group": {
+    "key": "fat-metabolism",
+    "label": "Fat metabolism"
+   },
+   "description": "Commonly used for: Fat metabolism, Body composition, Exercise and cardio programmes, Lean muscle preservation, Metabolic health",
+   "notes": "Many customers continue for 8-12 weeks.",
+   "products": [
+    {
+     "product_id": 3903,
+     "name": "AOD-9604 10mg Pen",
+     "format": "pen",
+     "image": {
+      "src": "https://peptidesbali.online/wp-content/uploads/2026/05/AOD-9604-10mg-3-Peptide-Pen-Bali-1-300x300.png",
+      "srcset": "https://peptidesbali.online/wp-content/uploads/2026/05/AOD-9604-10mg-3-Peptide-Pen-Bali-1-300x300.png 300w, https://peptidesbali.online/wp-content/uploads/2026/05/AOD-9604-10mg-3-Peptide-Pen-Bali-1-1024x1024.png 1024w, https://peptidesbali.online/wp-content/uploads/2026/05/AOD-9604-10mg-3-Peptide-Pen-Bali-1-150x150.png 150w, https://peptidesbali.online/wp-content/uploads/2026/05/AOD-9604-10mg-3-Peptide-Pen-Bali-1-768x768.png 768w, https://peptidesbali.online/wp-content/uploads/2026/05/AOD-9604-10mg-3-Peptide-Pen-Bali-1-600x600.png 600w, https://peptidesbali.online/wp-content/uploads/2026/05/AOD-9604-10mg-3-Peptide-Pen-Bali-1-80x80.png 80w, https://peptidesbali.online/wp-content/uploads/2026/05/AOD-9604-10mg-3-Peptide-Pen-Bali-1.png 1254w",
+      "sizes": "(max-width: 300px) 100vw, 300px",
+      "alt": "AOD-9604 10mg peptide pen for fat metabolism and body composition in Bali - AOD 9604 Bali peptide for weight management support",
+      "width": 300,
+      "height": 300,
+      "placeholder": false
+     },
+     "permalink": "/product/aod-9604-pen/"
+    }
+   ],
+   "plan": {
+    "schema": "arp-plan",
+    "version": 1,
+    "title": "AOD-9604 pen · recommended once daily",
+    "start_date": null,
+    "lines": [
+     {
+      "id": "s1",
+      "product_id": 3903,
+      "variation_id": 0,
+      "variation_attributes": {},
+      "mode": "schedule",
+      "amount": "250",
+      "unit": "mcg",
+      "events_per_period": 7,
+      "period_unit": "week",
+      "periods": 1,
+      "start_date": null,
+      "override_quantity": null,
+      "manual_quantity": null,
+      "label": "Week 1"
+     },
+     {
+      "id": "s2",
+      "product_id": 3903,
+      "variation_id": 0,
+      "variation_attributes": {},
+      "mode": "schedule",
+      "amount": "500",
+      "unit": "mcg",
+      "events_per_period": 7,
+      "period_unit": "week",
+      "periods": 7,
+      "start_date": null,
+      "override_quantity": null,
+      "manual_quantity": null,
+      "label": "Week 2 onwards"
+     }
+    ],
+    "notes": ""
+   },
+   "start_weeks": {
+    "s1": 1,
+    "s2": 2
+   },
+   "lines": [
+    {
+     "id": "s1",
+     "default_variation_id": 9592,
+     "variation_label": ""
+    },
+    {
+     "id": "s2",
+     "default_variation_id": 9592,
+     "variation_label": ""
+    }
+   ],
+   "line_count": 2,
+   "total_weeks": 8,
+   "from_price": "3200000.00",
+   "currency_code": "IDR",
+   "version": "7668d00ada80"
+  }
+ }
+}

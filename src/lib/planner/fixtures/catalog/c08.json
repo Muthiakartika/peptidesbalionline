@@ -1,0 +1,1 @@
+{"capturedAt":"2026-11-11","route":"catalog?page=0","status":400,"response":{"code":"rest_invalid_param","message":"Invalid parameter(s): page","data":{"status":400,"params":{"page":"page must be between 1 (inclusive) and 1000 (inclusive)"},"details":{"page":{"code":"rest_out_of_bounds","message":"page must be between 1 (inclusive) and 1000 (inclusive)","data":null}}}}}

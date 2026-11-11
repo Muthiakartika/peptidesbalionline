@@ -1,0 +1,191 @@
+{
+ "items": [
+  {
+   "id": 57,
+   "slug": "atlas-longevity-pen-peptides",
+   "name": "Atlas Longevity",
+   "parent": 24,
+   "count": 29
+  },
+  {
+   "id": 30,
+   "slug": "brain-cognitive-enhancement",
+   "name": "Brain & Cognitive Enhancement",
+   "parent": 18,
+   "count": 10
+  },
+  {
+   "id": 27,
+   "slug": "fat-loss-metabolic-health",
+   "name": "Fat Loss & Metabolic Health",
+   "parent": 18,
+   "count": 9
+  },
+  {
+   "id": 26,
+   "slug": "healing-recovery",
+   "name": "Healing & Recovery",
+   "parent": 18,
+   "count": 9
+  },
+  {
+   "id": 51,
+   "slug": "hormone-optimization",
+   "name": "Hormone Optimization",
+   "parent": 18,
+   "count": 2
+  },
+  {
+   "id": 31,
+   "slug": "libido-sexual-wellness",
+   "name": "Libido & Sexual Wellness",
+   "parent": 18,
+   "count": 5
+  },
+  {
+   "id": 29,
+   "slug": "longevity-healthy-aging",
+   "name": "Longevity & Healthy Ageing",
+   "parent": 18,
+   "count": 10
+  },
+  {
+   "id": 140,
+   "slug": "muscle-growth-performance",
+   "name": "Muscle Growth & Performance",
+   "parent": 18,
+   "count": 9
+  },
+  {
+   "id": 25,
+   "slug": "other",
+   "name": "Other",
+   "parent": 0,
+   "count": 1
+  },
+  {
+   "id": 184,
+   "slug": "blends",
+   "name": "Peptide Blends Bali",
+   "parent": 18,
+   "count": 1
+  },
+  {
+   "id": 52,
+   "slug": "nasal-spray-peptides",
+   "name": "Peptide Nasal Sprays",
+   "parent": 0,
+   "count": 13
+  },
+  {
+   "id": 24,
+   "slug": "pen-peptides",
+   "name": "Peptide Pens",
+   "parent": 0,
+   "count": 29
+  },
+  {
+   "id": 18,
+   "slug": "vial",
+   "name": "Peptide Vials",
+   "parent": 0,
+   "count": 61
+  },
+  {
+   "id": 142,
+   "slug": "research-compounds",
+   "name": "Research Compounds",
+   "parent": 18,
+   "count": 4
+  },
+  {
+   "id": 141,
+   "slug": "vitamins-wellness-injections",
+   "name": "Vitamins & Wellness Injections",
+   "parent": 18,
+   "count": 5
+  }
+ ],
+ "groups": [
+  {
+   "key": "nootropic",
+   "label": "Nootropic",
+   "term_ids": [
+    30
+   ],
+   "count": 10
+  },
+  {
+   "key": "metabolic",
+   "label": "Metabolic",
+   "term_ids": [
+    27
+   ],
+   "count": 9
+  },
+  {
+   "key": "recovery",
+   "label": "Recovery",
+   "term_ids": [
+    26
+   ],
+   "count": 9
+  },
+  {
+   "key": "hormones",
+   "label": "Hormones",
+   "term_ids": [
+    51
+   ],
+   "count": 2
+  },
+  {
+   "key": "libido",
+   "label": "Libido",
+   "term_ids": [
+    31
+   ],
+   "count": 5
+  },
+  {
+   "key": "longevity",
+   "label": "Longevity",
+   "term_ids": [
+    29
+   ],
+   "count": 10
+  },
+  {
+   "key": "muscle",
+   "label": "Muscle",
+   "term_ids": [
+    140
+   ],
+   "count": 9
+  },
+  {
+   "key": "peptide-blends-bali",
+   "label": "Peptide Blends Bali",
+   "term_ids": [
+    184
+   ],
+   "count": 1
+  },
+  {
+   "key": "research",
+   "label": "Research",
+   "term_ids": [
+    142
+   ],
+   "count": 4
+  },
+  {
+   "key": "vitamins",
+   "label": "Vitamins",
+   "term_ids": [
+    141
+   ],
+   "count": 5
+  }
+ ]
+}
