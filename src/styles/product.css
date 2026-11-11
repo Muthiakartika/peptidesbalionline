@@ -257,7 +257,11 @@ p.stock.wd-style-bordered.out-of-stock span::before { background-color: #e22d2d;
   .wd-reset-side-lg .wd-reset-var { width: 0; }
   .wd-reset-side-lg .reset_variations { margin-left: 10px; }
 }
+/* "Sorry, no products matched your selection" (AddToCartForm.tsx): below the options, like WooCommerce. */
+.wc-no-matching-variations { margin-bottom: 20px; }
 @media (max-width: 1024px) {
+  /* Below 1025px the "Clear" link sits under the options: keep the message clear of it. */
+  .wd-reset-bottom-md .wc-no-matching-variations { margin-top: 32px; }
   .wd-reset-bottom-md .wd-reset-var { position: absolute; inset-inline: 0; top: calc(100% + var(--wd-reset-btn-space)); }
   .wd-reset-bottom-md.variation-swatch-selected { --wd-var-table-mb: 40px; }
   .wd-label-top-md table.variations .cell { display: block; }

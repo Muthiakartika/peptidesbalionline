@@ -9,6 +9,7 @@ import Link from "next/link";
 import { Fragment, useState, type ReactNode } from "react";
 
 import { addToCart } from "@/app/(store)/cart/actions";
+import { isPurchasableVariation } from "@/lib/catalog/purchasable";
 import { formatUsd } from "@/lib/catalog/usd";
 import { announceCartChange } from "@/lib/commerce/useCartCount";
 import { formatMoney } from "@/lib/money";
@@ -127,7 +128,7 @@ function SearchBuy({ product }: { product: SuggestionProduct }) {
   }
 
   const allPicked = product.options.every((a) => selection[a.name]);
-  const chosen = allPicked ? product.variations.find((v) => matches(v.attributes, selection)) : undefined;
+  const chosen = allPicked ? product.variations.find((v) => isPurchasableVariation({ price: BigInt(v.price) }) && matches(v.attributes, selection)) : undefined;
 
   return (
     <div className="search-buy" onClick={stop} onPointerDown={stop}>

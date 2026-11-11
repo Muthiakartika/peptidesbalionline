@@ -32,6 +32,7 @@ import { announceCartChange } from "@/lib/commerce/useCartCount";
 import { loadQuickView, QuickView } from "@/components/product/QuickView";
 import type { QuickViewResponse } from "@/components/product/quick-view-types";
 import { Icon } from "@/components/ui/Icon";
+import { isPurchasableVariation } from "@/lib/catalog/purchasable";
 import type { Product, Variation } from "@/lib/catalog/types";
 import { formatUsd } from "@/lib/catalog/usd";
 import { formatMoney } from "@/lib/money";
@@ -96,7 +97,7 @@ export function ProductCard({ product, view = "grid", shortDescription = null }:
   const chrome = useChrome();
   const attributes = product.quickShop;
   const allPicked = attributes.length > 0 && attributes.every((a) => selection[a.name]);
-  const chosen = allPicked ? product.variations.find((v) => matches(v, selection)) : undefined;
+  const chosen = allPicked ? product.variations.find((v) => isPurchasableVariation(v) && matches(v, selection)) : undefined;
 
   const choose = (name: string, value: string) => setSelection((current) => ({ ...current, [name]: value }));
   // Clicking the active pill again clears it (Woodmart swatches).

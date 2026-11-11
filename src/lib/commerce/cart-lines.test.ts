@@ -76,4 +76,15 @@ describe("cart lines", () => {
     expect((await checkAddToCart(simple.id, null, 0)).ok).toBe(false);
     if (outOfStock) expect(await checkAddToCart(outOfStock.id, null, 1)).toEqual({ ok: false, error: `You cannot add "${outOfStock.name}" to the cart because the product is out of stock.` });
   });
+
+  it("never sells a variation without a price (WooCommerce hides it; it was addable at Rp0)", async () => {
+    const noPrice = products.flatMap((p) => p.variations.filter((v) => v.price <= 0n).map((v) => ({ product: p, variation: v })));
+    expect(noPrice.length).toBeGreaterThan(0); // e.g. CJC-1295 DAC 5mg's "10 MG" (product 4027)
+    for (const { product, variation: v } of noPrice) {
+      expect(await checkAddToCart(product.id, v.id, 1)).toEqual({ ok: false, error: "Sorry, this product cannot be purchased." });
+      const priced = await priceCart([{ productId: product.id, variationId: v.id, quantity: 1 }]);
+      expect(priced.lines).toEqual([]);
+      expect(priced.notices[0]).toContain("can no longer be purchased");
+    }
+  });
 });

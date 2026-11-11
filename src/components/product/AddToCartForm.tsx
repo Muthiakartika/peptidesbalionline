@@ -20,6 +20,7 @@ import { useChrome } from "@/components/layout/ChromeProvider";
 import { announceCartChange } from "@/lib/commerce/useCartCount";
 
 import type { ProductForm } from "@/lib/catalog/product-page";
+import { isPurchasableVariation } from "@/lib/catalog/purchasable";
 import type { Variation } from "@/lib/catalog/types";
 import { formatUsd } from "@/lib/catalog/usd";
 import { formatMoney } from "@/lib/money";
@@ -181,14 +182,16 @@ export function AddToCartForm({
   }
 
   const allPicked = form.attributes.every((a) => selection[a.name]);
-  const chosen = allPicked ? variations.find((v) => matches(v, selection)) : undefined;
+  const chosen = allPicked ? variations.find((v) => isPurchasableVariation(v) && matches(v, selection)) : undefined;
+  /** Every option picked, but no variation for sale matches (WooCommerce: "no products matched"). */
+  const noMatch = allPicked && !chosen;
   const purchasable = Boolean(chosen?.inStock);
 
   const choose = (name: string, value: string) => {
     const next = { ...selection, [name]: value };
     setSelection(next);
     const complete = form.attributes.every((a) => next[a.name]);
-    const variation = complete ? variations.find((v) => matches(v, next)) : undefined;
+    const variation = complete ? variations.find((v) => isPurchasableVariation(v) && matches(v, next)) : undefined;
     gallery.showVariation(variation ?? null);
   };
   const clear = () => {
@@ -309,16 +312,17 @@ export function AddToCartForm({
             </>
           ) : null}
         </div>
+        {noMatch ? <p className="wc-no-matching-variations woocommerce-info">Sorry, no products matched your selection. Please choose a different combination.</p> : null}
         {/* WooCommerce's state classes: nothing chosen yet → "selection needed"; the chosen
-            variation is out of stock → "unavailable". */}
+            variation is out of stock, or no variation for sale matches → "unavailable". */}
         <div className={`woocommerce-variation-add-to-cart variations_button woocommerce-variation-add-to-cart-${purchasable ? "enabled" : "disabled"}`}>
           <Quantity label={productName} />
           <button
             type="submit"
-            className={`single_add_to_cart_button button alt${purchasable ? "" : chosen ? " disabled wc-variation-is-unavailable" : " disabled wc-variation-selection-needed"}${adding ? " loading" : ""}`}
+            className={`single_add_to_cart_button button alt${purchasable ? "" : chosen || noMatch ? " disabled wc-variation-is-unavailable" : " disabled wc-variation-selection-needed"}${adding ? " loading" : ""}`}
             onClick={() => {
-              if (!chosen) window.alert("Please select some product options before adding this product to your cart.");
-              else if (!chosen.inStock) window.alert("Sorry, this product is unavailable. Please choose a different combination.");
+              if (noMatch || (chosen && !chosen.inStock)) window.alert("Sorry, this product is unavailable. Please choose a different combination.");
+              else if (!chosen) window.alert("Please select some product options before adding this product to your cart.");
             }}
           >
             Add to cart

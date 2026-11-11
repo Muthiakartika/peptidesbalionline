@@ -8,6 +8,7 @@
 import "server-only";
 
 import { getCatalogState, getProductById, type Category, type Product, type Variation } from "@/lib/catalog";
+import { isPurchasableVariation } from "@/lib/catalog/purchasable";
 
 import type { CartLine } from "./coupons";
 
@@ -76,7 +77,8 @@ export async function checkAddToCart(productId: number, variationId: number | nu
     return { ok: false, error: "Please choose product options by visiting", link: { href: product.path, text: product.name } };
   }
   const variation = variationOf(product, variationId);
-  if (variation === undefined) return { ok: false, error: "Sorry, this product cannot be purchased." };
+  // A variation without a price is never for sale (src/lib/catalog/purchasable.ts).
+  if (variation === undefined || (variation && !isPurchasableVariation(variation))) return { ok: false, error: "Sorry, this product cannot be purchased." };
   const inStock = variation ? variation.inStock : product.inStock;
   if (!inStock) return { ok: false, error: `You cannot add "${product.name}" to the cart because the product is out of stock.` };
   return { ok: true, entry: { productId, variationId: variation ? variation.id : null, quantity } };
@@ -103,7 +105,7 @@ export async function priceCart(entries: CartEntry[]): Promise<{ lines: PricedLi
     if (!Number.isInteger(entry.quantity) || entry.quantity < 1) continue;
     const product = catalog.byId.get(entry.productId);
     const variation = product ? variationOf(product, entry.variationId) : undefined;
-    if (!product || variation === undefined || (product.type === "variable" && !variation)) {
+    if (!product || variation === undefined || (product.type === "variable" && !variation) || (variation && !isPurchasableVariation(variation))) {
       notices.push(`${product?.name ?? "A product"} has been removed from your cart because it can no longer be purchased. Please contact us if you need assistance.`);
       continue;
     }
