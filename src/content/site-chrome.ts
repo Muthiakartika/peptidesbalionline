@@ -1,7 +1,8 @@
 /**
  * Everything shown in the header, footer and global popups, copied WORD FOR WORD from
  * https://peptidesbali.online on 3 Nov 2026 (including the live site's typos, e.g. "Whatsaap";
- * fixing them is open question Q-14).
+ * fixing them is open question Q-14). Updated 11 Nov 2026 after the owner moved "Insights" and
+ * "Consulting" out of the Calculator dropdown into a new footer column.
  *
  * The defaults: with CONTENT_SOURCE=sanity the texts and menus come from Sanity (Site settings,
  * src/lib/content/site-chrome.ts), and anything left empty there falls back to these. The import
@@ -56,14 +57,8 @@ export const mainMenu: NavLink[] = [
   { label: "Lab Results", href: "/lab-results-certificates-of-analysis/" },
   { label: "Rewards", href: "/rewards/" },
   { label: "Protocol Builder", href: "/protocol-builder/" },
-  {
-    label: "Calculator",
-    href: "/calculator/",
-    children: [
-      { label: "Insights", href: "/insights/" },
-      { label: "Consulting", href: "/peptide-consultation-bali/" },
-    ],
-  },
+  // No dropdown since 11 Nov 2026: its Insights and Consulting links are in the footer's "Insights" column.
+  { label: "Calculator", href: "/calculator/" },
 ];
 
 export type FooterColumn = { heading: string; headingTag: "h2" | "h4"; uppercase: boolean; links: { label: string; href?: string }[] };
@@ -149,6 +144,16 @@ export const footer = {
         { label: "GLP-2 TRZ Dosage Guide", href: "/tirzepatide-dosage-guide-bali/" },
         { label: "Injury & Healing Peptides", href: "/injury-healing-peptides-bali/" },
         { label: "Libido Peptides", href: "/libido-peptides-bali/" },
+      ],
+    },
+    {
+      // Added by the owner on live (seen 11 Nov 2026). "News" opens the blog, like the old menu's "Insights".
+      heading: "Insights",
+      headingTag: "h4",
+      uppercase: true,
+      links: [
+        { label: "News", href: "/insights/" },
+        { label: "Consulting", href: "/peptide-consultation-bali/" },
       ],
     },
   ] satisfies FooterColumn[],

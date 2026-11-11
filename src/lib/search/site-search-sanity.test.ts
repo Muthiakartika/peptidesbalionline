@@ -46,8 +46,10 @@ const docs: SanityProductSearchDoc[] = (convertProducts(root) as ConvertedProduc
 const fromSanity = () => Object.fromEntries(docs.map((doc) => [doc.slug, sanityProductSearchTexts(doc)]));
 const pages = JSON.parse(fs.readFileSync(path.join(root, "src/content/product-pages.json"), "utf8")).pages as Record<string, { id: number; title: string; shortDescription: string | null; tabs: { key: string; html: string | null }[] }>;
 
+// The live samples are from 5 Nov 2026: the posts added later from WordPress drafts aren't in them.
+const drafts = new Set((JSON.parse(fs.readFileSync(path.join(root, "src/content/blog/posts.json"), "utf8")) as { id: number; wpStatus?: string }[]).filter((post) => post.wpStatus).map((post) => post.id));
 const live = (term: string) => (samples as unknown as Record<string, [number, string, string][]>)[term].map((row) => row[0]);
-const ids = async (term: string) => (await siteSearch({ query: term })).map((doc) => doc.id);
+const ids = async (term: string) => (await siteSearch({ query: term })).map((doc) => doc.id).filter((id) => !drafts.has(id));
 
 beforeEach(() => {
   sanity.texts = fromSanity();
@@ -101,7 +103,7 @@ describe("products' search texts from Sanity", () => {
 
 describe("posts' bodies from Sanity", () => {
   it("a post body edited in the Studio is searched as edited, from the next search on", async () => {
-    const post = getAllPosts()[0];
+    const post = getAllPosts().find((p) => !drafts.has(p.id))!;
     expect(await ids("zqxpostedit")).toEqual([]);
     sanity.posts[post.slug] = `${await getPostHtml(post.slug)}<p>Updated: zqxpostedit.</p>`;
     expect(await ids("zqxpostedit")).toEqual([post.id]);

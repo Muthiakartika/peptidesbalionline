@@ -4,13 +4,21 @@
  */
 import { describe, expect, it } from "vitest";
 
+import postsData from "../../content/blog/posts.json";
 import samples from "./site-search-samples.json";
 import { searchExcerpt, siteSearch, withoutEmbeddedDocuments } from "./site-search";
 
+// The live samples are from 5 Nov 2026: the posts added later from WordPress drafts aren't in them.
+const drafts = new Set(postsData.filter((post) => "wpStatus" in post).map((post) => post.id));
 const live = (term: string) => (samples as unknown as Record<string, [number, string, string][]>)[term].map((row) => row[0]);
-const ids = async (term: string) => (await siteSearch({ query: term })).map((doc) => doc.id);
+const ids = async (term: string) => (await siteSearch({ query: term })).map((doc) => doc.id).filter((id) => !drafts.has(id));
 
 describe("site search", () => {
+  it("finds the posts added from WordPress drafts", async () => {
+    const results = await siteSearch({ query: "cagrisema" });
+    expect(results.map((doc) => doc.id)).toContain(12846); // /what-is-cagrisema/
+  });
+
   it('finds exactly what the live site finds for "bpc", in the same order (85 results)', async () => {
     expect(await ids("bpc")).toEqual(live("bpc"));
   });

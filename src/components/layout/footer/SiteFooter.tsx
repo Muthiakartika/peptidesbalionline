@@ -8,7 +8,7 @@
  *   └ container 1212px with 10px padding  ← "outer column"
  *     ├ inner section: 4 columns (logo+text, Navigation, Legal, Contact)
  *     ├ divider
- *     ├ inner section: 3 columns (Bali, Nationwide, Pricing & Guides)
+ *     ├ inner section: 4 columns of 25% (Bali, Nationwide, Pricing & Guides, Insights; 3 until 11 Nov 2026)
  *     ├ "Payment Methods" label
  *     ├ inner section: 8 payment chips
  *     ├ divider, disclaimer, divider
@@ -74,9 +74,16 @@ function Divider({ className = "" }: { className?: string }) {
   return <div className={`footer-divider ${className}`} role="separator" />;
 }
 
+/**
+ * The link columns by position: their class carries Elementor's per-column mobile spacing
+ * (site-chrome.css), and the last two use the wider 13px list spacing.
+ */
+const linkColumnNames = ["bali", "nationwide", "pricing", "insights"];
+
 export function SiteFooter({ footer = defaultFooter }: { footer?: FooterContent }) {
   const [navigation, legal] = footer.topColumns;
-  const [bali, nationwide, pricing] = footer.linkColumns;
+  // Elementor gives every column the same width: 25% for 4 columns, 33.33% for 3.
+  const linkColumnWidth = footer.linkColumns.length === 3 ? "footer-col--third" : "footer-col--quarter";
   return (
     <footer className="site-footer">
       <div className="footer-container">
@@ -118,15 +125,11 @@ export function SiteFooter({ footer = defaultFooter }: { footer?: FooterContent 
         <Divider className="footer-divider--first" />
 
         <InnerSection className="footer-section--links">
-          <Column className="footer-col--third footer-col--bali">
-            <LinkList column={bali} />
-          </Column>
-          <Column className="footer-col--third footer-col--nationwide">
-            <LinkList column={nationwide} />
-          </Column>
-          <Column className="footer-col--third footer-col--pricing">
-            <LinkList column={pricing} spacing="wide" />
-          </Column>
+          {footer.linkColumns.map((column, i) => (
+            <Column key={column.heading} className={`${linkColumnWidth} footer-col--${linkColumnNames[i] ?? "insights"}`}>
+              <LinkList column={column} spacing={i >= 2 ? "wide" : undefined} />
+            </Column>
+          ))}
         </InnerSection>
 
         <p className="footer-payment-label">{footer.paymentLabel}</p>

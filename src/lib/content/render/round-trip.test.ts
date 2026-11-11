@@ -97,7 +97,7 @@ describe("Sanity limits", () => {
 
 describe("blog posts round trip", () => {
   const posts = (content as unknown as { posts: { slug: { current: string }; body: RichText; bodyMeta: string }[] }).posts;
-  it("has every post", () => expect(posts.length).toBe(54));
+  it("has every post (54 published + 11 drafts)", () => expect(posts.length).toBe(65));
   it.each(posts.map((post) => [post.slug.current, post] as const))("post %s", (slug, post) => {
     const source = JSON.parse(fs.readFileSync(path.join(root, "src/content/blog/posts", `${slug}.json`), "utf8")).html as string;
     expect(firstDifference(source, renderRichText(post.body, post.bodyMeta))).toBeNull();

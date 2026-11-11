@@ -253,8 +253,19 @@
   "name": "Weight Management",
   "slug": "weight-management",
   "path": "/category/weight-management/",
-  "count": 4,
+  "count": 15,
   "postIds": [
+   12847,
+   12846,
+   12845,
+   12844,
+   12843,
+   12842,
+   12841,
+   12840,
+   12839,
+   12838,
+   12830,
    4874,
    4727,
    4712,
@@ -268,6 +279,17 @@
      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
      "ogType": "article",
      "ogTitle": "Weight Management Articles - Atlas Longevity",
+     "ogDescription": "Weight Management articles from Atlas Longevity: peptide guides, comparisons and practical advice for researchers in Bali and Indonesia."
+    },
+    "title": "Weight Management"
+   },
+   {
+    "seo": {
+     "title": "Weight Management Articles - Page 2 of 2 - Atlas Longevity",
+     "description": "Weight Management articles from Atlas Longevity: peptide guides, comparisons and practical advice for researchers in Bali and Indonesia.",
+     "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+     "ogType": "article",
+     "ogTitle": "Weight Management Articles - Page 2 of 2 - Atlas Longevity",
      "ogDescription": "Weight Management articles from Atlas Longevity: peptide guides, comparisons and practical advice for researchers in Bali and Indonesia."
     },
     "title": "Weight Management"

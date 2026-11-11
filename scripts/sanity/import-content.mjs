@@ -6,6 +6,11 @@
 //   node scripts/sanity/import-content.mjs --dataset staging            # adds what isn't there yet
 //   node scripts/sanity/import-content.mjs --dataset staging --overwrite  # replaces (loses edits!)
 //   node scripts/sanity/import-content.mjs --dry-run                     # only counts, sends nothing
+//   node scripts/sanity/import-content.mjs --dataset staging --only post-a,post-b  # just these ids
+//
+// --only limits a run to the listed document ids (e.g. post-<slug>): new posts from WordPress can be
+// added, or one changed post replaced (with --overwrite), without touching anything else (a full run
+// would also re-create documents deleted on purpose, such as products removed in the store admin).
 //
 // Safe by default: a document that already exists is left alone, so edits made in the Studio
 // survive a second run. --overwrite replaces them with the copy of the live site. The production
@@ -30,8 +35,13 @@ const option = (name) => {
 if (fs.existsSync(path.join(root, ".env.local"))) process.loadEnvFile(path.join(root, ".env.local"));
 
 const content = buildContent(root);
-const documents = [await convertSiteChrome(root), ...content.shared, ...content.popups, ...content.pages, ...content.posts, ...content.products];
+const built = [await convertSiteChrome(root), ...content.shared, ...content.popups, ...content.pages, ...content.posts, ...content.products];
+const only = option("only")?.split(",").map((id) => id.trim()).filter(Boolean);
+const unknown = only?.filter((id) => !built.some((doc) => doc._id === id)) ?? [];
+if (unknown.length) throw new Error(`--only: no such document in the copy of the live site: ${unknown.join(", ")}`);
+const documents = only ? built.filter((doc) => only.includes(doc._id)) : built;
 const bytes = (doc) => Buffer.byteLength(JSON.stringify(doc));
+if (only) console.log(`--only: ${documents.length} of ${built.length} documents.`);
 console.log(`Built Site settings, ${content.pages.length} pages, ${content.shared.length} shared sections, ${content.popups.length} popups, ${content.posts.length} blog posts, ${content.products.length} products (${(documents.reduce((n, d) => n + bytes(d), 0) / 1e6).toFixed(1)} MB).`);
 
 if (flag("dry-run")) {

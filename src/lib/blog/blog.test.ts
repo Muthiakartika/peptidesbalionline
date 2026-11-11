@@ -11,15 +11,19 @@ import { blogPageLinks } from "./pagination";
 const labels = (current: number, total: number) => blogPageLinks(current, total).map((link) => (link.current ? `[${link.label}]` : link.label)).join(" ");
 
 describe("blog data", () => {
-  it("has the 54 posts in 8 categories, newest first", () => {
+  // 54 published posts + the 11 GLP drafts added from wp-admin on 11 Nov 2026 (import_wordpress_drafts.py).
+  it("has the 65 posts (11 of them WordPress drafts) in 8 categories, newest first", () => {
     const posts = getAllPosts();
-    expect(posts).toHaveLength(54);
+    expect(posts).toHaveLength(65);
+    expect(posts.filter((post) => "wpStatus" in post && post.wpStatus === "draft")).toHaveLength(11);
     expect(getCategories()).toHaveLength(8);
     expect(posts.map((post) => post.date)).toEqual([...posts.map((post) => post.date)].sort().reverse());
   });
 
   it("prints every date as the live pages do", () => {
-    for (const post of getAllPosts()) {
+    // Drafts have no live page: their preview prints the preview's own time, and WordPress gives them
+    // their publish date later.
+    for (const post of getAllPosts().filter((post) => !("wpStatus" in post))) {
       expect(`On ${longDate(post.date)}`).toBe(post.printed.published);
       expect(longDate(post.modified)).toBe(post.printed.modified);
     }
