@@ -23,6 +23,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { ElementorPage } from "@/components/elementor/ElementorPage";
+import { InsightsPage } from "@/components/insights/InsightsPage";
 import { archiveMetadata } from "@/components/shop/archive-metadata";
 import { getElementorPage, landingPageNames } from "@/lib/elementor/pages";
 
@@ -50,5 +51,8 @@ export async function generateMetadata({ params }: PageProps<"/landing/[name]">)
 export default async function LandingPage({ params }: PageProps<"/landing/[name]">) {
   const page = await getLandingPage(params);
   if (!page) notFound();
+  // /insights/ has its own design since 11 Nov 2026 (src/components/insights/InsightsPage.tsx);
+  // only its SEO texts still come from the page content.
+  if (page.family === "blog" || page.path === "/insights/") return <InsightsPage page={page} />;
   return <ElementorPage page={page} linkedStyles />;
 }

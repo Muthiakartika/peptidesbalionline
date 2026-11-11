@@ -46,6 +46,9 @@ export type BlogPost = {
   seo: PageSeo;
   /** What the archive pages print for the post: its picture and excerpt. */
   card: { image: BlogImage | null; excerptHtml: string };
+  /** Set while the post borrows another post's picture (a WordPress draft without its own yet):
+   *  the slug of the post the picture comes from. */
+  placeholderImage?: string;
 };
 
 export type BlogCategory = {
