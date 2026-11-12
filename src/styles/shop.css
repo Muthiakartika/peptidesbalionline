@@ -41,13 +41,18 @@
 .shop-band__tiles-col { width: 84.275%; }
 .shop-band__tiles-wrap { padding: 10px; }
 
+/* In the homepage's format (the owner's request of 12 Nov 2026): Anton, uppercase, as the homepage's
+ * H1 (the live site used Cormorant Garamond). The cards and prices below keep Urbanist, as on the
+ * homepage. */
 .shop-band__title {
   margin-bottom: 18px;
   color: #000000;
-  font-family: var(--font-serif);
+  font-family: var(--font-anton), Arial, Helvetica, sans-serif;
   font-size: 48px;
   font-weight: 600;
   line-height: 1;
+  letter-spacing: 1.11px;
+  text-transform: uppercase;
 }
 
 .shop-breadcrumbs {

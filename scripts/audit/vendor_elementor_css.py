@@ -32,8 +32,11 @@ site loads on every page before the theme; the affiliate login and registration 
 Not copied: the site footer (#267) and the top-bar marquee (#4118), rebuilt natively in Phase 3a, and
 the popups (#5869, #5870, #6534: the age gate is rebuilt natively).
 
+Afterwards it gives every document except the homepage's the homepage's fonts (homepage_typography.py,
+the owner's request of 12 Nov 2026); --keep-live-fonts leaves the live site's fonts.
+
 Usage (from the project root, after export_product_pages.py and export_elementor_pages.py):
-    python scripts/audit/vendor_elementor_css.py
+    python scripts/audit/vendor_elementor_css.py [--keep-live-fonts]
 """
 
 from __future__ import annotations
@@ -193,6 +196,12 @@ def main() -> int:
             missing.append(doc_id)
         time.sleep(0.3)
     print(f"src/styles/legacy: core ({len(core) - 1} files) + kit + pages {page_docs}; public/legacy/elementor: {len(ids)} documents; missing {missing}")
+    # The owner's request of 12 Nov 2026: every page uses the homepage's fonts (homepage_typography.py).
+    if "--keep-live-fonts" not in sys.argv:
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        import homepage_typography
+
+        homepage_typography.main()
     return 1 if missing else 0
 
 

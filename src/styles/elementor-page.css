@@ -235,3 +235,31 @@
   transform: translate3d(calc(var(--owl-position) * -1 * (var(--owl-item-w) + var(--owl-gap, 0px)) + var(--owl-drag, 0px)), 0, 0);
 }
 .elementor-page .owl-carousel .owl-item { width: var(--owl-item-w); margin-right: var(--owl-gap, 0px); }
+
+/* ── Fonts in the homepage's format (the owner's request of 12 Nov 2026): Anton for big headings, Inter
+ * for the rest. Elementor widgets get them from their own CSS (rewritten by
+ * scripts/audit/homepage_typography.py) and from the kit's global fonts. These rules cover the content
+ * written as plain HTML instead of widgets (/affiliate-terms-of-use/, the affiliate forms, /calculator/)
+ * and the owner's tools (/calculator/, /protocol-builder/: their CSS inherits the font). The homepage's
+ * article holds only Elementor widgets, so none of this reaches it. */
+article[data-legacy-html] > :is(p, ul, ol, table, blockquote, form, h2, h3, h4, h5, h6, .arpt, .arp-planner) {
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+}
+:where(.elementor-page, .blog-page:not(.woo-page)) legend {
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+}
+article[data-legacy-html] > h1,
+article[data-legacy-html] .arp-planner :is(.arp-hero__title, .arp-info__title) {
+  font-family: var(--font-anton), Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  letter-spacing: 1.11px;
+}
+article[data-legacy-html] > h1 {
+  font-weight: 600;
+  text-transform: uppercase;
+}
+/* A font written into the text itself (a few spans on the legal pages say "Urbanist"): the text's
+   font instead. */
+article[data-legacy-html] [style*="font-family"][style*="Urbanist"] {
+  font-family: inherit !important;
+}

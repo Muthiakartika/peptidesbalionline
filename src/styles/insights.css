@@ -3,8 +3,9 @@
  * post (src/components/blog/BlogPostPage.tsx). Every class starts with "ins-" so nothing here
  * touches the rest of the site.
  *
- * Look: the homepage's warm cream, gold and near-black, Anton for big headings, Urbanist for text,
- * Inter for small labels, Cormorant Garamond italics as an accent. Colours and sizes are the
+ * Look: the homepage's warm cream, gold and near-black, and its fonts (the owner's request of 12 Nov
+ * 2026): Anton for big headings (letter spacing 1.11px, the page title uppercase), Inter for text and
+ * small labels, Cormorant Garamond italics only for quotes, as the homepage's testimonials. Colours and sizes are the
  * variables in the first block: change them there.
  */
 
@@ -28,7 +29,7 @@
   --ins-radius: 18px;
   --ins-radius-sm: 10px;
   --ins-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
-  --ins-font: var(--font-urbanist), Arial, Helvetica, sans-serif;
+  --ins-font: var(--font-inter), Arial, Helvetica, sans-serif;
   --ins-display: var(--font-anton), Impact, Arial, sans-serif;
   --ins-label: var(--font-inter), Arial, Helvetica, sans-serif;
   --ins-serif: var(--font-cormorant), Georgia, serif;
@@ -40,6 +41,11 @@
   color: var(--ins-text);
   background-color: var(--ins-paper);
   -webkit-font-smoothing: antialiased;
+}
+/* Headings take the text font unless their class says otherwise (the site's base rule gives every
+   heading Urbanist). */
+:where(.ins) :where(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--ins-font);
 }
 
 /* The whole page (also behind the transparent header) takes the warm paper colour. */
@@ -137,6 +143,7 @@ body:has(.ins),
 .ins-title-sub {
   display: block;
   margin-top: 0.3em;
+  font-family: var(--ins-font);
   font-size: 0.7em;
   font-weight: 500;
   line-height: 1.3;
@@ -146,6 +153,7 @@ body:has(.ins),
 .ins-post-title .ins-title-sub {
   margin-top: 0.45em;
   font-size: 0.4em;
+  text-transform: none;
   color: var(--ins-gold-deep);
 }
 
@@ -438,10 +446,11 @@ body:has(.ins),
 }
 .ins-lead__title {
   margin-top: 14px;
+  font-family: var(--ins-display);
   font-size: clamp(1.8rem, 2.8vw, 2.6rem);
-  font-weight: 700;
+  font-weight: 500;
   line-height: 1.1;
-  letter-spacing: -0.022em;
+  letter-spacing: 1.11px;
   color: var(--ins-ink);
   text-wrap: balance;
 }
@@ -635,8 +644,11 @@ body:has(.ins),
 }
 .ins-card--wide .ins-card__title,
 .ins-card--wide-reverse .ins-card__title {
+  font-family: var(--ins-display);
   font-size: clamp(1.5rem, 2.1vw, 1.9rem);
+  font-weight: 500;
   line-height: 1.15;
+  letter-spacing: 1.11px;
 }
 .ins-card--wide .ins-card__foot,
 .ins-card--wide-reverse .ins-card__foot {
@@ -711,11 +723,12 @@ body:has(.ins),
 }
 .ins-cover__word {
   position: relative;
-  font-family: var(--ins-serif);
+  font-family: var(--ins-display);
   font-size: clamp(2.6rem, 3.6vw, 3.4rem);
   font-style: italic;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1;
+  letter-spacing: 1.11px;
 }
 .ins-cover--ink {
   background: radial-gradient(120% 90% at 100% 0%, #43361a 0%, #17130d 62%);
@@ -898,16 +911,15 @@ body:has(.ins),
 }
 .ins-cta__title {
   margin: 16px 0 14px;
+  font-family: var(--ins-display);
   font-size: clamp(1.9rem, 3.2vw, 2.8rem);
-  font-weight: 700;
+  font-weight: 500;
   line-height: 1.08;
-  letter-spacing: -0.02em;
+  letter-spacing: 1.11px;
   color: #fff;
 }
 .ins-cta__title em {
-  font-family: var(--ins-serif);
-  font-size: 1.12em;
-  font-weight: 600;
+  font-style: italic;
   color: var(--ins-gold-light);
 }
 .ins-cta__text > p:last-child {
@@ -974,10 +986,12 @@ a.ins-tag:hover {
 }
 .ins-post-title {
   margin-top: 22px;
+  font-family: var(--ins-display);
   font-size: clamp(2.2rem, 4.6vw, 3.9rem);
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.04;
-  letter-spacing: -0.03em;
+  letter-spacing: 1.11px;
+  text-transform: uppercase;
   color: var(--ins-ink);
   text-wrap: balance;
 }
@@ -996,8 +1010,8 @@ a.ins-tag:hover {
   border-radius: 14px;
   background: var(--ins-ink);
   color: var(--ins-gold-light);
-  font-family: var(--ins-serif);
-  font-size: 19px;
+  font-family: var(--ins-label);
+  font-size: 17px;
   font-weight: 600;
   letter-spacing: 0.04em;
 }
@@ -1228,10 +1242,11 @@ a.ins-tag:hover {
   margin: 2.4em 0 0.7em;
   padding-top: 0.9em;
   border-top: 1px solid var(--ins-line);
+  font-family: var(--ins-display);
   font-size: clamp(1.6rem, 2.4vw, 2.05rem);
-  font-weight: 700;
+  font-weight: 500;
   line-height: 1.18;
-  letter-spacing: -0.02em;
+  letter-spacing: 1.11px;
 }
 .ins-prose h2::before {
   content: "";

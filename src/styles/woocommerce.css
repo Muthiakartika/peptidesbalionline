@@ -42,9 +42,12 @@
   margin: 0;
   padding: 0;
   color: var(--wd-title-color);
-  font-family: var(--font-body);
+  /* The page's title, in the homepage's format (the owner's request of 12 Nov 2026): Anton (the
+     live theme used Urbanist 600). */
+  font-family: var(--font-anton), Arial, Helvetica, sans-serif;
   font-size: 22px;
-  font-weight: 600;
+  font-weight: 500;
+  letter-spacing: 1.11px;
   text-transform: uppercase;
   list-style: none;
 }

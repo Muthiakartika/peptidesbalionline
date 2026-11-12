@@ -368,6 +368,31 @@ A9 payment sandboxes · A10 analytics access
     shows). Put them in the staging environment later too, never on the live domain. A wrong value stops the build; a running
     server (`next start` reads `.env.local` again) leaves the chat out and logs the message instead of
     breaking its pages (`checkedTawkUrl()` in ThirdPartyScripts.tsx).
+- [x] **Owner's decision (12 Nov 2026), a change from live: every page uses the homepage's font format**
+  ("Btw fonts for the new site can we follow the same format as the homepage"). On live the pages had
+  three looks: the homepage (Anton headings, Inter text), the 52 landing pages and the product
+  descriptions (all Urbanist, the legal pages' text Poppins), and /hgh-bali/, /rewards/, the consultation,
+  lab results and affiliate pages (Cormorant Garamond headings, Inter or Inter Tight text, Montserrat,
+  Roboto in the forms). Now everywhere: headings of 28px and more and every H1 in Anton (H1 600 and
+  uppercase, the others 500, letter spacing 1.11px, the gold italic words in Anton italic); all other
+  text, smaller headings, FAQ questions, buttons, labels and form fields in Inter, with each page's own
+  sizes; Cormorant Garamond only for numbers and accent lines, as the homepage's counters and quotes.
+  * Elementor pages and product descriptions: `scripts/audit/homepage_typography.py` rewrote the fonts
+    in `public/legacy/elementor/post-*.css` (112 files) and the kit's global fonts
+    (`src/styles/legacy/elementor-kit.css`: Anton headings, Inter text, also for widgets added in Sanity).
+    `vendor_elementor_css.py` runs it after every copy from live (`--keep-live-fonts` to skip it).
+  * Templates: the title band, the shop/search band title, the 404 page, the blog archives, the
+    Insights page and posts (`insights.css`), the COA library, the plain-HTML pages (affiliate terms
+    and forms) and the owner's tools (Calculator, Protocol Builder).
+  * The shop's pages too (the user, 12 Nov 2026: "samakan saja semua pages font seperti font di
+    homepage"): the "Shop" / category / product search title and the title band of the cart, checkout
+    and account pages (with the checkout steps) are Anton like the homepage's titles; the buttons block
+    under "Add to cart" (#701) is Inter like the homepage's buttons.
+  * Unchanged, because the homepage shows them this way: the header, menus and footer, and the shop's
+    data and forms in Urbanist like the homepage's product cards (product cards, prices, the product
+    page's title and buy box, the cart, checkout and account forms and tables).
+  * No longer loaded: Inter Tight, Montserrat, Roboto, Poppins 300/400, Cormorant Garamond 700
+    (`src/lib/fonts.ts`). Clone visual diffs against live no longer apply to these pages' text.
 
 **Phase 4: content**
 

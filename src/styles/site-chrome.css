@@ -1177,9 +1177,10 @@
   line-height: 1;
   transform: translate(-50%, -50%);
 }
-.error-404__title { position: relative; padding: 1.5em 0; color: var(--color-gold); font-size: inherit; font-weight: 900; line-height: 1; text-align: center; text-transform: uppercase; }
-.error-404__content { text-align: center; }
-.error-404__h1 { margin-bottom: 20px; color: var(--color-title); font-size: 28px; font-weight: 600; line-height: 1.4; }
+.error-404__title { position: relative; padding: 1.5em 0; color: var(--color-gold); font-family: var(--font-anton), Arial, Helvetica, sans-serif; font-size: inherit; font-weight: 500; line-height: 1; letter-spacing: 1.11px; text-align: center; text-transform: uppercase; }
+/* Fonts in the homepage's format (the owner's request of 12 Nov 2026): Anton heading, Inter text. */
+.error-404__content { font-family: var(--font-inter), Arial, Helvetica, sans-serif; text-align: center; }
+.error-404__h1 { margin-bottom: 20px; color: var(--color-title); font-family: var(--font-anton), Arial, Helvetica, sans-serif; font-size: 28px; font-weight: 600; line-height: 1.4; letter-spacing: 1.11px; text-transform: uppercase; }
 .error-404__text { margin-bottom: 20px; font-size: 110%; line-height: 1.6; }
 .error-404__search { position: relative; max-width: 400px; margin: 0 auto; }
 .error-404__search input[type="text"] {

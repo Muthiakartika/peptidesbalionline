@@ -10,6 +10,12 @@
  * Imported by the blog's routes and by ElementorPage (for the /insights/ post grid).
  */
 
+/* Text in the homepage's format (the owner's request of 12 Nov 2026): Inter (the live theme used
+ * Urbanist); the title band below is Anton on every page. Not the text of the shop's pages (cart,
+ * checkout, account: WooPage shares this frame): their forms, products and prices keep Urbanist, as
+ * the homepage's product cards. */
+main.blog-page:not(.woo-page) { font-family: var(--font-inter), Arial, Helvetica, sans-serif; }
+
 /* ── The page title band ("Blog", an archive's name, "Insights", "Search Results for: …"). The
  * theme settings give it a black background; color-scheme-light turns its text white. ── */
 .wd-page-title {
@@ -44,14 +50,18 @@
   padding-inline: 15px;
   text-align: var(--wd-align);
 }
+/* The title in the homepage's format (the owner's request of 12 Nov 2026): Anton, uppercase, as the
+ * homepage's H1 (the live theme used Urbanist). */
 .wd-page-title .title {
   display: block;
   margin-bottom: 0;
   color: var(--wd-title-color);
-  font-family: var(--font-body);
+  font-family: var(--font-anton), Arial, Helvetica, sans-serif;
   font-size: var(--wd-title-font-s);
   font-weight: 600;
   line-height: 1.2;
+  letter-spacing: 1.11px;
+  text-transform: uppercase;
 }
 /* Breadcrumbs (base theme): grey links, the last one bold, "/" between them. */
 .wd-page-title .wd-breadcrumbs {
@@ -293,7 +303,7 @@
 
 /* Titles of posts and of the "Newer / Older" links (base theme: .wd-entities-title, with the theme
  * settings' title font, Urbanist 500). */
-:where(.blog-page, .wd-blog-element) .wd-entities-title { display: block; font-family: var(--font-body); font-weight: 500; line-height: 1.4; overflow-wrap: break-word; }
+:where(.blog-page, .wd-blog-element) .wd-entities-title { display: block; font-family: var(--font-inter), Arial, Helvetica, sans-serif; font-weight: 500; line-height: 1.4; overflow-wrap: break-word; }
 
 /* Pictures with a caption in a post's text (WordPress's wp-blocks rules). */
 :where(.blog-page) :is(.alignleft, .aligncenter, .alignright, .alignnone)[id*="attachment"] { max-width: 100%; }
@@ -363,7 +373,7 @@
 
 /* The comment form (WordPress markup, Woodmart rules) */
 :where(.blog-page) .comments-area .comment-respond { margin-top: 30px; }
-:where(.blog-page) .comments-area .comment-reply-title { margin-bottom: 20px; color: var(--wd-title-color); font-family: var(--font-body); font-size: 22px; font-weight: 600; line-height: 1.4; }
+:where(.blog-page) .comments-area .comment-reply-title { margin-bottom: 20px; color: var(--wd-title-color); font-family: var(--font-inter), Arial, Helvetica, sans-serif; font-size: 22px; font-weight: 600; line-height: 1.4; }
 :where(.blog-page) .comments-area .comment-reply-title a { color: inherit; text-decoration: none; }
 :where(.blog-page) .comments-area .comment-reply-title small { vertical-align: middle; }
 :where(.blog-page) .comments-area #cancel-comment-reply-link { display: inline-block; margin-inline-start: 10px; font-size: 0; vertical-align: middle; }

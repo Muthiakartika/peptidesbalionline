@@ -114,6 +114,15 @@
   font-weight: 600;
   line-height: 1.4;
 }
+/* Fonts in the homepage's format (the owner's request of 12 Nov 2026): headings and table headings
+   written in the text (not heading widgets), and the text of the product descriptions' tabs, in Inter;
+   the live theme used Urbanist. Not the shop's own pages (cart, checkout, account: .woo-page) nor the
+   shop's parts inside the content (category tiles, product cards), which keep Urbanist as on the
+   homepage. Every other heading on the homepage has its own font, so this doesn't reach it. */
+:where(.single-product .wc-tab-inner.wd-entry-content) { font-family: var(--font-inter), Arial, Helvetica, sans-serif; }
+:where(.single-product .wd-entry-content, .elementor-page .entry-content, .blog-page:not(.woo-page) :is(.wd-entry-content, .entry-content)) :is(h1, h2, h3, h4, h5, h6):not(:where(.wd-cat, .wd-product, .product-grid-item, .product-card) *) {
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+}
 /* A link inside a heading takes the heading's colour (base theme: ":is(h1, …, .title) a"). Measured on
    the blog posts only; the other content areas were measured without it. */
 :where(.blog-page :is(.wd-entry-content, .entry-content)) :is(h1, h2, h3, h4, h5, h6) a { color: inherit; text-decoration: none; }
@@ -162,6 +171,7 @@
   text-transform: uppercase;
   vertical-align: middle;
 }
+:where(.single-product .wd-entry-content, .elementor-page .entry-content, .blog-page:not(.woo-page) :is(.wd-entry-content, .entry-content)) table th { font-family: var(--font-inter), Arial, Helvetica, sans-serif; } /* the homepage's format, see above */
 :where(.single-product .wd-entry-content, .elementor-page .entry-content, .blog-page :is(.wd-entry-content, .entry-content)) table td { padding: 15px 12px; border-bottom: 1px solid rgb(0 0 0 / 0.105); text-align: start; vertical-align: middle; }
 :where(.single-product .wd-entry-content, .elementor-page .entry-content, .blog-page :is(.wd-entry-content, .entry-content)) table :is(tbody, tfoot) th { border-bottom: 1px solid rgb(0 0 0 / 0.105); font-size: inherit; text-transform: none; }
 /* Space between blocks of content. The full :is() list is the theme's: its longest entry gives the

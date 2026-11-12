@@ -1,7 +1,8 @@
 /*
  * The COA library on /lab-results-certificates-of-analysis/ (src/components/coa/CoaLibrary.tsx).
- * Looks like the rest of that page: Cormorant Garamond headings, Urbanist text, small Inter labels,
- * brand gold on cream and white. Every class starts with "coa-". Selectors start with ".coa-lib" so
+ * Fonts in the homepage's format (the owner's request of 12 Nov 2026): Anton headings, Inter text and
+ * small Inter labels, Cormorant Garamond only for the big numbers (as the homepage's counters); brand
+ * gold on cream and white. Every class starts with "coa-". Selectors start with ".coa-lib" so
  * they outweigh the theme's form and button rules (src/styles/elementor-page.css).
  * Colours and sizes: the variables in the first block.
  */
@@ -20,7 +21,8 @@
   --coa-radius: 18px;
   --coa-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
   --coa-serif: var(--font-cormorant), Georgia, serif;
-  --coa-font: var(--font-urbanist), Arial, Helvetica, sans-serif;
+  --coa-display: var(--font-anton), Impact, Arial, sans-serif;
+  --coa-font: var(--font-inter), Arial, Helvetica, sans-serif;
   --coa-label: var(--font-inter), Arial, Helvetica, sans-serif;
 
   position: relative;
@@ -96,10 +98,11 @@
 }
 .coa-lib .coa-title {
   margin: 0;
-  font-family: var(--coa-serif);
+  font-family: var(--coa-display);
   font-size: clamp(2.3rem, 4.4vw, 3.4rem);
   font-weight: 500;
   line-height: 1.05;
+  letter-spacing: 1.11px; /* the homepage headings */
   color: var(--coa-ink);
 }
 .coa-lib .coa-lede {
@@ -605,7 +608,7 @@
 .coa-lib .coa-card__title,
 .coa-modal .coa-card__title {
   margin: 4px 0 0;
-  font-family: var(--coa-serif);
+  font-family: var(--coa-font);
   font-size: 22px;
   font-weight: 600;
   line-height: 1.15;
@@ -808,7 +811,7 @@
 }
 .coa-lib .coa-empty__title {
   margin: 0 0 6px;
-  font-family: var(--coa-serif);
+  font-family: var(--coa-font);
   font-size: 26px;
   font-weight: 600;
   color: var(--coa-ink);
@@ -838,7 +841,8 @@
   --coa-line-strong: #dccb9c;
   --coa-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
   --coa-serif: var(--font-cormorant), Georgia, serif;
-  --coa-font: var(--font-urbanist), Arial, Helvetica, sans-serif;
+  --coa-display: var(--font-anton), Impact, Arial, sans-serif;
+  --coa-font: var(--font-inter), Arial, Helvetica, sans-serif;
   --coa-label: var(--font-inter), Arial, Helvetica, sans-serif;
 
   position: fixed;
@@ -893,9 +897,10 @@
 .coa-modal__title {
   margin: 0;
   font-variant-numeric: lining-nums;
-  font-family: var(--coa-serif);
+  font-family: var(--coa-display);
   font-size: 30px;
-  font-weight: 600;
+  font-weight: 500;
+  letter-spacing: 1.11px; /* the homepage headings */
   line-height: 1.1;
   color: var(--coa-ink);
 }
@@ -1006,7 +1011,7 @@
   color: var(--coa-gold);
 }
 .coa-modal .coa-preview__lab-title {
-  font-family: var(--coa-serif);
+  font-family: var(--coa-font);
   font-size: 22px;
   font-weight: 600;
   color: var(--coa-ink);
