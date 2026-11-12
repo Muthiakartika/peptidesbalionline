@@ -4,7 +4,7 @@
  */
 import { redirect } from "next/navigation";
 
-import { getListing, getShopCarousel } from "@/lib/catalog";
+import { getListing } from "@/lib/catalog";
 
 import { ShopArchive } from "./ShopArchive";
 
@@ -22,7 +22,6 @@ export async function ProductSearch({ page, searchParams }: { page: number; sear
     <ShopArchive
       title={`Search results: “${query}”`}
       crumbs={[{ label: "Home", href: "/" }, { label: "Shop", href: "/shop/" }, { label: `Search results for “${query}”` }]}
-      tiles={await getShopCarousel()}
       basePath="/"
       page={page}
       search={query}

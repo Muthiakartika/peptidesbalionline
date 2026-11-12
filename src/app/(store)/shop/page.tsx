@@ -6,7 +6,7 @@ import type { Metadata } from "next";
 
 import { archiveMetadata } from "@/components/shop/archive-metadata";
 import { ShopArchive } from "@/components/shop/ShopArchive";
-import { defaultPerPage, getListing, getShopCarousel, getShopSeo } from "@/lib/catalog";
+import { defaultPerPage, getListing, getShopSeo } from "@/lib/catalog";
 
 export const metadata: Metadata = archiveMetadata(getShopSeo(), "/shop/");
 
@@ -19,7 +19,6 @@ export default async function ShopPage({ searchParams }: PageProps<"/shop">) {
       <ShopArchive
         title="Shop"
         crumbs={[{ label: "Home", href: "/" }, { label: "Shop" }]}
-        tiles={await getShopCarousel()}
         basePath="/shop/"
         page={1}
         searchParams={searchParams}

@@ -6,7 +6,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { defaultPerPage, getListing, getShopCarousel, getShopSeo } from "@/lib/catalog";
+import { defaultPerPage, getListing, getShopSeo } from "@/lib/catalog";
 
 import { archiveMetadata } from "./archive-metadata";
 import { parsePageSegment, ShopArchive } from "./ShopArchive";
@@ -37,7 +37,6 @@ export async function ShopPagedPage({ segment, view }: { segment: string; view?:
       <ShopArchive
         title="Shop"
         crumbs={[{ label: "Home", href: "/" }, { label: "Shop" }]}
-        tiles={await getShopCarousel()}
         basePath="/shop/"
         page={page}
         searchParams={Promise.resolve(paramsFromView(view))}

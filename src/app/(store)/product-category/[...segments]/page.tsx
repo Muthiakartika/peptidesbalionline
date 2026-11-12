@@ -81,7 +81,6 @@ export default async function CategoryPage({ params }: PageProps<"/product-categ
       <ShopArchive
         title={category.title}
         crumbs={crumbs}
-        tiles={category.carousel}
         basePath={category.path}
         page={page}
         category={category}

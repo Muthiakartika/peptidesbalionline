@@ -11,32 +11,30 @@
  */
 import "@/styles/shop.css";
 
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense, type CSSProperties, type ReactNode } from "react";
 
 import { AliasNotice } from "@/components/layout/search/AliasNotice";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { getCategoryTree, getListing, normalisePerPage, type Category, type CategoryTile } from "@/lib/catalog";
+import { getCategoryTree, getListing, normalisePerPage, type Category } from "@/lib/catalog";
 import { shortDescriptionFor } from "@/lib/catalog/product-content";
 import { getProductPage } from "@/lib/catalog/product-page";
 import { cleanLegacyHtml } from "@/lib/legacy-html";
 
-import { CategoryCarousel } from "./CategoryCarousel";
 import { CategorySidebar } from "./CategorySidebar";
 import { Pagination } from "./Pagination";
 import { ProductCard } from "./ProductCard";
+import { ShopHero, type Crumb } from "./ShopHero";
 import { ShopToolbar } from "./ShopToolbar";
 import { archiveHref, pickArchiveParams } from "./shop-url";
 
-export type Crumb = { label: string; href?: string };
+export type { Crumb };
 
 type SearchParams = Promise<Record<string, string | string[] | undefined>>;
 
 export type ShopArchiveProps = {
   title: string;
   crumbs: Crumb[];
-  tiles: CategoryTile[];
   /** First page of this archive: "/shop/", "/product-category/vial/" or "/" (search). */
   basePath: string;
   page: number;
@@ -45,38 +43,13 @@ export type ShopArchiveProps = {
   searchParams: SearchParams;
 };
 
-function Breadcrumbs({ crumbs }: { crumbs: Crumb[] }) {
-  return (
-    <nav className="shop-breadcrumbs" aria-label="Breadcrumb">
-      {crumbs.map((crumb, index) => (
-        <span key={`${crumb.label}-${index}`} className="contents">
-          {index > 0 ? <span className="shop-breadcrumbs__delimiter" /> : null}
-          {crumb.href ? <Link href={crumb.href}>{crumb.label}</Link> : <span className="shop-breadcrumbs__last">{crumb.label}</span>}
-        </span>
-      ))}
-    </nav>
-  );
-}
-
 export function ShopArchive(props: ShopArchiveProps) {
-  const { title, crumbs, tiles } = props;
+  const { title, crumbs } = props;
   return (
     <main id="main-content" className="shop-archive">
       {/* The search results ("/") have no structured data of their own. */}
       {props.search === undefined ? <JsonLd path={props.page > 1 ? `${props.basePath}page/${props.page}/` : props.basePath} /> : null}
-      <section className="shop-band">
-        <div className="shop-band__container">
-          <div className="shop-band__title-col">
-            <div className="shop-band__title-wrap">
-              <h1 className="shop-band__title">{title}</h1>
-              <Breadcrumbs crumbs={crumbs} />
-            </div>
-          </div>
-          <div className="shop-band__tiles-col">
-            <div className="shop-band__tiles-wrap">{tiles.length > 0 ? <CategoryCarousel tiles={tiles} /> : null}</div>
-          </div>
-        </div>
-      </section>
+      <ShopHero title={title} crumbs={crumbs} category={props.category} search={props.search} />
       <Suspense fallback={<section className="shop-body" aria-busy="true" />}>
         <ShopBody {...props} />
       </Suspense>

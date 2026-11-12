@@ -5,8 +5,8 @@
  *
  * Breakpoints used by the live site (they are not all the same, which is why this file has four):
  *   ≥ 1025px  desktop           hover image, quick-view button, toolbar in one row
- *   ≤ 1024px  tablet            "Show sidebar" + sort icon, carousel 4 per view
- *   ≤ 768px   Woodmart "small"  2 product columns, 10px gaps, carousel 3 per view
+ *   ≤ 1024px  tablet            "Show sidebar" + sort icon
+ *   ≤ 768px   Woodmart "small"  2 product columns, 10px gaps
  *   ≤ 767px   Elementor mobile  smaller card text, sidebar becomes a drawer
  *
  * Percentages copy Elementor's: they are relative to the parent's width, exactly as on the live site.
@@ -19,111 +19,284 @@
   padding-block: 40px;
 }
 
-/* ───────────────────────── Grey title band ───────────────────────── */
-.shop-band {
-  padding-block: calc(var(--shop-inner) * 0.03);
-  background-color: #f3f3f3;
+/* ───────────────────────── Title band (ShopHero) ─────────────────────────
+ * Redesigned on 12 Nov 2026 at the user's request (no longer the live site's grey band with round
+ * images). Design "C · Editorial", which the user chose from four options: a soft cream wash, a big
+ * Anton title whose last word is gold (#a56c1e, as the homepage's "Delivered Across Bali"), a fan of
+ * the first three products' pictures, the owner's three promises, and the categories as pill chips
+ * in a scrollable row. Content lines up with the sidebar and product grid below (1280px). */
+.shop-hero {
+  --hero-gold: #a56c1e;
+  --hero-ink: #1c1915;
+  --hero-muted: #6f6556;
+  --hero-line: rgb(184 149 42 / 0.18);
+  padding-inline: 10px;
+  background-image:
+    radial-gradient(38% 90% at 82% 45%, rgb(231 170 63 / 0.12), transparent 70%),
+    linear-gradient(180deg, #faf6ee 0%, rgb(250 246 238 / 0) 100%);
 }
-.shop-band__container {
-  display: flex;
-  max-width: 1300px;
-  margin-inline: auto;
-  padding-block: 10px;
-}
-.shop-band__title-col { display: flex; width: 15.725%; }
-.shop-band__title-wrap {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 100%;
-  padding: 10px;
-}
-.shop-band__tiles-col { width: 84.275%; }
-.shop-band__tiles-wrap { padding: 10px; }
+.shop-hero__panel { max-width: 1280px; margin-inline: auto; padding: 12px 10px 0; }
 
-/* In the homepage's format (the owner's request of 12 Nov 2026): Anton, uppercase, as the homepage's
- * H1 (the live site used Cormorant Garamond). The cards and prices below keep Urbanist, as on the
- * homepage. */
-.shop-band__title {
-  margin-bottom: 18px;
-  color: #000000;
-  font-family: var(--font-anton), Arial, Helvetica, sans-serif;
-  font-size: 48px;
-  font-weight: 600;
-  line-height: 1;
-  letter-spacing: 1.11px;
-  text-transform: uppercase;
+.shop-hero__top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 460px);
+  /* The pictures are taller than the texts: the extra height goes above the breadcrumbs. */
+  grid-template-rows: 1fr auto;
+  align-items: end;
+  gap: 22px 48px;
 }
+/* No pictures (a search without results): the texts take the whole width. */
+.shop-hero__top:not([data-pictures]) { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; }
+.shop-hero__intro { grid-column: 1; grid-row: 1; }
 
-.shop-breadcrumbs {
-  display: inline-flex;
-  align-self: flex-start;
+.shop-hero__crumbs {
+  display: flex;
   flex-wrap: wrap;
   align-items: center;
-  color: var(--color-body);
-  font-size: 15px;
-  line-height: 24px;
+  gap: 6px 0;
+  margin-bottom: 18px;
+  color: var(--hero-muted);
+  font-family: var(--font-inter), sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 2.2px;
+  text-transform: uppercase;
 }
-.shop-breadcrumbs a { transition: color 0.25s; }
-.shop-breadcrumbs a:hover { color: #555555; }
-.shop-breadcrumbs__delimiter { margin-inline: 8px; }
-.shop-breadcrumbs__delimiter::after { content: "/"; }
-.shop-breadcrumbs__last { color: var(--color-title); font-weight: 600; }
+.shop-hero__crumb { display: inline-flex; align-items: center; }
+.shop-hero__crumbs a { color: inherit; transition: color 0.2s; }
+.shop-hero__crumbs a:hover { color: var(--hero-gold); }
+.shop-hero__crumbs a:focus-visible { border-radius: 2px; outline: 2px solid var(--hero-gold); outline-offset: 3px; }
+.shop-hero__crumb-sep { width: 14px; height: 1px; margin-inline: 10px; background-color: rgb(165 108 30 / 0.45); }
+.shop-hero__crumb-current { color: var(--hero-gold); }
 
-/* Round category images (Woodmart carousel: 6 / 4 / 3 per view) */
-.cat-carousel { position: relative; margin-block: -15px; }
-.cat-carousel__viewport { margin-inline: -10px; padding-block: 15px; overflow: clip; touch-action: pan-y; }
-.cat-carousel__track { display: flex; transition: transform 0.3s ease; }
-.cat-carousel__item { flex: 0 0 16.6667%; max-width: 16.6667%; padding-inline: 10px; }
-.cat-tile { position: relative; text-align: center; }
-.cat-tile__thumb {
-  position: relative;
-  max-width: 103px;
-  margin-inline: auto;
+.shop-hero__title {
+  color: var(--hero-ink);
+  font-family: var(--font-anton), Arial, Helvetica, sans-serif;
+  font-size: clamp(44px, 6.2vw, 92px);
+  font-weight: 600;
+  line-height: 0.98;
+  letter-spacing: 1.11px;
+  text-transform: uppercase;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+}
+.shop-hero__title-accent { color: var(--hero-gold); }
+
+.shop-hero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 8px;
+  margin-top: 14px;
+  color: var(--hero-muted);
+  font-family: var(--font-inter), sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+}
+/* Numbers in Cormorant Garamond, as the homepage's counters. */
+.shop-hero__count {
+  color: var(--hero-gold);
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: 26px;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1;
+  font-variant-numeric: lining-nums;
+}
+.shop-hero__meta-dot { width: 4px; height: 4px; margin-inline: 4px; border-radius: 50%; background-color: rgb(165 108 30 / 0.5); align-self: center; }
+
+/* The first three products' pictures, fanned out; they spread a little on hover. */
+.shop-hero__collage { position: relative; grid-column: 2; grid-row: 1 / span 2; height: 290px; }
+.shop-hero__cover {
+  position: absolute;
+  bottom: 6px;
+  width: 44%;
+  aspect-ratio: 1;
   overflow: hidden;
-  border-radius: 300px;
+  border-radius: 22px;
+  background-color: #efe6d4;
+  box-shadow: 0 0 0 1px rgb(184 149 42 / 0.16), 0 30px 50px -30px rgb(80 55 15 / 0.6);
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
-.cat-tile__image {
-  display: block;
-  margin: -1px;
-  color: #333333;
-  transition: transform 0.5s cubic-bezier(0, 0, 0.44, 1.18);
-}
-.cat-tile__image img { display: block; width: 100%; height: auto; }
-.cat-tile:hover .cat-tile__image { transform: scale(1.1); }
-.cat-tile__content { padding: 10px; }
-.cat-tile__title {
-  color: var(--color-entity-title);
+.shop-hero__cover img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.shop-hero__cover[data-n="0"] { left: 0; z-index: 1; transform: rotate(-7deg) translateY(-4%); }
+.shop-hero__cover[data-n="1"] { left: 26%; z-index: 3; width: 50%; transform: translateY(-12%); }
+.shop-hero__cover[data-n="2"] { right: 0; z-index: 2; transform: rotate(7deg) translateY(-2%); }
+/* Categories with only one or two products */
+.shop-hero__collage[data-count="1"] [data-n="0"] { left: 25%; width: 50%; transform: rotate(-3deg) translateY(-10%); }
+.shop-hero__collage[data-count="2"] [data-n="0"] { left: 6%; transform: rotate(-6deg) translateY(-4%); }
+.shop-hero__collage[data-count="2"] [data-n="1"] { left: auto; right: 6%; width: 48%; transform: rotate(4deg) translateY(-10%); }
+.shop-hero__collage:hover [data-n="0"] { transform: rotate(-11deg) translate(-6%, -6%); }
+.shop-hero__collage:hover [data-n="2"] { transform: rotate(11deg) translate(6%, -4%); }
+.shop-hero__collage[data-count="1"]:hover [data-n="0"] { transform: rotate(-1deg) translateY(-13%); }
+
+.shop-hero__trust { display: flex; flex-wrap: wrap; grid-column: 1; grid-row: 2; gap: 8px 20px; }
+.shop-hero__trust-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #2b2620;
+  font-family: var(--font-inter), sans-serif;
   font-size: 13px;
+  font-weight: 500;
+  line-height: 1.35;
+}
+.shop-hero__trust-icon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-image: linear-gradient(rgb(165 108 38) 0%, rgb(231 170 63) 100%);
+  color: #ffffff;
+}
+.shop-hero__trust-icon svg { width: 13px; height: 13px; }
+.shop-hero__trust a {
+  color: var(--hero-gold);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color 0.2s;
+}
+.shop-hero__trust a:hover { color: var(--hero-ink); }
+
+/* Category chips */
+.shop-rail { margin-top: 30px; padding-top: 18px; border-top: 1px solid var(--hero-line); }
+.shop-rail__head { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 14px; }
+.shop-rail__label {
+  color: #2b2620;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 12px;
   font-weight: 600;
   line-height: 1.4;
-  text-transform: capitalize;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
 }
-.cat-tile__link { position: absolute; inset: 0; z-index: 1; }
-
-.cat-carousel__arrow {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  z-index: 250;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 50px;
-  height: 50px;
-  margin-block: auto;
-  color: #a5a5a5;
-  font-size: 24px;
-  line-height: 1;
-  opacity: 0;
+.shop-rail__arrows { display: flex; gap: 8px; }
+.shop-rail:not([data-overflow]) .shop-rail__arrows { visibility: hidden; }
+.shop-rail__arrow {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgb(36 24 8 / 0.14);
+  border-radius: 50%;
+  background-color: rgb(255 255 255 / 0.7);
+  color: #2b2620;
+  font-size: 12px;
   cursor: pointer;
-  transition: all 0.25s;
+  transition: background-color 0.25s, color 0.25s, border-color 0.25s, opacity 0.25s, transform 0.15s;
 }
-.cat-carousel__arrow--prev { left: -50px; transform: translateX(-30px); }
-.cat-carousel__arrow--next { right: -50px; transform: translateX(30px); }
-.cat-carousel:hover .cat-carousel__arrow:not(:disabled) { opacity: 1; transform: none; }
-.cat-carousel__arrow:not(:disabled):hover { color: #333333; }
-.cat-carousel__arrow:disabled { pointer-events: none; }
+.shop-rail__arrow:hover:not(:disabled) { border-color: var(--hero-ink); background-color: var(--hero-ink); color: #ffffff; }
+.shop-rail__arrow:active:not(:disabled) { transform: scale(0.94); }
+.shop-rail__arrow:focus-visible { outline: 2px solid var(--hero-gold); outline-offset: 2px; }
+.shop-rail__arrow:disabled { opacity: 0.35; cursor: default; }
+
+/* Chips snap just after the faded edge (--rail-fade), so the one they stop on is never faded. */
+.shop-rail__scroller {
+  --rail-fade: 56px;
+  position: relative;
+  display: flex;
+  gap: 12px;
+  margin: -6px -4px -14px;
+  padding: 6px 4px 14px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--rail-fade);
+  scrollbar-width: none;
+}
+.shop-rail__scroller::-webkit-scrollbar { display: none; }
+.shop-rail__scroller[data-fade="end"] { mask-image: linear-gradient(to right, #000 calc(100% - var(--rail-fade)), transparent); }
+.shop-rail__scroller[data-fade="start"] { mask-image: linear-gradient(to right, transparent, #000 var(--rail-fade)); }
+.shop-rail__scroller[data-fade="start end"] { mask-image: linear-gradient(to right, transparent, #000 var(--rail-fade), #000 calc(100% - var(--rail-fade)), transparent); }
+
+.shop-card {
+  position: relative;
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 14px 5px 5px;
+  border: 1px solid rgb(36 24 8 / 0.08);
+  border-radius: 999px;
+  background-color: #ffffff;
+  box-shadow: 0 1px 2px rgb(120 84 20 / 0.05);
+  scroll-snap-align: start;
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s, border-color 0.35s, background-color 0.35s;
+}
+.shop-card:hover { border-color: rgb(184 149 42 / 0.5); box-shadow: 0 16px 30px -18px rgb(165 108 38 / 0.55); transform: translateY(-3px); }
+.shop-card:active { transform: translateY(-1px) scale(0.99); }
+.shop-card:focus-visible { outline: 2px solid var(--hero-gold); outline-offset: 3px; }
+.shop-card__img { flex: none; width: 34px; height: 34px; overflow: hidden; border-radius: 50%; background-color: #efe6d4; }
+.shop-card__img img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.shop-card:hover .shop-card__img img { transform: scale(1.1); }
+.shop-card__text { display: flex; align-items: center; gap: 8px; }
+.shop-card__name { color: var(--hero-ink); font-family: var(--font-inter), sans-serif; font-size: 13.5px; font-weight: 600; line-height: 1.3; white-space: nowrap; }
+.shop-card__count {
+  padding: 1px 8px;
+  border-radius: 999px;
+  background-color: rgb(184 149 42 / 0.13);
+  color: #8a5a17;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+}
+.shop-card__sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+/* The category being viewed */
+.shop-card[aria-current="page"] { border-color: var(--hero-ink); background-color: var(--hero-ink); box-shadow: 0 16px 30px -20px rgb(28 25 21 / 0.7); }
+.shop-card[aria-current="page"] .shop-card__name { color: #ffffff; }
+.shop-card[aria-current="page"] .shop-card__count { background-color: rgb(231 170 63 / 0.22); color: #f2c56e; }
+
+/* A light entrance: texts, pictures and chips rise in one after another (the title stays put, it
+ * is the page's largest text). */
+@media (prefers-reduced-motion: no-preference) {
+  .shop-hero__crumbs,
+  .shop-hero__meta,
+  .shop-hero__trust,
+  .shop-hero__collage { animation: shop-hero-in 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+  .shop-hero__meta { animation-delay: 60ms; }
+  .shop-hero__trust { animation-delay: 120ms; }
+  .shop-hero__collage { animation-delay: 80ms; }
+  .shop-card { animation: shop-hero-in 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) both; animation-delay: calc(var(--i, 0) * 45ms + 140ms); }
+}
+@keyframes shop-hero-in {
+  from { opacity: 0; transform: translateY(10px); }
+}
+
+@media (max-width: 1024px) {
+  .shop-hero__top { grid-template-columns: minmax(0, 1fr) minmax(0, 300px); }
+  .shop-hero__collage { height: 200px; }
+}
+@media (hover: none), (max-width: 767px) {
+  .shop-rail__arrows { display: none; }
+}
+@media (max-width: 767px) {
+  .shop-hero { margin-top: -16px; }
+  .shop-hero__panel { padding: 14px 18px 0; }
+  .shop-hero__top { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; gap: 16px; }
+  .shop-hero__crumbs { margin-bottom: 12px; font-size: 10px; letter-spacing: 1.8px; }
+  .shop-hero__crumb-sep { width: 10px; margin-inline: 8px; }
+  .shop-hero__title { font-size: clamp(34px, 10.5vw, 44px); }
+  .shop-hero__meta { margin-top: 10px; font-size: 13px; }
+  .shop-hero__count { font-size: 22px; }
+  /* The three pictures become a small overlapping row under the count. */
+  .shop-hero__collage { display: flex; grid-column: 1; grid-row: 2; height: auto; }
+  .shop-hero__cover,
+  .shop-hero__collage[data-count] .shop-hero__cover[data-n] { position: relative; bottom: auto; left: auto; right: auto; width: 48px; border: 2px solid #ffffff; border-radius: 50%; transform: none; }
+  .shop-hero__cover + .shop-hero__cover { margin-left: -14px; }
+  .shop-hero__collage[data-count]:hover [data-n] { transform: none; }
+  .shop-hero__trust { grid-row: 3; gap: 7px 16px; }
+  .shop-hero__trust-item { gap: 8px; font-size: 12.5px; }
+  .shop-rail { margin-top: 20px; padding-top: 16px; }
+  .shop-rail__head { margin-bottom: 12px; }
+  /* The row runs to the screen's edges so a chip cut off at the right shows there is more. */
+  .shop-rail__scroller { --rail-fade: 28px; gap: 10px; margin-inline: -28px; padding-inline: 28px; }
+}
 
 /* ───────────────────────── Sidebar + products ───────────────────────── */
 .shop-body { padding-top: calc(var(--shop-inner) * 0.03); }
@@ -619,11 +792,6 @@ a.shop-pagination__item:hover { background-color: #f1f1f1; }
 
 /* ───────────────────────── Tablet (≤ 1024px) ───────────────────────── */
 @media (max-width: 1024px) {
-  .cat-carousel__viewport { margin-inline: -5px; }
-  .cat-carousel__item { flex-basis: 25%; max-width: 25%; padding-inline: 5px; }
-  .cat-carousel__arrow { width: 40px; height: 40px; color: #333333; font-size: 16px; opacity: 1; transform: none; }
-  .cat-carousel__arrow--prev { left: -28px; }
-  .cat-carousel__arrow--next { right: -28px; }
 
   .shop-toolbar { flex-direction: column; align-items: stretch; }
   .shop-toolbar__left,
@@ -653,20 +821,11 @@ a.shop-pagination__item:hover { background-color: #f1f1f1; }
 
 /* ───────────────────────── Woodmart "small" (≤ 768px) ───────────────────────── */
 @media (max-width: 768.98px) {
-  .cat-carousel__item { flex-basis: 33.3333%; max-width: 33.3333%; }
   .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
 }
 
 /* ───────────────────────── Phones (≤ 767px) ───────────────────────── */
 @media (max-width: 767px) {
-  .shop-band { margin-top: -20px; padding-block: calc(var(--shop-inner) * 0.02) calc(var(--shop-inner) * 0.01); }
-  .shop-band__container { flex-direction: column; }
-  .shop-band__title-col,
-  .shop-band__tiles-col { width: 100%; }
-  .shop-band__title-wrap { margin: 0 0 2% 3%; }
-  .shop-band__title { margin-bottom: 9px; font-size: 38px; }
-  .cat-tile__thumb { max-width: 95px; }
-  .cat-tile__title { font-size: 12px; }
 
   .shop-body { padding-top: 0; }
   .shop-main { width: 100%; }

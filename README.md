@@ -79,7 +79,7 @@ live domain.
 | 404 page | `src/app/(store)/not-found.tsx` |
 | Products, categories, prices shown in the shop | `src/content/catalog.json` (generated: re-run `python scripts/audit/export_shop_snapshot.py`; moves to Sanity + PostgreSQL in Phase 4) |
 | Sort orders, paging, search rules, the "~$" USD hint | `src/lib/catalog/` (`index.ts`, `search.ts`, `usd.ts`; tests in `catalog.test.ts`) |
-| Shop / category / search page layout | `src/components/shop/ShopArchive.tsx` (+ `ProductCard.tsx`, `ShopToolbar.tsx`, `CategorySidebar.tsx`, `CategoryCarousel.tsx`, `Pagination.tsx`) |
+| Shop / category / search page layout | `src/components/shop/ShopArchive.tsx` (+ `ProductCard.tsx`, `ShopToolbar.tsx`, `CategorySidebar.tsx`, `ShopHero.tsx` + `CollectionRail.tsx` (title band, redesigned 12 Nov 2026), `Pagination.tsx`) |
 | Shop page styles | `src/styles/shop.css` (every value measured on the live shop) |
 | Header search suggestions | `src/components/layout/SearchOverlay.tsx`, `src/components/layout/search/`, `src/app/api/search-suggestions/route.ts` |
 | Product page layout | `src/components/product/ProductPage.tsx` (+ `ProductGallery.tsx`, `AddToCartForm.tsx`, `ProductTabs.tsx`, `RelatedProducts.tsx`) and the route `src/app/(store)/product/[slug]/page.tsx` |
