@@ -38,7 +38,7 @@ export function parentStatus(items: OfferItem[]): StockStatus {
 
 const availability = (status: StockStatus) => `https://schema.org/${status === "instock" ? "InStock" : status === "onbackorder" ? "BackOrder" : "OutOfStock"}`;
 
-export function wooProductOffer(product: OfferProduct, now: Date = new Date()): Record<string, unknown> | null {
+export function wooProductOffer(product: OfferProduct, now: Date): Record<string, unknown> | null {
   if (!product.items.length) return null;
   // gmdate('Y-12-31', time() + YEAR_IN_SECONDS)
   const nextYear = `${new Date(now.getTime() + 365 * 24 * 3600 * 1000).getUTCFullYear()}-12-31`;

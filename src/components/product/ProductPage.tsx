@@ -37,6 +37,7 @@ import { getCoas } from "@/lib/coa/library";
 import { getSharedBlockHtml, type ProductPageData } from "@/lib/catalog/product-page";
 import type { Product } from "@/lib/catalog/types";
 import { cleanLegacyHtml } from "@/lib/legacy-html";
+import { offerDate } from "@/lib/seo/offer-date";
 import { productJsonLd } from "@/lib/seo/product-jsonld";
 
 import { AddToCartForm, SummaryPrice } from "./AddToCartForm";
@@ -57,7 +58,7 @@ const NOT_LINKED = new Set([267, 4118, 7]);
 export async function ProductPage({ product, page }: { product: Product; page: ProductPageData }) {
   const related = (await Promise.all(page.related.map((id) => getProductById(id)))).filter((p): p is Product => Boolean(p));
   const backorder = backorderFor(product, (await getCatalogState()).backorder);
-  const jsonLd = productJsonLd(product, page, backorder);
+  const jsonLd = productJsonLd(product, page, backorder, new Date(await offerDate()));
   const afterBlocks = (await Promise.all(page.afterAddToCart.map(async (id) => cleanLegacyHtml(await getSharedBlockHtml(id))))).join("");
   const tabs = page.tabs.map((tab) => ({ key: tab.key, title: tab.title, html: cleanLegacyHtml(tab.html) }));
   // This product's certificates (the COA cards on the lab results page link to their product).

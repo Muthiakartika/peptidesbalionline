@@ -20,7 +20,8 @@ const stripTags = (html: string) =>
     .replace(/&amp;/g, "&")
     .trim();
 
-export function productJsonLd(product: Product, page: ProductPageData, backorder: Record<string, { notify: boolean }>): ProductJsonLd {
+/** `now`: today (src/lib/seo/offer-date.ts), for the offers' "valid until". */
+export function productJsonLd(product: Product, page: ProductPageData, backorder: Record<string, { notify: boolean }>, now: Date): ProductJsonLd {
   const status = (id: number, inStock: boolean): StockStatus => (backorder[String(id)] ? "onbackorder" : inStock ? "instock" : "outofstock");
   const items: OfferItem[] = (
     product.type === "variable"
@@ -30,7 +31,7 @@ export function productJsonLd(product: Product, page: ProductPageData, backorder
     // A variation without a price can't be bought (Q-17): WooCommerce leaves it out of the offer, as here.
     .filter((item) => item.price > 0n);
   const url = `${LIVE}${product.path}`;
-  const offer = wooProductOffer({ type: product.type, url, items });
+  const offer = wooProductOffer({ type: product.type, url, items }, now);
   const image = page.gallery[0]?.full.src;
   return {
     name: product.name,
