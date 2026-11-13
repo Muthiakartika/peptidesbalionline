@@ -22,6 +22,7 @@ import { encodeCart, type StoredCart } from "@/lib/commerce/cart-cookie";
 import { cartCouponState, withoutCoupons } from "@/lib/commerce/cart-coupons";
 import { checkAddToCart, lineKey, MAX_QUANTITY, priceCart } from "@/lib/commerce/cart-lines";
 import { readCart, writeCart } from "@/lib/commerce/cart-store";
+import { CURRENT_OFFER } from "@/lib/commerce/offers";
 import { computeTotals } from "@/lib/commerce/totals";
 import { formatMoney } from "@/lib/money";
 
@@ -52,7 +53,7 @@ export type CartAnswer = { status: number; body: Record<string, unknown> };
 async function cartSummary(cart: StoredCart) {
   const { lines } = await priceCart(cart.items);
   const coupons = lines.length ? await cartCouponState(cart, lines) : null;
-  const totals = computeTotals({ lines, coupons: coupons?.coupons ?? [] });
+  const totals = computeTotals({ lines, coupons: coupons?.coupons ?? [], offer: CURRENT_OFFER });
   return {
     item_count: lines.reduce((sum, line) => sum + line.quantity, 0),
     subtotal: formatMoney(totals.subtotal),

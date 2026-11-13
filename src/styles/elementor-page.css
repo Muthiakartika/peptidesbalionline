@@ -293,3 +293,12 @@ article[data-legacy-html] > h1 {
 article[data-legacy-html] [style*="font-family"][style*="Urbanist"] {
   font-family: inherit !important;
 }
+
+/* Phones: landing-page sections whose text ran to the screen's edges (an all-pages scan of 13 Nov 2026:
+   headings and price lines 0–5px from the edge on /peptides-nusa-dua/, /peptide/batam/, /ghk-cu-bali/…).
+   Their content keeps 16px from the edges. A section that is an Elementor container gets the same
+   through its padding variables. */
+@media (max-width: 767px) {
+  :where(.elementor-page) :is(.elementor-element-da65539, .elementor-element-159e084, .elementor-element-0638886, .elementor-element-20c413f, .elementor-element-1f40594, .elementor-element-ec6f3bc, .elementor-element-e882f31, .elementor-element-edf3ed7, .elementor-element-1ecb892, .elementor-element-809a36c, .elementor-element-6de4262, .elementor-element-d022247) > .elementor-container { padding-inline: 16px; }
+  :where(.elementor-page) .e-con:is(.elementor-element-da65539, .elementor-element-159e084, .elementor-element-0638886, .elementor-element-20c413f, .elementor-element-1f40594, .elementor-element-ec6f3bc, .elementor-element-e882f31, .elementor-element-edf3ed7, .elementor-element-1ecb892, .elementor-element-809a36c, .elementor-element-6de4262, .elementor-element-d022247) { --padding-left: 16px !important; --padding-right: 16px !important; }
+}

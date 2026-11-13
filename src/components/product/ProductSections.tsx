@@ -2,7 +2,8 @@
  * The product's description and custom tabs (WooCommerce "tabs"), shown one after another as
  * sections of the page instead of tabs (redesign of 12 Nov 2026: every page one continuous page).
  *
- *   * A description that is a designed Elementor page is shown as it is, across the screen.
+ *   * A description that is a designed Elementor page is shown as it is, in the page's container (its
+ *     stretched sections still run across the screen).
  *   * A description written as plain text (headings, paragraphs, lists, tables) becomes an article:
  *     a heading and the list of its H2s on the left, the text in a reading column (ProductArticle).
  *   * The other tabs ("Benefits", …) get a small heading on the left and their text on the right.
@@ -28,7 +29,11 @@ export function ProductSections({ tabs, productName }: { tabs: CleanTab[]; produ
         if (tab.key === "description" && isDesigned(tab.html)) {
           return (
             <section key={tab.key} id={`tab-${tab.key}`} className="pp-section pp-section--description woocommerce-Tabs-panel--description" aria-label={`About ${productName}`}>
-              <LegacyHtml className="wc-tab-inner wd-entry-content" html={tab.html} />
+              {/* In the page's container, as in the old tabs: the description's "stretched" sections still
+                  run across the screen (their own 100vw), the others keep the content width. */}
+              <div className="container pp-designed">
+                <LegacyHtml className="wc-tab-inner wd-entry-content" html={tab.html} />
+              </div>
             </section>
           );
         }

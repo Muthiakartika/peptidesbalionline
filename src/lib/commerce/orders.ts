@@ -17,6 +17,7 @@ import { and, eq } from "drizzle-orm";
 
 import { getDb } from "@/db";
 import { orderFees, orderItems, orderNotes, orders } from "@/db/schema";
+import { formatMoney } from "@/lib/money";
 
 import type { CheckoutInput } from "./checkout-validation";
 import type { PricedLine } from "./cart-lines";
@@ -132,6 +133,11 @@ export async function createOrder({
       }),
     );
     if (fee) await tx.insert(orderFees).values({ orderId: order.id, label: fee.label, amountMinor: fee.amount });
+    // The automatic offer is in the discount and the line discounts; this note says which offer it was.
+    if (totals.offer && totals.offer.amount > 0n) {
+      const { offer, qualifyingQuantity, amount } = totals.offer;
+      await tx.insert(orderNotes).values({ orderId: order.id, body: `${offer.name} offer applied: ${offer.percent}% off ${qualifyingQuantity} qualifying items (-${formatMoney(amount)}).`, isCustomerNote: false });
+    }
     // The coupons used, counted in their usage as WooCommerce does once an order is placed.
     await recordOrderCoupons(tx, { orderId: order.id, userId, email: billing.email, status: method.statusAfterOrder, coupons });
     return { id: order.id, number: order.number, key };

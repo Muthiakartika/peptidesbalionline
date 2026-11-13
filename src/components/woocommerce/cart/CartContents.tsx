@@ -12,6 +12,7 @@ import { priceCart, type PricedLine } from "@/lib/commerce/cart-lines";
 import { cartCouponState } from "@/lib/commerce/cart-coupons";
 import { readCart } from "@/lib/commerce/cart-store";
 import { cartTopUp } from "@/lib/commerce/store-settings";
+import { CURRENT_OFFER } from "@/lib/commerce/offers";
 import { computeTotals } from "@/lib/commerce/totals";
 import { formatUsd } from "@/lib/catalog/usd";
 
@@ -21,6 +22,7 @@ import { CartForm, CartNotices, CartQuantity, CartRemoveCoupon, RemoveItem, TopU
 import { BackorderBadge } from "./BackorderBadge";
 import { CartAmount, CartPrice, ProductPriceHtml } from "./CartPrice";
 import { CouponRow } from "./CouponRow";
+import { OfferCard, OfferRow } from "@/components/woocommerce/OfferCard";
 import { formatDestination } from "./destination";
 import { ShippingCalculator } from "./ShippingCalculator";
 
@@ -135,7 +137,7 @@ export async function CartContents() {
   }
   // The applied coupons that are still valid (WooCommerce's cart check drops the others, with a notice).
   const coupons = await cartCouponState(cart, lines);
-  const totals = computeTotals({ lines, coupons: coupons.coupons });
+  const totals = computeTotals({ lines, coupons: coupons.coupons, offer: CURRENT_OFFER });
   return (
     <div className="cart-content-wrapper">
       <CartNotices serverErrors={[...notices, ...errors, ...coupons.notices]} />
@@ -192,6 +194,7 @@ export async function CartContents() {
       </CartForm>
       <div className="cart_totals ">
         <div className="cart-totals-inner wd-set-mb reset-last-child wd-layout-1">
+          <OfferCard state={totals.offer} />
           <h2>Cart totals</h2>
           <table cellSpacing={0} className="shop_table shop_table_responsive">
             <tbody>
@@ -204,6 +207,7 @@ export async function CartContents() {
               {coupons.coupons.map((coupon) => (
                 <CouponRow key={coupon.code} code={coupon.code} amount={totals.couponTotals.get(coupon.code) ?? 0n} freeShipping={coupon.freeShipping} withDataTitle remove={<CartRemoveCoupon code={coupon.code} />} />
               ))}
+              <OfferRow state={totals.offer} withDataTitle />
               <tr className="woocommerce-shipping-totals shipping">
                 <th>Shipment</th>
                 <td data-title="Shipment">

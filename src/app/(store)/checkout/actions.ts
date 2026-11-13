@@ -31,6 +31,7 @@ import { applyCoupon, checkCouponForCustomer, couponMessages } from "@/lib/comme
 import { validateCheckout, type CheckoutInput, type CheckoutMessage, isPaymentMethodId } from "@/lib/commerce/checkout-validation";
 import { afterOrderAddress, createOrder, internationalPhone } from "@/lib/commerce/orders";
 import { paymentMethods } from "@/lib/commerce/store-settings";
+import { CURRENT_OFFER } from "@/lib/commerce/offers";
 import { computeTotals } from "@/lib/commerce/totals";
 import { sendOrderStatusEmails } from "@/lib/email/order-notifications";
 
@@ -121,7 +122,7 @@ export async function placeOrder(raw: Partial<CheckoutInput>, extras: CheckoutEx
   if (!lines.length) return { ok: false, messages: [{ text: "Sorry, your session has expired. Return to shop" }] };
   const couponCheck = await checkoutCoupons(cart, lines, input.billing.email);
   if (couponCheck.drop.length) await writeCart(withoutCoupons(cart, couponCheck.drop));
-  const totals = computeTotals({ lines, coupons: couponCheck.coupons, paymentId: isPaymentMethodId(input.paymentMethod) ? input.paymentMethod : null, preselectPayment: false });
+  const totals = computeTotals({ lines, coupons: couponCheck.coupons, paymentId: isPaymentMethodId(input.paymentMethod) ? input.paymentMethod : null, preselectPayment: false, offer: CURRENT_OFFER });
   const messages = [...couponCheck.messages, ...validateCheckout(input, { totals, cartErrors: errors })];
   if (messages.length) return { ok: false, messages };
   const method = paymentMethods.find((m) => m.id === input.paymentMethod)!;

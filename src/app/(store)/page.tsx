@@ -17,6 +17,9 @@ import { ElementorPage } from "@/components/elementor/ElementorPage";
 import { HomePopups } from "@/components/elementor/HomePopups";
 import { AgeGate } from "@/components/layout/AgeGate";
 import { archiveMetadata } from "@/components/shop/archive-metadata";
+import { getCoas } from "@/lib/coa/library";
+import { withCoaShowcase } from "@/lib/coa/showcase";
+import { withDispatchPanel } from "@/lib/home/dispatch";
 import { getSiteChrome } from "@/lib/content/sanity";
 import { getElementorPage } from "@/lib/elementor/pages";
 
@@ -33,7 +36,9 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function HomePage() {
   return (
     <>
-      <ElementorPage page={await getHomePage()} />
+      {/* The hero's button becomes the dispatch countdown + format tiles (src/lib/home/dispatch.ts); the
+          certificates carousel opens each report in a window (src/lib/coa/showcase.ts). */}
+      <ElementorPage page={withCoaShowcase(withDispatchPanel(await getHomePage()), await getCoas())} />
       {/* On the live site the age gate and the "5% off" popups are on the homepage only (Q-45). */}
       <AgeGate ageGate={(await getSiteChrome()).ageGate} />
       <HomePopups />

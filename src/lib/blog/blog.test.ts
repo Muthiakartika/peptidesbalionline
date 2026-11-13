@@ -66,3 +66,13 @@ describe("blog page links", () => {
     expect(labels(9, 9)).toBe("« ‹ 7 8 [9]");
   });
 });
+
+describe("pasted code viewers", () => {
+  it("turns a ChatGPT code viewer with one title per line into a list, and leaves real code alone", async () => {
+    const { withoutPastedCodeViewers } = await import("./article-html");
+    const pasted = `<div class="cm-editor"><pre class="cm-content q9tKkq_readonly m-0"><code>Introduction\n\nWhat Are Peptides?\n</code></pre></div>`;
+    expect(withoutPastedCodeViewers(pasted)).toBe(`<div class="cm-editor"><ul><li>Introduction</li><li>What Are Peptides?</li></ul></div>`);
+    const code = `<pre class="cm-content"><code>const a = 1;\nreturn a;</code></pre>`;
+    expect(withoutPastedCodeViewers(code)).toBe(code);
+  });
+});

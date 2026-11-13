@@ -26,7 +26,11 @@ import { cleanLegacyHtml } from "@/lib/legacy-html";
 
 import { BlogGridIsland, type BlogGridProps } from "../blog/BlogGridIsland";
 import { CoaLibrary } from "../coa/CoaLibrary";
+import { CoaShowcase } from "../coa/CoaShowcase";
+import { DispatchPanel } from "../home/DispatchPanel";
 import type { CoaLibraryProps } from "../coa/types";
+import type { CoaShowcaseProps } from "@/lib/coa/showcase";
+import type { DispatchPanelProps } from "@/lib/home/dispatch";
 import { ContentAccordion, ElementorToggle, WoodmartAccordion } from "./Accordions";
 import { CopyIcon } from "./CopyIcon";
 import { ElementorCounter } from "./ElementorCounter";
@@ -86,6 +90,24 @@ const optionsFor = (path: string): HTMLReactParserOptions => ({
       return (
         <Tag {...props(node, "data-island", "data-island-props")}>
           <CoaLibrary {...library} />
+        </Tag>
+      );
+    }
+    // The homepage's certificates (put in place of its report carousel by src/lib/coa/showcase.ts).
+    if (attribs["data-island"] === "coa-showcase") {
+      const showcase = JSON.parse(attribs["data-island-props"]) as CoaShowcaseProps;
+      return (
+        <Tag {...props(node, "data-island", "data-island-props")}>
+          <CoaShowcase {...showcase} />
+        </Tag>
+      );
+    }
+    // The homepage hero's dispatch countdown and format tiles (in place of its button, src/lib/home/dispatch.ts).
+    if (attribs["data-island"] === "dispatch-panel") {
+      const panel = JSON.parse(attribs["data-island-props"]) as DispatchPanelProps;
+      return (
+        <Tag {...props(node, "data-island", "data-island-props")}>
+          <DispatchPanel {...panel} />
         </Tag>
       );
     }

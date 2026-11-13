@@ -52,6 +52,23 @@ export function withoutRepeatedPicture(html: string, headerSrc: string | null | 
   return html;
 }
 
+/**
+ * Text pasted from ChatGPT can bring its code viewer along: a <pre class="cm-content"><code> with one
+ * title per line (e.g. "Peptides in Bali: the complete guide" pastes its own contents that way), which
+ * showed as monospaced code. Such a block becomes a plain list; anything that looks like real code
+ * (braces, semicolons, tags, "=") stays as it is.
+ */
+export function withoutPastedCodeViewers(html: string): string {
+  return html.replace(/<pre\b[^>]*class="[^"]*\bcm-content\b[^"]*"[^>]*>\s*<code>([\s\S]*?)<\/code>\s*<\/pre>/gi, (block, inner: string) => {
+    const lines = inner
+      .split("\n")
+      .map((line) => line.trim())
+      .filter(Boolean);
+    if (lines.length < 2 || lines.some((line) => /[{};=]|&lt;|&gt;|<|\b(?:const|let|var|function|import|return)\b/.test(line))) return block;
+    return `<ul>${lines.map((line) => `<li>${line}</li>`).join("")}</ul>`;
+  });
+}
+
 /** Puts each table in a box that scrolls sideways on small screens (styled in insights.css). */
 export function withTableBoxes(html: string): string {
   return html.replace(/<table\b[\s\S]*?<\/table>/gi, (table) => `<div class="ins-table">${table}</div>`);

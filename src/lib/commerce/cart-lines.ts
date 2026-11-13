@@ -37,7 +37,7 @@ export const MAX_QUANTITY = 9999;
 export const lineKey = (productId: number, variationId: number | null) => `${productId}:${variationId ?? 0}`;
 
 /** A category slug and all its parents' slugs (WooCommerce's wc_get_product_cat_ids). */
-function withParents(slugs: string[], categories: Category[]): string[] {
+export function withParents(slugs: string[], categories: Category[]): string[] {
   const bySlug = new Map(categories.map((c) => [c.slug, c]));
   const byId = new Map(categories.map((c) => [c.id, c]));
   const all = new Set<string>();

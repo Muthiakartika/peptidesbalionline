@@ -26,7 +26,7 @@ import { InsightCard, MoleculeMark, TitleText, articleFormat } from "@/component
 import { InsightsCta } from "@/components/insights/InsightsCta";
 import { ReadingProgress } from "@/components/insights/ReadingProgress";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { plainText, readingMinutes, withHeadingIds, withoutRepeatedPicture, withTableBoxes } from "@/lib/blog/article-html";
+import { plainText, readingMinutes, withHeadingIds, withoutPastedCodeViewers, withoutRepeatedPicture, withTableBoxes } from "@/lib/blog/article-html";
 import { BLOG_AUTHOR } from "@/lib/blog/author";
 import type { BlogPost } from "@/lib/blog/data";
 import { longDate } from "@/lib/blog/dates";
@@ -43,7 +43,7 @@ export async function BlogPostPage({ post, html }: { post: BlogPost; html: strin
   const topics = postTopics(post);
   const topic = topics[0] ?? null;
   const image = post.image;
-  const { html: body, headings } = withHeadingIds(withTableBoxes(withoutRepeatedPicture(cleanLegacyHtml(html), image?.src)));
+  const { html: body, headings } = withHeadingIds(withTableBoxes(withoutPastedCodeViewers(withoutRepeatedPicture(cleanLegacyHtml(html), image?.src))));
   const minutes = readingMinutes(body);
   const tall = image ? image.height > image.width * 1.05 : false;
   const updated = post.modified.slice(0, 10) !== post.date.slice(0, 10);

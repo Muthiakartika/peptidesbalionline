@@ -21,6 +21,7 @@ import type { Notice } from "@/lib/account/notices";
 import { RemoveCouponLink } from "@/components/woocommerce/cart/CartControls";
 import { CartAmount, CartPrice } from "@/components/woocommerce/cart/CartPrice";
 import { CouponRow } from "@/components/woocommerce/cart/CouponRow";
+import { OfferCard, OfferRow } from "@/components/woocommerce/OfferCard";
 import { formatUsd } from "@/lib/catalog/usd";
 import type { CheckoutMessage } from "@/lib/commerce/checkout-validation";
 import { couponFromData, type CartLine, type CouponData } from "@/lib/commerce/coupons";
@@ -28,6 +29,7 @@ import type { DeliveryOption } from "@/lib/commerce/delivery";
 import { phoneCountryCodes } from "@/lib/commerce/phone-country-codes";
 import { idrPerUsd, indonesiaStates, type PaymentMethodId } from "@/lib/commerce/store-settings";
 import { PAYMENT_DETAILS } from "@/lib/commerce/payment-details";
+import { CURRENT_OFFER } from "@/lib/commerce/offers";
 import { computeTotals, percentOf } from "@/lib/commerce/totals";
 import { useHydrated } from "@/lib/useHydrated";
 
@@ -184,7 +186,7 @@ export function CheckoutForm({
 
   const cartLines: CartLine[] = useMemo(() => lines.map((line) => ({ ...line, unitPrice: BigInt(line.unitPrice) })), [lines]);
   const appliedCoupons = useMemo(() => coupons.map(couponFromData), [coupons]);
-  const totals = computeTotals({ lines: cartLines, coupons: appliedCoupons, paymentId, preselectPayment: true });
+  const totals = computeTotals({ lines: cartLines, coupons: appliedCoupons, paymentId, preselectPayment: true, offer: CURRENT_OFFER });
 
   /** The owner's "Apply" (snippet 6479): its own texts, WooCommerce's notice at the top once it worked. */
   const applyCoupon = () => {
@@ -575,6 +577,7 @@ export function CheckoutForm({
 
         <div className="checkout-order-review">
           <h3 id="order_review_heading">Your order</h3>
+          <OfferCard state={totals.offer} />
           <div id="order_review" className="woocommerce-checkout-review-order">
             <div className="wd-table-wrapper">
               <table className="shop_table woocommerce-checkout-review-order-table">
@@ -624,6 +627,7 @@ export function CheckoutForm({
                       remove={<RemoveCouponLink code={applied.code} href={`/checkout/?remove_coupon=${encodeURIComponent(applied.code)}`} busy={removing} onRemove={() => removeCoupon(applied.code)} />}
                     />
                   ))}
+                  <OfferRow state={totals.offer} />
                   <tr className="woocommerce-shipping-totals shipping">
                     <th>Shipment</th>
                     <td data-title="Shipment">

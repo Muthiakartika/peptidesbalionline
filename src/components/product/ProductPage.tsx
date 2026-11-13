@@ -1,13 +1,13 @@
 /**
  * A single product page (/product/<slug>/). Redesigned on 12 Nov 2026 after the owner's reference
- * shops (every page one continuous page, src/styles/product-page.css):
+ * shops (every page one continuous page, src/styles/product-page.css), with the certificate card
+ * of 13 Nov 2026 (ProductCoaCard) under the gallery:
  *
  *   ┌ top band across the screen: gallery │ breadcrumbs, category, title, price, lab-tested badge,
  *   │                                     │ short description, included supplies, options +
  *   │                                     │ quantity + Add to cart, the buttons block, "Also available as"
  *   ├ "On this page" bar (sticky): Overview · the custom tabs · Lab results · Related products
  *   ├ the description (a designed Elementor page) and the custom tabs, one after another
- *   ├ Lab results: this product's certificates from the lab results page
  *   └ related products
  *
  * Class names are the live page's (WooCommerce/Woodmart) on purpose: the site owner's CSS
@@ -32,8 +32,12 @@ import Link from "next/link";
 import { Fragment } from "react";
 
 import { JsonLd } from "@/components/seo/JsonLd";
-import { backorderFor, getCatalogState, getProductById } from "@/lib/catalog";
+import { OfferBanner } from "@/components/woocommerce/OfferCard";
+import { backorderFor, getAllProducts, getCatalogState, getCategories, getProductById } from "@/lib/catalog";
+import { withParents } from "@/lib/commerce/cart-lines";
+import { CURRENT_OFFER, qualifies } from "@/lib/commerce/offers";
 import { getCoas } from "@/lib/coa/library";
+import { coasForProduct } from "@/lib/coa/product-coas";
 import { getSharedBlockHtml, type ProductPageData } from "@/lib/catalog/product-page";
 import type { Product } from "@/lib/catalog/types";
 import { cleanLegacyHtml } from "@/lib/legacy-html";
@@ -44,7 +48,7 @@ import { AddToCartForm, SummaryPrice } from "./AddToCartForm";
 import { LegacyHtml } from "./LegacyHtml";
 import { ProductGallery } from "./ProductGallery";
 import { ProductGalleryProvider } from "./ProductGalleryContext";
-import { ProductLabResults } from "./ProductLabResults";
+import { ProductCoaCard } from "./ProductCoaCard";
 import { ProductSectionNav, type SectionLink } from "./ProductSectionNav";
 import { ProductSections } from "./ProductSections";
 import { RelatedProducts } from "./RelatedProducts";
@@ -62,7 +66,10 @@ export async function ProductPage({ product, page }: { product: Product; page: P
   const afterBlocks = (await Promise.all(page.afterAddToCart.map(async (id) => cleanLegacyHtml(await getSharedBlockHtml(id))))).join("");
   const tabs = page.tabs.map((tab) => ({ key: tab.key, title: tab.title, html: cleanLegacyHtml(tab.html) }));
   // This product's certificates (the COA cards on the lab results page link to their product).
-  const coas = (await getCoas()).filter((coa) => coa.productPath === product.path);
+  // This product's certificates, or its compound's vial's for a pen or nasal spray (product-coas.ts).
+  const { coas, sampled } = coasForProduct(product, await getCoas(), await getAllProducts());
+  // The running offer's strip ("20% · mix any 3+ products") on the products that count towards it.
+  const inOffer = CURRENT_OFFER.active && qualifies({ name: product.name, categories: withParents(product.categories, await getCategories()) });
   const bestCoa = coas.length ? coas.reduce((a, b) => (b.purity > a.purity ? b : a)) : null;
   // The category the visitor came through: the breadcrumb before the product's own name.
   const category = page.breadcrumbs.length > 2 ? page.breadcrumbs[page.breadcrumbs.length - 2].label : null;
@@ -92,6 +99,7 @@ export async function ProductPage({ product, page }: { product: Product; page: P
                   <div className="product-image-summary-inner wd-grid-g">
                     <div className="product-images wd-grid-col">
                       <ProductGallery images={page.gallery} thumbnails={page.thumbnails} />
+                      <ProductCoaCard coas={coas} sampled={sampled} productName={page.title} />
                     </div>
                     <div className="summary entry-summary text-left wd-grid-col">
                       <div className="summary-inner wd-set-mb reset-last-child">
@@ -123,7 +131,7 @@ export async function ProductPage({ product, page }: { product: Product; page: P
                               </svg>
                             </span>
                             <span>
-                              Lab tested · <strong>{bestCoa.purityText}</strong> purity · {bestCoa.lab}
+                              {sampled === "vial" ? "Vial lab tested" : "Lab tested"} · <strong>{bestCoa.purityText}</strong> purity · {bestCoa.lab}
                             </span>
                             <span className="pp-proof__more">View certificate{coas.length > 1 ? "s" : ""}</span>
                           </a>
@@ -134,6 +142,7 @@ export async function ProductPage({ product, page }: { product: Product; page: P
                         {page.includedSupplies ? (
                           <div className="sleeks-included-supplies" data-legacy-html="" dangerouslySetInnerHTML={{ __html: cleanLegacyHtml(page.includedSupplies) }} />
                         ) : null}
+                        {inOffer ? <OfferBanner /> : null}
                         <AddToCartForm productId={product.id} productName={page.title} form={page.form} variations={product.variations} backorder={backorder} />
                         {afterBlocks ? <LegacyHtml className="wd-after-add-to-cart wd-entry-content" html={afterBlocks} /> : null}
                         {page.connectedFormats ? (
@@ -149,7 +158,6 @@ export async function ProductPage({ product, page }: { product: Product; page: P
         </div>
         <ProductSectionNav links={sections} />
         <ProductSections tabs={tabs} productName={page.title} />
-        <ProductLabResults coas={coas} productName={page.title} />
         <RelatedProducts products={related} />
       </div>
       <ScrollbarWidth />

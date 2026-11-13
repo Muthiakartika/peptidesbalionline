@@ -3,7 +3,8 @@
  * docs/audit/backend-settings.md §2–§3). All amounts are minor units; no floating point anywhere.
  *
  *   subtotal            sum of unit price × quantity (no tax: taxes are off)
- *   discount            the applied coupons (coupons.ts)
+ *   discount            the applied coupons (coupons.ts) and the automatic offer (offers.ts: "Bundle of
+ *                       three", 3+ qualifying items → 20% off them; waits while a coupon is applied)
  *   cart amount         subtotal − discount ("cart contents total"): the base for free shipping, the
  *                       card fee and the card / COD minimums
  *   shipping            Indonesia only: "Shipping" Rp 100,000; once the cart amount is Rp 2,500,000 or
@@ -16,6 +17,7 @@
  *   total               cart amount + shipping + adjustment
  */
 import { couponDiscounts, type CartLine, type Coupon } from "./coupons";
+import { evaluateOffer, type MultiBuyOffer, type OfferState } from "./offers";
 import { paymentMethods, shipping, type PaymentMethod, type PaymentMethodId } from "./store-settings";
 
 export type ShippingOption = { id: "flat_rate" | "free_shipping"; rateId: string; title: string; cost: bigint };
@@ -31,8 +33,11 @@ export type Totals = {
   subtotal: bigint;
   /** Coupon code → its discount (all lines). */
   couponTotals: Map<string, bigint>;
-  /** Line key → the discount on that line (all coupons). */
+  /** Line key → the discount on that line (all coupons and the offer). */
   lineDiscounts: Map<string, bigint>;
+  /** The automatic offer: progress, and what it takes off (null when none is running). */
+  offer: OfferState | null;
+  /** Coupons + offer. */
   discount: bigint;
   cartAmount: bigint;
   shippingOptions: ShippingOption[];
@@ -55,6 +60,8 @@ export type TotalsInput = {
   preselectPayment?: boolean;
   /** The methods offered (default: the live list). Online providers can be left out until they work. */
   methods?: readonly PaymentMethod[];
+  /** The automatic offer to apply (offers.ts CURRENT_OFFER); none when left out. */
+  offer?: MultiBuyOffer | null;
 };
 
 /** a × percent / 100, rounded half up (WooCommerce rounds fees to the store's 2 decimals). */
@@ -64,7 +71,7 @@ export function percentOf(amount: bigint, percent: number): bigint {
   return (scaled * 2n + 10_000n) / 20_000n;
 }
 
-export function computeTotals({ lines, coupons = [], country = "ID", shippingId = null, paymentId = null, preselectPayment = false, methods = paymentMethods }: TotalsInput): Totals {
+export function computeTotals({ lines, coupons = [], country = "ID", shippingId = null, paymentId = null, preselectPayment = false, methods = paymentMethods, offer: offerSetting = null }: TotalsInput): Totals {
   const subtotal = lines.reduce((sum, line) => sum + line.unitPrice * BigInt(line.quantity), 0n);
   const perCoupon = couponDiscounts(coupons, lines);
   const couponTotals = new Map<string, bigint>();
@@ -77,7 +84,11 @@ export function computeTotals({ lines, coupons = [], country = "ID", shippingId 
     }
     couponTotals.set(code, total);
   }
-  const discount = [...couponTotals.values()].reduce((sum, amount) => sum + amount, 0n);
+  const couponDiscount = [...couponTotals.values()].reduce((sum, amount) => sum + amount, 0n);
+  // The automatic offer, after the coupons (a line never goes below zero).
+  const offer = evaluateOffer(lines, { offer: offerSetting, couponApplied: coupons.length > 0, taken: new Map(lineDiscounts) });
+  for (const [key, amount] of offer?.perLine ?? []) lineDiscounts.set(key, (lineDiscounts.get(key) ?? 0n) + amount);
+  const discount = couponDiscount + (offer?.amount ?? 0n);
   const cartAmount = subtotal - discount;
 
   // Shipping: only to Indonesia (no other zone has a method). Before an address is known WooCommerce
@@ -109,5 +120,5 @@ export function computeTotals({ lines, coupons = [], country = "ID", shippingId 
   }
 
   const total = cartAmount + (chosenShipping?.cost ?? 0n) + (paymentAdjustment?.amount ?? 0n);
-  return { subtotal, couponTotals, lineDiscounts, discount, cartAmount, shippingOptions, shipping: chosenShipping, paymentOptions, payment, paymentAdjustment, total };
+  return { subtotal, couponTotals, lineDiscounts, offer, discount, cartAmount, shippingOptions, shipping: chosenShipping, paymentOptions, payment, paymentAdjustment, total };
 }

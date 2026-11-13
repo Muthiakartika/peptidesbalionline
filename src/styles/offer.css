@@ -1,0 +1,97 @@
+/*
+ * The running offer (src/components/woocommerce/OfferCard.tsx; 13 Nov 2026, after biopeptech.id):
+ *   .offer-card    cart and checkout: warm black card, gold label and "20% off" badge, a step per
+ *                  item (done steps gold with a tick), what is still needed, the exclusions
+ *   .offer-banner  product page: the offer in one strip above the options
+ * Atlas colours, Inter text, Anton for the big title; plain class names so it works on every page.
+ */
+.offer-card {
+  position: relative;
+  margin: 0 0 22px;
+  padding: 22px 22px 18px;
+  overflow: hidden;
+  border-radius: 20px;
+  background:
+    radial-gradient(70% 90% at 100% 0%, rgb(214 178 92 / 0.22), transparent 70%),
+    #17130d;
+  color: #d9d1c2;
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+  text-align: left;
+}
+.offer-card__top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.offer-card__eyebrow { color: #d6b25c; font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; }
+.offer-card__badge { padding: 4px 10px; border-radius: 999px; background: linear-gradient(135deg, #b98a31, #e6c76c 55%, #bd9036); color: #17130d; font-size: 11px; font-weight: 800; letter-spacing: 0.6px; text-transform: uppercase; }
+.offer-card__title { margin: 12px 0 6px; color: #ffffff; font-family: var(--font-anton), Arial, Helvetica, sans-serif; font-size: 26px; font-weight: 400; line-height: 1.12; letter-spacing: 1.11px; text-transform: uppercase; }
+.offer-card[data-state="saving"] .offer-card__title { color: #f2c56e; }
+.offer-card__text { margin: 0; color: #c9c0b0; font-size: 14px; line-height: 1.55; }
+.offer-card__text strong { color: #ffffff; }
+
+.offer-card__steps { display: flex; align-items: center; margin: 18px 0 8px; padding: 0; list-style: none; }
+.offer-card__steps li { display: flex; flex: 1 1 0; align-items: center; }
+.offer-card__steps li:last-child { flex: 0 0 auto; }
+.offer-card__steps li span {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgb(255 255 255 / 0.22);
+  border-radius: 50%;
+  color: #c9c0b0;
+  font-size: 13px;
+  font-weight: 700;
+}
+.offer-card__steps li:not(:last-child)::after { content: ""; flex: 1 1 auto; height: 1px; margin-inline: 8px; background: rgb(255 255 255 / 0.18); }
+.offer-card__steps li[data-done] span { border-color: transparent; background: linear-gradient(135deg, #b98a31, #e6c76c 55%, #bd9036); color: #17130d; }
+.offer-card__steps li[data-done]:not(:last-child)::after { background: #d6b25c; }
+.offer-card__count { margin: 0; color: #a79e8d; font-size: 11px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; }
+.offer-card__warn { margin: 12px 0 0; padding: 10px 12px; border: 1px solid rgb(242 197 110 / 0.35); border-radius: 12px; color: #f2c56e; font-size: 13px; line-height: 1.5; }
+.offer-card__cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 46px;
+  margin-top: 16px;
+  border-radius: 999px;
+  background-color: #fbf6ec;
+  color: #17130d !important;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none !important;
+  transition: background-color 0.2s, transform 0.2s;
+}
+.offer-card__cta:hover { background-color: #ffffff; transform: translateY(-1px); }
+.offer-card__cta:focus-visible { outline: 2px solid #d6b25c; outline-offset: 3px; }
+.offer-card__note { margin: 14px 0 0; padding-top: 12px; border-top: 1px solid rgb(255 255 255 / 0.1); color: #8a8273; font-size: 11.5px; line-height: 1.5; }
+
+/* The discount line in the totals: gold, like a saving. */
+.offer-discount th,
+.offer-discount td { color: #a56c1e; }
+
+/* Product page strip */
+.offer-banner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 0 0 22px;
+  padding: 14px 18px;
+  border-radius: 16px;
+  background:
+    radial-gradient(60% 120% at 0% 50%, rgb(214 178 92 / 0.25), transparent 70%),
+    #17130d;
+  color: #c9c0b0;
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+}
+.offer-banner__big { flex: none; color: #e6c76c; font-family: var(--font-anton), Arial, Helvetica, sans-serif; font-size: 40px; line-height: 1; letter-spacing: 1px; }
+.offer-banner__text { display: flex; flex-direction: column; gap: 2px; font-size: 12.5px; line-height: 1.45; }
+.offer-banner__eyebrow { color: #d6b25c; font-size: 10.5px; font-weight: 600; letter-spacing: 1.8px; text-transform: uppercase; }
+.offer-banner__text strong { color: #ffffff; font-size: 15px; font-weight: 700; }
+
+@media (max-width: 767px) {
+  .offer-card { padding: 20px 18px 16px; border-radius: 18px; }
+  .offer-card__title { font-size: 22px; }
+  .offer-banner { gap: 12px; padding: 12px 14px; }
+  .offer-banner__big { font-size: 32px; }
+}
