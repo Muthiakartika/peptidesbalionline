@@ -36,7 +36,7 @@
 
 | Table | Key columns | Notes |
 |---|---|---|
-| `product_records` | id, `sanity_id` (unique), `legacy_wc_product_id` (unique), type (`simple`/`variable`), status, tax_status | One per Sanity product. No content here. |
+| `product_records` | id, `sanity_id` (unique), `legacy_wc_product_id` (unique), slug (unique), `old_slugs` (text[], migration 0011), type (`simple`/`variable`), status, tax_status | One per Sanity product. No content here. `old_slugs`: the addresses it had before its slug was changed in /admin/products/ (WordPress's `_wp_old_slug`); /product/&lt;old&gt;/ answers 301 to the current one (src/proxy.ts). |
 | `product_variants` | id, product_id → product_records, `legacy_wc_variation_id` (unique), variant_key (e.g. `pen-type=disposable-pen;mg=5`), sku (nullable: today none exist), price_minor, regular_price_minor, sale_price_minor, sale_from/to, status, sort_order | A simple product has exactly one variant |
 | `inventory` | variant_id (PK), manage_stock, stock_quantity, stock_status (`instock`/`outofstock`/`onbackorder`), backorders (`no`/`notify`/`yes`) | Mirrors WooCommerce (Q-04) |
 | `inventory_movements` | id, variant_id, delta, reason (`order`, `refund`, `manual`, `migration`), order_id, actor_user_id | Append-only |
@@ -73,15 +73,21 @@
 | `affiliate_payout_items` | payout_id, referral_id, **★ unique(referral_id)** | A referral can only be paid once |
 | `affiliate_audit_logs` | id, actor_user_id, action, target_type, target_id, before (jsonb), after (jsonb), ip_hash, created_at | Every approval, rate change, payout and correction |
 
-## 4. Rewards / loyalty (only if confirmed active: it is advertised on `/rewards/`)
+## 4. Rewards / loyalty (advertised on `/rewards/`, terms on `/rewards-terms/`)
 
-**Status (7 Nov 2026):** not built. RewardsWP Pro is switched off on live (backend-settings.md §10), so there is no data to import through an API; build these tables only if the owner keeps the programme (Q-27).
+**Built (12–13 Nov 2026, migration 0010, `src/db/schema/loyalty.ts`; rules in `src/lib/loyalty/rules.ts`, database
+code in `src/lib/loyalty/store.ts`; how it works and what the owner should confirm: [rewards.md](../setup/rewards.md)).**
+RewardsWP's data came from the owner's database dump (`scripts/import/import-rewardswp.mjs`).
 
 | Table | Key columns | Notes |
 |---|---|---|
-| `loyalty_accounts` | user_id (PK), referral_code (unique), joined_at, welcome_reward_issued_at, `legacy_*` | |
-| `loyalty_transactions` | id, user_id, type (`earn`, `redeem`, `reverse`, `restore`, `adjust`, `migration`), credits (int), order_id, coupon_id, reason, **★ unique(user_id, type, order_id)** for earn/redeem | Credits = `floor(net_product_spend_minor / 1,000,000)` (1 per Rp 10,000) **(decision: confirm rounding and base)** |
-| `loyalty_referrals` | id, referrer_user_id, referred_user_id, referred_order_id, status, reward_coupon_id | "Give Rp 250,000, get Rp 250,000" |
+| `loyalty_members` | user_id (PK → users), referral_code (unique, case-insensitive), joined_at, `legacy_rewardswp_member_id` (unique) | One per account. Imported members keep RewardsWP's code, so links already shared (`/share/<code>/`) still work |
+| `loyalty_transactions` | id, user_id, type (`earn`, `redeem`, `reverse`, `restore`, `adjust`, `migration`), credits (signed int), source (`welcome`, `order`, `redemption`, `import`, `admin`), order_id, coupon_code, reason, created_at | **Ledger, append-only: the balance is the sum of `credits`.** An order's credits are kept in step by `syncOrderCredits` (issued when the order is completed, taken back when cancelled / refunded, recalculated after a partial refund: it writes only the difference). **★ unique(user_id) where source = 'welcome'**: the welcome credits are given once |
+| `loyalty_referrals` | id, referrer_user_id, referred_user_id, referred_email, status (`pending`, `rewarded`, `reversed`, `rejected`), friend_coupon_code, reward_coupon_code, referred_order_id, note, `legacy_rewardswp_referral_id`, converted_at | One row per friend. **★ unique(referred_user_id)** (one claim per person), **unique(friend_coupon_code)** |
+
+Money-off rewards are not a table of their own: redeemed credits, the friend's coupon and the member's reward are
+ordinary rows of `coupons` (`source` = `rewards_redemption` / `rewards_referral`; fixed cart amount, used once,
+restricted to the owner's e-mail address, "individual use" so never combined with another coupon).
 
 ## 5. Protocol Builder / Tracker (from the custom plugin: after Q-15)
 

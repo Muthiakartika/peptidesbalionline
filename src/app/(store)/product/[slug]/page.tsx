@@ -28,7 +28,8 @@ export async function generateMetadata({ params }: PageProps<"/product/[slug]">)
   const path = `/product/${(await params).slug}/`;
   const page = await getProductPage(path);
   if (!page) notFound();
-  return archiveMetadata(page.seo, path);
+  // A product made in /admin/products/ isn't in the copy of live's link previews: its first picture is used.
+  return archiveMetadata(page.seo, path, page.gallery[0]?.full);
 }
 
 export default async function Page({ params }: PageProps<"/product/[slug]">) {

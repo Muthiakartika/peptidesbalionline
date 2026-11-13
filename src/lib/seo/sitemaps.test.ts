@@ -8,7 +8,44 @@ import { blogArchivePaths, blogPostSlugs } from "@/content/blog";
 import { elementorPageNames } from "@/content/pages";
 import { getAllProducts, getCategories } from "@/lib/catalog";
 
-import { SITEMAP_NAMES, sitemapEntries, sitemapIndexXml, sitemapXml } from "./sitemaps";
+import { productCategorySitemapEntries, productSitemapEntries, SITEMAP_NAMES, sitemapDate, sitemapEntries, sitemapIndexXml, sitemapXml } from "./sitemaps";
+
+describe("the shop's sitemaps follow the catalogue", () => {
+  const snapshot = [
+    { path: "/shop/", lastmod: "2026-11-04T13:14:45+00:00", images: [] },
+    { path: "/product/old/", lastmod: "2026-08-01T10:00:00+00:00", images: ["https://peptidesbali.online/wp-content/uploads/old.webp"] },
+    { path: "/product/archived/", lastmod: "2026-09-01T10:00:00+00:00", images: [] },
+  ];
+  const products = [
+    { path: "/product/new/", date: "2026-11-12T08:30:00", image: "https://media.example.com/new.webp", categories: ["vial"] },
+    { path: "/product/old/", date: "2026-01-01T00:00:00", image: null, categories: ["pens"] },
+  ];
+
+  it("lists /shop/ first, then the products from the oldest change; new ones dated by publication; archived ones gone", () => {
+    expect(productSitemapEntries(products, snapshot)).toEqual([
+      { path: "/shop/", lastmod: "2026-11-12T08:30:00+00:00", images: [] },
+      snapshot[1],
+      { path: "/product/new/", lastmod: "2026-11-12T08:30:00+00:00", images: ["https://media.example.com/new.webp"] },
+    ]);
+  });
+
+  it("lists the categories that have products, new ones dated by their newest product", () => {
+    const entries = productSitemapEntries(products, snapshot);
+    const categories = [
+      { id: 1, parent: 0, slug: "vial", path: "/product-category/vial/", count: 1 },
+      { id: 2, parent: 0, slug: "pens", path: "/product-category/pens/", count: 1 },
+      { id: 3, parent: 0, slug: "empty", path: "/product-category/empty/", count: 0 },
+    ];
+    const known = [{ path: "/product-category/pens/", lastmod: "2026-10-01T00:00:00+00:00", images: [] }];
+    expect(productCategorySitemapEntries(categories, entries, products, known)).toEqual([known[0], { path: "/product-category/vial/", lastmod: "2026-11-12T08:30:00+00:00", images: [] }]);
+  });
+
+  it("writes dates as Yoast does", () => {
+    expect(sitemapDate("2026-11-12T08:30:00")).toBe("2026-11-12T08:30:00+00:00");
+    expect(sitemapDate(new Date("2026-11-12T08:30:00.123Z"))).toBe("2026-11-12T08:30:00+00:00");
+    expect(sitemapIndexXml({ product: productSitemapEntries(products, snapshot) })).toMatch(/\/product-sitemap\.xml<\/loc>\n\t\t<lastmod>2026-11-12T08:30:00\+00:00<\/lastmod>/);
+  });
+});
 
 describe("sitemaps", () => {
   it("has Yoast's five parts with the live counts", () => {

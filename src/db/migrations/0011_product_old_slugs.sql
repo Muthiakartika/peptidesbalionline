@@ -1,0 +1,1 @@
+ALTER TABLE "product_records" ADD COLUMN "old_slugs" text[] DEFAULT '{}'::text[] NOT NULL;

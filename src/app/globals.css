@@ -116,7 +116,7 @@
 
 /* Fonts come from next/font (src/lib/fonts.ts) as CSS variables on <html>. */
 @theme inline {
-  --font-body: var(--font-urbanist), Arial, Helvetica, sans-serif;
+  --font-body: var(--font-inter), Arial, Helvetica, sans-serif;
   --font-display: var(--font-anton), Arial, Helvetica, sans-serif;
   --font-label: var(--font-inter), Arial, Helvetica, sans-serif;
   --font-label-alt: var(--font-jost), Arial, Helvetica, sans-serif;

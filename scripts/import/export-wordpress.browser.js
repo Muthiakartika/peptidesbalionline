@@ -105,7 +105,7 @@ await (async () => {
   const skipped = {
     "orders in the trash": await total("/wc/v3/orders?status=trash&per_page=1"),
     "comments held for moderation (none approved)": await total("/wp/v2/comments?status=hold&per_page=1&context=edit"),
-    "RewardsWP data": "plugin switched off: no API (needs a database export, Q-27)",
+    "RewardsWP data": "plugin switched off: no API; imported from the database dump by scripts/import/import-rewardswp.mjs (docs/setup/rewards.md)",
   };
 
   const data = { version: 1, source: location.origin, exportedAt: new Date().toISOString(), liveTotals, skipped, users, customers, orders, orderNotes, coupons, affiliateWp };

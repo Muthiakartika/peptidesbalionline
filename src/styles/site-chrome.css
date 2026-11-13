@@ -78,9 +78,13 @@
 
 /* Holds the space of the pill while it is fixed (sticky), so the page doesn't jump.
    flow-root stops the pill's top margin from leaking outside the slot (margin collapsing). */
-.header-pill-slot { display: flow-root; height: 72px; } /* 15px margin + 56px + 1px border */
-@media (max-width: 1024px) { .header-pill-slot { height: 76px; } } /* 15 + 60 + 1 */
-@media (max-width: 768px) { .header-pill-slot { height: 71px; } }  /* 10 + 60 + 1 */
+.header-pill-slot { display: flow-root; height: var(--header-slot); }
+/* The slot's height, also used by the pages whose first band starts under the floating pill (as the
+   homepage's hero does: shop, product and COA pages), so the pill floats on the band's colour and
+   not on a white strip: margin-top: calc(-1 * var(--header-slot)) plus the same padding. */
+:root { --header-slot: 72px; } /* 15px margin + 56px + 1px border */
+@media (max-width: 1024px) { :root { --header-slot: 76px; } } /* 15 + 60 + 1 */
+@media (max-width: 768px) { :root { --header-slot: 71px; } }  /* 10 + 60 + 1 */
 
 .header-pill {
   width: calc(100% - 40px);
@@ -1055,112 +1059,152 @@
 /* Page content area: Woodmart keeps it at least half a screen tall (visible on short pages). */
 .store-content { min-height: 50vh; background-color: #ffffff; }
 
-/* ───────────────────────── Footer (Elementor footer #267) ───────────────────────── */
-/* Same box model as Elementor so its percentage margins resolve against the same widths:
-   - .site-footer padding: % of the page width
-   - .footer-section margins: % of the outer column's content width (1192px on desktop)
-   - widgets are spaced 20px apart (10px in the logo column), last one has no gap */
-.site-footer { padding: 2% 0 1%; background-color: #151515; }
-/* Flex column like Elementor's widget wrapper, so vertical margins add up instead of collapsing.
-   Width/margins reproduce Elementor's boxed container: 1212px centred on wide screens, and on
-   narrow screens 20px wider than the footer's content box (−10px each side). */
-.footer-container {
-  display: flex;
-  flex-direction: column;
-  width: min(1212px, calc(100% + 20px));
-  margin-inline: max(-10px, calc((100% - 1212px) / 2));
-  padding: 10px;
+/* ───────────────────────── Footer ─────────────────────────
+ * Redesigned on 12 Nov 2026 with the new pages (SiteFooter.tsx): a warm black band with a soft gold
+ * glow; brand block (logo, intro, contact, two buttons) beside six link columns in a 3 × 2 grid;
+ * payment methods; the research-use notice; copyright and "Back to top". Inter throughout, small
+ * gold uppercase headings as on the rest of the site. */
+.site-footer {
+  position: relative;
+  padding: 84px 0 30px;
+  overflow: hidden;
+  background:
+    radial-gradient(45% 60% at 0% 0%, rgb(184 149 42 / 0.16), transparent 70%),
+    radial-gradient(35% 50% at 100% 100%, rgb(184 149 42 / 0.08), transparent 70%),
+    #14110d;
+  color: #b9b0a0;
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
 }
-/* 20px spacing after each loose widget (inner sections keep their own % margins instead). */
-.footer-container > :not(.footer-section):not(:last-child) { margin-bottom: 20px; }
-.footer-row { display: flex; flex-wrap: wrap; margin-inline: -10px; }
-.footer-col { width: 100%; min-width: 0; } /* columns keep their % width even if content is wider, like Elementor */
-.footer-col__inner { display: flex; flex-direction: column; padding: 10px; }
-.footer-col__inner > *:not(:last-child) { margin-bottom: 20px; }
+.site-footer::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgb(214 178 92 / 0.6), transparent);
+}
+.footer-inner { max-width: 1280px; margin-inline: auto; padding-inline: 20px; }
 
-.footer-section--top { margin-block: 3%; }
-.footer-section--links { margin-block: 2% 3%; }
-.footer-col--quarter { width: 25%; }
-.footer-col--third { width: 33.3333%; }
-.footer-col--intro .footer-col__inner > *:not(:last-child) { margin-bottom: 10px; }
-.footer-col--nav .footer-col__inner { margin-left: 12%; }
+.footer-main {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2.15fr);
+  gap: 72px;
+  padding-bottom: 60px;
+  border-bottom: 1px solid rgb(255 255 255 / 0.08);
+}
 
-.footer-logo img { display: block; width: 40%; height: auto; }
-.footer-intro { margin: 2% 10% 8% 0; color: #9e9d9d; font-size: 16px; line-height: 1.3; }
-.footer-heading { color: #898989; font-family: var(--font-label); font-size: 15px; font-weight: 500; line-height: 1; }
-.footer-list { display: flex; flex-direction: column; gap: 9px; color: #9e9d9d; font-size: 15px; line-height: 24px; }
-.footer-list--wide { gap: 13px; }
-.footer-list a { color: inherit; transition: color 0.25s; }
-.footer-list a:hover { color: #ffffff; }
-.footer-contact { gap: 13px; }
+/* Brand block */
+.footer-logo { display: inline-block; }
+.footer-logo img { display: block; width: 156px; height: auto; }
+.footer-intro { max-width: 340px; margin: 22px 0 30px; color: #a79e8d; font-size: 15px; line-height: 1.7; }
+.footer-contact { display: flex; flex-direction: column; gap: 14px; margin: 0 0 30px; padding: 0; list-style: none; color: #cfc7b8; font-size: 14px; line-height: 1.55; }
 .footer-contact li,
-.footer-contact a { display: flex; align-items: flex-start; }
-.footer-contact__icon-wrap { display: flex; flex: 0 0 auto; padding-top: 5px; padding-inline-end: 3.5px; }
-.footer-contact__icon { width: 14px; height: 14px; fill: #cecece; }
-.footer-contact__icon-wrap + span { padding-inline-start: 5px; }
-
-.footer-divider { padding-block: 15px; }
-.footer-divider::before { content: ""; display: block; border-top: 1px solid #323232; }
-.footer-divider--thin { padding-block: 10px; }
-
-.footer-payment-label { color: #555555; font-family: var(--font-label); font-size: 12px; line-height: 26px; letter-spacing: 1px; text-transform: uppercase; }
-.footer-section--payments { padding-right: 8%; }
-.footer-col--payment .footer-col__inner { flex-direction: row; }
-.footer-col--payment:nth-child(1) { width: 6.409%; }
-.footer-col--payment:nth-child(2) { width: 11.014%; }
-.footer-col--payment:nth-child(3) { width: 10.707%; }
-.footer-col--payment:nth-child(4) { width: 11.782%; }
-.footer-col--payment:nth-child(5) { width: 8.38%; }
-.footer-col--payment:nth-child(6) { width: 7.396%; }
-.footer-col--payment:nth-child(7) { width: 8.916%; }
-.footer-col--payment:nth-child(8) { width: 34.39%; }
-.footer-chip {
-  display: inline-block;
-  padding: 3px 12px;
-  color: #ffffff;
-  background-color: rgb(255 255 255 / 0.07);
-  border: 1px solid rgb(183 182 180 / 0.28);
-  border-radius: 999px;
-  font-family: var(--font-label);
-  font-size: 14px;
-  font-weight: 300;
-  line-height: 21.6px;
-  letter-spacing: 0.288px;
+.footer-contact a { display: flex; align-items: flex-start; gap: 12px; }
+.footer-contact a { color: #ece6da; transition: color 0.2s; }
+.footer-contact a:hover { color: #d6b25c; }
+.footer-contact__icon-wrap {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  margin-top: -4px;
+  border: 1px solid rgb(214 178 92 / 0.32);
+  border-radius: 50%;
+  color: #d6b25c;
 }
-.footer-disclaimer { margin-right: 10%; color: #9e9d9d; font-size: 12px; line-height: 1.3; }
-.footer-copyright { color: #9e9e9e; font-size: 15px; line-height: 24px; text-align: center; }
+.footer-contact__icon { width: 14px; height: 14px; }
+.footer-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.footer-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 22px;
+  border: 1px solid rgb(255 255 255 / 0.18);
+  border-radius: 999px;
+  color: #f4efe6;
+  font-size: 13.5px;
+  font-weight: 600;
+  transition: border-color 0.2s, color 0.2s, filter 0.2s;
+}
+.footer-btn:hover { border-color: #d6b25c; color: #d6b25c; }
+.footer-btn:focus-visible,
+.footer-list a:focus-visible,
+.footer-contact a:focus-visible,
+.footer-top:focus-visible { outline: 2px solid #d6b25c; outline-offset: 3px; border-radius: 6px; }
+.footer-btn--gold { border-color: transparent; background: linear-gradient(135deg, #b98a31 0%, #e6c76c 50%, #bd9036 100%); color: #14110d; }
+.footer-btn--gold:hover { border-color: transparent; color: #14110d; filter: brightness(1.07); }
 
+/* Link columns */
+.footer-links { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px 36px; }
+.footer-heading {
+  margin: 0 0 18px;
+  color: #d6b25c;
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.footer-brand .footer-heading { margin-bottom: 14px; }
+.footer-list { display: flex; flex-direction: column; gap: 11px; margin: 0; padding: 0; list-style: none; font-size: 14.5px; line-height: 1.45; }
+.footer-list a { color: #b9b0a0; transition: color 0.2s; }
+.footer-list a:hover { color: #ffffff; }
+
+/* Payment methods */
+.footer-payments { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; padding-block: 28px; border-bottom: 1px solid rgb(255 255 255 / 0.08); }
+.footer-payment-label { margin: 0; color: #8a8273; font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; }
+.footer-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.footer-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 0 14px;
+  border: 1px solid rgb(255 255 255 / 0.12);
+  border-radius: 999px;
+  background-color: rgb(255 255 255 / 0.03);
+  color: #e8e1d3;
+  font-size: 12.5px;
+  font-weight: 500;
+}
+
+/* Research-use notice and bottom bar */
+.footer-disclaimer { max-width: 1000px; margin: 28px 0 0; color: #8a8273; font-size: 12.5px; line-height: 1.75; }
+.footer-disclaimer__label {
+  display: inline-block;
+  margin-right: 10px;
+  padding: 3px 10px;
+  border: 1px solid rgb(214 178 92 / 0.38);
+  border-radius: 999px;
+  color: #d6b25c;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  vertical-align: 1px;
+}
+.footer-bottom { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; margin-top: 28px; padding-top: 22px; border-top: 1px solid rgb(255 255 255 / 0.08); }
+.footer-copyright { margin: 0; color: #8a8273; font-size: 13px; }
+.footer-top { display: inline-flex; align-items: center; gap: 8px; color: #e8e1d3; font-size: 13px; font-weight: 600; transition: color 0.2s; }
+.footer-top:hover { color: #d6b25c; }
+
+@media (max-width: 1024px) {
+  .site-footer { padding-top: 64px; }
+  .footer-main { grid-template-columns: minmax(0, 1fr); gap: 52px; padding-bottom: 48px; }
+  .footer-intro { max-width: 560px; }
+}
 @media (max-width: 767px) {
-  .site-footer { padding: 2% 4% 2% 5%; }
-  .footer-col--quarter,
-  .footer-col--third { width: 100%; }
-  .footer-col--nav .footer-col__inner { margin-left: 0; }
-  /* Elementor mobile settings per column: 3% vertical margin and 14px/15px widget spacing */
-  .footer-col--nav .footer-col__inner,
-  .footer-col--contact .footer-col__inner,
-  .footer-col--bali .footer-col__inner,
-  .footer-col--pricing .footer-col__inner,
-  .footer-col--insights .footer-col__inner { margin-block: 3%; }
-  .footer-col--nav .footer-col__inner > *:not(:last-child),
-  .footer-col--bali .footer-col__inner > *:not(:last-child) { margin-bottom: 14px; }
-  .footer-col--legal .footer-col__inner > *:not(:last-child),
-  .footer-col--contact .footer-col__inner > *:not(:last-child),
-  .footer-col--nationwide .footer-col__inner > *:not(:last-child),
-  .footer-col--pricing .footer-col__inner > *:not(:last-child),
-  .footer-col--insights .footer-col__inner > *:not(:last-child) { margin-bottom: 15px; }
-  .footer-intro { margin: 0 0 9% 0; }
-  .footer-divider--first { padding-block: 5px; }
-  .footer-divider--thin { padding-block: 7px; }
-  .footer-section--payments { padding-inline: 1%; }
-  .footer-col--payment:nth-child(1) { width: 17%; }
-  .footer-col--payment:nth-child(2) { width: 30%; }
-  .footer-col--payment:nth-child(3) { width: 32%; }
-  .footer-col--payment:nth-child(4) { width: 35%; }
-  .footer-col--payment:nth-child(5) { width: 22%; }
-  .footer-col--payment:nth-child(6) { width: 26%; }
-  .footer-col--payment:nth-child(7) { width: 22%; }
-  .footer-col--payment:nth-child(8) { width: 50%; }
-  .footer-disclaimer { margin-right: 0; }
+  .site-footer { padding: 56px 0 26px; }
+  .footer-inner { padding-inline: 18px; }
+  .footer-main { gap: 44px; }
+  .footer-logo img { width: 136px; }
+  .footer-links { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 38px 20px; }
+  .footer-list { gap: 10px; font-size: 14px; }
+  .footer-payments { padding-block: 24px; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; }
 }
 
 /* ───────────────────────── 404 page (Woodmart) ───────────────────────── */

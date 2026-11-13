@@ -7,14 +7,15 @@
  * The e-mail is built here from the page's own certificates (only their ids come from the browser),
  * so the form can't be used to send other text or links. A few requests per address per 10 minutes.
  *
- * Until the owner picks an e-mail provider (Q-08) nothing is sent from a live server (sendEmail answers
- * "not-sent"); the library then offers the visitor's own e-mail app and a copy button instead. On this
- * computer the e-mail is saved in .data/mail/.
+ * Sent through SendGrid (src/lib/email/index.ts), in the shop's design with a plain-text copy. When it can't be
+ * sent ("not-sent": no key on the live site, SendGrid refused) the library offers the visitor's own e-mail app
+ * and a copy button instead; a test site without a test inbox saves it in .data/mail/.
  */
 import { headers } from "next/headers";
 
 import { COA_LINKS_SUBJECT, coaLinksText } from "@/components/coa/links-text";
 import { sendEmail } from "@/lib/email";
+import { coaLinksHtml } from "@/lib/email/coa-email";
 import { siteUrl } from "@/lib/site";
 
 import { getCoas } from "./library";
@@ -43,11 +44,9 @@ export async function emailCoaLinks(email: string, ids: string[]): Promise<Email
   recent.set(visitor, [...times, now]);
 
   try {
-    const status = await sendEmail({
-      to,
-      subject: `${COA_LINKS_SUBJECT} (${coas.length})`,
-      text: coaLinksText(coas, `${siteUrl}/lab-results-certificates-of-analysis/#result`),
-    });
+    const subject = `${COA_LINKS_SUBJECT} (${coas.length})`;
+    const libraryUrl = `${siteUrl}/lab-results-certificates-of-analysis/#result`;
+    const status = await sendEmail({ to, subject, text: coaLinksText(coas, libraryUrl), html: coaLinksHtml(subject, coas, libraryUrl) });
     return { status };
   } catch (error) {
     // e.g. a server that can't save the local copy (read-only disk): the library offers the fallback.

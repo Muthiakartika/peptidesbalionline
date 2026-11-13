@@ -31,7 +31,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps<"/blog-post/[slug]">): Promise<Metadata> {
   const post = getPostBySlug((await params).slug);
   if (!post) notFound();
-  return archiveMetadata(post.seo, post.path);
+  return archiveMetadata(post.seo, post.path, null, { title: post.title });
 }
 
 export default async function Page({ params }: PageProps<"/blog-post/[slug]">) {

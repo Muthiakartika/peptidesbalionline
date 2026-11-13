@@ -7,6 +7,9 @@
  *                                  bar keeps /peptide/jakarta/). /landing/… itself -> the 404 page;
  *   a blog post's address       -> its page, e.g. /what-is-bpc-157/ -> /blog-post/what-is-bpc-157/
  *                                  (src/app/(store)/blog-post/[slug]/page.tsx); /blog-post/… -> 404;
+ *   a post's comments feed      -> /what-is-bpc-157/feed/ -> /feed/comments/what-is-bpc-157/ (RSS, as
+ *                                  WordPress); /feed/comments/… itself -> 404;
+ *   a product's old address     -> 301 to its address now (slug changed in /admin/products/);
  *   /category/<slug>/page/N/    -> the archive when that page exists, else the 404 page (with
  *                                  status 404, as on WordPress: /category/peptide-therapy/page/2/);
  *   cart, checkout and account addresses -> see woocommerce() below (e.g. /checkout/ with an empty
@@ -47,10 +50,10 @@ const BLOG_POSTS = new Map<string, string>(Object.entries(blogPostSlugs));
 /** The blog archive pages that exist (/category/uncategorized/page/2/ …). */
 const BLOG_ARCHIVES = new Set<string>(blogArchivePaths);
 /** Internal routes that only the rewrites above may reach. */
-const INTERNAL = ["/landing/", "/blog-post/", "/woo/"];
+const INTERNAL = ["/landing/", "/blog-post/", "/woo/", "/feed/comments/"];
 /** Account endpoints with a page of their own and no value (/my-account/downloads/): a value after them
  * (/my-account/downloads/x/) is ignored, as WordPress does. */
-const PLAIN_ENDPOINTS = new Set(["downloads", "edit-account", "payment-methods", "research-tools"]);
+const PLAIN_ENDPOINTS = new Set(["downloads", "edit-account", "payment-methods", "research-tools", "rewards"]);
 /** Account actions WooCommerce answers by going back to the payment methods. */
 const PAYMENT_METHOD_ACTIONS = new Set(["delete-payment-method", "set-default-payment-method"]);
 
@@ -69,7 +72,7 @@ const PAYMENT_METHOD_ACTIONS = new Set(["delete-payment-method", "set-default-pa
  *   /my-account/orders/<n>/               -> that page of orders (a whole number), else page 1;
  *   /my-account/view-order/               -> "Invalid order." (/my-account/view-order/0/);
  *   /my-account/edit-address/<type>/      -> the billing / shipping form; any other type the Addresses page;
- *   /my-account/<downloads, edit-account, payment-methods, research-tools>/<value>/ -> the endpoint itself;
+ *   /my-account/<downloads, edit-account, payment-methods, research-tools, rewards>/<value>/ -> the endpoint itself;
  *   /my-account/add-payment-method/       -> the payment methods (no method here saves cards);
  *   /my-account/customer-logout/          -> logging out (its route) with a session cookie, else the
  *                                            login page (/my-account/);
@@ -159,7 +162,7 @@ function woocommerce(url: NextRequest["nextUrl"], hasCart: boolean, loggedIn: bo
  * VIEW_SEGMENT): those routes read no query, so every one of their pages is static, also for a category
  * or a page number made after the build. Those internal addresses themselves are 404.
  */
-function shopAddress(url: NextRequest["nextUrl"], { productPaths, shopProductCount, categoryProductCounts }: ShopIndex): NextResponse | null {
+function shopAddress(url: NextRequest["nextUrl"], { productPaths, shopProductCount, categoryProductCounts, movedProducts }: ShopIndex): NextResponse | null {
   const pathname = url.pathname.toLowerCase();
   const serve = (path: string) => {
     if (path === url.pathname) return null;
@@ -171,7 +174,12 @@ function shopAddress(url: NextRequest["nextUrl"], { productPaths, shopProductCou
   const notFound = serve;
   if (pathname.startsWith("/product/")) {
     if (pathname.split("/").filter(Boolean).length !== 2) return null;
-    return productPaths.has(pathname) ? serve(pathname) : notFound("/product/");
+    if (productPaths.has(pathname)) return serve(pathname);
+    // A product whose slug was changed in /admin/products/: its old address goes to the new one, as
+    // WordPress's old-slug redirect does (301, without the query).
+    const moved = movedProducts.get(pathname);
+    if (moved) return NextResponse.redirect(new URL(moved, url.origin), 301);
+    return notFound("/product/");
   }
   const isShop = pathname.startsWith("/shop/");
   if (!isShop && !pathname.startsWith("/product-category/")) return null;
@@ -248,6 +256,13 @@ function route(request: NextRequest, index: ShopIndex | null): NextResponse {
   if (post) {
     const target = url.clone();
     target.pathname = `/blog-post/${post}/`;
+    return NextResponse.rewrite(target);
+  }
+  // A post's comments feed, as WordPress has one for every post (src/lib/seo/feeds.ts).
+  const postFeed = url.pathname.endsWith("/feed/") ? BLOG_POSTS.get(url.pathname.slice(0, -"feed/".length)) : undefined;
+  if (postFeed) {
+    const target = url.clone();
+    target.pathname = `/feed/comments/${postFeed}/`;
     return NextResponse.rewrite(target);
   }
   if (url.pathname.startsWith("/category/") && !BLOG_ARCHIVES.has(url.pathname)) {

@@ -1,10 +1,12 @@
 "use client";
 
 /**
- * One product in a shop grid (Woodmart "standard" hover card, restyled by the owner's CSS).
+ * One product in a shop grid. Redesigned on 12 Nov 2026 after the owner's reference shops: picture
+ * on a cream tile (sale / sold-out badge, quick-view button), then category, name, the options as
+ * small pills, and "From Rp…" next to one button.
  *
- * What a visitor can do with it, as on the live site:
- *   * hover (desktop): the card lifts, a second image fades in, a quick-view button slides in;
+ * What a visitor can do with it:
+ *   * hover (desktop): the card lifts, a second image fades in, the quick-view button appears;
  *   * variable products: pick the options in the card ("quick shop"). When every option is picked,
  *     the price and image change to that variation and the button says "Add to cart".
  *
@@ -69,9 +71,13 @@ function Price({ min, max, regular }: { min: bigint; max: bigint; regular?: bigi
       </>
     );
   }
-  // The live site prints "Rp2,500,000.00 – Rp8,500,000.00" but hides the dash and the maximum.
+  // The live site prints "Rp2,500,000.00 – Rp8,500,000.00" but hides the dash and the maximum; the
+  // cards say "From" before the minimum.
   return (
     <>
+      <span className="price__from" aria-hidden="true">
+        From
+      </span>{" "}
       <span className="price__amount" aria-hidden="true">
         {formatMoney(min)}
       </span>{" "}
@@ -125,6 +131,9 @@ export function ProductCard({ product, view = "grid", shortDescription = null }:
     : product.image;
   const buttonLabel = product.type === "simple" || chosen ? "Add to cart" : "Select options";
   const canAdd = product.type === "simple" ? product.inStock : Boolean(chosen?.inStock);
+  // Badge on the picture: sold out, or how much a sale takes off (simple products on sale).
+  const was = struckRegular(product.priceMin, product.priceMax, product.regularPrice);
+  const badge = !product.inStock ? "Sold out" : was !== null && was > 0n ? `−${Number(((was - product.priceMin) * 100n) / was)}%` : null;
 
   return (
     <div className="product-card" data-view={view}>
@@ -139,6 +148,11 @@ export function ProductCard({ product, view = "grid", shortDescription = null }:
               {/* eslint-disable-next-line @next/next/no-img-element -- see above */}
               <img src={product.hoverImage.src} srcSet={product.hoverImage.srcset} sizes={product.hoverImage.sizes} width={product.hoverImage.width} height={product.hoverImage.height} alt={product.hoverImage.alt} loading="lazy" decoding="async" />
             </div>
+          ) : null}
+          {badge ? (
+            <span className="product-card__badge" data-sold-out={!product.inStock || undefined}>
+              {badge}
+            </span>
           ) : null}
           <div className="product-card__buttons">
             <Link
@@ -156,13 +170,33 @@ export function ProductCard({ product, view = "grid", shortDescription = null }:
               }}
             >
               <Icon name="search" />
-              Quick view
+              <span className="product-card__quick-view-text">Quick view</span>
             </Link>
           </div>
           {quickView ? <QuickView data={quickView} onClose={() => setQuickView(null)} /> : null}
         </div>
 
         <div className="product-card__bottom">
+          <div className="product-card__cats">
+            {product.cardCategories.map((category, index) => (
+              <span key={category.path}>
+                {index > 0 ? ", " : null}
+                <Link href={category.path} rel="tag">
+                  {category.name}
+                </Link>
+              </span>
+            ))}
+          </div>
+
+          <h3 className="product-card__title">
+            <Link href={productHref}>{product.name}</Link>
+          </h3>
+
+          {view === "list" && shortDescription ? (
+            // The product's short description (WooCommerce's excerpt), HTML from the live site.
+            <div className="product-card__short woocommerce-product-details__short-description" data-legacy-html="" dangerouslySetInnerHTML={{ __html: shortDescription }} />
+          ) : null}
+
           {attributes.length > 0 ? (
             <form className="quick-shop" action={product.path} method="get" onSubmit={(event) => event.preventDefault()}>
               <table className="quick-shop__table" role="presentation">
@@ -220,58 +254,37 @@ export function ProductCard({ product, view = "grid", shortDescription = null }:
             </form>
           ) : null}
 
-          {view === "list" && shortDescription ? (
-            // The product's short description (WooCommerce's excerpt), HTML from the live site.
-            <div className="product-card__short woocommerce-product-details__short-description" data-legacy-html="" dangerouslySetInnerHTML={{ __html: shortDescription }} />
-          ) : null}
-
-          <div className="product-card__cats">
-            {product.cardCategories.map((category, index) => (
-              <span key={category.path}>
-                {index > 0 ? ", " : null}
-                <Link href={category.path} rel="tag">
-                  {category.name}
-                </Link>
-              </span>
-            ))}
-          </div>
-
-          <h3 className="product-card__title">
-            <Link href={productHref}>{product.name}</Link>
-          </h3>
-
-          <span className="price">
-            {chosen ? (
-              // Live quirk kept on purpose: the variation price is a second .price inside the first,
-              // so it gets the card's side margins twice (17px further right, 12px taller).
-              <span className="price">
+          <div className="product-card__foot">
+            <span className="price">
+              {chosen ? (
+                // The chosen variation's own price.
                 <Price min={chosen.price} max={chosen.price} regular={chosen.regularPrice} />
-              </span>
-            ) : (
-              <Price min={product.priceMin} max={product.priceMax} regular={product.regularPrice} />
-            )}
-          </span>
+              ) : (
+                <Price min={product.priceMin} max={product.priceMax} regular={product.regularPrice} />
+              )}
+            </span>
 
-          <div className="product-card__add">
-            <Link
-              href={productHref}
-              className={`product-card__button${adding ? " loading" : ""}`}
-              rel="nofollow"
-              aria-busy={adding || undefined}
-              onClick={(event) => {
-                if (!canAdd) return; // the product page
-                event.preventDefault();
-                if (adding) return;
-                startAdding(async () => {
-                  const result = await addToCart(product.id, chosen?.id ?? null, 1);
-                  announceCartChange();
-                  if (result.ok) chrome.open("cart");
-                  else window.location.assign(productHref);
-                });
-              }}
-            >
-              <span>{buttonLabel}</span>
-            </Link>
+            <div className="product-card__add">
+              <Link
+                href={productHref}
+                className={`product-card__button${adding ? " loading" : ""}`}
+                rel="nofollow"
+                aria-busy={adding || undefined}
+                onClick={(event) => {
+                  if (!canAdd) return; // the product page
+                  event.preventDefault();
+                  if (adding) return;
+                  startAdding(async () => {
+                    const result = await addToCart(product.id, chosen?.id ?? null, 1);
+                    announceCartChange();
+                    if (result.ok) chrome.open("cart");
+                    else window.location.assign(productHref);
+                  });
+                }}
+              >
+                <span>{buttonLabel}</span>
+              </Link>
+            </div>
           </div>
         </div>
       </div>

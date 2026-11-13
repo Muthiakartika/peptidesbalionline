@@ -45,11 +45,25 @@ describe("COA library", () => {
     expect(reta.reportUrl).toBe(reta.verifyUrl);
   });
 
-  it("replaces the cards and the old search section, keeping the page's anchor", () => {
+  it("makes the library the page: the hero's texts become its heading, the old hero and search section go", () => {
     expect(out.html).toMatch(/<section[^>]*id="result"[^>]*data-island="coa-library"/);
     expect(out.html).not.toContain("e-search-form");
-    expect(props.intro).toMatchObject({ eyebrow: "Browse Lab Results", title: "Find Your Product" });
+    expect(props.intro).toMatchObject({
+      eyebrow: "Transparency • Quality • Lab Tested • Certificates of Analysis",
+      title: "Independent Laboratory Testing & Certificates of Analysis",
+      accent: "Certificates of Analysis",
+      pageTitle: true,
+    });
+    expect(props.intro.text).toMatch(/^Every latest Atlas Longevity batch is independently tested/);
+    // The hero (its photo, paragraphs and buttons) is gone; the library is the first section.
+    expect(out.html).not.toContain("View Lab Results");
+    expect(out.html.indexOf('data-island="coa-library"')).toBeLessThan(out.html.indexOf("Premium Products Backed by"));
     // The rest of the page is kept.
     expect(out.html).toContain("What Information Does a Certificate of Analysis Include?");
+  });
+
+  it("gives every certificate its lab's test method", () => {
+    expect(new Set(props.coas.filter((c) => c.lab === "Freedom Diagnostics").map((c) => c.method))).toEqual(new Set(["HPLC with UV detection coupled with mass spectrometry (LC-MS)"]));
+    expect(new Set(props.coas.filter((c) => c.lab === "Janoshik").map((c) => c.method))).toEqual(new Set(["HPLC"]));
   });
 });

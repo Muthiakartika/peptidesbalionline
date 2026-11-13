@@ -430,18 +430,21 @@
   height: 14px;
   pointer-events: none;
 }
+/* Two round buttons in a pill, as tall as the sort field and the filters (40px). */
 .coa-lib .coa-segment {
   display: inline-flex;
-  padding: 3px;
+  gap: 2px;
+  padding: 2px;
   border: 1px solid var(--coa-line-strong);
   border-radius: 999px;
   background: #fff;
 }
 .coa-lib .coa-segment button {
   display: grid;
+  flex: none;
   place-items: center;
   width: 34px;
-  height: 32px;
+  height: 34px;
   margin: 0;
   padding: 0;
   border: 0;
@@ -1433,4 +1436,339 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════════════════════════
+ * 12 Nov 2026: a full COA-library page (the owner pointed to a COA archive page): the library
+ * replaces the page's hero, spans the page's width and uses that archive's fonts — Inter for text
+ * and headings, JetBrains Mono for numbers and codes. Later rules here win over the ones above.
+ * ════════════════════════════════════════════════════════════════════════════════════════════════ */
+.coa-lib,
+.coa-modal {
+  --coa-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --coa-font: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+}
+/* The page starts with the library: no gap under the header, full width (the page frame is a
+   container, so 100cqw is its full width without the scrollbar). */
+main.wd-content-layout:has(.coa-library-slot) {
+  padding-top: 0;
+}
+.coa-library-slot {
+  width: 100cqw;
+  margin-left: calc(50% - 50cqw);
+}
+.coa-lib {
+  margin: 0;
+  padding: 56px 0 96px;
+  border-radius: 0;
+  background:
+    radial-gradient(60% 420px at 50% 0%, rgb(209 177 87 / 0.18), transparent 70%),
+    linear-gradient(180deg, var(--coa-cream) 0%, #fff 900px);
+}
+
+/* Heading */
+.coa-lib .coa-head--page {
+  max-width: 860px;
+  margin-bottom: 40px;
+}
+.coa-lib .coa-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 22px;
+  padding: 7px 14px;
+  border: 1px solid var(--coa-line-strong);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.7);
+  font-family: var(--coa-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--coa-gold-deep);
+}
+.coa-lib .coa-badge .coa-icon {
+  width: 14px;
+  height: 14px;
+}
+/* The page title as the homepage's H1 (the owner: "the same font layout from the homepage throughout
+   the site", 12 Nov 2026): Anton, uppercase, the highlighted words gold. Numbers and codes stay in
+   JetBrains Mono, as the owner asked for this page. */
+.coa-lib .coa-title {
+  font-family: var(--font-anton), Arial, Helvetica, sans-serif;
+  font-size: clamp(2.3rem, 4.6vw, 3.8rem);
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: 1.11px;
+  text-transform: uppercase;
+  color: var(--coa-ink);
+  text-wrap: balance;
+}
+.coa-lib .coa-title__accent {
+  background: linear-gradient(100deg, #85680f 0%, #c9a544 40%, #b79127 70%, #85680f 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.coa-lib .coa-head--page .coa-lede {
+  max-width: 62ch;
+  margin-top: 18px;
+  font-family: var(--coa-font);
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--coa-text);
+}
+.coa-lib .coa-hint {
+  margin: 20px 0 0;
+  font-family: var(--coa-font);
+  font-size: 13px;
+  color: var(--coa-muted);
+}
+.coa-lib .coa-hint kbd,
+.coa-lib .coa-kbd {
+  display: inline-block;
+  min-width: 26px;
+  padding: 3px 7px;
+  border: 1px solid var(--coa-line-strong);
+  border-bottom-width: 2px;
+  border-radius: 6px;
+  background: #fff;
+  font-family: var(--coa-mono);
+  font-size: 11.5px;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: center;
+  color: var(--coa-ink);
+}
+.coa-lib .coa-kbd {
+  position: absolute;
+  right: 14px;
+}
+@media (hover: none) {
+  .coa-lib .coa-hint {
+    display: none;
+  }
+}
+
+/* Numbers and codes in JetBrains Mono */
+.coa-lib .coa-stats dd {
+  font-family: var(--coa-mono);
+  font-size: clamp(1.7rem, 2.6vw, 2.1rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.coa-lib .coa-stats dt {
+  font-family: var(--coa-font);
+  font-size: 11.5px;
+  letter-spacing: 0.08em;
+}
+.coa-lib .coa-purity,
+.coa-modal .coa-purity,
+.coa-lib .coa-mono,
+.coa-modal .coa-mono,
+.coa-modal .coa-preview__value,
+.coa-modal .coa-compare__purity {
+  font-family: var(--coa-mono);
+}
+.coa-lib .coa-purity,
+.coa-modal .coa-purity {
+  font-size: 12.5px;
+  font-weight: 600;
+}
+.coa-modal .coa-preview__value {
+  font-size: 38px;
+  font-weight: 700;
+}
+.coa-modal .coa-compare__purity {
+  font-size: 26px;
+  font-weight: 700;
+}
+.coa-lib .coa-card__title,
+.coa-modal .coa-card__title {
+  font-family: var(--coa-font);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  text-transform: none;
+}
+.coa-modal .coa-modal__title {
+  font-family: var(--coa-font);
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-transform: none;
+}
+.coa-lib .coa-facts dt,
+.coa-modal .coa-facts dt,
+.coa-lib .coa-card__peptide,
+.coa-modal .coa-card__peptide {
+  font-family: var(--coa-font);
+}
+.coa-lib .coa-facts dd {
+  font-size: 13.5px;
+  font-weight: 500;
+}
+
+/* Search with a visible label */
+.coa-lib .coa-search__label {
+  display: block;
+  margin: 0 0 8px 2px;
+  font-family: var(--coa-font);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--coa-ink);
+}
+
+/* Filter buttons with icons */
+.coa-lib .coa-filter__icon {
+  width: 14px;
+  height: 14px;
+  color: var(--coa-gold-deep);
+}
+.coa-lib .coa-filter__btn.is-active .coa-filter__icon {
+  color: var(--coa-gold-light);
+}
+.coa-lib .coa-filter__btn {
+  font-family: var(--coa-font);
+  font-weight: 500;
+}
+
+/* Purity: minimum purity slider and number */
+.coa-lib .coa-range {
+  display: grid;
+  gap: 10px;
+  padding: 6px 6px 4px;
+  min-width: 250px;
+}
+.coa-lib .coa-range__label {
+  margin: 0;
+  font-family: var(--coa-font);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--coa-muted);
+}
+.coa-lib .coa-range__row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.coa-lib .coa-range__row input[type="range"] {
+  flex: 1;
+  margin: 0;
+  accent-color: var(--coa-gold-deep);
+}
+.coa-lib .coa-range__value {
+  min-width: 64px;
+  font-family: var(--coa-mono);
+  font-size: 13px;
+  font-weight: 600;
+  text-align: right;
+  color: var(--coa-gold-deep);
+}
+.coa-lib .coa-range__input {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--coa-mono);
+  font-size: 13px;
+  color: var(--coa-muted);
+}
+.coa-lib .coa-range__input input {
+  width: 84px;
+  height: 36px;
+  margin: 0;
+  padding: 0 10px;
+  border: 1px solid var(--coa-line-strong);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: none;
+  font-family: var(--coa-mono);
+  font-size: 13px;
+  color: var(--coa-ink);
+}
+.coa-lib .coa-range__note {
+  margin: 0;
+  font-size: 12px;
+  color: var(--coa-muted);
+}
+
+/* Date range: from / to */
+.coa-lib .coa-dates {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  padding: 6px;
+  min-width: 290px;
+}
+.coa-lib .coa-dates label {
+  display: grid;
+  gap: 5px;
+  margin: 0;
+  font-family: var(--coa-font);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--coa-muted);
+}
+.coa-lib .coa-dates input {
+  width: 100%;
+  height: 38px;
+  margin: 0;
+  padding: 0 8px;
+  border: 1px solid var(--coa-line-strong);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: none;
+  font-family: var(--coa-mono);
+  font-size: 12.5px;
+  color: var(--coa-ink);
+}
+.coa-lib .coa-range input:focus,
+.coa-lib .coa-dates input:focus {
+  outline: none;
+  border-color: var(--coa-gold);
+  box-shadow: 0 0 0 3px rgb(183 145 39 / 0.14);
+}
+
+@media (max-width: 767px) {
+  .coa-lib {
+    padding-top: 36px;
+  }
+  .coa-lib .coa-head--page {
+    margin-bottom: 28px;
+  }
+  .coa-lib .coa-head--page .coa-lede {
+    font-size: 16px;
+  }
+  /* Five filters on two columns: the last one takes the whole row. */
+  .coa-lib .coa-filters > .coa-filter:last-child {
+    grid-column: 1 / -1;
+  }
+  .coa-lib .coa-filters > .coa-filter:last-child .coa-filter__menu {
+    left: 0;
+    right: auto;
+  }
+  .coa-lib .coa-range,
+  .coa-lib .coa-dates {
+    min-width: 0;
+  }
+}
+@media (max-width: 767px) {
+  /* Phones have no keyboard shortcut to show. */
+  .coa-lib .coa-kbd,
+  .coa-lib .coa-hint {
+    display: none;
+  }
+}
+
+/* The library is the page's first band: it starts under the floating header (--header-slot in
+   site-chrome.css), so the header floats on the cream instead of a white strip. */
+.coa-library-slot { margin-top: calc(-1 * var(--header-slot)); }
+.coa-library-slot > .coa-lib { padding-top: calc(56px + var(--header-slot)); }
+@media (max-width: 767px) {
+  .coa-library-slot > .coa-lib { padding-top: calc(36px + var(--header-slot)); }
 }

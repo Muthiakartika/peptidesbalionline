@@ -1,6 +1,7 @@
-// /product-sitemap.xml: /shop/ and the 182 products (src/lib/seo/sitemaps.ts).
-import { sitemapResponse } from "@/lib/seo/sitemaps";
+// /product-sitemap.xml: /shop/ and the shop's products as they are now (src/lib/seo/sitemaps.ts).
+import { shopSitemaps } from "@/lib/seo/sitemap-data";
+import { sitemapResponse, sitemapXml } from "@/lib/seo/sitemaps";
 
-export function GET() {
-  return sitemapResponse("product");
+export async function GET() {
+  return sitemapResponse("product", sitemapXml("product", (await shopSitemaps()).product));
 }

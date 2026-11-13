@@ -47,6 +47,23 @@
       "port": 3005
     },
     {
+      "name": "dev-local-db",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "node_modules/next/dist/bin/next",
+        "dev",
+        "-p",
+        "3007"
+      ],
+      "env": {
+        "DATABASE_URL": "",
+        "DATABASE_URL_UNPOOLED": "",
+        "NEXT_PUBLIC_SITE_URL": "http://localhost:3007",
+        "ENABLE_LIVE_CHAT": "false"
+      },
+      "port": 3007
+    },
+    {
       "name": "prod-local-db",
       "runtimeExecutable": "node",
       "runtimeArgs": [

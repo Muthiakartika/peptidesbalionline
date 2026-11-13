@@ -6,4 +6,5 @@ export * from "./auth";
 export * from "./catalog";
 export * from "./commerce";
 export * from "./affiliate";
+export * from "./loyalty";
 export * from "./system";

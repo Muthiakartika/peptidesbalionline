@@ -15,12 +15,12 @@
   --brdcolor-gray-300: rgba(0, 0, 0, 0.105);
   --wd-title-color: #242424;
   --wd-title-font-weight: 600;
-  --wd-title-font: "Urbanist", Arial, Helvetica, sans-serif;
+  --wd-title-font: var(--font-inter), Arial, Helvetica, sans-serif;
   --wd-text-color: #767676;
   --wd-entities-title-color: #333;
   --wd-entities-title-color-hover: rgba(51, 51, 51, 0.65);
   --wd-entities-title-font-weight: 500;
-  --wd-entities-title-font: "Urbanist", Arial, Helvetica, sans-serif;
+  --wd-entities-title-font: var(--font-inter), Arial, Helvetica, sans-serif;
   --color-gray-800: #333;
   --color-gray-500: #767676;
   --color-gray-300: #bbb;

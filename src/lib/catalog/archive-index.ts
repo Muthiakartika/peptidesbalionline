@@ -33,6 +33,8 @@ export type ShopIndex = {
   shopProductCount: number;
   /** Category slug → number of products in its listing (sub-categories included). */
   categoryProductCounts: ReadonlyMap<string, number>;
+  /** A product's earlier address → its address now (its slug was changed in /admin/products/): 301. */
+  movedProducts: ReadonlyMap<string, string>;
 };
 
 /** A category and all its sub-categories (as getListing counts them). */
@@ -51,9 +53,27 @@ function familySlugs(category: IndexCategory, categories: IndexCategory[]): Set<
   return new Set(categories.filter((c) => family.has(c.id)).map((c) => c.slug));
 }
 
+/**
+ * A product's earlier addresses (its old slugs) → its address now. An earlier address that is a product's
+ * address today stays that product's, as on WordPress (its old-slug redirect only answers a missing address).
+ */
+export function movedProductsOf(products: { slug: string; oldSlugs: readonly string[] }[], productPaths: ReadonlySet<string>): Map<string, string> {
+  const moved = new Map<string, string>();
+  for (const product of products) {
+    const path = `/product/${product.slug}/`;
+    if (!productPaths.has(path)) continue;
+    for (const old of product.oldSlugs) {
+      const from = `/product/${old}/`.toLowerCase();
+      if (!productPaths.has(from) && !moved.has(from)) moved.set(from, path);
+    }
+  }
+  return moved;
+}
+
 /** The index of a list of products (the snapshot's, or the store database's: /api/catalog/index/). */
-export function shopIndexOf(products: IndexProduct[], categories: IndexCategory[]): ShopIndex {
+export function shopIndexOf(products: IndexProduct[], categories: IndexCategory[], movedProducts: ReadonlyMap<string, string> = new Map()): ShopIndex {
   return {
+    movedProducts,
     productPaths: new Set(products.map((p) => p.path)),
     shopProductCount: products.length,
     categoryProductCounts: new Map(
@@ -86,8 +106,13 @@ export async function currentShopIndex(origin: string, fresh = false): Promise<S
   try {
     const response = await fetch(`${origin}/api/catalog/index/`, { signal: AbortSignal.timeout(3000), cache: "no-store" });
     if (!response.ok) throw new Error(String(response.status));
-    const data = (await response.json()) as { productPaths: string[]; shopProductCount: number; categoryProductCounts: [string, number][] };
-    const index: ShopIndex = { productPaths: new Set(data.productPaths), shopProductCount: data.shopProductCount, categoryProductCounts: new Map(data.categoryProductCounts) };
+    const data = (await response.json()) as { productPaths: string[]; shopProductCount: number; categoryProductCounts: [string, number][]; movedProducts?: [string, string][] };
+    const index: ShopIndex = {
+      productPaths: new Set(data.productPaths),
+      shopProductCount: data.shopProductCount,
+      categoryProductCounts: new Map(data.categoryProductCounts),
+      movedProducts: new Map(data.movedProducts ?? []),
+    };
     cached = { at: Date.now(), index };
     return index;
   } catch {

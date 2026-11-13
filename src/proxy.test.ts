@@ -64,7 +64,7 @@ describe("proxy", () => {
     expect(await rewrittenTo("/cart/?remove_coupon=welcome5")).toBe("/woo/remove-coupon/?remove_coupon=welcome5&back=%2Fcart%2F");
     expect(await rewrittenTo("/checkout/?remove_coupon=welcome5")).toBe("/woo/remove-coupon/?remove_coupon=welcome5&back=%2Fcheckout%2F");
     // The account pages have routes of their own (each shows the login form to a visitor).
-    for (const address of ["/my-account/orders/", "/my-account/orders/2/", "/my-account/view-order/123/", "/my-account/edit-address/", "/my-account/edit-address/billing/", "/my-account/edit-account/", "/my-account/downloads/", "/my-account/research-tools/"]) {
+    for (const address of ["/my-account/orders/", "/my-account/orders/2/", "/my-account/view-order/123/", "/my-account/edit-address/", "/my-account/edit-address/billing/", "/my-account/edit-account/", "/my-account/downloads/", "/my-account/research-tools/", "/my-account/rewards/"]) {
       expect((await run(address)).headers.get("x-middleware-next"), address).toBe("1");
     }
     // Logging out without a session: the login page.
@@ -153,5 +153,13 @@ describe("proxy", () => {
     expect(await rewrittenTo("/?s=bpc&post_type=product")).toBe("/page/1/?s=bpc&post_type=product");
     expect((await run("/page/1/")).status).toBe(301);
     expect(await rewrittenTo("/page/2/")).toBe("/");
+  });
+
+  it("serves a post's comments feed, and keeps its internal address private", async () => {
+    expect(await rewrittenTo("/bpc-157-vs-tb-500/feed/")).toBe("/feed/comments/bpc-157-vs-tb-500/");
+    expect(await rewrittenTo("/feed/comments/bpc-157-vs-tb-500/")).toBe("/feed/comments/");
+    // The site's own feeds have routes of their own.
+    expect(await rewrittenTo("/feed/")).toBeNull();
+    expect(await rewrittenTo("/comments/feed/")).toBeNull();
   });
 });

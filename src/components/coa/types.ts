@@ -23,6 +23,8 @@ export type Coa = {
   testedLabel: string;
   /** "Janoshik" or "Freedom Diagnostics". */
   lab: string;
+  /** The analytical method, e.g. "HPLC with UV detection coupled with mass spectrometry (LC-MS)". */
+  method: string;
   /** The batch or client reference on the report, e.g. "SUL0330-001". */
   batch: string | null;
   /** Janoshik task number and verification key. */
@@ -38,6 +40,16 @@ export type Coa = {
   productPath: string | null;
 };
 
-export type CoaLibraryIntro = { eyebrow: string; title: string; text: string };
+export type CoaLibraryIntro = {
+  eyebrow: string;
+  title: string;
+  /** The part of the title shown in gold (the page's own highlight, e.g. "Certificates of Analysis"). */
+  accent?: string;
+  text: string;
+  /** Short trust points under the text ("Independent Laboratory Testing", …). */
+  points?: string[];
+  /** The library replaced the page's hero: its title is the page's H1. */
+  pageTitle?: boolean;
+};
 
 export type CoaLibraryProps = { coas: Coa[]; intro: CoaLibraryIntro };

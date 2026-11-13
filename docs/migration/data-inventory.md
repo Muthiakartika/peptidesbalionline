@@ -17,10 +17,10 @@ this file). "Here" is this project: the content snapshots in `src/content/`, the
 | Redirects (Redirection) | 196 | 196 | `src/content/seo/redirects.json` | read in wp-admin, 6 Nov 2026 |
 | Yoast SEO + JSON-LD | every page | every page | `src/content/seo/` | `export_jsonld.py`, `export_sitemaps.py` |
 | Images under `/wp-content/uploads/` | 3,211 referenced (507 MB); 3,216 with the Sanity content (9 Nov 2026) | still served by live | target: Cloudflare R2, same paths (`scripts/media/copy-uploads-to-r2.mjs`, `docs/setup/r2.md`); new uploads from the Studio go straight to R2 | **moved 9 Nov 2026**: 3,215 files (533 MB) in R2 bucket `peptides-bali-storage`, all answering on its public address; the site shows them from there (`NEXT_PUBLIC_MEDIA_BASE_URL`). Missing: the one file already 404 on live (`/tirzepatide-bali/`). Before launch: a custom domain instead of r2.dev |
-| WordPress accounts | 45 | 45 | `users` + `addresses` (28) | `scripts/import/` (see below) |
-| Orders (not in the trash) | 253 | 253 | `orders`, `order_items` (573), `order_fees` (156), `coupon_redemptions` (82), `order_notes` (1,457), `payments` (25) | same |
-| Coupons | 10 | 10 | `coupons` (with usage counters) | same; usable at checkout |
-| AffiliateWP: affiliates / referrals / visits / customers | 1 / 1 / 1 / 1 | same | `affiliates`, `affiliate_referrals` (+ ledger), `affiliate_visits`, `affiliate_customers` | same |
+| WordPress accounts | 45 (7 Nov) → **69** (12 Nov dump) | 69 | `users` + `addresses` (42) | `scripts/import/` (see below). **13 Nov 2026:** the owner's database dump (`import-wordpress.mjs <dump.sql.gz>`) brought the 24 accounts made 7–12 Nov |
+| Orders (not in the trash) | 253 (7 Nov) → **284** | 284 | `orders`, `order_items` (634), `order_fees` (164), `coupon_redemptions` (92), `order_notes` (1,629), `payments` (27) | same; 272 completed, 9 cancelled, 1 processing, 2 on-hold. The 31 new orders are from 7–12 Nov (Rp 106,955,572). 71 orders in the trash stay out on purpose |
+| Coupons | 10 (7 Nov) → **13** | 13 | `coupons` (with usage counters) | same; usable at checkout. New: `welcome20`, `20atl`, `tom10` |
+| AffiliateWP: affiliates / referrals / visits / customers | 1 / 1 / 1 / 1 (the 7 Nov API view was incomplete) → **7 / 8 / 368 / 7** | same | `affiliates` (6 active, 1 pending), `affiliate_referrals` (+ ledger: 4 unpaid = Rp 3,594,000, 3 rejected, 1 pending), `affiliate_visits`, `affiliate_customers` | same |
 | AffiliateWP: payouts / creatives / campaigns | 0 / 0 / 0 | — | — | nothing to import |
 | AffiliateWP settings | 27 values | 27 | `affiliate_settings` | read in wp-admin, 6 Nov 2026 |
 | Atlas Research Planner: product mappings / store protocols / settings | 424 / 147 / 79 fields | same | `docs/audit/data/planner/planner-export.json` | read in wp-admin (admin REST), 7 Nov 2026; for the Protocol Builder (6c) |
@@ -31,12 +31,20 @@ this file). "Here" is this project: the content snapshots in `src/content/`, the
 | Blog comments | 17, all held for moderation | — | — | none is public; the owner can review them in wp-admin |
 | Orders in the trash | 74 | — | — | left out on purpose (not shown anywhere on live) |
 
-**Not available without a database export** (no API gives them):
-- WordPress password hashes: the site is ready to accept the old passwords (Q-07, built 9 Nov 2026) once the
-  users table's `ID` and `user_pass` columns are exported by whoever holds the hosting login; until then,
-  imported customers set a new password with "Lost your password?";
-- RewardsWP Pro's data: the plugin is switched off; 5 orders show it ran for a while (Q-27: keep the programme or not);
-- Atlas Research Tools' per-customer vial inventory and log.
+**Not available without a database export** (no API gives them; the owner's dump of 12 Nov 2026 has them):
+- WordPress password hashes: the site accepts the old passwords (Q-07, built 9 Nov 2026). **Imported 12–13 Nov 2026
+  for all 69 accounts** (`import-wordpress-passwords.mjs`, all `$wp$2y$`); each customer's first login with the old
+  password converts it;
+- RewardsWP Pro's data: the plugin is switched off, but its tables are in the owner's database dump: 4 members,
+  5 point records, 1 referral, 1 issued coupon. Imported 13 Nov 2026 by `scripts/import/import-rewardswp.mjs`
+  (docs/setup/rewards.md);
+- Atlas Research Tools' per-customer vial inventory and log. **In the dump but not imported (13 Nov 2026):**
+  4 vials and 2 access grants (the admin REST view showed 0); the planner's other tables (`arp_audit` 1,928 rows,
+  `arp_kb_links` 318) were not looked at;
+- Also in the dump, left for the e-mail flows (Q-08) or not needed: 363 Elementor form submissions (170 "New Form",
+  193 "Subscriber"), Icegram 11 contacts, Atlas Email Automation 67 subscribers (+ 164 enrollments), AEM 72 contacts and
+  101 abandoned carts, 10 Trustindex Google reviews (a widget), 1 wishlist, 7 webhooks, and the logs (Action Scheduler,
+  security, SEO analytics).
 
 **What changed on live since the earlier exports (found 7 Nov 2026, now in the snapshots):** 6 GLP-3 RTA Pen
 variations back in stock; new pictures on 3 products (and their search thumbnails) and 2 variations; another

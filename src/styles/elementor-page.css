@@ -11,6 +11,36 @@
 
 /* ── Page frame (Woodmart): main.wd-content-layout.container > .wd-content-area > article ── */
 :is(.elementor-page, .blog-page).wd-content-layout { padding-block: 40px; }
+
+/* The page's first band starts under the floating header, as the homepage's hero does (12 Nov 2026:
+ * no white strip behind the header). Most landing pages' first section only cancels the frame's
+ * 40px above (margin-top -40px in its own CSS): it is pulled up by the header's height too
+ * (--header-slot, site-chrome.css), and its content comes down by the same amount inside the band,
+ * so the texts stay where they were. Left alone: the documents whose first section already sits
+ * under the header in their own CSS (margin -110px: homepage 7282, 10324, rewards 10834, contact 285,
+ * 5323, affiliates 8714, 9094). A new page made like those needs its number here. */
+:where(.elementor-page) .elementor:not(.elementor-7282, .elementor-10324, .elementor-10834, .elementor-285, .elementor-5323, .elementor-8714, .elementor-9094) > .elementor-section:first-child {
+  display: flow-root;
+  margin-top: calc(-40px - var(--header-slot)) !important;
+}
+:where(.elementor-page) .elementor:not(.elementor-7282, .elementor-10324, .elementor-10834, .elementor-285, .elementor-5323, .elementor-8714, .elementor-9094) > .elementor-section:first-child > .elementor-container {
+  margin-top: var(--header-slot);
+}
+/* A plain page whose content starts with its title (the calculator): the title becomes a cream band
+ * across the screen, under the header, like the other pages' title bands. */
+:where(.elementor-page) article[data-legacy-html] > h1:first-child {
+  position: relative;
+  margin: calc(-40px - var(--header-slot)) 0 44px;
+  padding: calc(var(--header-slot) + 52px) 0 48px;
+  background-color: #fbf6ec;
+  box-shadow: 0 0 0 100vmax #fbf6ec, 0 1px 0 100vmax #ece3d1;
+  clip-path: inset(0 -100vmax -1px);
+  color: #1c1915;
+  font-size: clamp(2.2rem, 4.4vw, 3.6rem);
+  line-height: 1.05;
+}
+/* Protocol Builder: the title band already says "Protocol Builder"; the plugin's box doesn't repeat it. */
+.wd-page-title ~ main .arp-hero__title { display: none; }
 :is(.elementor-page, .blog-page).container { width: 100%; max-width: var(--wd-container-w, 1222px); margin-inline: auto; padding-inline: 15px; }
 
 /* Theme settings used below: rounded corners and link / product-title colours. */

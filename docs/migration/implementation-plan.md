@@ -83,6 +83,14 @@ A9 payment sandboxes · A10 analytics access
   the importer now casts `$n::text::jsonb` (the first run failed inside its transaction: nothing was half
   written). Checked on the site: accounts and coupons come from Neon. One foreign-key name is longer than
   Postgres's 63 characters and is stored shortened (harmless).
+  **Brought up to date 13 Nov 2026 from the owner's database dump** (`node scripts/import/import-wordpress.mjs
+  <dump.sql.gz>`: `scripts/import/wordpress-dump.mjs` rebuilds the same export the browser script makes, so the same
+  mapping, import and reconciliation run, no signed-in browser needed; read-only and safe to repeat). Checked
+  first: the 253 orders already here map to the same rows from the dump (only real changes since 7 Nov differ:
+  2 statuses, 10 edit dates, a few notes; the dump's text was UTF-8 read as Windows-1252 and is repaired on the
+  way). Neon now holds 69 accounts, 284 orders (31 new, 7–12 Nov), 13 coupons (3 new), 7 affiliates / 8 referrals /
+  368 visits / 7 AffiliateWP customers: every reconciliation line "ok"
+  ([wordpress-import-report.md](wordpress-import-report.md)), plus the old password of all 69 accounts.
 - [ ] Create the Neon project and run `npm run db:migrate`: needs the owner's account (done 9 Nov 2026, above). Neon chosen on
   6 Nov 2026 (region Singapore; branch `dev` for development; `DATABASE_URL` pooled + `DATABASE_URL_UNPOOLED`
   direct for migrations, both pasted into `.env.local` by the owner). Check Neon's acceptable-use rules first (Q-29).
@@ -609,8 +617,9 @@ places edited once, an editor like Elementor's (heading levels, pictures), pictu
   the order and the session): "Your order was cancelled." and the note "Order cancelled by customer. Order
   status changed from Pending payment to Cancelled." Status changes are noted as
   `WC_Order::status_transition` does and set the paid / completed dates. Tested end to end on the local
-  database. Still to do: coupons in the database (needs the coupon import), the other order e-mails
-  (new order, processing, completed…: they need the e-mail provider, Q-08).
+  database. Still to do: coupons in the database (needs the coupon import). **Order e-mails built 13 Nov
+  2026** (new order, on hold, processing, completed, refunded, cancelled, failed, customer note; WooCommerce
+  11.2.1's hooks and texts, `src/lib/email/order-emails.ts`), sent through SendGrid once its key is set (Q-08).
 - [ ] E-mails, My Account, admin orders. **My Account done (7 Nov 2026):** every page of a logged-in
   customer as live shows it (read on live with the owner's own session, personal data left out): the menu
   Dashboard / Orders / Downloads / Addresses / Account details / the owner's "Research tools" / Logout, the
@@ -722,10 +731,21 @@ places edited once, an editor like Elementor's (heading levels, pictures), pictu
   `affiliate_payout_items` (migration 0005, `src/db/schema/affiliate.ts`). Reconciliation:
   [wordpress-import-report.md](wordpress-import-report.md), every line matches (AffiliateWP's own earnings
   counters too). No affiliate coupon is linked to an affiliate on live (no `affwp_discount_affiliate` meta).
-- [ ] Rewards ledger + import + reconciliation. **Nothing to import (checked 7 Nov 2026):** RewardsWP Pro is
-  switched off, so its data has no API; 5 orders carry its `_rewardswp_first_order_points_skipped` mark (it
-  ran for a while) and the refer-a-friend coupon came over with the coupons. Whatever points it saved can only
-  come from a database export, and only if the owner keeps the programme (Q-27).
+- [x] Rewards ledger + import + reconciliation. **Built (12–13 Nov 2026, the owner chose to keep the programme,
+  Q-27):** migration 0010 (`loyalty_members`, `loyalty_transactions`, `loyalty_referrals`), the rules of `/rewards/`
+  and `/rewards-terms/` in `src/lib/loyalty/rules.ts` (1 credit per Rp 10,000 of eligible product spend, rounded down
+  per completed order; 250 credits → a Rp 250,000 coupon for an order of Rp 2,500,000+; Rp 50,000 welcome; refer a
+  friend: Rp 250,000 each, the friend's first order Rp 3,000,000+; one coupon per order; no expiry), the database
+  code (`src/lib/loyalty/store.ts`, hooked into `setOrderStatus` after the status is saved, so a rewards problem
+  never stops an order), the **My Account → Rewards** tab (`/my-account/rewards/`: join, balance, exchange,
+  coupons, share link, history) and the share link `/share/<code>/`. 33 tests on a real in-memory Postgres
+  (credits, refunds, redemption, referral, affiliate exclusion, the coupon engine, failure isolation) plus 6 for
+  the importer. **Imported:** the owner's database dump held RewardsWP's tables after all (checked 12 Nov 2026,
+  so the earlier "nothing to import" no longer holds): 4 members, 5 point records (3 approved: 50 + 50 + 288 =
+  388 credits; 2 pending purchases that wait for their orders), 1 referral with its friend coupon. Reconciliation
+  (RewardsWP's balance = its approved points = credits imported): every member matches, on the local database
+  and on Neon `dev`. Left for later, not asked yet: admin screens to adjust credits, e-mails about rewards, the
+  calculator on `/rewards/`, and pointing that page's buttons at `/my-account/rewards/`.
 - [ ] Protocol Builder / Calculator / Tracker with golden tests.
   `/calculator/` is live ahead (6 Nov 2026, the owner asked for it): the page is the live one (a plain
   page, exported like 3g) and the calculator is the owner's own plugin script (Atlas Research Planner,
@@ -753,7 +773,7 @@ Answering the ones marked **🔴** first unblocks the most work.
 | 🔴 Q-05 | Can we get a staging copy (or a test admin on a backup) for logged-in and checkout captures and safe referral tests? **Partly done 6 Nov 2026:** the cart and checkout with products were captured on live with two guest carts (owner's side's OK; `docs/audit/visual-reference/`). A staging copy is still needed for logged-in pages, a placed order and referral tests. | Phase 3h, 6a |
 | ✅ Q-06 | Which order statuses (incl. custom crypto ones) are used? **Answered 6 Nov 2026 ([backend-settings](../audit/backend-settings.md) §6): only WooCommerce's own statuses; 248 orders so far.** | — |
 | Q-07 | Migrate WordPress password hashes (recommended) or ask everyone to reset? | Auth |
-| Q-08 | Which e-mail provider and sender domain? Keep WooCommerce e-mail wording? **Today ([backend-settings](../audit/backend-settings.md) §8): WP Mail SMTP through the hosting's mail server, from name "Peptides Bali", plus the owner's Atlas Email Automations (5 flows). Still open: the provider for the new site.** | E-mails |
+| Q-08 | Which e-mail provider and sender domain? Keep WooCommerce e-mail wording? **Today ([backend-settings](../audit/backend-settings.md) §8): WP Mail SMTP through the hosting's mail server, from name "Peptides Bali", plus the owner's Atlas Email Automations (5 flows). Decided 13 Nov 2026: SendGrid, from Peptides Bali <hello@peptidesbali.online>, WooCommerce's wording (11.2.1, the live switches, plain text). Built (`src/lib/email/`: account, order and note e-mails; on a test site every e-mail goes to `EMAIL_TEST_TO` only). Waiting for the owner's account, domain check and key ([email setup](../setup/email.md)). Atlas Email Automations' flows still need their source (Q-15).** | E-mails |
 | Q-09 | Translation: keep the GTranslate client-side widget as today (recommended for a "no change" migration), or build real Indonesian pages later? | Header |
 | Q-10 | Age gate: show up to 3 times (current Elementor setting) or remember for 30 days (current popup text)? | Layout |
 | Q-11 | Keep the same GTM / GA4 / Clarity / Tawk.to / Trustindex IDs? Who owns the GTM container (it has e-commerce events to rebuild)? | Analytics |
@@ -771,14 +791,14 @@ Answering the ones marked **🔴** first unblocks the most work.
 | Q-23 | Any affiliates with custom rates or allowed self-referrals? | 6a |
 | ✅ Q-24 | Full plugin list from WP Admin (active + inactive) **Answered 6 Nov 2026 ([backend-settings](../audit/backend-settings.md) §12): 30 plugins, 28 active.** | — |
 | ✅ Q-25 | What is AdsAgent used for? **Answered 6 Nov 2026: AdsAgent is no longer installed ([backend-settings](../audit/backend-settings.md) §12).** | — |
-| Q-26 | New-order alerts: who uses the WooCommerce mobile app today, and what should replace it? | Admin |
-| 🔴 Q-27 | Which plugin runs Rewards (credits, welcome, refer-a-friend)? Can we export balances? **Answered in part ([backend-settings](../audit/backend-settings.md) §10): RewardsWP Pro 1.7.1, installed but switched off. Still open: should rewards exist in the new site, and are there balances to move?** | Phase 6b |
+| Q-26 | New-order alerts: who uses the WooCommerce mobile app today, and what should replace it? **13 Nov 2026: the "New order" e-mail goes to `ORDER_ALERT_TO` (default hello@peptidesbali.online, as live), once SendGrid is set up. Still open: whether the owner wants more (WhatsApp, a phone notification).** | Admin |
+| ✅ Q-27 | Which plugin runs Rewards (credits, welcome, refer-a-friend)? Can we export balances? **Answered ([backend-settings](../audit/backend-settings.md) §10): RewardsWP Pro 1.7.1, installed but switched off. Decided 12 Nov 2026: the programme stays and is built into the new site; its balances (4 members, 388 credits) came from the database dump. What the owner should still confirm: [rewards.md](../setup/rewards.md) §3.** | Phase 6b |
 | ✅ Q-28 | **Decided 3 Nov 2026: Option A approved.** Commerce is a custom module in Next.js + PostgreSQL (Drizzle); no Medusa, no headless WooCommerce. | — |
 | Q-29 | Have Vercel, Sanity and Neon/Supabase been checked for acceptable-use rules on this product category? | Phase 2 |
 | Q-30 | Where should the Git repository live (GitHub private repo?) | Phase 2 |
 | Q-31 | Does DNS stay on Cloudflare? (Cloudflare analytics and caching depend on it) | Phase 8 |
 | ✅ Q-32 | Checkout delivery slots (snippet 15): fixed time slots, capacity limits, same-day cut-off? **Answered 6 Nov 2026 ([backend-settings](../audit/backend-settings.md) §4): fixed slots 07–09 … 21–23, today + 7 days, no capacity limit, no cut-off.** | — |
-| Q-33 | Checkout address map (snippet 16): which maps provider and API key? | Phase 5 |
+| Q-33 | Checkout address map (snippet 16): which maps provider and API key? **Decided 13 Nov 2026: Google Maps, as live. Built (`DeliveryMap.tsx`: suggestions, Find on Map, draggable pin; the order keeps lat / lng / Google's address); shown once `NEXT_PUBLIC_GOOGLE_MAPS_API_KEY` is set. Waiting for the owner's key: [google-maps.md](../setup/google-maps.md).** | Phase 5 |
 | Q-34 | The live site's theme icon font (Woodmart) is reused for pixel-identical icons, and many of the theme's CSS rules are rewritten with the same selectors and values (`src/styles/product.css`, `quick-view.css`, and for the Elementor pages `elementor-page.css` and `legacy-content.css`: product categories, buttons, form fields, the FAQ accordion; the accordion's behaviour is rewritten too, `src/lib/elementor/accordion.ts`; for the blog `blog.css`: title band, post cards, single post, share icons, comment form; for the cart, checkout and account pages `woocommerce.css`: checkout steps, empty cart, login / registration, messages). Is the owner's Woodmart licence OK with that for the rebuilt site, or should we switch to look-alike SVG icons and our own CSS? The same question for the Google-reviews widget's icons, copied from Trustindex's CDN (`public/legacy/vendor/cdn.trustindex.io/`). (Elementor's CSS is GPL-3.0, AffiliateWP's form CSS GPL-2.0; PhotoSwipe, Owl Carousel and Swiper are MIT; Font Awesome Free is CC BY / OFL / MIT; so those are fine.) | Phase 3 |
 | ✅ Q-35 | **Answered 6 Nov 2026 from the owner's script on the live pages:** exactly 3 names ("semaglutide" → "GLP-1 SMA" from 5 letters, "tirzepatide" → "GLP-2 TRZ" and "retatrutide" → "GLP-3 RTA" from 4), also shortened, with a note each (`src/lib/search/aliases.ts`). | — |
 | Q-36 | Cloudflare serves cached copies of shop and category pages that can be a day old (on 4 Nov 2026 the cached `/shop/` still lacked the "Affiliate Registration" footer link). Is that intended? It decides how long price or stock changes take to show. | Phase 8 |

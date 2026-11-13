@@ -1,10 +1,13 @@
 /**
- * A single product page (/product/<slug>/), the live site's WooCommerce + Woodmart template:
+ * A single product page (/product/<slug>/). Redesigned on 12 Nov 2026 after the owner's reference
+ * shops (every page one continuous page, src/styles/product-page.css):
  *
- *   ┌ gallery card ┬ summary card: breadcrumbs, title, price, short description, included
- *   │              │ supplies, options + quantity + Add to cart, the green/gold buttons block,
- *   │              │ "Also available as"
- *   ├ tabs (Description + the product's custom tabs)
+ *   ┌ top band across the screen: gallery │ breadcrumbs, category, title, price, lab-tested badge,
+ *   │                                     │ short description, included supplies, options +
+ *   │                                     │ quantity + Add to cart, the buttons block, "Also available as"
+ *   ├ "On this page" bar (sticky): Overview · the custom tabs · Lab results · Related products
+ *   ├ the description (a designed Elementor page) and the custom tabs, one after another
+ *   ├ Lab results: this product's certificates from the lab results page
  *   └ related products
  *
  * Class names are the live page's (WooCommerce/Woodmart) on purpose: the site owner's CSS
@@ -23,21 +26,26 @@ import "@/styles/product.css";
 import "@/styles/legacy-content.css";
 import "@/styles/product-owner.css";
 import "@/styles/usd-prices-owner.css";
+import "@/styles/product-page.css";
 
 import Link from "next/link";
 import { Fragment } from "react";
 
 import { JsonLd } from "@/components/seo/JsonLd";
 import { backorderFor, getCatalogState, getProductById } from "@/lib/catalog";
+import { getCoas } from "@/lib/coa/library";
 import { getSharedBlockHtml, type ProductPageData } from "@/lib/catalog/product-page";
 import type { Product } from "@/lib/catalog/types";
 import { cleanLegacyHtml } from "@/lib/legacy-html";
+import { productJsonLd } from "@/lib/seo/product-jsonld";
 
 import { AddToCartForm, SummaryPrice } from "./AddToCartForm";
 import { LegacyHtml } from "./LegacyHtml";
 import { ProductGallery } from "./ProductGallery";
 import { ProductGalleryProvider } from "./ProductGalleryContext";
-import { ProductTabs } from "./ProductTabs";
+import { ProductLabResults } from "./ProductLabResults";
+import { ProductSectionNav, type SectionLink } from "./ProductSectionNav";
+import { ProductSections } from "./ProductSections";
 import { RelatedProducts } from "./RelatedProducts";
 import { ScrollbarWidth } from "./ScrollbarWidth";
 import { TrackRecentlyViewed } from "./TrackRecentlyViewed";
@@ -49,12 +57,23 @@ const NOT_LINKED = new Set([267, 4118, 7]);
 export async function ProductPage({ product, page }: { product: Product; page: ProductPageData }) {
   const related = (await Promise.all(page.related.map((id) => getProductById(id)))).filter((p): p is Product => Boolean(p));
   const backorder = backorderFor(product, (await getCatalogState()).backorder);
+  const jsonLd = productJsonLd(product, page, backorder);
   const afterBlocks = (await Promise.all(page.afterAddToCart.map(async (id) => cleanLegacyHtml(await getSharedBlockHtml(id))))).join("");
   const tabs = page.tabs.map((tab) => ({ key: tab.key, title: tab.title, html: cleanLegacyHtml(tab.html) }));
+  // This product's certificates (the COA cards on the lab results page link to their product).
+  const coas = (await getCoas()).filter((coa) => coa.productPath === product.path);
+  const bestCoa = coas.length ? coas.reduce((a, b) => (b.purity > a.purity ? b : a)) : null;
+  // The category the visitor came through: the breadcrumb before the product's own name.
+  const category = page.breadcrumbs.length > 2 ? page.breadcrumbs[page.breadcrumbs.length - 2].label : null;
+  const sections: SectionLink[] = [
+    ...tabs.map((tab) => ({ id: `tab-${tab.key}`, label: tab.key === "description" ? "Overview" : tab.title })),
+    ...(coas.length ? [{ id: "lab-results", label: "Lab results" }] : []),
+    ...(related.length ? [{ id: "related-products", label: "Related products" }] : []),
+  ];
 
   return (
     <main id="main-content" className="single-product elementor-kit-7">
-      <JsonLd path={product.path} />
+      <JsonLd path={product.path} product={jsonLd} />
       {/* Plain links (no "precedence"), so React leaves them here in the page instead of moving them
           into <head>: they must load after every other stylesheet, as on the live site. Plain files in
           public/ because each page needs only a few of the 44. */}
@@ -64,54 +83,72 @@ export async function ProductPage({ product, page }: { product: Product; page: P
           <link key={id} rel="stylesheet" href={`/legacy/elementor/post-${id}.css`} />
         ))}
       <div className="single-product-page single-product-content wd-sticky-on product-sticky-on">
-        <div className="container">
-          <ProductGalleryProvider images={page.form.type === "variable" ? page.form.images : undefined}>
-            <div className="product-image-summary-wrap">
-              <div className="product-image-summary">
-                <div className="product-image-summary-inner wd-grid-g">
-                  <div className="product-images wd-grid-col">
-                    <ProductGallery images={page.gallery} thumbnails={page.thumbnails} />
-                  </div>
-                  <div className="summary entry-summary text-left wd-grid-col">
-                    <div className="summary-inner wd-set-mb reset-last-child">
-                      <div className="single-breadcrumbs-wrapper">
-                        <nav className="wd-breadcrumbs woocommerce-breadcrumb" aria-label="Breadcrumb">
-                          {page.breadcrumbs.map((crumb, index) => (
-                            <Fragment key={`${crumb.label}-${index}`}>
-                              {index > 0 ? <span className="wd-delimiter" /> : null}
-                              {crumb.path !== null ? (
-                                // The live "Home" link is the bare domain, stored as "".
-                                <Link href={crumb.path || "/"} className={index === page.breadcrumbs.length - 2 ? "wd-last-link" : undefined}>
-                                  {crumb.label}
-                                </Link>
-                              ) : (
-                                <span className="wd-last">{crumb.label}</span>
-                              )}
-                            </Fragment>
-                          ))}
-                        </nav>
+        <div className="pp-hero">
+          <div className="container">
+            <ProductGalleryProvider images={page.form.type === "variable" ? page.form.images : undefined}>
+              <div className="product-image-summary-wrap">
+                <div className="product-image-summary">
+                  <div className="product-image-summary-inner wd-grid-g">
+                    <div className="product-images wd-grid-col">
+                      <ProductGallery images={page.gallery} thumbnails={page.thumbnails} />
+                    </div>
+                    <div className="summary entry-summary text-left wd-grid-col">
+                      <div className="summary-inner wd-set-mb reset-last-child">
+                        <div className="single-breadcrumbs-wrapper">
+                          <nav className="wd-breadcrumbs woocommerce-breadcrumb" aria-label="Breadcrumb">
+                            {page.breadcrumbs.map((crumb, index) => (
+                              <Fragment key={`${crumb.label}-${index}`}>
+                                {index > 0 ? <span className="wd-delimiter" /> : null}
+                                {crumb.path !== null ? (
+                                  // The live "Home" link is the bare domain, stored as "".
+                                  <Link href={crumb.path || "/"} className={index === page.breadcrumbs.length - 2 ? "wd-last-link" : undefined}>
+                                    {crumb.label}
+                                  </Link>
+                                ) : (
+                                  <span className="wd-last">{crumb.label}</span>
+                                )}
+                              </Fragment>
+                            ))}
+                          </nav>
+                        </div>
+                        {category ? <p className="pp-eyebrow pp-hero__category">{category}</p> : null}
+                        <h1 className="product_title entry-title wd-entities-title">{page.title}</h1>
+                        <SummaryPrice min={product.priceMin} max={product.priceMax} regular={product.regularPrice} />
+                        {bestCoa ? (
+                          <a href="#lab-results" className="pp-proof">
+                            <span className="pp-proof__icon" aria-hidden="true">
+                              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="m5 12.5 4.5 4.5L19 7.5" />
+                              </svg>
+                            </span>
+                            <span>
+                              Lab tested · <strong>{bestCoa.purityText}</strong> purity · {bestCoa.lab}
+                            </span>
+                            <span className="pp-proof__more">View certificate{coas.length > 1 ? "s" : ""}</span>
+                          </a>
+                        ) : null}
+                        {page.shortDescription ? (
+                          <div className="woocommerce-product-details__short-description" data-legacy-html="" dangerouslySetInnerHTML={{ __html: cleanLegacyHtml(page.shortDescription) }} />
+                        ) : null}
+                        {page.includedSupplies ? (
+                          <div className="sleeks-included-supplies" data-legacy-html="" dangerouslySetInnerHTML={{ __html: cleanLegacyHtml(page.includedSupplies) }} />
+                        ) : null}
+                        <AddToCartForm productId={product.id} productName={page.title} form={page.form} variations={product.variations} backorder={backorder} />
+                        {afterBlocks ? <LegacyHtml className="wd-after-add-to-cart wd-entry-content" html={afterBlocks} /> : null}
+                        {page.connectedFormats ? (
+                          <div className="atlas-connected-formats" data-legacy-html="" dangerouslySetInnerHTML={{ __html: cleanLegacyHtml(page.connectedFormats) }} />
+                        ) : null}
                       </div>
-                      <h1 className="product_title entry-title wd-entities-title">{page.title}</h1>
-                      <SummaryPrice min={product.priceMin} max={product.priceMax} regular={product.regularPrice} />
-                      {page.shortDescription ? (
-                        <div className="woocommerce-product-details__short-description" data-legacy-html="" dangerouslySetInnerHTML={{ __html: cleanLegacyHtml(page.shortDescription) }} />
-                      ) : null}
-                      {page.includedSupplies ? (
-                        <div className="sleeks-included-supplies" data-legacy-html="" dangerouslySetInnerHTML={{ __html: cleanLegacyHtml(page.includedSupplies) }} />
-                      ) : null}
-                      <AddToCartForm productId={product.id} productName={page.title} form={page.form} variations={product.variations} backorder={backorder} />
-                      {afterBlocks ? <LegacyHtml className="wd-after-add-to-cart wd-entry-content" html={afterBlocks} /> : null}
-                      {page.connectedFormats ? (
-                        <div className="atlas-connected-formats" data-legacy-html="" dangerouslySetInnerHTML={{ __html: cleanLegacyHtml(page.connectedFormats) }} />
-                      ) : null}
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </ProductGalleryProvider>
+            </ProductGalleryProvider>
+          </div>
         </div>
-        <ProductTabs tabs={tabs} />
+        <ProductSectionNav links={sections} />
+        <ProductSections tabs={tabs} productName={page.title} />
+        <ProductLabResults coas={coas} productName={page.title} />
         <RelatedProducts products={related} />
       </div>
       <ScrollbarWidth />

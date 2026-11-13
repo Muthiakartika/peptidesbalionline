@@ -124,6 +124,12 @@ export const productRecords = pgTable(
     /** The product's number in the shop, cart and orders (= its WooCommerce id when migrated). */
     shopId: integer("shop_id").notNull().default(sql`nextval('shop_id_seq')`),
     slug: text("slug").notNull(),
+    /**
+     * The addresses this product had before its slug was changed in /admin/products/ (WordPress's
+     * _wp_old_slug): /product/<old>/ answers 301 to the current address (src/proxy.ts), unless another
+     * product uses that address now. The live site's own history is src/content/seo/old-slug-redirects.json.
+     */
+    oldSlugs: text("old_slugs").array().notNull().default(sql`'{}'::text[]`),
     name: text("name").notNull(),
     type: productType("type").notNull(),
     status: recordStatus("status").notNull().default("draft"),

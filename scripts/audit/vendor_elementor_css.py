@@ -33,10 +33,11 @@ Not copied: the site footer (#267) and the top-bar marquee (#4118), rebuilt nati
 the popups (#5869, #5870, #6534: the age gate is rebuilt natively).
 
 Afterwards it gives every document except the homepage's the homepage's fonts (homepage_typography.py,
-the owner's request of 12 Nov 2026); --keep-live-fonts leaves the live site's fonts.
+the owner's request of 12 Nov 2026); --keep-live-fonts leaves the live site's fonts. Then it gives them the
+Atlas colours of the redesign (atlas_palette.py); --keep-live-colours leaves the live site's greys and blacks.
 
 Usage (from the project root, after export_product_pages.py and export_elementor_pages.py):
-    python scripts/audit/vendor_elementor_css.py [--keep-live-fonts]
+    python scripts/audit/vendor_elementor_css.py [--keep-live-fonts] [--keep-live-colours]
 """
 
 from __future__ import annotations
@@ -202,6 +203,12 @@ def main() -> int:
         import homepage_typography
 
         homepage_typography.main()
+    # The redesign of 12 Nov 2026: Atlas colours instead of the live pages' greys and blacks (atlas_palette.py).
+    if "--keep-live-colours" not in sys.argv:
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        import atlas_palette
+
+        atlas_palette.main()
     return 1 if missing else 0
 
 

@@ -23,3 +23,14 @@ export function deliveryDayOptions(now = new Date()): DeliveryOption[] {
 export function deliveryTimeOptions(): DeliveryOption[] {
   return [{ value: "", label: "Choose a time" }, ...deliverySlots.times.map((value) => ({ value, label: value.replace("-", "–") }))];
 }
+
+/** A saved delivery day as the owner's snippet prints it on the order: wp_date("l, j F Y"), e.g. "Saturday, 7 November 2026". */
+export function deliveryDayLabel(value: string | null): string {
+  if (!value || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return value ?? "";
+  const date = new Date(`${value}T12:00:00Z`);
+  const part = (o: Intl.DateTimeFormatOptions) => new Intl.DateTimeFormat("en-GB", { timeZone: "UTC", ...o }).format(date);
+  return `${part({ weekday: "long" })}, ${Number(value.slice(8))} ${part({ month: "long" })} ${value.slice(0, 4)}`;
+}
+
+/** A saved time slot as printed on the order: "10:00-12:00" → "10:00–12:00". */
+export const deliveryTimeLabel = (value: string | null) => (value ?? "").replace("-", "–");

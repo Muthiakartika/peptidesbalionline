@@ -72,27 +72,28 @@ Project → **Members** → **Invite**: the people who will edit content (role *
 
 The site caches every page it builds from Sanity until Sanity tells it something changed.
 
-1. Make a long random secret (e.g. `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"`)
-   and put it in `.env.local` and on Vercel yourself:
-
-   ```
-   SANITY_REVALIDATE_SECRET=paste-it-here
-   ```
-
+1. The secret: a long random code, already made on 13 Nov 2026 in `.data/sanity-webhook-secret.txt` (open the
+   file and copy the last line; to make another: `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"`).
+   Put it on **Vercel** yourself (Project → Settings → Environment Variables → `SANITY_REVALIDATE_SECRET`, then
+   **Redeploy**). **Not in `.env.local`**: this computer can't receive webhooks, and with the secret set the site
+   keeps Sanity pages until a webhook arrives, so local pages would stop refreshing.
 2. Project → **API** → **Webhooks** → **Create webhook**:
    - Name: `Refresh site`
-   - URL: `https://<the site's address>/api/sanity/revalidate/` (with the final "/", like every address of
-     the site; one webhook per environment: staging, live)
-   - Dataset: the one that site reads (`staging` or `production`)
-   - Trigger on: **Create, Update, Delete**
+   - URL: `https://peptidesbalionline.vercel.app/api/sanity/revalidate/` (the site's address, with the final "/",
+     like every address of the site; one webhook per site: test site now, `https://peptidesbali.online/…` at launch)
+   - Dataset: the one that site reads (`staging` now, `production` after the production import)
+   - Trigger on: **Create, Update, Delete**; drafts and versions off
    - Filter: `_type in ["page", "sharedSection", "popup", "siteSettings", "post", "product"]`
    - Projection: `{_type, _id}`
-   - HTTP method **POST**, API version `v2026-11-01`, **Secret**: the same secret. Save.
-3. Publish any small change; the page shows it on the next visit.
+   - Status: enabled. HTTP method **POST**. API version: the newest offered (any works: the site only reads
+     `_type`). HTTP headers: none. **Secret**: the same secret. Save.
+3. Publish any small change; the page shows it on the next visit. The webhook's **Attempts log** shows `200`
+   for each publish (`401` = the two secrets differ, `503` = Vercel doesn't have the secret yet or wasn't
+   redeployed).
 
-Without the webhook (and without `SANITY_REVALIDATE_SECRET`, e.g. on this computer, which webhooks can't
-reach) the site keeps a page for one minute: the first visit after that rebuilds it in the background and
-the next visit shows the change.
+Without the webhook (and without `SANITY_REVALIDATE_SECRET`) the site works the same, only a little later: it
+keeps a page for one minute (the first visit after that rebuilds it in the background, the next visit shows the
+change), and the products' texts for up to an hour.
 
 ## Login method
 

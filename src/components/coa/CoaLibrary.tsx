@@ -34,10 +34,10 @@ const SORTS: { value: Sort; label: string }[] = [
   { value: "purity", label: "Highest purity" },
   { value: "name", label: "Name A–Z" },
 ];
-const PURITY_STEPS = [99, 99.5, 99.8];
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-const monthKey = (iso: string) => iso.slice(0, 7);
-const monthLabel = (key: string) => `${MONTHS[Number(key.slice(5, 7)) - 1] ?? ""} ${key.slice(0, 4)}`;
+/** "2026-08-20" → "20 Aug 2026" */
+const dateLabel = (iso: string) => (iso ? `${Number(iso.slice(8, 10))} ${MONTHS[Number(iso.slice(5, 7)) - 1] ?? ""} ${iso.slice(0, 4)}` : "");
+const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 const MAX_COMPARE = 4;
 
 /* ── Small icons (stroke icons, 1.8px) ─────────────────────────────────────────────────────────── */
@@ -56,6 +56,11 @@ const PATHS = {
   shield: "M12 3 5 6v6c0 4.4 3 7.6 7 9 4-1.4 7-4.6 7-9V6l-7-3Zm-3 9 2 2 4-4",
   arrow: "M5 12h14M13 6l6 6-6 6",
   mail: "M4 6h16v12H4zM4 7l8 6 8-6",
+  hash: "M5 9h14M5 15h14M10 3 8 21M16 3l-2 18",
+  wrench: "M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4 2.5-2.5Z",
+  flask: "M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.7 3h10.6a2 2 0 0 0 1.7-3l-5-9V3",
+  chart: "M4 20V12M10 20V6M16 20v-9M2 20h20",
+  calendar: "M4 6h16v14H4zM4 10h16M9 3v4M15 3v4",
 } as const;
 
 function Icon({ name, className }: { name: keyof typeof PATHS; className?: string }) {
@@ -65,6 +70,9 @@ function Icon({ name, className }: { name: keyof typeof PATHS; className?: strin
     </svg>
   );
 }
+
+/** "HPLC with UV detection coupled with mass spectrometry (LC-MS)" → "HPLC-UV + LC-MS" on the cards. */
+const shortMethod = (method: string) => (/HPLC with UV detection coupled with mass spectrometry/i.test(method) ? "HPLC-UV + LC-MS" : method);
 
 /* ── Helpers ───────────────────────────────────────────────────────────────────────────────────── */
 async function copyText(text: string): Promise<boolean> {
@@ -85,7 +93,7 @@ async function copyText(text: string): Promise<boolean> {
   }
 }
 
-const haystack = (c: Coa) => [c.peptide, c.title, c.amount, c.lab, c.batch, c.task, c.verificationKey, c.searchCode, c.accession, c.testedLabel, c.purityText].filter(Boolean).join(" ").toLowerCase();
+const haystack = (c: Coa) => [c.peptide, c.title, c.amount, c.lab, c.method, c.batch, c.task, c.verificationKey, c.searchCode, c.accession, c.testedLabel, c.purityText].filter(Boolean).join(" ").toLowerCase();
 
 /** Width of the purity bar: the 99–100 % range fills the bar (results under 99 % show a sliver). */
 const meter = (purity: number) => `${Math.max(4, Math.min(100, (purity - 99) * 100))}%`;
@@ -123,10 +131,11 @@ function Modal({ title, eyebrow, onClose, wide, children, footer }: { title: str
   );
 }
 
-function FilterMenu({ id, label, count, open, onToggle, children }: { id: string; label: string; count: number; open: boolean; onToggle: (id: string | null) => void; children: ReactNode }) {
+function FilterMenu({ id, icon, label, count, open, onToggle, children }: { id: string; icon: keyof typeof PATHS; label: string; count: number; open: boolean; onToggle: (id: string | null) => void; children: ReactNode }) {
   return (
     <div className={`coa-filter${open ? " is-open" : ""}`} data-filter-menu={id}>
       <button type="button" className={`coa-filter__btn${count ? " is-active" : ""}`} aria-expanded={open} onClick={() => onToggle(open ? null : id)}>
+        <Icon name={icon} className="coa-filter__icon" />
         {label}
         {count ? <span className="coa-filter__count">{count}</span> : null}
         <Icon name="chevron" className="coa-filter__chev" />
@@ -189,7 +198,7 @@ function RequestLinks({ coas, onClose, say }: { coas: Coa[]; onClose: () => void
               Sent. Check your inbox at <strong>{email.trim()}</strong>.
             </>
           ) : (
-            <>Saved on this computer in .data/mail/ (no e-mail provider is set up yet, so nothing was sent).</>
+            <>Saved on this computer in .data/mail/ (this test copy doesn&apos;t send e-mails, so nothing was sent).</>
           )}
         </p>
       ) : state.step === "fallback" ? (
@@ -234,8 +243,10 @@ export function CoaLibrary({ coas, intro }: CoaLibraryProps) {
   const [query, setQuery] = useState("");
   const [peptides, setPeptides] = useState<string[]>([]);
   const [labs, setLabs] = useState<string[]>([]);
+  const [methods, setMethods] = useState<string[]>([]);
   const [minPurity, setMinPurity] = useState<number | null>(null);
-  const [months, setMonths] = useState<string[]>([]);
+  const [dateFrom, setDateFrom] = useState("");
+  const [dateTo, setDateTo] = useState("");
   const [sort, setSort] = useState<Sort>("newest");
   const [view, setView] = useState<View>("grid");
   const [selected, setSelected] = useState<string[]>([]);
@@ -254,7 +265,11 @@ export function CoaLibrary({ coas, intro }: CoaLibraryProps) {
     return {
       peptides: count(coas.map((c) => c.peptide)).sort((a, b) => a[0].localeCompare(b[0])),
       labs: count(coas.map((c) => c.lab)).sort((a, b) => b[1] - a[1]),
-      months: count(coas.map((c) => monthKey(c.testedOn)).filter(Boolean)).sort((a, b) => b[0].localeCompare(a[0])),
+      methods: count(coas.map((c) => c.method).filter(Boolean)).sort((a, b) => b[1] - a[1]),
+      firstDate: coas.map((c) => c.testedOn).filter(Boolean).sort()[0] ?? "",
+      lastDate: coas.map((c) => c.testedOn).filter(Boolean).sort().at(-1) ?? "",
+      /** The purity slider starts at the lowest result, rounded down to a whole percent. */
+      purityFloor: Math.floor(Math.min(...coas.map((c) => c.purity).filter((p) => Number.isFinite(p)), 100)),
     };
   }, [coas]);
 
@@ -270,7 +285,9 @@ export function CoaLibrary({ coas, intro }: CoaLibraryProps) {
       if (peptides.length && !peptides.includes(c.peptide)) return false;
       if (labs.length && !labs.includes(c.lab)) return false;
       if (minPurity !== null && !(c.purity >= minPurity)) return false;
-      if (months.length && !months.includes(monthKey(c.testedOn))) return false;
+      if (methods.length && !methods.includes(c.method)) return false;
+      if (dateFrom && c.testedOn < dateFrom) return false;
+      if (dateTo && c.testedOn > dateTo) return false;
       const text = haystack(c);
       return words.every((w) => text.includes(w));
     });
@@ -281,9 +298,21 @@ export function CoaLibrary({ coas, intro }: CoaLibraryProps) {
       name: (a, b) => a.peptide.localeCompare(b.peptide) || b.testedOn.localeCompare(a.testedOn),
     };
     return [...list].sort(by[sort]);
-  }, [coas, deferredQuery, peptides, labs, minPurity, months, sort]);
+  }, [coas, deferredQuery, peptides, methods, labs, minPurity, dateFrom, dateTo, sort]);
 
-  const filterCount = peptides.length + labs.length + months.length + (minPurity !== null ? 1 : 0);
+  /** The title with the page's gold highlight (e.g. "Certificates of Analysis"). */
+  const accentAt = intro.accent ? intro.title.lastIndexOf(intro.accent) : -1;
+  const titleParts =
+    accentAt >= 0 && intro.accent ? (
+      <>
+        {intro.title.slice(0, accentAt)}
+        <span className="coa-title__accent">{intro.accent}</span>
+        {intro.title.slice(accentAt + intro.accent.length)}
+      </>
+    ) : (
+      intro.title
+    );
+  const filterCount = peptides.length + methods.length + labs.length + (minPurity !== null ? 1 : 0) + (dateFrom || dateTo ? 1 : 0);
   const preview = previewId ? (coas.find((c) => c.id === previewId) ?? null) : null;
   const chosen = selected.map((id) => coas.find((c) => c.id === id)).filter((c): c is Coa => Boolean(c));
   const allVisibleSelected = results.length > 0 && results.every((c) => selected.includes(c.id));
@@ -299,11 +328,14 @@ export function CoaLibrary({ coas, intro }: CoaLibraryProps) {
     const list = (key: string) => (p.get(key) ?? "").split(",").map((v) => v.trim()).filter(Boolean);
     /* eslint-disable react-hooks/set-state-in-effect -- reading the address once, after hydration */
     if (p.get("q")) setQuery(p.get("q") ?? "");
-    if (list("compound").length) setPeptides(list("compound").filter((v) => coas.some((c) => c.peptide === v)));
+    const named = [...list("peptide"), ...list("compound")].filter((v) => coas.some((c) => c.peptide === v));
+    if (named.length) setPeptides(named);
+    if (list("method").length) setMethods(list("method").filter((v) => coas.some((c) => c.method === v)));
     if (list("lab").length) setLabs(list("lab").filter((v) => coas.some((c) => c.lab === v)));
-    if (list("tested").length) setMonths(list("tested"));
     const purity = Number(p.get("purity"));
-    if (PURITY_STEPS.includes(purity)) setMinPurity(purity);
+    if (p.get("purity") && purity >= 50 && purity <= 100) setMinPurity(purity);
+    if (ISO_DATE.test(p.get("from") ?? "")) setDateFrom(p.get("from")!);
+    if (ISO_DATE.test(p.get("to") ?? "")) setDateTo(p.get("to")!);
     const s = p.get("sort") as Sort | null;
     if (s && SORTS.some((o) => o.value === s)) setSort(s);
     if (p.get("view") === "list") setView("list");
@@ -321,6 +353,12 @@ export function CoaLibrary({ coas, intro }: CoaLibraryProps) {
       const typing = event.target instanceof HTMLElement && /^(INPUT|TEXTAREA|SELECT)$/.test(event.target.tagName);
       if (((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") || (event.key === "/" && !typing)) {
         event.preventDefault();
+        searchRef.current?.focus({ preventScroll: true });
+        searchRef.current?.scrollIntoView({ block: "center", behavior: "smooth" });
+      } else if (!typing && !previewId && !panel && !requestIds && event.key.length === 1 && /\S/.test(event.key) && !event.ctrlKey && !event.metaKey && !event.altKey) {
+        // Start typing anywhere on the page: the letters go into the search.
+        event.preventDefault();
+        setQuery((q) => q + event.key);
         searchRef.current?.focus({ preventScroll: true });
         searchRef.current?.scrollIntoView({ block: "center", behavior: "smooth" });
       } else if (event.key === "Escape") {
@@ -350,17 +388,21 @@ export function CoaLibrary({ coas, intro }: CoaLibraryProps) {
     setQuery("");
     setPeptides([]);
     setLabs([]);
+    setMethods([]);
     setMinPurity(null);
-    setMonths([]);
+    setDateFrom("");
+    setDateTo("");
   };
 
   const viewUrl = (extra?: Record<string, string>) => {
     const p = new URLSearchParams();
     if (query.trim()) p.set("q", query.trim());
-    if (peptides.length) p.set("compound", peptides.join(","));
+    if (peptides.length) p.set("peptide", peptides.join(","));
+    if (methods.length) p.set("method", methods.join(","));
     if (labs.length) p.set("lab", labs.join(","));
     if (minPurity !== null) p.set("purity", String(minPurity));
-    if (months.length) p.set("tested", months.join(","));
+    if (dateFrom) p.set("from", dateFrom);
+    if (dateTo) p.set("to", dateTo);
     if (sort !== "newest") p.set("sort", sort);
     if (view !== "grid") p.set("view", view);
     for (const [k, v] of Object.entries(extra ?? {})) p.set(k, v);
@@ -374,8 +416,14 @@ export function CoaLibrary({ coas, intro }: CoaLibraryProps) {
   const chips: { label: string; clear: () => void }[] = [
     ...peptides.map((v) => ({ label: v, clear: () => setPeptides((l) => l.filter((x) => x !== v)) })),
     ...labs.map((v) => ({ label: v, clear: () => setLabs((l) => l.filter((x) => x !== v)) })),
-    ...(minPurity !== null ? [{ label: `≥ ${minPurity}% purity`, clear: () => setMinPurity(null) }] : []),
-    ...months.map((v) => ({ label: `Tested ${monthLabel(v)}`, clear: () => setMonths((l) => l.filter((x) => x !== v)) })),
+    ...methods.map((v) => ({ label: v, clear: () => setMethods((l) => l.filter((x) => x !== v)) })),
+    ...(minPurity !== null ? [{ label: `Purity ≥ ${minPurity}%`, clear: () => setMinPurity(null) }] : []),
+    ...(dateFrom || dateTo
+      ? [{ label: dateFrom && dateTo ? `Tested ${dateLabel(dateFrom)} – ${dateLabel(dateTo)}` : dateFrom ? `Tested from ${dateLabel(dateFrom)}` : `Tested until ${dateLabel(dateTo)}`, clear: () => {
+            setDateFrom("");
+            setDateTo("");
+          } }]
+      : []),
   ];
 
   /** As on the old cards: "Verify on <lab>" (the lab's own copy), "View report", plus our Preview. */
@@ -411,10 +459,16 @@ export function CoaLibrary({ coas, intro }: CoaLibraryProps) {
   return (
     <div className="coa-lib" ref={rootRef}>
       <div className="coa-wrap">
-        <header className="coa-head">
-          <p className="coa-eyebrow">{intro.eyebrow}</p>
-          <h2 className="coa-title">{intro.title}</h2>
-          <p className="coa-lede">{intro.text}</p>
+        <header className={`coa-head${intro.pageTitle ? " coa-head--page" : ""}`}>
+          <p className="coa-badge">
+            <Icon name="shield" />
+            {intro.eyebrow}
+          </p>
+          {intro.pageTitle ? <h1 className="coa-title">{titleParts}</h1> : <h2 className="coa-title">{titleParts}</h2>}
+          {intro.text ? <p className="coa-lede">{intro.text}</p> : null}
+          <p className="coa-hint">
+            Press <kbd>Ctrl</kbd> <kbd>K</kbd> to search — or start typing below
+          </p>
         </header>
 
         <dl className="coa-stats">
@@ -437,18 +491,20 @@ export function CoaLibrary({ coas, intro }: CoaLibraryProps) {
         </dl>
 
         <div className="coa-toolbar">
-          <label className="coa-search">
-            <span className="coa-sr-only">Search certificates</span>
+          <label className="coa-search__label" htmlFor="coa-search-input">
+            Search certificates of analysis
+          </label>
+          <div className="coa-search">
             <Icon name="search" />
-            <input ref={searchRef} type="search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search name, batch or code" autoComplete="off" />
+            <input id="coa-search-input" ref={searchRef} type="search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search peptide, batch, lab or method" autoComplete="off" />
             <kbd className="coa-kbd" aria-hidden="true">
               Ctrl K
             </kbd>
-          </label>
+          </div>
 
           <div className="coa-toolbar__row">
             <div className="coa-filters" role="group" aria-label="Filters">
-              <FilterMenu id="compound" label="Compound" count={peptides.length} open={menu === "compound"} onToggle={setMenu}>
+              <FilterMenu id="peptide" icon="hash" label="Peptide" count={peptides.length} open={menu === "peptide"} onToggle={setMenu}>
                 <div className="coa-menu__list">
                   {options.peptides.map(([value, n]) => (
                     <label key={value} className="coa-option">
@@ -464,7 +520,18 @@ export function CoaLibrary({ coas, intro }: CoaLibraryProps) {
                   </button>
                 ) : null}
               </FilterMenu>
-              <FilterMenu id="lab" label="Laboratory" count={labs.length} open={menu === "lab"} onToggle={setMenu}>
+              <FilterMenu id="method" icon="wrench" label="Test Method" count={methods.length} open={menu === "method"} onToggle={setMenu}>
+                <div className="coa-menu__list">
+                  {options.methods.map(([value, n]) => (
+                    <label key={value} className="coa-option">
+                      <input type="checkbox" checked={methods.includes(value)} onChange={() => setMethods((l) => toggleIn(l, value))} />
+                      <span>{value}</span>
+                      <span className="coa-option__n">{n}</span>
+                    </label>
+                  ))}
+                </div>
+              </FilterMenu>
+              <FilterMenu id="lab" icon="flask" label="Testing Lab" count={labs.length} open={menu === "lab"} onToggle={setMenu}>
                 <div className="coa-menu__list">
                   {options.labs.map(([value, n]) => (
                     <label key={value} className="coa-option">
@@ -475,27 +542,58 @@ export function CoaLibrary({ coas, intro }: CoaLibraryProps) {
                   ))}
                 </div>
               </FilterMenu>
-              <FilterMenu id="purity" label="Purity" count={minPurity !== null ? 1 : 0} open={menu === "purity"} onToggle={setMenu}>
-                <div className="coa-menu__list">
-                  {[null, ...PURITY_STEPS].map((step) => (
-                    <label key={String(step)} className="coa-option">
-                      <input type="radio" name="coa-purity" checked={minPurity === step} onChange={() => setMinPurity(step)} />
-                      <span>{step === null ? "Any purity" : `${step}% or higher`}</span>
-                      <span className="coa-option__n">{step === null ? coas.length : coas.filter((c) => c.purity >= step).length}</span>
-                    </label>
-                  ))}
+              <FilterMenu id="purity" icon="chart" label="Purity" count={minPurity !== null ? 1 : 0} open={menu === "purity"} onToggle={setMenu}>
+                <div className="coa-range">
+                  <p className="coa-range__label">Minimum purity</p>
+                  <div className="coa-range__row">
+                    <input type="range" min={options.purityFloor} max={100} step={0.05} value={minPurity ?? options.purityFloor} onChange={(e) => setMinPurity(Number(e.target.value))} aria-label="Minimum purity" />
+                    <span className="coa-range__value">≥{(minPurity ?? options.purityFloor).toFixed(1)}%</span>
+                  </div>
+                  <label className="coa-range__input">
+                    <span>≥</span>
+                    <input
+                      type="number"
+                      min={options.purityFloor}
+                      max={100}
+                      step={0.1}
+                      value={minPurity ?? ""}
+                      placeholder={options.purityFloor.toFixed(1)}
+                      onChange={(e) => setMinPurity(e.target.value === "" ? null : Math.min(100, Math.max(0, Number(e.target.value))))}
+                      aria-label="Minimum purity in percent"
+                    />
+                    <span>%</span>
+                  </label>
+                  <p className="coa-range__note">{coas.filter((c) => c.purity >= (minPurity ?? 0)).length} certificates at this purity or higher</p>
                 </div>
+                {minPurity !== null ? (
+                  <button type="button" className="coa-menu__clear" onClick={() => setMinPurity(null)}>
+                    Clear
+                  </button>
+                ) : null}
               </FilterMenu>
-              <FilterMenu id="tested" label="Date tested" count={months.length} open={menu === "tested"} onToggle={setMenu}>
-                <div className="coa-menu__list">
-                  {options.months.map(([value, n]) => (
-                    <label key={value} className="coa-option">
-                      <input type="checkbox" checked={months.includes(value)} onChange={() => setMonths((l) => toggleIn(l, value))} />
-                      <span>{monthLabel(value)}</span>
-                      <span className="coa-option__n">{n}</span>
-                    </label>
-                  ))}
+              <FilterMenu id="date" icon="calendar" label="Date Range" count={dateFrom || dateTo ? 1 : 0} open={menu === "date"} onToggle={setMenu}>
+                <div className="coa-dates">
+                  <label>
+                    <span>From</span>
+                    <input type="date" value={dateFrom} min={options.firstDate} max={dateTo || options.lastDate} onChange={(e) => setDateFrom(e.target.value)} />
+                  </label>
+                  <label>
+                    <span>To</span>
+                    <input type="date" value={dateTo} min={dateFrom || options.firstDate} max={options.lastDate} onChange={(e) => setDateTo(e.target.value)} />
+                  </label>
                 </div>
+                {dateFrom || dateTo ? (
+                  <button
+                    type="button"
+                    className="coa-menu__clear"
+                    onClick={() => {
+                      setDateFrom("");
+                      setDateTo("");
+                    }}
+                  >
+                    Clear
+                  </button>
+                ) : null}
               </FilterMenu>
             </div>
 
@@ -605,17 +703,21 @@ export function CoaLibrary({ coas, intro }: CoaLibraryProps) {
                 </div>
                 <dl className="coa-facts">
                   <div>
-                    <dt>Laboratory</dt>
+                    <dt>Test Method</dt>
+                    <dd title={c.method}>{c.method ? shortMethod(c.method) : "—"}</dd>
+                  </div>
+                  <div>
+                    <dt>Testing Lab</dt>
                     <dd>{c.lab}</dd>
                   </div>
                   <div>
-                    <dt>Tested</dt>
+                    <dt>Test Date</dt>
                     <dd>
                       <time dateTime={c.testedOn}>{c.testedLabel}</time>
                     </dd>
                   </div>
                   <div>
-                    <dt>{c.searchCode ? "Search code" : "Batch / ref."}</dt>
+                    <dt>Batch / Lot</dt>
                     <dd className="coa-mono">
                       {c.searchCode ? (
                         <button type="button" className="coa-copy" onClick={() => copyCode("Search code", c.searchCode!)} title="Copy the search code">
@@ -623,13 +725,9 @@ export function CoaLibrary({ coas, intro }: CoaLibraryProps) {
                           <Icon name="copy" />
                         </button>
                       ) : (
-                        (c.batch ?? "—")
+                        (c.batch ?? (c.task ? `Task #${c.task}` : "—"))
                       )}
                     </dd>
-                  </div>
-                  <div>
-                    <dt>{c.task ? "Task" : "Accession"}</dt>
-                    <dd className="coa-mono">{c.task ? `#${c.task}` : c.accession ? `#${c.accession}` : "—"}</dd>
                   </div>
                 </dl>
                 <footer className="coa-card__foot">
@@ -753,6 +851,12 @@ export function CoaLibrary({ coas, intro }: CoaLibraryProps) {
                   <dt>Laboratory</dt>
                   <dd>{preview.lab}</dd>
                 </div>
+                {preview.method ? (
+                  <div>
+                    <dt>Test method</dt>
+                    <dd>{preview.method}</dd>
+                  </div>
+                ) : null}
                 <div>
                   <dt>Tested</dt>
                   <dd>

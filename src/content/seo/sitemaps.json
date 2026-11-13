@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-05T09:43:42Z",
+ "generatedAt": "2026-11-13T04:24:06Z",
  "index": [
   {
    "name": "post",
@@ -7,11 +7,11 @@
   },
   {
    "name": "page",
-   "lastmod": "2026-11-04T14:52:52+00:00"
+   "lastmod": "2026-11-12T18:18:56+00:00"
   },
   {
    "name": "product",
-   "lastmod": "2026-11-04T13:14:45+00:00"
+   "lastmod": "2026-11-13T01:21:55+00:00"
   },
   {
    "name": "category",
@@ -19,7 +19,7 @@
   },
   {
    "name": "product_cat",
-   "lastmod": "2026-11-04T13:14:45+00:00"
+   "lastmod": "2026-11-13T01:21:55+00:00"
   }
  ],
  "sitemaps": {
@@ -502,7 +502,7 @@
   "page": [
    {
     "path": "/",
-    "lastmod": "2026-11-04T14:52:52+00:00",
+    "lastmod": "2026-11-12T18:12:11+00:00",
     "images": [
      "https://peptidesbali.online/wp-content/uploads/2026/10/Golden-Atlas-Longevity-Wellness-Logo-e1792061576128-1024x516.png",
      "https://peptidesbali.online/wp-content/uploads/2026/10/Glossy-Golden-Shield-Checkmark-Icon.png",
@@ -527,9 +527,6 @@
      "https://peptidesbali.online/wp-content/uploads/2026/10/Luxury-Peptide-Pen-Kit-Essentials-1-1024x1024.png",
      "https://peptidesbali.online/wp-content/uploads/2026/05/Selank-Nasal-Spray-10mg-2-peptide-nasal-spray-bali-1024x1024.webp",
      "https://peptidesbali.online/wp-content/uploads/2026/05/Semax-Nasal-Spray-10mg-2-peptide-nasal-spray-bali-1024x1024.webp",
-     "https://peptidesbali.online/wp-content/uploads/2026/08/BPC-157-5mg-2-1024x1024.webp",
-     "https://peptidesbali.online/wp-content/uploads/2026/04/BAC-Water-3ml.png-1024x1024.webp",
-     "https://peptidesbali.online/wp-content/uploads/2026/04/Tesamorelin-10mg-2-1-768x1024.webp",
      "https://peptidesbali.online/wp-content/uploads/2026/08/lab-DOF0OMfH.jpeg"
     ]
    },
@@ -731,15 +728,6 @@
     "lastmod": "2026-10-30T06:40:57+00:00",
     "images": [
      "https://peptidesbali.online/wp-content/uploads/2026/08/lab-DOF0OMfH.jpeg"
-    ]
-   },
-   {
-    "path": "/lab-results-certificates-of-analysis/",
-    "lastmod": "2026-10-30T06:41:28+00:00",
-    "images": [
-     "https://peptidesbali.online/wp-content/uploads/2026/08/coa-doc-Z6lvW7jw.jpeg",
-     "https://peptidesbali.online/wp-content/uploads/2026/08/lab-quality-Db1hSOD1.jpeg",
-     "https://peptidesbali.online/wp-content/uploads/2026/08/coa-doc-Z6lvW7jw.jpeg"
     ]
    },
    {
@@ -1023,12 +1011,21 @@
     "images": [
      "https://peptidesbali.online/wp-content/uploads/2026/04/MOTS-C-10mg-1.jpg"
     ]
+   },
+   {
+    "path": "/lab-results-certificates-of-analysis/",
+    "lastmod": "2026-11-12T18:18:56+00:00",
+    "images": [
+     "https://peptidesbali.online/wp-content/uploads/2026/08/coa-doc-Z6lvW7jw.jpeg",
+     "https://peptidesbali.online/wp-content/uploads/2026/08/lab-quality-Db1hSOD1.jpeg",
+     "https://peptidesbali.online/wp-content/uploads/2026/08/coa-doc-Z6lvW7jw.jpeg"
+    ]
    }
   ],
   "product": [
    {
     "path": "/shop/",
-    "lastmod": "2026-11-04T13:14:45+00:00",
+    "lastmod": "2026-11-13T01:21:55+00:00",
     "images": []
    },
    {
@@ -1102,24 +1099,10 @@
     ]
    },
    {
-    "path": "/product/nad-500mg/",
-    "lastmod": "2026-10-22T07:13:37+00:00",
-    "images": [
-     "https://peptidesbali.online/wp-content/uploads/2026/04/NAD-500mg-2-1.webp"
-    ]
-   },
-   {
     "path": "/product/ghk-cu-50mg/",
     "lastmod": "2026-10-22T07:13:41+00:00",
     "images": [
      "https://peptidesbali.online/wp-content/uploads/2026/08/GHK-Cu-50mg-2.webp"
-    ]
-   },
-   {
-    "path": "/product/bacteriostatic-water-10ml/",
-    "lastmod": "2026-10-22T07:13:48+00:00",
-    "images": [
-     "https://peptidesbali.online/wp-content/uploads/2026/04/BAC-Water-10ml.png.webp"
     ]
    },
    {
@@ -1169,20 +1152,6 @@
     "lastmod": "2026-10-22T07:14:21+00:00",
     "images": [
      "https://peptidesbali.online/wp-content/uploads/2026/04/TB-500-5mg-2.webp"
-    ]
-   },
-   {
-    "path": "/product/thymosin-alpha-1/",
-    "lastmod": "2026-10-22T07:14:24+00:00",
-    "images": [
-     "https://peptidesbali.online/wp-content/uploads/2026/04/Thymosin-Alpha-1-5mg-2.webp"
-    ]
-   },
-   {
-    "path": "/product/bacteriostatic-water-3ml/",
-    "lastmod": "2026-10-22T07:14:31+00:00",
-    "images": [
-     "https://peptidesbali.online/wp-content/uploads/2026/04/BAC-Water-3ml.png.webp"
     ]
    },
    {
@@ -1571,13 +1540,6 @@
     ]
    },
    {
-    "path": "/product/oxytocin/",
-    "lastmod": "2026-10-22T07:19:36+00:00",
-    "images": [
-     "https://peptidesbali.online/wp-content/uploads/2026/04/Oxytocin-2mg-2.webp"
-    ]
-   },
-   {
     "path": "/product/cagrilintide-2mg/",
     "lastmod": "2026-10-22T07:19:40+00:00",
     "images": [
@@ -1620,24 +1582,10 @@
     ]
    },
    {
-    "path": "/product/bpc-157/",
-    "lastmod": "2026-11-01T07:01:03+00:00",
-    "images": [
-     "https://peptidesbali.online/wp-content/uploads/2026/08/BPC-157-5mg-2.webp"
-    ]
-   },
-   {
     "path": "/product/dsip-5mg/",
     "lastmod": "2026-11-01T07:10:48+00:00",
     "images": [
      "https://peptidesbali.online/wp-content/uploads/2026/08/DSIP-5mg-2-1.webp"
-    ]
-   },
-   {
-    "path": "/product/testosterone-250mg-ml-x-10/",
-    "lastmod": "2026-11-01T08:23:49+00:00",
-    "images": [
-     "https://peptidesbali.online/wp-content/uploads/2026/04/testosterone-propionate-bali.jpg"
     ]
    },
    {
@@ -1733,20 +1681,6 @@
     ]
    },
    {
-    "path": "/product/10ml-vial-storage-case/",
-    "lastmod": "2026-11-02T07:49:04+00:00",
-    "images": [
-     "https://peptidesbali.online/wp-content/uploads/2026/10/10ml-2-vial-holder-atlas-longevity-bali.webp.webp"
-    ]
-   },
-   {
-    "path": "/product/3ml-6-vial-peptide-case/",
-    "lastmod": "2026-11-02T07:49:23+00:00",
-    "images": [
-     "https://peptidesbali.online/wp-content/uploads/2026/08/atlas-longevity-6-vial-peptide-case-3ml.webp.webp"
-    ]
-   },
-   {
     "path": "/product/ara-290-10mg/",
     "lastmod": "2026-11-02T07:49:32+00:00",
     "images": [
@@ -1838,24 +1772,10 @@
     ]
    },
    {
-    "path": "/product/bpc157-5mg-pen/",
-    "lastmod": "2026-11-02T07:50:33+00:00",
-    "images": [
-     "https://peptidesbali.online/wp-content/uploads/2026/06/BPC-157-5mg-Peptide-Pen-Bali-1.png"
-    ]
-   },
-   {
     "path": "/product/cartalax-20mg/",
     "lastmod": "2026-11-02T07:50:37+00:00",
     "images": [
      "https://peptidesbali.online/wp-content/uploads/2026/09/Cartalax-20mg.webp"
-    ]
-   },
-   {
-    "path": "/product/cjc-1295-no-dac-ipamorelin-20mg/",
-    "lastmod": "2026-11-02T07:50:44+00:00",
-    "images": [
-     "https://peptidesbali.online/wp-content/uploads/2026/09/CJC-1295-NO-DAC-10mg-Ipamorelin-10mg-20mg.webp"
     ]
    },
    {
@@ -2045,13 +1965,6 @@
     ]
    },
    {
-    "path": "/product/peptide-vial-protective-caps/",
-    "lastmod": "2026-11-02T07:53:10+00:00",
-    "images": [
-     "https://peptidesbali.online/wp-content/uploads/2026/10/3ml-peptide-vial-protective-cap-from-Atlas-Longevity-Bali.webp"
-    ]
-   },
-   {
     "path": "/product/premium-peptide-vial-storage-case-13-vials/",
     "lastmod": "2026-11-02T07:53:18+00:00",
     "images": [
@@ -2092,13 +2005,6 @@
     "lastmod": "2026-11-02T07:53:50+00:00",
     "images": [
      "https://peptidesbali.online/wp-content/uploads/2026/08/Super-Human-Blend-865mg.webp"
-    ]
-   },
-   {
-    "path": "/product/survodutide-10mg/",
-    "lastmod": "2026-11-02T07:53:53+00:00",
-    "images": [
-     "https://peptidesbali.online/wp-content/uploads/2026/08/Survodutide-10mg.webp"
     ]
    },
    {
@@ -2158,13 +2064,6 @@
     ]
    },
    {
-    "path": "/product/ghk-cu-kpv-60mg-peptide-pen-bali/",
-    "lastmod": "2026-11-03T01:11:43+00:00",
-    "images": [
-     "https://peptidesbali.online/wp-content/uploads/2026/11/ghk-cu-50mg-kpv-10mg-60mg-peptide-pen-bali.webp.webp"
-    ]
-   },
-   {
     "path": "/product/bpc-157-tb-500-kpv-30mg-peptide-pen-bali/",
     "lastmod": "2026-11-03T01:11:48+00:00",
     "images": [
@@ -2186,20 +2085,6 @@
     ]
    },
    {
-    "path": "/product/semax-selank-nasal-spray-10mg-bali/",
-    "lastmod": "2026-11-03T01:11:53+00:00",
-    "images": [
-     "https://peptidesbali.online/wp-content/uploads/2026/09/Semax-10mg-Selank-10mg-Blend-Nasal-Spray-peptide-nasal-spray-bali.webp"
-    ]
-   },
-   {
-    "path": "/product/semax-selank-blend-10mg-bali/",
-    "lastmod": "2026-11-03T01:11:58+00:00",
-    "images": [
-     "https://peptidesbali.online/wp-content/uploads/2026/11/semax-5mg-selank-5mg-blend-10mg-bali.webp.webp"
-    ]
-   },
-   {
     "path": "/product/glp-3-rta-cagrilintide-blend-15mg-bali/",
     "lastmod": "2026-11-03T01:11:59+00:00",
     "images": [
@@ -2211,13 +2096,6 @@
     "lastmod": "2026-11-03T01:12:03+00:00",
     "images": [
      "https://peptidesbali.online/wp-content/uploads/2026/11/mazdutide-10mg-vial-bali-atlas-longevity.webp.webp"
-    ]
-   },
-   {
-    "path": "/product/ghk-cu-kpv-blend-60mg-bali/",
-    "lastmod": "2026-11-03T01:12:04+00:00",
-    "images": [
-     "https://peptidesbali.online/wp-content/uploads/2026/11/ghk-cu-kpv-blend-60mg-bali-atlas-longevity.webp.webp"
     ]
    },
    {
@@ -2270,20 +2148,6 @@
     ]
    },
    {
-    "path": "/product/glp-3-5mg/",
-    "lastmod": "2026-11-04T13:03:32+00:00",
-    "images": [
-     "https://peptidesbali.online/wp-content/uploads/2026/08/Retatrutide-5mg-2-1.webp"
-    ]
-   },
-   {
-    "path": "/product/glp-3-10mg-pen/",
-    "lastmod": "2026-11-04T13:05:37+00:00",
-    "images": [
-     "https://peptidesbali.online/wp-content/uploads/2026/07/Retatrutide-10mg-2-Peptide-Pen-Bali-1.png"
-    ]
-   },
-   {
     "path": "/product/hcg-5000iu/",
     "lastmod": "2026-11-04T13:08:08+00:00",
     "images": [
@@ -2309,6 +2173,139 @@
     "lastmod": "2026-11-04T13:14:45+00:00",
     "images": [
      "https://peptidesbali.online/wp-content/uploads/2026/10/Vesugen-10mg.webp"
+    ]
+   },
+   {
+    "path": "/product/bacteriostatic-water-3ml/",
+    "lastmod": "2026-11-05T13:40:55+00:00",
+    "images": [
+     "https://peptidesbali.online/wp-content/uploads/2026/04/BAC-Water-3ml.png.webp"
+    ]
+   },
+   {
+    "path": "/product/bacteriostatic-water-10ml/",
+    "lastmod": "2026-11-05T13:41:13+00:00",
+    "images": [
+     "https://peptidesbali.online/wp-content/uploads/2026/04/BAC-Water-10ml.png.webp"
+    ]
+   },
+   {
+    "path": "/product/glp-3-5mg/",
+    "lastmod": "2026-11-06T16:18:08+00:00",
+    "images": [
+     "https://peptidesbali.online/wp-content/uploads/2026/08/Retatrutide-5mg-2-1.webp"
+    ]
+   },
+   {
+    "path": "/product/glp-3-10mg-pen/",
+    "lastmod": "2026-11-06T16:19:14+00:00",
+    "images": [
+     "https://peptidesbali.online/wp-content/uploads/2026/07/Retatrutide-10mg-2-Peptide-Pen-Bali-1.png"
+    ]
+   },
+   {
+    "path": "/product/bpc-157/",
+    "lastmod": "2026-11-06T16:19:51+00:00",
+    "images": [
+     "https://peptidesbali.online/wp-content/uploads/2026/08/BPC-157-5mg-2.webp"
+    ]
+   },
+   {
+    "path": "/product/bpc157-5mg-pen/",
+    "lastmod": "2026-11-06T16:20:46+00:00",
+    "images": [
+     "https://peptidesbali.online/wp-content/uploads/2026/06/BPC-157-5mg-Peptide-Pen-Bali-1.png"
+    ]
+   },
+   {
+    "path": "/product/semax-selank-blend-10mg-bali/",
+    "lastmod": "2026-11-06T16:21:23+00:00",
+    "images": [
+     "https://peptidesbali.online/wp-content/uploads/2026/11/semax-5mg-selank-5mg-blend-10mg-bali.webp.webp"
+    ]
+   },
+   {
+    "path": "/product/semax-selank-nasal-spray-10mg-bali/",
+    "lastmod": "2026-11-06T16:22:01+00:00",
+    "images": [
+     "https://peptidesbali.online/wp-content/uploads/2026/09/Semax-10mg-Selank-10mg-Blend-Nasal-Spray-peptide-nasal-spray-bali.webp"
+    ]
+   },
+   {
+    "path": "/product/ghk-cu-kpv-60mg-peptide-pen-bali/",
+    "lastmod": "2026-11-06T16:23:00+00:00",
+    "images": [
+     "https://peptidesbali.online/wp-content/uploads/2026/11/ghk-cu-50mg-kpv-10mg-60mg-peptide-pen-bali.webp.webp"
+    ]
+   },
+   {
+    "path": "/product/ghk-cu-kpv-blend-60mg-bali/",
+    "lastmod": "2026-11-06T16:23:15+00:00",
+    "images": [
+     "https://peptidesbali.online/wp-content/uploads/2026/11/ghk-cu-kpv-blend-60mg-bali-atlas-longevity.webp.webp"
+    ]
+   },
+   {
+    "path": "/product/10ml-vial-storage-case/",
+    "lastmod": "2026-11-07T08:31:01+00:00",
+    "images": [
+     "https://peptidesbali.online/wp-content/uploads/2026/10/10ml-2-vial-holder-atlas-longevity-bali.webp.webp"
+    ]
+   },
+   {
+    "path": "/product/3ml-6-vial-peptide-case/",
+    "lastmod": "2026-11-07T08:32:00+00:00",
+    "images": [
+     "https://peptidesbali.online/wp-content/uploads/2026/08/atlas-longevity-6-vial-peptide-case-3ml.webp.webp"
+    ]
+   },
+   {
+    "path": "/product/peptide-vial-protective-caps/",
+    "lastmod": "2026-11-07T08:33:02+00:00",
+    "images": [
+     "https://peptidesbali.online/wp-content/uploads/2026/10/3ml-peptide-vial-protective-cap-from-Atlas-Longevity-Bali.webp"
+    ]
+   },
+   {
+    "path": "/product/nad-500mg/",
+    "lastmod": "2026-11-07T15:12:44+00:00",
+    "images": [
+     "https://peptidesbali.online/wp-content/uploads/2026/04/NAD-500mg-2-1.webp"
+    ]
+   },
+   {
+    "path": "/product/thymosin-alpha-1/",
+    "lastmod": "2026-11-07T15:14:06+00:00",
+    "images": [
+     "https://peptidesbali.online/wp-content/uploads/2026/04/Thymosin-Alpha-1-5mg-2.webp"
+    ]
+   },
+   {
+    "path": "/product/oxytocin/",
+    "lastmod": "2026-11-07T15:16:26+00:00",
+    "images": [
+     "https://peptidesbali.online/wp-content/uploads/2026/04/Oxytocin-2mg-2.webp"
+    ]
+   },
+   {
+    "path": "/product/survodutide-10mg/",
+    "lastmod": "2026-11-07T15:24:07+00:00",
+    "images": [
+     "https://peptidesbali.online/wp-content/uploads/2026/08/Survodutide-10mg.webp"
+    ]
+   },
+   {
+    "path": "/product/cjc-1295-no-dac-ipamorelin-20mg/",
+    "lastmod": "2026-11-10T09:05:18+00:00",
+    "images": [
+     "https://peptidesbali.online/wp-content/uploads/2026/09/CJC-1295-NO-DAC-10mg-Ipamorelin-10mg-20mg.webp"
+    ]
+   },
+   {
+    "path": "/product/testosterone-250mg-ml-x-10/",
+    "lastmod": "2026-11-13T01:21:55+00:00",
+    "images": [
+     "https://peptidesbali.online/wp-content/uploads/2026/04/testosterone-propionate-bali.jpg"
     ]
    }
   ],
@@ -2357,47 +2354,47 @@
   "product_cat": [
    {
     "path": "/product-category/vial/blends/",
-    "lastmod": "2026-11-03T01:12:09+00:00",
+    "lastmod": "2026-11-10T09:05:18+00:00",
     "images": []
    },
    {
     "path": "/product-category/vial/",
-    "lastmod": "2026-11-04T13:14:45+00:00",
+    "lastmod": "2026-11-13T01:21:55+00:00",
     "images": []
    },
    {
     "path": "/product-category/vial/brain-cognitive-enhancement/",
-    "lastmod": "2026-11-03T01:11:58+00:00",
+    "lastmod": "2026-11-06T16:21:23+00:00",
     "images": []
    },
    {
     "path": "/product-category/vial/fat-loss-metabolic-health/",
-    "lastmod": "2026-11-04T13:13:37+00:00",
+    "lastmod": "2026-11-07T15:24:07+00:00",
     "images": []
    },
    {
     "path": "/product-category/vial/healing-recovery/",
-    "lastmod": "2026-11-03T01:12:09+00:00",
+    "lastmod": "2026-11-07T15:14:06+00:00",
     "images": []
    },
    {
     "path": "/product-category/vial/hormone-optimization/",
-    "lastmod": "2026-11-04T12:57:01+00:00",
+    "lastmod": "2026-11-13T01:21:55+00:00",
     "images": []
    },
    {
     "path": "/product-category/vial/libido-sexual-wellness/",
-    "lastmod": "2026-11-04T12:55:35+00:00",
+    "lastmod": "2026-11-07T15:16:26+00:00",
     "images": []
    },
    {
     "path": "/product-category/vial/longevity-healthy-aging/",
-    "lastmod": "2026-11-04T13:14:45+00:00",
+    "lastmod": "2026-11-07T15:12:44+00:00",
     "images": []
    },
    {
     "path": "/product-category/vial/muscle-growth-performance/",
-    "lastmod": "2026-11-04T12:56:19+00:00",
+    "lastmod": "2026-11-10T09:05:18+00:00",
     "images": []
    },
    {
@@ -2412,22 +2409,22 @@
    },
    {
     "path": "/product-category/vial/supplies/",
-    "lastmod": "2026-11-03T01:12:14+00:00",
+    "lastmod": "2026-11-07T08:33:02+00:00",
     "images": []
    },
    {
     "path": "/product-category/pen-peptides/",
-    "lastmod": "2026-11-04T13:08:08+00:00",
+    "lastmod": "2026-11-06T16:23:00+00:00",
     "images": []
    },
    {
     "path": "/product-category/pen-peptides/atlas-longevity-pen-peptides/",
-    "lastmod": "2026-11-04T13:08:08+00:00",
+    "lastmod": "2026-11-06T16:23:00+00:00",
     "images": []
    },
    {
     "path": "/product-category/nasal-spray-peptides/",
-    "lastmod": "2026-11-03T01:11:53+00:00",
+    "lastmod": "2026-11-06T16:22:01+00:00",
     "images": []
    },
    {
@@ -2477,7 +2474,7 @@
    },
    {
     "path": "/product-category/other/",
-    "lastmod": "2026-11-04T12:57:01+00:00",
+    "lastmod": "2026-11-13T01:21:55+00:00",
     "images": []
    }
   ]

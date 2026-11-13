@@ -8,10 +8,10 @@
 .cart-widget-side {
   --wd-primary-color: rgb(184, 149, 42);
   --wd-text-color: #767676;
-  --wd-text-font: "Urbanist", Arial, Helvetica, sans-serif;
+  --wd-text-font: var(--font-inter), Arial, Helvetica, sans-serif;
   --wd-entities-title-color: #333;
   --wd-entities-title-color-hover: rgb(51 51 51 / 65%);
-  --wd-entities-title-font: "Urbanist", Arial, Helvetica, sans-serif;
+  --wd-entities-title-font: var(--font-inter), Arial, Helvetica, sans-serif;
   --wd-entities-title-font-weight: 500;
   --color-gray-300: #bbb;
   --color-gray-800: #333;

@@ -18,6 +18,8 @@ import "@/styles/woocommerce.css";
 // The shop tables (orders, order details) and prices, as live loads woo-mod-shop-table here too.
 import "@/styles/cart.css";
 import "@/styles/account.css";
+import "@/styles/rewards.css";
+import "@/styles/account-dashboard.css";
 import "@/styles/usd-prices-owner.css";
 
 import { cookies } from "next/headers";
@@ -25,7 +27,8 @@ import { Suspense } from "react";
 
 import { PageTitle } from "@/components/blog/PageTitle";
 import { decodeNotices, FLASH_COOKIE, notice, type Notice } from "@/lib/account/notices";
-import { getAccountUser, resendTokenFor, type AccountUser } from "@/lib/account/session";
+import { getCreditsChip } from "@/lib/account/dashboard";
+import { getAccountUser, isStaff, resendTokenFor, type AccountUser } from "@/lib/account/session";
 
 import { AccountLogin } from "../AccountLogin";
 import { WooPage } from "../WooPage";
@@ -33,10 +36,12 @@ import { WooPage } from "../WooPage";
 import { AccountNotices } from "./AccountNotices";
 import { AccountShell, type AccountEndpoint } from "./AccountShell";
 import { EditAccountForm, EditAddressForm } from "./AccountForms";
-import { Addresses, Dashboard, Downloads, loadAddresses, Orders, PaymentMethods, ResearchTools, ViewOrder } from "./AccountSections";
+import { AccountDashboard } from "./AccountDashboard";
+import { Addresses, Downloads, loadAddresses, Orders, PaymentMethods, ResearchTools, ViewOrder } from "./AccountSections";
+import { Rewards } from "./RewardsTab";
 
 export type AccountView =
-  | { endpoint: "dashboard" | "downloads" | "edit-address" | "edit-account" | "payment-methods" | "research-tools" }
+  | { endpoint: "dashboard" | "downloads" | "edit-address" | "edit-account" | "payment-methods" | "research-tools" | "rewards" }
   | { endpoint: "orders"; page: Promise<number> | number; searchParams?: Promise<Record<string, string | string[] | undefined>> }
   | { endpoint: "view-order"; number: Promise<string> }
   | { endpoint: "edit-address-form"; type: Promise<"billing" | "shipping"> };
@@ -82,7 +87,7 @@ async function Endpoint({ view, user, flash: flashed }: { view: AccountView; use
   let content: React.ReactNode;
   switch (view.endpoint) {
     case "dashboard":
-      content = <Dashboard user={user} />;
+      content = <AccountDashboard user={user} />;
       break;
     case "orders": {
       const params = view.searchParams ? await view.searchParams : {};
@@ -104,6 +109,9 @@ async function Endpoint({ view, user, flash: flashed }: { view: AccountView; use
     case "research-tools":
       content = <ResearchTools />;
       break;
+    case "rewards":
+      content = <Rewards user={user} />;
+      break;
   }
   return (
     <>
@@ -123,8 +131,10 @@ async function AccountContent({ view }: { view: AccountView }) {
     console.error("[account] session check failed", error);
   }
   if (!user) return <AccountLogin notices={flash} />;
+  // The sidebar's credits chip (members only); a problem here only hides the chip.
+  const credits = await getCreditsChip(user.id).catch(() => null);
   return (
-    <AccountShell active={activeItem(view)} logoutToken={user.logoutToken}>
+    <AccountShell active={activeItem(view)} logoutToken={user.logoutToken} profile={{ displayName: user.displayName, email: user.email, staff: isStaff(user), credits }}>
       <Endpoint view={view} user={user} flash={flash} />
     </AccountShell>
   );

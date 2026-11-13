@@ -14,6 +14,7 @@ import { getAccountUser, isStaff } from "@/lib/account/session";
 import { getOrderWithLines, ORDER_STATUS_NAMES, setOrderStatus } from "@/lib/commerce/orders";
 import { sendEmail } from "@/lib/email";
 import { customerNoteEmail } from "@/lib/email/order-emails";
+import { orderEmailExtras } from "@/lib/email/order-notifications";
 
 type Status = (typeof orders.$inferSelect)["status"];
 
@@ -51,6 +52,6 @@ async function emailCustomerNote(orderId: string, note: string) {
   const view = row ? await getOrderWithLines(row.number.toString(), { key: row.key }) : null;
   const to = (view?.order.billing as { email?: string } | undefined)?.email;
   if (!view || !to) return;
-  const result = await sendEmail({ to, ...customerNoteEmail(view, note) });
-  if (result === "not-sent") console.warn("[order-note] the customer note e-mail wasn't sent: no e-mail provider is set up (Q-08).");
+  const result = await sendEmail({ to, ...customerNoteEmail(view, note, await orderEmailExtras(view.items)) });
+  if (result === "not-sent") console.warn("[order-note] the customer note e-mail wasn't sent (see the [email] message above).");
 }

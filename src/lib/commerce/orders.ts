@@ -20,6 +20,9 @@ import { orderFees, orderItems, orderNotes, orders } from "@/db/schema";
 
 import type { CheckoutInput } from "./checkout-validation";
 import type { PricedLine } from "./cart-lines";
+import { sendOrderStatusEmails } from "@/lib/email/order-notifications";
+import { syncOrderRewards } from "@/lib/loyalty/store";
+
 import { recordOrderCoupons, updateCouponUsageForStatus, type StoredCoupon } from "./coupon-store";
 import { paymentMethods, type PaymentMethodId } from "./store-settings";
 import type { Totals } from "./totals";
@@ -204,9 +207,21 @@ export async function addOrderNote(orderId: string, body: string, isCustomerNote
  * Returns whether the status changed.
  */
 export async function setOrderStatus(orderId: string, status: (typeof orders.$inferSelect)["status"], note = "", authorUserId?: string): Promise<boolean> {
+  const previous = await changeOrderStatus(orderId, status, note, authorUserId);
+  if (previous === null) return false;
+  // After the change is saved, and never able to undo it (a problem there is logged): the rewards programme
+  // follows the status (credits when completed, taken back when cancelled or refunded, src/lib/loyalty/store.ts),
+  // then WooCommerce's e-mails for this change (src/lib/email/order-notifications.ts).
+  await syncOrderRewards(orderId);
+  await sendOrderStatusEmails(orderId, previous, status);
+  return true;
+}
+
+/** Saves the new status; returns the one it had before, or null when nothing changed. */
+async function changeOrderStatus(orderId: string, status: (typeof orders.$inferSelect)["status"], note: string, authorUserId?: string): Promise<string | null> {
   return getDb().transaction(async (db) => {
     const [current] = await db.select({ status: orders.status, paidAt: orders.paidAt }).from(orders).where(eq(orders.id, orderId)).limit(1);
-    if (!current || current.status === status) return false;
+    if (!current || current.status === status) return null;
     const now = new Date();
     const paid = (status === "processing" || status === "completed") && !current.paidAt;
     await db
@@ -216,6 +231,6 @@ export async function setOrderStatus(orderId: string, status: (typeof orders.$in
     const transition = `Order status changed from ${ORDER_STATUS_NAMES[current.status] ?? current.status} to ${ORDER_STATUS_NAMES[status] ?? status}.`;
     await db.insert(orderNotes).values({ orderId, authorUserId, body: [note, transition].filter(Boolean).join(" ") });
     await updateCouponUsageForStatus(db, orderId, status);
-    return true;
+    return current.status;
   });
 }

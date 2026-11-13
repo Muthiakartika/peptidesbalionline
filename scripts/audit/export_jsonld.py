@@ -22,6 +22,7 @@ import json
 import re
 import sys
 import time
+import urllib.error
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -63,10 +64,25 @@ def without_private_data(block):
 def main() -> int:
     inventory = json.loads((ROOT / "docs" / "audit" / "data" / "page-inventory.json").read_text(encoding="utf-8"))
     pages = [page for page in inventory["pages"] if page["status"] == 200 and not page.get("redirected")]
+    paths = [urlparse(page["url"]).path + (f"?{urlparse(page['url']).query}" if urlparse(page["url"]).query else "") for page in pages]
+    # Every address of the live sitemaps too (src/content/seo/sitemaps.json, refreshed by export_sitemaps.py):
+    # products and posts added or renamed after the 3 Nov 2026 crawl.
+    sitemaps = json.loads((OUT / "sitemaps.json").read_text(encoding="utf-8"))
+    for entries in sitemaps["sitemaps"].values():
+        for entry in entries:
+            if entry["path"] not in paths:
+                paths.append(entry["path"])
     out: dict[str, list] = {}
-    for page in pages:
-        path = urlparse(page["url"]).path + (f"?{urlparse(page['url']).query}" if urlparse(page["url"]).query else "")
-        soup = BeautifulSoup(fetch(path), "lxml")
+    for path in paths:
+        try:
+            html = fetch(path)
+        except urllib.error.HTTPError as error:
+            # A page of the 3 Nov crawl that is gone now (e.g. a product renamed since): nothing to copy.
+            if error.code in (404, 410):
+                print(f"{path}: {error.code}, skipped")
+                continue
+            raise
+        soup = BeautifulSoup(html, "lxml")
         blocks = []
         for script in soup.select('script[type="application/ld+json"]'):
             text = script.get_text().strip()
@@ -78,6 +94,16 @@ def main() -> int:
         out[path] = blocks
         print(f"{path}: {len(blocks)} block(s)")
         time.sleep(0.4)
+    # Posts the rebuild shows that live doesn't answer (WordPress drafts imported by import_wordpress_drafts.py):
+    # their structured data was made then, so it is kept.
+    previous_file = OUT / "jsonld.json"
+    if previous_file.exists():
+        previous = json.loads(previous_file.read_text(encoding="utf-8"))
+        posts = {post["path"] for post in json.loads((ROOT / "src" / "content" / "blog" / "posts.json").read_text(encoding="utf-8"))}
+        for path, blocks in previous.items():
+            if path not in out and path in posts:
+                out[path] = blocks
+                print(f"{path}: kept (not public on live)")
     text = json.dumps(out, ensure_ascii=False, separators=(",", ":"))
     if EMAIL.search(text.replace("hello@peptidesbali.online", "")) or GRAVATAR.search(text):
         raise SystemExit("private data left in the structured data: not saved")

@@ -1,11 +1,13 @@
 /**
  * Imports the WordPress export into the database:
  *
- *   node scripts/import/import-wordpress.mjs <export.json> [--report docs/migration/wordpress-import-report.md]
+ *   node scripts/import/import-wordpress.mjs <export.json | dump.sql | dump.sql.gz> [--report docs/migration/wordpress-import-report.md] [--prefix wp_]
  *
  * The export is made in the owner's signed-in wp-admin tab with scripts/import/export-wordpress.browser.js and
  * holds customers' personal data: keep it OUTSIDE this folder (e.g. in Downloads), never commit it, delete it
- * when it is no longer needed.
+ * when it is no longer needed. A MySQL dump of the live database works instead (13 Nov 2026): it is read into the
+ * same shape by scripts/import/wordpress-dump.mjs (users, orders with lines and notes, coupons, AffiliateWP), no
+ * signed-in browser needed; the dump has the same personal data and the same rules apply.
  *
  * Database: DATABASE_URL_UNPOOLED / DATABASE_URL (Neon) or, when empty, the local one in .data/pglite: stop the
  * site first, only one program can open that folder. Run `npm run db:migrate` before (migration 0005 adds the
@@ -18,6 +20,7 @@ import { existsSync, readFileSync, writeFileSync } from "node:fs";
 
 import { openDatabase, outsideProject } from "./database.mjs";
 import { importWordpress, reconcile } from "./wordpress-import.mjs";
+import { buildExportFromDump } from "./wordpress-dump.mjs";
 
 if (existsSync(".env.local")) process.loadEnvFile(".env.local");
 
@@ -34,7 +37,9 @@ if (!outsideProject(file)) {
   process.exit(1);
 }
 
-const data = JSON.parse(readFileSync(file, "utf8"));
+// The export file made in the browser (JSON), or a MySQL dump (.sql / .sql.gz) read into the same shape (wordpress-dump.mjs).
+const prefixIndex = args.indexOf("--prefix");
+const data = /\.sql(\.gz)?$/i.test(file) ? await buildExportFromDump(file, prefixIndex >= 0 ? { prefix: args[prefixIndex + 1] } : {}) : JSON.parse(readFileSync(file, "utf8"));
 const catalog = JSON.parse(readFileSync("src/content/catalog.json", "utf8"));
 const db = await openDatabase();
 try {

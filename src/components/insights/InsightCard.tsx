@@ -10,6 +10,7 @@
  * Styles: src/styles/insights.css (classes starting with "ins-card").
  */
 import Link from "next/link";
+import { Fragment } from "react";
 
 import type { InsightCardData } from "./types";
 
@@ -26,7 +27,8 @@ export function articleFormat(title: string): string {
 
 /**
  * Many WordPress titles carry SEO tails after a "|" ("TB-500 vs Wolverine Blend | Complete Comparison
- * Guide (2026) | Peptides Bali"). The first part is shown as the title, the rest smaller and lighter.
+ * Guide (2026) | Peptides Bali"). The first part is shown as the title, the rest smaller and lighter, with
+ * a dot between its parts. The text keeps every " | " (hidden), so the heading reads exactly as on live.
  */
 export function TitleText({ title }: { title: string }) {
   const [main, ...rest] = title.split(/\s+\|\s+/);
@@ -36,7 +38,16 @@ export function TitleText({ title }: { title: string }) {
       {main}
       <span className="ins-title-sub">
         <span className="ins-sr-only"> | </span>
-        {rest.join(" · ")}
+        {rest.map((part, index) => (
+          <Fragment key={index}>
+            {index > 0 ? (
+              <span className="ins-title-dot">
+                <span className="ins-sr-only"> | </span>
+              </span>
+            ) : null}
+            {part}
+          </Fragment>
+        ))}
       </span>
     </>
   );

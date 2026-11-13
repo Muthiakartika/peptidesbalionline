@@ -1,14 +1,14 @@
 "use client";
 
 /**
- * Remembers which overlay is open (search, cart drawer, mobile menu, or the shop's category
- * sidebar on phones) so that any button can open it: the header cart icon and the floating cart
+ * Remembers which overlay is open (search, cart drawer or mobile menu) so that any button can
+ * open it: the header cart icon and the floating cart
  * both open the same cart drawer.
  * Only one overlay is open at a time, like on the live site.
  */
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 
-export type Panel = "search" | "cart" | "menu" | "shopSidebar" | null;
+export type Panel = "search" | "cart" | "menu" | null;
 
 type ChromeState = {
   openPanel: Panel;

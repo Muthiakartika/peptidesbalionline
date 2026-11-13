@@ -23,6 +23,19 @@ const PURITY = /^\d{2,3}(?:\.\d+)?\s*%$/;
 const COA_PAGE = "lab-results-certificates-of-analysis";
 /** Freedom Diagnostics' document server (what their COA lookup opens): <server>/<search code>.pdf */
 const FREEDOM_DOCUMENTS = "https://coas.freedomdiagnosticstesting.com";
+/**
+ * The test method by lab, shown on the cards and in the "Test Method" filter (a card can also carry its
+ * own "Method: …" line, which wins):
+ *   Freedom Diagnostics: printed on every one of their reports ("Method: HPLC with UV detection coupled
+ *   with mass spectrometry (LC-MS).", read from the 5 PDFs on 12 Nov 2026).
+ *   Janoshik: their certificates don't print a method; HPLC is the method they describe for peptide
+ *   purity and quantity (to be confirmed by the owner). Change it here.
+ */
+const LAB_METHODS: Record<string, string> = {
+  "Freedom Diagnostics": "HPLC with UV detection coupled with mass spectrometry (LC-MS)",
+  Janoshik: "HPLC",
+};
+
 const DATE = /^(\d{1,2})\s+([A-Za-z]{3,9})\s+(\d{4})$/;
 const MONTHS = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
 
@@ -131,6 +144,7 @@ function readCard(card: Element, index: number): Coa | null {
     testedOn: dateAt >= 0 ? isoDate(texts[dateAt]) : "",
     testedLabel: dateAt >= 0 ? texts[dateAt] : "",
     lab,
+    method: valueAfter(/^(test )?method:?/i)?.replace(/\.$/, "") ?? LAB_METHODS[lab] ?? "",
     batch,
     task: task?.[1] ?? null,
     verificationKey: task?.[2] ?? null,
@@ -175,6 +189,36 @@ function takeSearchSection(nodes: ChildNode[]): { section: Element | null; intro
   };
 }
 
+/**
+ * The page's hero (the top section with the H1, before the cards): its texts become the library's
+ * heading, so the library is the first thing on the page (a full COA-library page, as the owner
+ * asked on 12 Nov 2026), and the hero section is dropped.
+ */
+function takeHero(cardsSection: Element): { section: Element; intro: CoaLibraryIntro } | null {
+  const root = cardsSection.parent;
+  if (!(root instanceof Element)) return null;
+  const sections = root.children.filter((c): c is Element => c instanceof Element);
+  const before = sections.slice(0, sections.indexOf(cardsSection));
+  const section = before.find((s) => domutils.findOne((e) => e.name === "h1", s.children));
+  if (!section) return null;
+  const h1 = domutils.findOne((e) => e.name === "h1", section.children)!;
+  const widgets = domutils.findAll((e) => /\belementor-widget-(text-editor|heading)\b/.test(e.attribs.class ?? ""), section.children);
+  const at = widgets.findIndex((w) => isInside(w, h1));
+  const accentNode = domutils.findOne((e) => ["span", "em", "i", "strong"].includes(e.name) && textOf(e).length > 2, h1.children);
+  const points = domutils.findAll((e) => (e.attribs.class ?? "").includes("elementor-icon-list-text"), section.children).map(textOf).filter(Boolean);
+  return {
+    section,
+    intro: {
+      eyebrow: (at > 0 ? textOf(widgets[at - 1]) : "") || "Certificates of Analysis",
+      title: textOf(h1),
+      ...(accentNode ? { accent: textOf(accentNode) } : {}),
+      text: (at >= 0 && widgets[at + 1] ? textOf(widgets[at + 1]) : "") || "",
+      ...(points.length ? { points } : {}),
+      pageTitle: true,
+    },
+  };
+}
+
 /** The page with its COA cards replaced by the library island (unchanged when it has no cards). */
 /** The certificates of the page's cards, each with a unique id. */
 function readCoas(cards: Element[]): Coa[] {
@@ -202,8 +246,9 @@ export function withCoaLibrary(page: ElementorPageData): ElementorPageData {
   const coas = readCoas(cards);
   const cardsSection = topSection(cards[0]);
   if (!cardsSection) return page;
-  const { section: searchSection, intro } = takeSearchSection(nodes);
-  const props: CoaLibraryProps = { coas, intro };
+  const { section: searchSection, intro: searchIntro } = takeSearchSection(nodes);
+  const hero = takeHero(cardsSection);
+  const props: CoaLibraryProps = { coas, intro: hero?.intro ?? searchIntro };
   const slot = new Element("section", {
     id: cardsSection.attribs.id || "result",
     class: "coa-library-slot",
@@ -212,5 +257,6 @@ export function withCoaLibrary(page: ElementorPageData): ElementorPageData {
   });
   domutils.replaceElement(cardsSection, slot);
   if (searchSection && searchSection !== cardsSection) domutils.removeElement(searchSection);
+  if (hero) domutils.removeElement(hero.section);
   return { ...page, html: serialize(nodes) };
 }

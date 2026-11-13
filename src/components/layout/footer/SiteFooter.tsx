@@ -1,109 +1,66 @@
 /**
- * The dark footer on every store page (Elementor footer #267 on the live site).
- * Content: src/content/site-chrome.ts → footer. Styles: ".site-footer" in src/styles/site-chrome.css.
+ * The dark footer on every store page. Redesigned on 12 Nov 2026 to go with the new pages (the
+ * owner's reference shops: brand block on the left, link columns on the right, research-use notice
+ * and a bottom bar), in the Atlas colours. Content: src/content/site-chrome.ts → footer (Sanity can
+ * override it). Styles: ".site-footer" in src/styles/site-chrome.css.
  *
- * The markup mirrors Elementor's nesting on purpose, because Elementor's percentage margins are
- * relative to these boxes:
- *   footer (padding 2% 0 1%)
- *   └ container 1212px with 10px padding  ← "outer column"
- *     ├ inner section: 4 columns (logo+text, Navigation, Legal, Contact)
- *     ├ divider
- *     ├ inner section: 4 columns of 25% (Bali, Nationwide, Pricing & Guides, Insights; 3 until 11 Nov 2026)
- *     ├ "Payment Methods" label
- *     ├ inner section: 8 payment chips
- *     ├ divider, disclaimer, divider
- *     └ inner section: copyright
+ *   ┌ brand: logo, intro, contact, two buttons │ 6 link columns in a 3 × 2 grid ┐
+ *   ├ payment methods                                                         ┤
+ *   ├ research-use disclaimer                                                 ┤
+ *   └ copyright                                                  Back to top  ┘
  */
 import Link from "next/link";
-import type { ReactNode } from "react";
+
 import { footer as defaultFooter, type FooterColumn, type FooterContent } from "@/content/site-chrome";
 
-function InnerSection({ className = "", children }: { className?: string; children: ReactNode }) {
-  return (
-    <div className={`footer-section ${className}`}>
-      <div className="footer-row">{children}</div>
-    </div>
-  );
-}
-
-function Column({ className = "", children }: { className?: string; children: ReactNode }) {
-  return (
-    <div className={`footer-col ${className}`}>
-      <div className="footer-col__inner">{children}</div>
-    </div>
-  );
-}
-
-function LinkList({ column, spacing }: { column: FooterColumn; spacing?: "wide" }) {
+function LinkColumn({ column }: { column: FooterColumn }) {
   const Heading = column.headingTag;
   return (
-    <>
-      <Heading className={`footer-heading ${column.uppercase ? "uppercase" : ""}`}>{column.heading}</Heading>
-      <ul className={`footer-list ${spacing === "wide" ? "footer-list--wide" : ""}`}>
-        {column.links.map((link) =>
-          link.href ? (
-            <li key={link.label}>
-              <Link href={link.href}>{link.label}</Link>
-            </li>
-          ) : (
-            <li key={link.label}>{link.label}</li>
-          ),
-        )}
+    <div className="footer-links__col">
+      <Heading className="footer-heading">{column.heading}</Heading>
+      <ul className="footer-list">
+        {column.links.map((link) => {
+          // "Home" has no link in the live footer's content; here it goes to the homepage.
+          const href = link.href ?? (link.label.trim().toLowerCase() === "home" ? "/" : undefined);
+          return <li key={link.label}>{href ? <Link href={href}>{link.label}</Link> : link.label}</li>;
+        })}
       </ul>
-    </>
+    </div>
   );
 }
 
 function EnvelopeIcon() {
   return (
-    <svg aria-hidden="true" viewBox="0 0 512 512" className="footer-contact__icon">
-      <path d="M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z" />
+    <svg aria-hidden="true" viewBox="0 0 24 24" className="footer-contact__icon" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+      <path d="m3.5 6.5 8.5 6.5 8.5-6.5" />
     </svg>
   );
 }
 
 function MapMarkerIcon() {
   return (
-    <svg aria-hidden="true" viewBox="0 0 384 512" className="footer-contact__icon">
-      <path d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z" />
+    <svg aria-hidden="true" viewBox="0 0 24 24" className="footer-contact__icon" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z" />
+      <circle cx="12" cy="9.5" r="2.5" />
     </svg>
   );
 }
 
-function Divider({ className = "" }: { className?: string }) {
-  return <div className={`footer-divider ${className}`} role="separator" />;
-}
-
-/**
- * The link columns by position: their class carries Elementor's per-column mobile spacing
- * (site-chrome.css), and the last two use the wider 13px list spacing.
- */
-const linkColumnNames = ["bali", "nationwide", "pricing", "insights"];
-
 export function SiteFooter({ footer = defaultFooter }: { footer?: FooterContent }) {
-  const [navigation, legal] = footer.topColumns;
-  // Elementor gives every column the same width: 25% for 4 columns, 33.33% for 3.
-  const linkColumnWidth = footer.linkColumns.length === 3 ? "footer-col--third" : "footer-col--quarter";
+  const columns: FooterColumn[] = [...footer.topColumns, ...footer.linkColumns];
   return (
     <footer className="site-footer">
-      <div className="footer-container">
-        <InnerSection className="footer-section--top">
-          <Column className="footer-col--quarter footer-col--intro">
-            <Link href="/" className="footer-logo">
+      <div className="footer-inner">
+        <div className="footer-main">
+          <div className="footer-brand">
+            <Link href="/" className="footer-logo" aria-label="Atlas Longevity, home">
               {/* eslint-disable-next-line @next/next/no-img-element -- logo keeps its natural proportions */}
               <img src="/brand/atlas-longevity-logo.png" alt="" width={700} height={356} />
             </Link>
             <p className="footer-intro">{footer.intro}</p>
-          </Column>
-          <Column className="footer-col--quarter footer-col--nav">
-            <LinkList column={navigation} />
-          </Column>
-          <Column className="footer-col--quarter footer-col--legal">
-            <LinkList column={legal} />
-          </Column>
-          <Column className="footer-col--quarter footer-col--contact">
-            <h2 className="footer-heading uppercase">{footer.contact.heading}</h2>
-            <ul className="footer-list footer-contact">
+            <h2 className="footer-heading">{footer.contact.heading}</h2>
+            <ul className="footer-contact">
               <li>
                 <a href={`mailto:${footer.contact.email}`}>
                   <span className="footer-contact__icon-wrap">
@@ -119,38 +76,45 @@ export function SiteFooter({ footer = defaultFooter }: { footer?: FooterContent 
                 <span>{footer.contact.address}</span>
               </li>
             </ul>
-          </Column>
-        </InnerSection>
+            <div className="footer-actions">
+              <Link href="/shop/" className="footer-btn footer-btn--gold">
+                Shop peptides
+              </Link>
+              <Link href="/lab-results-certificates-of-analysis/" className="footer-btn">
+                Lab results
+              </Link>
+            </div>
+          </div>
+          <nav className="footer-links" aria-label="Footer">
+            {columns.map((column) => (
+              <LinkColumn key={column.heading} column={column} />
+            ))}
+          </nav>
+        </div>
 
-        <Divider className="footer-divider--first" />
+        <div className="footer-payments">
+          <p className="footer-payment-label">{footer.paymentLabel}</p>
+          <ul className="footer-chips">
+            {footer.paymentMethods.map((method) => (
+              <li key={method} className="footer-chip">
+                {method}
+              </li>
+            ))}
+          </ul>
+        </div>
 
-        <InnerSection className="footer-section--links">
-          {footer.linkColumns.map((column, i) => (
-            <Column key={column.heading} className={`${linkColumnWidth} footer-col--${linkColumnNames[i] ?? "insights"}`}>
-              <LinkList column={column} spacing={i >= 2 ? "wide" : undefined} />
-            </Column>
-          ))}
-        </InnerSection>
+        <p className="footer-disclaimer">
+          <span className="footer-disclaimer__label">Research use only</span>
+          {footer.disclaimer}
+        </p>
 
-        <p className="footer-payment-label">{footer.paymentLabel}</p>
-
-        <InnerSection className="footer-section--payments">
-          {footer.paymentMethods.map((method) => (
-            <Column key={method} className="footer-col--payment">
-              <span className="footer-chip">{method}</span>
-            </Column>
-          ))}
-        </InnerSection>
-
-        <Divider />
-        <p className="footer-disclaimer">{footer.disclaimer}</p>
-        <Divider className="footer-divider--thin" />
-
-        <InnerSection className="footer-section--copyright">
-          <Column className="footer-col--full">
-            <p className="footer-copyright">{footer.copyright}</p>
-          </Column>
-        </InnerSection>
+        <div className="footer-bottom">
+          <p className="footer-copyright">{footer.copyright}</p>
+          <a href="#" className="footer-top">
+            Back to top
+            <span aria-hidden="true">↑</span>
+          </a>
+        </div>
       </div>
     </footer>
   );

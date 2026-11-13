@@ -2,7 +2,7 @@
  * What My Account shows on the right for each endpoint (server components), with WooCommerce 11.2.1's
  * templates and texts (myaccount/dashboard.php, orders.php, downloads, my-address.php, view-order.php,
  * order/order-details.php) and the owner's "Research tools" tab:
- *   Dashboard      "Hello …", the description and Woodmart's link tiles;
+ *   (the Dashboard is AccountDashboard.tsx)
  *   Orders         the customer's orders (10 a page), or "No order has been made yet.", after the
  *                  "Confirm email address" note WooCommerce 11 shows to accounts whose e-mail isn't confirmed;
  *   View order     one of the customer's orders, or "Invalid order.";
@@ -25,7 +25,6 @@ import { cancelAddress, cancelToken, getOrderWithLines, needsPayment, ORDER_STAT
 
 import { OrderDetails } from "../order/OrderDetails";
 
-import { ACCOUNT_MENU, menuHref } from "./AccountShell";
 import { ClaimForm } from "./ClaimForm";
 
 /** WordPress's "Blog pages show at most" (posts_per_page), which WooCommerce uses for the orders list. */
@@ -34,38 +33,6 @@ export const ORDERS_PER_PAGE = 10;
 const STATUS_NAMES = ORDER_STATUS_NAMES;
 
 const isoDate = (date: Date) => date.toISOString().slice(0, 19);
-
-export function Dashboard({ user }: { user: AccountUser }) {
-  const logout = `/my-account/customer-logout/?_wpnonce=${user.logoutToken}`;
-  return (
-    <>
-      <p>
-        Hello <strong>{user.displayName}</strong> (not <strong>{user.displayName}</strong>? <a href={logout}>Log out</a>)
-      </p>
-      <p>
-        From your account dashboard you can view your <Link href="/my-account/orders/">recent orders</Link>, manage your <Link href="/my-account/edit-address/">shipping and billing addresses</Link>, and{" "}
-        <Link href="/my-account/edit-account/">edit your password and account details</Link>.
-      </p>
-      <ul className="wd-my-account-links wd-nav-my-acc wd-nav wd-icon-top wd-grid-g">
-        {ACCOUNT_MENU.map((item) => (
-          <li key={item.endpoint} className={`wd-my-acc-${item.endpoint}`}>
-            {item.endpoint === "customer-logout" ? (
-              <a href={menuHref(item, user.logoutToken)}>
-                <span className="wd-nav-icon" />
-                <span className="nav-link-text">{item.label}</span>
-              </a>
-            ) : (
-              <Link href={item.href}>
-                <span className="wd-nav-icon" />
-                <span className="nav-link-text">{item.label}</span>
-              </Link>
-            )}
-          </li>
-        ))}
-      </ul>
-    </>
-  );
-}
 
 function BrowseProducts({ text }: { text: string }) {
   return (

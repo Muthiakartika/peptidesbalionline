@@ -71,6 +71,20 @@
       "when": 1794211862365,
       "tag": "0009_categories_attributes",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1794473397601,
+      "tag": "0010_loyalty_rewards",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1794543513012,
+      "tag": "0011_product_old_slugs",
+      "breakpoints": true
     }
   ]
 }

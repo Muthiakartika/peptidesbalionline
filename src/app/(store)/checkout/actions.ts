@@ -32,11 +32,20 @@ import { validateCheckout, type CheckoutInput, type CheckoutMessage, isPaymentMe
 import { afterOrderAddress, createOrder, internationalPhone } from "@/lib/commerce/orders";
 import { paymentMethods } from "@/lib/commerce/store-settings";
 import { computeTotals } from "@/lib/commerce/totals";
+import { sendOrderStatusEmails } from "@/lib/email/order-notifications";
 
 export type PlaceOrderResult = { ok: false; messages: CheckoutMessage[] } | { ok: true; redirect: string };
 
 /** What the form sends besides the checked fields. */
-export type CheckoutExtras = { createAccount?: boolean; notes?: string; location?: { lat?: string; lng?: string } };
+/** `location`: the map's pin (lat / lng) and Google's formatted address of it (live's _atlas_google_formatted_address). */
+export type CheckoutExtras = { createAccount?: boolean; notes?: string; location?: { lat?: string; lng?: string; address?: string } };
+
+/** A coordinate from the map, or nothing: only a plain decimal within the earth's range is kept. */
+const coordinate = (value: unknown, limit: number) => {
+  const text = typeof value === "string" ? value.trim().slice(0, 30) : "";
+  const number = Number(text);
+  return /^-?\d{1,3}(\.\d{1,10})?$/.test(text) && Math.abs(number) <= limit ? text : undefined;
+};
 
 const text = (value: unknown, max = 500) => (typeof value === "string" ? value.slice(0, max) : "");
 
@@ -148,7 +157,12 @@ export async function placeOrder(raw: Partial<CheckoutInput>, extras: CheckoutEx
       coupons: couponCheck.coupons.map((coupon) => ({ coupon, amount: totals.couponTotals.get(coupon.code) ?? 0n })),
       userId,
       notes: (extras.notes ?? "").slice(0, 2000).trim(),
-      deliveryLocation: { address: input.deliveryAddress, lat: extras.location?.lat?.slice(0, 30), lng: extras.location?.lng?.slice(0, 30) },
+      // As live: the pin's Google address when the customer used the map, else what they typed.
+      deliveryLocation: {
+        address: text(extras.location?.address).trim() || input.deliveryAddress,
+        lat: coordinate(extras.location?.lat, 90),
+        lng: coordinate(extras.location?.lng, 180),
+      },
     });
     if (userId) {
       // WooCommerce keeps the customer's checkout address on the account (the next checkout starts with it).
@@ -171,6 +185,10 @@ export async function placeOrder(raw: Partial<CheckoutInput>, extras: CheckoutEx
     }
     // The cart is emptied (the shipping destination stays, as WooCommerce's customer data does).
     await writeCart({ items: [], coupons: [], destination: cart.destination });
+    // WooCommerce's order e-mails: the order starts "pending" and the payment method moves it on (Card, Revolut,
+    // Wise: on hold, COD: processing → "New order" to the shop and the customer's e-mail; IDR Account stays
+    // pending: none yet). Never throws: a problem sending doesn't touch the order.
+    await sendOrderStatusEmails(order.id, "pending", method.statusAfterOrder);
     return { ok: true, redirect: afterOrderAddress(method.id, order) };
   } catch (error) {
     return unavailable(error);

@@ -1,6 +1,7 @@
-// /product_cat-sitemap.xml: the 25 product categories (src/lib/seo/sitemaps.ts).
-import { sitemapResponse } from "@/lib/seo/sitemaps";
+// /product_cat-sitemap.xml: the product categories that have products, as they are now (src/lib/seo/sitemaps.ts).
+import { shopSitemaps } from "@/lib/seo/sitemap-data";
+import { sitemapResponse, sitemapXml } from "@/lib/seo/sitemaps";
 
-export function GET() {
-  return sitemapResponse("product_cat");
+export async function GET() {
+  return sitemapResponse("product_cat", sitemapXml("product_cat", (await shopSitemaps()).product_cat));
 }

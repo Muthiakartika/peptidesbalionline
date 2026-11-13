@@ -12,6 +12,7 @@ import { CartAmount } from "@/components/woocommerce/cart/CartPrice";
 import { getDb } from "@/db";
 import { orderFees, orderItems, orderNotes, orders } from "@/db/schema";
 import { formatAddress } from "@/lib/account/validation";
+import { deliveryDayLabel as deliveryDay, deliveryTimeLabel } from "@/lib/commerce/delivery";
 import { ORDER_STATUS_NAMES } from "@/lib/commerce/orders";
 
 import { addOrderNoteAction, updateOrderStatus } from "../actions";
@@ -25,14 +26,6 @@ export function generateStaticParams() {
 type Address = { firstName?: string; lastName?: string; address1?: string; city?: string; state?: string; postcode?: string; country?: string; phone?: string; email?: string };
 const lines = (a: Address | null) =>
   a ? formatAddress({ first_name: a.firstName ?? "", last_name: a.lastName ?? "", address_1: a.address1 ?? "", city: a.city ?? "", state: a.state ?? "", postcode: a.postcode ?? "", country: a.country ?? "" }) : [];
-
-/** The owner's snippet: wp_date("l, j F Y") of the delivery day, e.g. "Saturday, 7 November 2026". */
-function deliveryDay(value: string | null) {
-  if (!value || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return value ?? "";
-  const date = new Date(`${value}T12:00:00Z`);
-  const part = (o: Intl.DateTimeFormatOptions) => new Intl.DateTimeFormat("en-GB", { timeZone: "UTC", ...o }).format(date);
-  return `${part({ weekday: "long" })}, ${Number(value.slice(8))} ${part({ month: "long" })} ${value.slice(0, 4)}`;
-}
 
 const Box = ({ title, children }: { title: string; children: ReactNode }) => (
   <section className="mb-4 border border-[#c3c4c7] bg-white">
@@ -134,7 +127,7 @@ async function OrderScreen({ params }: { params: Promise<{ number: string }> }) 
                   ) : null}
                   {order.deliveryTimeSlot ? (
                     <p>
-                      <strong>Time slot:</strong> {order.deliveryTimeSlot.replace("-", "–")}
+                      <strong>Time slot:</strong> {deliveryTimeLabel(order.deliveryTimeSlot)}
                     </p>
                   ) : null}
                 </div>

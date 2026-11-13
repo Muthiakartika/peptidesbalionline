@@ -8,10 +8,10 @@
  *
  * The totals are worked out here with the same rules as the server (src/lib/commerce/totals.ts) so they
  * follow the payment method at once; "Place order" checks everything again on the server.
- * Not live yet: the map (needs the owner's Google Maps key, Q-33), saving the order (needs the database).
+ * The delivery map (DeliveryMap.tsx) appears once NEXT_PUBLIC_GOOGLE_MAPS_API_KEY is set (Q-33, docs/setup/google-maps.md).
  */
 import Link from "next/link";
-import { useEffect, useMemo, useRef, useState, useTransition, type FormEvent } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, useTransition, type FormEvent } from "react";
 
 import { removeCartCoupon } from "@/app/(store)/cart/actions";
 import { applyCheckoutCoupon, placeOrder } from "@/app/(store)/checkout/actions";
@@ -31,8 +31,17 @@ import { PAYMENT_DETAILS } from "@/lib/commerce/payment-details";
 import { computeTotals, percentOf } from "@/lib/commerce/totals";
 import { useHydrated } from "@/lib/useHydrated";
 
+import { ADDRESS_STATUS } from "@/lib/commerce/delivery-address";
+
+import { DeliveryMap, type DeliveryPoint, type StatusTone } from "./DeliveryMap";
+
 export type ReviewLine = Omit<CartLine, "unitPrice"> & { unitPrice: string; options: { label: string; value: string }[] };
 
+/**
+ * The Google Maps key of the delivery map (Q-33, docs/setup/google-maps.md): a browser key, public by nature, written into the
+ * build. Without it the map isn't shown and the typed address is what the order keeps.
+ */
+const MAPS_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ?? "";
 
 /** "(~$8.48)" as the owner's fee snippet prints it: number_format with 2 decimals. */
 const usdPlain = (minor: bigint) => `(~$${(Number(minor) / 100 / idrPerUsd).toFixed(2)})`;
@@ -126,7 +135,30 @@ export function CheckoutForm({
   const [shipElsewhere, setShipElsewhere] = useState(false);
   const [couponOpen, setCouponOpen] = useState(false);
   const [coupon, setCoupon] = useState<{ ok: boolean; message: string } | null>(null);
-  const [addressStatus, setAddressStatus] = useState("");
+  const [addressStatus, setAddressStatus] = useState<{ text: string; tone?: StatusTone }>({ text: "" });
+  const showAddressStatus = useCallback((text: string, tone?: StatusTone) => setAddressStatus({ text, tone }), []);
+  // The point chosen on the map (coordinates only with a map), Google's or the typed address, and the map's
+  // "Find on Map" action once it's ready.
+  const [deliveryPoint, setDeliveryPoint] = useState<DeliveryPoint>({ lat: "", lng: "", address: "" });
+  const updateDeliveryPoint = useCallback((point: Partial<DeliveryPoint>) => setDeliveryPoint((current) => ({ ...current, ...point })), []);
+  const findOnMap = useRef<((address: string) => void) | null>(null);
+  /** As live: the delivery address is also the billing street address (live's input / blur handlers). */
+  const keepTypedAddress = (address: string, announce: boolean) => {
+    const street = document.getElementById("billing_address_1") as HTMLInputElement | null;
+    if (street) {
+      street.value = address;
+      if (announce) street.dispatchEvent(new Event("change", { bubbles: true }));
+    }
+    updateDeliveryPoint({ address });
+  };
+  /** "Find on Map" (and Enter in the address box): on the map when there is one, else the typed address is kept. */
+  const findAddress = () => {
+    const typed = (document.getElementById("atlas_delivery_address") as HTMLInputElement | null)?.value.trim() ?? "";
+    if (findOnMap.current) return findOnMap.current(typed);
+    if (!typed) return showAddressStatus(ADDRESS_STATUS.empty, "error");
+    keepTypedAddress(typed, true);
+    showAddressStatus(ADDRESS_STATUS.saved, "success");
+  };
   const [messages, setMessages] = useState<CheckoutMessage[]>([]);
   const [placing, startPlacing] = useTransition();
   const [applying, startApplying] = useTransition();
@@ -219,7 +251,7 @@ export function CheckoutForm({
       }, {
         createAccount: data.get("createaccount") === "1",
         notes: value("order_comments"),
-        location: { lat: value("atlas_delivery_latitude"), lng: value("atlas_delivery_longitude") },
+        location: { lat: value("atlas_delivery_latitude"), lng: value("atlas_delivery_longitude"), address: value("atlas_google_formatted_address") },
       });
       // Saved: the thank-you page (or WhatsApp for IDR Account), a full load as WooCommerce's redirect.
       if (result.ok) return window.location.assign(result.redirect);
@@ -362,35 +394,43 @@ export function CheckoutForm({
                 </label>
                 <div className="atlas-address-input-wrap">
                   <span className="atlas-address-icon"> ⌖ </span>
-                  <input type="text" id="atlas_delivery_address" name="atlas_delivery_address" className="atlas-delivery-address" placeholder="Street address, Plus Code or place..." autoComplete="off" />
+                  <input
+                    type="text"
+                    id="atlas_delivery_address"
+                    name="atlas_delivery_address"
+                    className="atlas-delivery-address"
+                    placeholder="Street address, Plus Code or place..."
+                    autoComplete="off"
+                    onInput={(event) => {
+                      const address = event.currentTarget.value.trim();
+                      keepTypedAddress(address, false);
+                      showAddressStatus(address ? (MAPS_KEY ? ADDRESS_STATUS.typing : "") : "");
+                    }}
+                    onBlur={(event) => {
+                      const address = event.currentTarget.value.trim();
+                      if (address) keepTypedAddress(address, true);
+                    }}
+                    onKeyDown={(event) => {
+                      if (event.key !== "Enter") return;
+                      // Enter searches the address (or picks the highlighted suggestion); it never sends the checkout.
+                      event.preventDefault();
+                      if (!document.querySelector(".pac-container .pac-item-selected")) findAddress();
+                    }}
+                  />
                 </div>
-                <button
-                  type="button"
-                  id="atlas-find-address"
-                  className="atlas-find-address-button"
-                  onClick={() => {
-                    const address = (document.getElementById("atlas_delivery_address") as HTMLInputElement | null)?.value.trim();
-                    // Without the map (Q-33) the typed address is what is kept for the order.
-                    setAddressStatus(address ? "Your address has been saved." : "Please enter a street address, Plus Code or place.");
-                  }}
-                >
+                <button type="button" id="atlas-find-address" className="atlas-find-address-button" onClick={findAddress}>
                   {" "}
-                  Find on Map{" "}
+                  {MAPS_KEY ? "Find on Map" : "Use this address"}{" "}
                 </button>
-                <div id="atlas-address-status" className="atlas-address-status" aria-live="polite">
-                  {addressStatus}
+                <div id="atlas-address-status" className={`atlas-address-status${addressStatus.tone ? ` is-${addressStatus.tone}` : ""}`} aria-live="polite">
+                  {addressStatus.text}
                 </div>
               </div>
-              <div className="atlas-map-wrap">
-                {/* The live map is Google Maps with the owner's key (Q-33: a key for the new site). */}
-                <div id="atlas-checkout-map" className="atlas-checkout-map" />
-                <div className="atlas-map-note">
-                  <span className="atlas-map-pin"> ● </span> Drag the pin to your exact delivery location. The address will update automatically.{" "}
-                </div>
-              </div>
-              <input type="hidden" name="atlas_delivery_latitude" id="atlas_delivery_latitude" value="" />
-              <input type="hidden" name="atlas_delivery_longitude" id="atlas_delivery_longitude" value="" />
-              <input type="hidden" name="atlas_google_formatted_address" id="atlas_google_formatted_address" value="" />
+              {/* Live's Google map (Q-33). Without a key nothing is shown: an empty map box looked broken. */}
+              {MAPS_KEY ? <DeliveryMap apiKey={MAPS_KEY} inputId="atlas_delivery_address" onLocation={updateDeliveryPoint} onStatus={showAddressStatus} findRef={findOnMap} /> : null}
+              <input type="hidden" name="atlas_delivery_latitude" id="atlas_delivery_latitude" value={deliveryPoint.lat} />
+              <input type="hidden" name="atlas_delivery_longitude" id="atlas_delivery_longitude" value={deliveryPoint.lng} />
+              <input type="hidden" name="atlas_google_formatted_address" id="atlas_google_formatted_address" value={deliveryPoint.address} />
             </div>
             <div className="woocommerce-billing-fields__field-wrapper">
               <Field id="billing_first_name" label="Full name" className="form-row form-row-wide thwcfd-required thwcfd-field-wrapper thwcfd-field-text validate-required">

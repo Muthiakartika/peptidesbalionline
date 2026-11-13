@@ -1,13 +1,11 @@
 "use client";
 
 /**
- * The two interactive pieces of the shop toolbar:
- *   * the sort dropdown: choosing an option loads page 1 sorted that way (no full page reload);
- *   * "Show sidebar" (tablets and phones): opens the category sidebar.
+ * The sort dropdown of the shop toolbar: choosing an option loads page 1 sorted that way (no full
+ * page reload).
  */
 import { useRouter } from "next/navigation";
 
-import { useChrome } from "@/components/layout/ChromeProvider";
 
 import { archiveHref, type ArchiveParams } from "./shop-url";
 
@@ -41,23 +39,5 @@ export function OrderbySelect({ options, value, basePath, hidden }: { options: {
       <input type="hidden" name="paged" value="1" />
       {Object.entries(hidden).map(([name, val]) => (val ? <input key={name} type="hidden" name={name} value={val} /> : null))}
     </form>
-  );
-}
-
-export function SidebarButton() {
-  const { open } = useChrome();
-  return (
-    <div className="shop-sidebar-button">
-      <a
-        href="#"
-        rel="nofollow"
-        onClick={(event) => {
-          event.preventDefault();
-          open("shopSidebar");
-        }}
-      >
-        Show sidebar
-      </a>
-    </div>
   );
 }

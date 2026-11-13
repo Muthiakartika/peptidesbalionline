@@ -98,6 +98,31 @@ describe("product admin", () => {
     await db.delete(schema.productAttributes);
   });
 
+  it("keeps a product's earlier addresses when its slug changes (WordPress's old slugs)", async () => {
+    const created = await createProduct({ ...simpleInput, name: "Renamed Peptide" }, "staff-1");
+    if (!created.ok) throw new Error(created.error);
+    const oldSlugs = async () => (await db.select({ oldSlugs: schema.productRecords.oldSlugs }).from(schema.productRecords).where(eq(schema.productRecords.shopId, created.shopId)))[0].oldSlugs;
+    const rename = async (slug: string) => updateProduct(created.shopId, { ...(await getEditorProduct(created.shopId))!, slug }, "staff-1");
+    expect(await oldSlugs()).toEqual([]);
+    expect((await rename("renamed-peptide-10mg")).ok).toBe(true);
+    expect(await oldSlugs()).toEqual(["renamed-peptide"]);
+    expect((await rename("renamed-peptide-20mg")).ok).toBe(true);
+    expect(await oldSlugs()).toEqual(["renamed-peptide", "renamed-peptide-10mg"]);
+    // Back to an earlier address: that one is the product's address again, not an old one.
+    expect((await rename("renamed-peptide")).ok).toBe(true);
+    expect(await oldSlugs()).toEqual(["renamed-peptide-10mg", "renamed-peptide-20mg"]);
+    // Saving without changing the address changes nothing.
+    expect((await rename("renamed-peptide")).ok).toBe(true);
+    expect(await oldSlugs()).toEqual(["renamed-peptide-10mg", "renamed-peptide-20mg"]);
+  });
+
+  it("refuses an address the live site already forwards somewhere else", async () => {
+    expect(await createProduct({ ...simpleInput, name: "Ghk", slug: "ghk-cu" }, "staff-1")).toEqual({
+      ok: false,
+      error: "The address /product/ghk-cu/ is an old address of the shop that already forwards to /product/ghk-cu-50mg/. Please choose another address.",
+    });
+  });
+
   it("archives (hidden from the shop), restores, and deletes a never-ordered product", async () => {
     expect((await archiveProduct(200000)).ok).toBe(true);
     let rows = await loadCatalogRows();

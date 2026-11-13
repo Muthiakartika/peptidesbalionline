@@ -18,6 +18,7 @@ import { getDb } from "@/db";
 import { inventory, inventoryMovements, orderItems, productAttributes, productRecords, productVariants, type ProductAttribute, type VariantImage } from "@/db/schema";
 import { getCategories } from "@/lib/catalog";
 import { sanityWriter } from "@/lib/content/sanity-write";
+import { legacyRedirects } from "@/lib/seo/redirects";
 
 import { customAttributeName, slugify } from "./slug";
 
@@ -104,6 +105,9 @@ export async function cleanProductInput(raw: unknown): Promise<CleanProduct | st
   const input = parsed.data;
   const slug = slugify(input.slug || input.name);
   if (!slug) return "The address (slug) needs letters or numbers.";
+  // The live site's old addresses are answered before any page (next.config.ts): a product there could never be opened.
+  const forwarded = legacyRedirects().find((r) => r.source.toLowerCase() === `/product/${slug}/`);
+  if (forwarded) return `The address /product/${slug}/ is an old address of the shop that already forwards to ${forwarded.destination}. Please choose another address.`;
   const known = new Set((await getCategories()).map((c) => c.slug));
   if (input.categorySlugs.some((s) => !known.has(s))) return "Unknown category.";
 
@@ -267,11 +271,15 @@ export async function updateProduct(shopId: number, raw: unknown, actorUserId: s
   if (record.type !== product.type) return { ok: false, error: "The product type can't be changed after it was created." };
   const [taken] = await db.select({ id: productRecords.id }).from(productRecords).where(and(eq(productRecords.slug, product.slug), ne(productRecords.id, record.id)));
   if (taken) return { ok: false, error: `The address /product/${product.slug}/ is already used by another product.` };
+  // As WordPress keeps _wp_old_slug: the address it had keeps working (301 to the new one, src/proxy.ts);
+  // going back to an earlier address takes that one off the list.
+  const oldSlugs = [...new Set([...record.oldSlugs, ...(record.slug !== product.slug ? [record.slug] : [])])].filter((s) => s !== product.slug);
   await db.transaction(async (tx) => {
     await tx
       .update(productRecords)
       .set({
         slug: product.slug,
+        oldSlugs,
         name: product.name,
         status: record.status === "archived" ? "archived" : product.status,
         statusBeforeArchive: record.status === "archived" ? product.status : record.statusBeforeArchive,

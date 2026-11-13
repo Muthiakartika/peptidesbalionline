@@ -247,7 +247,7 @@ export function ProductEditor({ initial, categories, shopAttributes }: { initial
                   <input className={input} value={slug} onChange={(e) => setSlug(e.target.value)} placeholder="made from the name when empty" />
                   <span className="text-[#646970]">/</span>
                 </div>
-                {initial && slug && slug !== initial.slug ? <p className="mt-1 text-[12px] text-[#996800]">Changing the address breaks links to the old one (Google, ads, WhatsApp messages). Add a redirect if it was shared.</p> : null}
+                {initial && slug && slug !== initial.slug ? <p className="mt-1 text-[12px] text-[#996800]">The old address will forward to the new one automatically (301, as WordPress does), so links to it keep working.</p> : null}
               </div>
             </div>
           </section>

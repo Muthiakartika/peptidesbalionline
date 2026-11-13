@@ -16,25 +16,31 @@
  * the homepage's product cards. */
 main.blog-page:not(.woo-page) { font-family: var(--font-inter), Arial, Helvetica, sans-serif; }
 
-/* ── The page title band ("Blog", an archive's name, "Insights", "Search Results for: …"). The
- * theme settings give it a black background; color-scheme-light turns its text white. ── */
+/* ── The page title band (an archive's name, "Search Results for: …", the account and cart pages'
+ * titles, the Protocol Builder). Redesigned on 12 Nov 2026 (was the theme's black band): a cream
+ * band like the shop's title band, starting under the floating header (--header-slot in
+ * site-chrome.css), dark Anton title and gold breadcrumbs. ── */
 .wd-page-title {
   --wd-align: start;
-  --wd-title-sp: 15px;
-  --wd-title-font-s: 36px;
+  --wd-title-sp: 30px;
+  --wd-title-font-s: 38px;
   position: relative;
-  padding-block: var(--wd-title-sp);
-  background-color: rgb(0 0 0);
+  margin-top: calc(-1 * var(--header-slot));
+  padding-block: calc(var(--wd-title-sp) + var(--header-slot)) var(--wd-title-sp);
+  border-bottom: 1px solid #ece3d1;
+  background:
+    radial-gradient(50% 120% at 50% 0%, rgb(231 199 120 / 0.22), transparent 70%),
+    linear-gradient(180deg, #fbf6ec 0%, #fffdf9 100%);
 }
 .wd-page-title.title-design-centered { --wd-align: center; }
 @media (min-width: 1025px) {
-  .wd-page-title.title-size-default { --wd-title-sp: 60px; --wd-title-font-s: 68px; }
+  .wd-page-title.title-size-default { --wd-title-sp: 56px; --wd-title-font-s: 60px; }
 }
 .wd-page-title.color-scheme-light {
-  --wd-title-color: #fff;
-  --wd-text-color: rgba(255, 255, 255, 0.8);
-  --wd-link-color: rgba(255, 255, 255, 0.9);
-  --wd-link-color-hover: #fff;
+  --wd-title-color: #1c1915;
+  --wd-text-color: #6f6556;
+  --wd-link-color: #8b8274;
+  --wd-link-color-hover: #a56c1e;
   color: var(--wd-text-color);
 }
 .wd-page-title .wd-page-title-bg { position: absolute; inset: 0; }
@@ -63,11 +69,14 @@ main.blog-page:not(.woo-page) { font-family: var(--font-inter), Arial, Helvetica
   letter-spacing: 1.11px;
   text-transform: uppercase;
 }
-/* Breadcrumbs (base theme): grey links, the last one bold, "/" between them. */
+/* Breadcrumbs: small uppercase, the last one gold, "/" between them. */
 .wd-page-title .wd-breadcrumbs {
-  --wd-link-color: rgba(255, 255, 255, 0.7);
-  --wd-link-color-hover: rgba(255, 255, 255, 0.9);
-  --wd-bcrumb-color-active: #fff;
+  --wd-link-color: #9d958a;
+  --wd-link-color-hover: #a56c1e;
+  --wd-bcrumb-color-active: #a56c1e;
+  font-size: 11px;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
 }
 .wd-page-title .wd-breadcrumbs a { color: var(--wd-link-color); text-decoration: none; transition: all 0.25s ease; }
 .wd-page-title .wd-breadcrumbs a:hover { color: var(--wd-link-color-hover); }

@@ -2,8 +2,12 @@
  * The page shared by /shop/, every /product-category/…/ page and the product search results
  * (Woodmart layout #9495 on the live site):
  *
- *   ┌ grey title band ─ title + breadcrumbs │ round category images ┐
- *   ├ category sidebar │ toolbar, product grid, page numbers        ┤
+ *   ┌ title band (ShopHero): breadcrumbs, title, product pictures, category chips ┐
+ *   ├ toolbar: result count │ search, sort, grid/list                               ┤
+ *   └ product grid (4 per row) and page numbers, across the whole width              ┘
+ *
+ * Redesigned on 12 Nov 2026 after the owner's reference shops: no category sidebar any more (the
+ * chips in the title band are the categories).
  *
  * The title band only depends on the URL path, so Next.js can prerender it. Everything below
  * depends on the query string (?orderby=, ?per_page=, ?shop_view=…), which is only known when a
@@ -16,12 +20,11 @@ import { Suspense, type CSSProperties, type ReactNode } from "react";
 
 import { AliasNotice } from "@/components/layout/search/AliasNotice";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { getCategoryTree, getListing, normalisePerPage, type Category } from "@/lib/catalog";
+import { getListing, normalisePerPage, type Category } from "@/lib/catalog";
 import { shortDescriptionFor } from "@/lib/catalog/product-content";
 import { getProductPage } from "@/lib/catalog/product-page";
 import { cleanLegacyHtml } from "@/lib/legacy-html";
 
-import { CategorySidebar } from "./CategorySidebar";
 import { Pagination } from "./Pagination";
 import { ProductCard } from "./ProductCard";
 import { ShopHero, type Crumb } from "./ShopHero";
@@ -66,7 +69,7 @@ async function ShopBody({ basePath, page, category, search, searchParams }: Shop
   // being a real 404 status. Open pagination links always point to existing pages.
   if (page > listing.totalPages) notFound();
   const isList = params.shop_view === "list";
-  const perRow = params.shop_view === "grid" && Number(params.per_row) > 0 ? Number(params.per_row) : 3;
+  const perRow = params.shop_view === "grid" && Number(params.per_row) > 0 ? Number(params.per_row) : 4;
   // The list view also shows each product's short description (its product page's; from Sanity when
   // the site reads Sanity).
   const shortDescriptions = isList ? await Promise.all(listing.products.map(async (product) => shortDescriptionFor(await getProductPage(product.path), product.path))) : [];
@@ -74,34 +77,27 @@ async function ShopBody({ basePath, page, category, search, searchParams }: Shop
   return (
     <section className="shop-body">
       <div className="shop-body__container">
-        <div className="shop-body__row">
-          <CategorySidebar tree={await getCategoryTree()} currentId={category?.id} />
-          <div className="shop-main">
-            <div className="shop-main__wrap">
-              <ShopToolbar listing={listing} perPage={perPage} basePath={basePath} params={params} isSearch={search !== undefined} />
-              <div className="shop-products">
-                {/* Product search: the compound-name note above the products, as the owner's script
-                    puts it on the live site. */}
-                {search !== undefined ? <AliasNotice query={search} /> : null}
-                {listing.total > 0 ? (
-                  <>
-                    <div className="product-grid" data-view={isList ? "list" : "grid"} style={{ "--cols": perRow } as CSSProperties}>
-                      {listing.products.map((product, index) =>
-                        isList ? (
-                          <ProductCard key={product.id} product={product} view="list" shortDescription={cleanLegacyHtml(shortDescriptions[index]) || null} />
-                        ) : (
-                          <ProductCard key={product.id} product={product} />
-                        ),
-                      )}
-                    </div>
-                    <Pagination current={listing.page} total={listing.totalPages} hrefFor={(n) => archiveHref(basePath, n, params)} />
-                  </>
-                ) : (
-                  <NoProducts search={search} />
+        <ShopToolbar listing={listing} perPage={perPage} basePath={basePath} params={params} isSearch={search !== undefined} search={search} />
+        <div className="shop-products">
+          {/* Product search: the compound-name note above the products, as the owner's script
+              puts it on the live site. */}
+          {search !== undefined ? <AliasNotice query={search} /> : null}
+          {listing.total > 0 ? (
+            <>
+              <div className="product-grid" data-view={isList ? "list" : "grid"} style={{ "--cols": perRow } as CSSProperties}>
+                {listing.products.map((product, index) =>
+                  isList ? (
+                    <ProductCard key={product.id} product={product} view="list" shortDescription={cleanLegacyHtml(shortDescriptions[index]) || null} />
+                  ) : (
+                    <ProductCard key={product.id} product={product} />
+                  ),
                 )}
               </div>
-            </div>
-          </div>
+              <Pagination current={listing.page} total={listing.totalPages} hrefFor={(n) => archiveHref(basePath, n, params)} />
+            </>
+          ) : (
+            <NoProducts search={search} />
+          )}
         </div>
       </div>
     </section>

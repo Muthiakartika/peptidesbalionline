@@ -1,13 +1,18 @@
 /**
- * The frame of every My Account page for a logged-in customer, as on live (Woodmart's "predefined" My
- * Account layout): the menu on the left ("My account", Dashboard … Logout), the endpoint on the right.
- * The menu is the live one, including the owner's "Research tools" (the Atlas Research Planner plugin).
- * Styles: src/styles/account.css.
+ * The frame of every My Account page for a logged-in customer (redesigned 13 Nov 2026, on purpose: not WooCommerce's
+ * plain menu any more): a warm-black sidebar card with the customer's profile (initials in a gold ring, name, e-mail,
+ * rewards credits) and the menu as pills with icons, and the endpoint on the right under its title. On phones the
+ * sidebar becomes a profile strip over a row of scrollable pills. Styles: src/styles/account-dashboard.css.
+ *
+ * This file is also imported by the header's account dropdown (a client component) for the menu list, so it holds no
+ * server-only code.
  */
 import Link from "next/link";
 import type { CSSProperties, ReactNode } from "react";
 
-export type AccountEndpoint = "dashboard" | "orders" | "downloads" | "edit-address" | "edit-account" | "research-tools" | "customer-logout" | "payment-methods";
+import { AccountIcon } from "./AccountIcons";
+
+export type AccountEndpoint = "dashboard" | "orders" | "downloads" | "edit-address" | "edit-account" | "research-tools" | "rewards" | "customer-logout" | "payment-methods";
 
 /** The live menu, in its order. */
 export const ACCOUNT_MENU: { endpoint: AccountEndpoint; label: string; href: string }[] = [
@@ -17,42 +22,105 @@ export const ACCOUNT_MENU: { endpoint: AccountEndpoint; label: string; href: str
   { endpoint: "edit-address", label: "Addresses", href: "/my-account/edit-address/" },
   { endpoint: "edit-account", label: "Account details", href: "/my-account/edit-account/" },
   { endpoint: "research-tools", label: "Research tools", href: "/my-account/research-tools/" },
+  { endpoint: "rewards", label: "Rewards", href: "/my-account/rewards/" },
   { endpoint: "customer-logout", label: "Logout", href: "/my-account/customer-logout/" },
 ];
 
 /** The menu link of an endpoint; Logout carries the session's token (WooCommerce's _wpnonce). */
 export const menuHref = (item: (typeof ACCOUNT_MENU)[number], logoutToken: string) => (item.endpoint === "customer-logout" ? `${item.href}?_wpnonce=${logoutToken}` : item.href);
 
+/** The icon of each menu entry (src/components/woocommerce/account/AccountIcons.tsx). */
+export const MENU_ICON: Record<AccountEndpoint, string> = {
+  dashboard: "dashboard",
+  orders: "orders",
+  downloads: "downloads",
+  "edit-address": "addresses",
+  "edit-account": "account",
+  "research-tools": "research",
+  rewards: "rewards",
+  "customer-logout": "logout",
+  "payment-methods": "wallet",
+};
+
+/** The page title above the endpoint ("Payment methods" has no menu entry). */
+const TITLES: Partial<Record<AccountEndpoint, string>> = { "payment-methods": "Payment methods" };
+
+/** "Budi Santoso" → "BS", "budi" → "B". */
+export function initials(name: string): string {
+  const words = name.trim().split(/[\s._-]+/).filter(Boolean);
+  return ((words[0]?.[0] ?? "?") + (words.length > 1 ? (words[words.length - 1][0] ?? "") : "")).toUpperCase();
+}
+
+export type AccountProfile = { displayName: string; email: string; staff: boolean; credits: number | null };
+
 const vars = (values: Record<string, string | number>) => values as CSSProperties;
 
-export function AccountShell({ active, logoutToken, children }: { active: AccountEndpoint | null; logoutToken: string; children: ReactNode }) {
+export function AccountShell({ active, logoutToken, profile, children }: { active: AccountEndpoint | null; logoutToken: string; profile: AccountProfile; children: ReactNode }) {
+  const activeLabel = (active && (TITLES[active] ?? ACCOUNT_MENU.find((item) => item.endpoint === active)?.label)) ?? "Payment methods";
+  const items = ACCOUNT_MENU.filter((item) => item.endpoint !== "customer-logout");
+  const logout = ACCOUNT_MENU.find((item) => item.endpoint === "customer-logout")!;
   return (
-    <div className="wd-my-account-wrapper wd-grid-g" style={vars({ "--wd-col-lg": 12, "--wd-gap-lg": "30px", "--wd-gap-sm": "20px" })}>
-      <div className="wd-my-account-sidebar wd-grid-col" style={vars({ "--wd-col-lg": 3, "--wd-col-md": 4, "--wd-col-sm": 12 })}>
-        <h3 className="woocommerce-MyAccount-title entry-title">My account</h3>
-        <nav className="woocommerce-MyAccount-navigation" aria-label="Account pages">
+    <div className="acct" style={vars({ "--acct-sidebar": "300px" })}>
+      <aside className="acct-side" aria-label="Account">
+        <div className="acct-profile">
+          <span className="acct-avatar" aria-hidden="true">
+            {initials(profile.displayName)}
+          </span>
+          <div className="acct-profile__text">
+            <strong className="acct-profile__name">{profile.displayName}</strong>
+            <span className="acct-profile__mail">{profile.email}</span>
+          </div>
+          {profile.credits !== null ? (
+            <Link href="/my-account/rewards/" className="acct-credits" title="Your reward credits">
+              <AccountIcon name="rewards" size={14} />
+              <span>{profile.credits.toLocaleString("en-US")} credits</span>
+            </Link>
+          ) : null}
+        </div>
+
+        <nav className="acct-nav" aria-label="Account pages">
           <ul>
-            {ACCOUNT_MENU.map((item) => {
+            {items.map((item) => {
               const current = item.endpoint === active;
               return (
-                <li key={item.endpoint} className={`woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--${item.endpoint}${current ? " is-active" : ""}`}>
-                  {/* Logout is a plain link: it leaves the page (a redirect), it isn't a page of its own. */}
-                  {item.endpoint === "customer-logout" ? (
-                    <a href={menuHref(item, logoutToken)}>{item.label}</a>
-                  ) : (
-                    <Link href={item.href} aria-current={current ? "page" : undefined}>
-                      {item.label}
-                    </Link>
-                  )}
+                <li key={item.endpoint} className={`woocommerce-MyAccount-navigation-link--${item.endpoint}${current ? " is-active" : ""}`}>
+                  <Link href={item.href} aria-current={current ? "page" : undefined}>
+                    <span className="acct-nav__icon">
+                      <AccountIcon name={MENU_ICON[item.endpoint]} />
+                    </span>
+                    <span className="acct-nav__label">{item.label}</span>
+                  </Link>
                 </li>
               );
             })}
+            {profile.staff ? (
+              <li>
+                <Link href="/admin/orders/">
+                  <span className="acct-nav__icon">
+                    <AccountIcon name="admin" />
+                  </span>
+                  <span className="acct-nav__label">Store admin</span>
+                </Link>
+              </li>
+            ) : null}
           </ul>
         </nav>
-      </div>
-      <div className="woocommerce-MyAccount-content wd-grid-col" style={vars({ "--wd-col-lg": 9, "--wd-col-md": 8, "--wd-col-sm": 12 })}>
-        {children}
-      </div>
+
+        {/* Logout is a plain link: it leaves the page (a redirect), it isn't a page of its own. */}
+        <a className="acct-logout" href={menuHref(logout, logoutToken)}>
+          <AccountIcon name="logout" size={18} />
+          <span>Log out</span>
+        </a>
+      </aside>
+
+      <section className="acct-main" data-endpoint={active ?? "other"}>
+        {active === "dashboard" ? null : (
+          <header className="acct-main__head">
+            <h2 className="acct-main__title">{activeLabel}</h2>
+          </header>
+        )}
+        <div className="woocommerce-MyAccount-content acct-content">{children}</div>
+      </section>
     </div>
   );
 }

@@ -7,10 +7,13 @@
 import { useEffect, useRef, useState } from "react";
 
 const swing = (p: number) => 0.5 - Math.cos(p * Math.PI) / 2;
+const decimalsOf = (n: number) => (String(n).split(".")[1] ?? "").length;
 
-function format(value: number, delimiter: string): string {
-  const digits = String(Math.round(value));
-  return delimiter ? digits.replace(/\B(?=(\d{3})+(?!\d))/g, delimiter) : digits;
+/** As Elementor: as many decimals as the target value has ("4.9" stays 4.9, not 5). */
+function format(value: number, delimiter: string, decimals: number): string {
+  const [whole, fraction] = value.toFixed(decimals).split(".");
+  const grouped = delimiter ? whole.replace(/\B(?=(\d{3})+(?!\d))/g, delimiter) : whole;
+  return fraction ? `${grouped}.${fraction}` : grouped;
 }
 
 export function ElementorCounter({ from, to, duration, delimiter }: { from: number; to: number; duration: number; delimiter: string }) {
@@ -39,7 +42,7 @@ export function ElementorCounter({ from, to, duration, delimiter }: { from: numb
   }, [from, to, duration]);
   return (
     <span ref={ref} className="elementor-counter-number" data-duration={duration} data-to-value={to} data-from-value={from} data-delimiter={delimiter}>
-      {format(value, delimiter)}
+      {format(value, delimiter, decimalsOf(to))}
     </span>
   );
 }

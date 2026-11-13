@@ -1,0 +1,82 @@
+/*
+ * My Account → Rewards (src/components/woocommerce/account/RewardsTab.tsx). Plain cards inside the account
+ * content column, in the shop's gold and cream (the tokens of src/app/globals.css).
+ */
+.atlas-rewards { display: grid; gap: 20px; }
+.atlas-rewards__title { margin: 0; font-size: 26px; text-transform: uppercase; letter-spacing: 0.02em; color: var(--color-title); }
+.atlas-rewards__lead { margin: 0; color: var(--color-body); }
+.atlas-rewards__lead a { color: var(--color-gold-strong); text-decoration: underline; }
+
+.atlas-rewards__card {
+  display: grid;
+  gap: 12px;
+  padding: 22px;
+  background: var(--color-cream);
+  border: 1px solid var(--color-gold-border-card);
+  border-radius: 12px;
+}
+.atlas-rewards__card--invite { background: var(--color-gold-soft); border-color: var(--color-gold-border-button); }
+.atlas-rewards__card h3 { margin: 0; font-size: 18px; text-transform: uppercase; color: var(--color-title); }
+.atlas-rewards__card p { margin: 0; }
+.atlas-rewards__muted { color: var(--color-body); font-size: 14px; }
+
+.atlas-rewards__balance { font-size: 18px; color: var(--color-title); }
+.atlas-rewards__balance strong { font-size: 44px; line-height: 1; color: var(--color-gold-strong); }
+
+.atlas-rewards__bar { height: 8px; overflow: hidden; background: rgb(0 0 0 / 0.08); border-radius: 999px; }
+.atlas-rewards__bar span { display: block; height: 100%; background: var(--color-gold); border-radius: inherit; }
+
+.atlas-rewards__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 10px 22px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--color-gold-strong);
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.atlas-rewards__button:hover:not(:disabled) { background: var(--color-gold); }
+.atlas-rewards__button:disabled { cursor: not-allowed; opacity: 0.45; }
+
+.atlas-rewards__code { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.atlas-rewards__code code {
+  padding: 8px 12px;
+  overflow-wrap: anywhere;
+  font-size: 14px;
+  color: var(--color-title);
+  background: #fff;
+  border: 1px dashed var(--color-gold-border-button);
+  border-radius: 6px;
+  user-select: all;
+}
+.atlas-rewards__copy {
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-gold-strong);
+  background: transparent;
+  border: 1px solid var(--color-gold-border-button);
+  border-radius: 6px;
+  cursor: pointer;
+}
+.atlas-rewards__copy:hover { background: var(--color-gold-soft); }
+.atlas-rewards__badge { padding: 4px 10px; font-size: 12px; font-weight: 700; text-transform: uppercase; color: #fff; background: #8b8b8b; border-radius: 999px; }
+
+.atlas-rewards__coupons { display: grid; gap: 10px; padding: 0; margin: 0; list-style: none; }
+.atlas-rewards__coupons li { display: grid; gap: 8px; padding: 12px 14px; background: #fff; border: 1px solid var(--color-gold-border-card); border-radius: 8px; }
+.atlas-rewards__coupons li.is-used { opacity: 0.6; }
+
+.atlas-rewards__table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.atlas-rewards__table th,
+.atlas-rewards__table td { padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--color-gold-border-card); vertical-align: top; }
+.atlas-rewards__table th { font-size: 12px; text-transform: uppercase; color: var(--color-body); }
+.atlas-rewards__table td.is-negative { color: #9b2c2c; }
+@media (max-width: 600px) {
+  .atlas-rewards__card { padding: 16px; }
+  .atlas-rewards__table th:nth-child(2),
+  .atlas-rewards__table td:nth-child(2) { max-width: 140px; }
+}

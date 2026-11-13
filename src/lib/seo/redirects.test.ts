@@ -7,19 +7,27 @@ import { describe, expect, it } from "vitest";
 import catalog from "@/content/catalog.json";
 import inventory from "../../../docs/audit/data/page-inventory.json";
 
-import { legacyRedirects, legacyRules } from "./redirects";
+import { legacyRedirects, legacyRules, oldSlugRules } from "./redirects";
 
 const LIVE = "https://peptidesbali.online";
-const livePages = new Set(inventory.pages.filter((page) => page.status === 200).map((page) => page.url.replace(LIVE, "")));
-const liveAddresses = new Set(inventory.pages.map((page) => page.url.replace(LIVE, "")));
+const productPaths = new Set(catalog.products.map((product) => product.path));
+// A product page counts as a live page (products renamed after the 3 Nov 2026 crawl are in the catalogue).
+const livePages = new Set([...inventory.pages.filter((page) => page.status === 200).map((page) => page.url.replace(LIVE, "")), ...productPaths]);
+const liveAddresses = new Set([...inventory.pages.map((page) => page.url.replace(LIVE, "")), ...productPaths]);
 
 describe("legacy redirects", () => {
   const redirects = legacyRedirects();
 
-  it("has the 195 permanent redirects of the live site, each address once, as 301", () => {
+  it("has the live site's 195 plugin redirects and 51 old-slug redirects, each address once, as 301", () => {
     expect(legacyRules).toHaveLength(196);
-    expect(redirects).toHaveLength(195);
-    expect(new Set(redirects.map((r) => r.source.toLowerCase())).size).toBe(195);
+    expect(oldSlugRules).toHaveLength(51);
+    expect(redirects).toHaveLength(195 + 51);
+    expect(new Set(redirects.map((r) => r.source.toLowerCase())).size).toBe(195 + 51);
+    // The old slugs are WordPress's own product redirects (/product/<old>/ → /product/<new>/).
+    for (const [from, to] of oldSlugRules) {
+      expect(from).toMatch(/^\/product\/[^/]+\/$/);
+      expect(productPaths.has(to as string), `${from} → ${to}`).toBe(true);
+    }
     for (const r of redirects) {
       expect(r.statusCode).toBe(301);
       expect(r.source, r.source).toMatch(/^\/[^?#:*()]*\/$/);

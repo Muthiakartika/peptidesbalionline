@@ -156,6 +156,11 @@ body:has(.ins),
   text-transform: none;
   color: var(--ins-gold-deep);
 }
+/* Between the smaller parts a dot is shown; the text itself keeps WordPress's "|" (the heading search
+   engines read stays the live one). */
+.ins-title-dot::before {
+  content: " · ";
+}
 
 .ins-meta {
   display: flex;
